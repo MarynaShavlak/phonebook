@@ -1,0 +1,46 @@
+.editForm__title {
+  text-transform: uppercase;
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+}
+
+
+.editForm__info {
+  background-color: white;
+  font-size: 20px;
+  margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    /* color: #f66fa5; */
+    /* border: 5px solid #fab7d2; */
+    border-radius: 10px;
+}
+
+.contact__info {
+  display: flex;
+  column-gap: 30px;
+  margin-top: 10px;
+}
+
+.contact__category {
+  width:100px;
+  font-style: italic;
+}
+
+.editForm__instrc {
+  display: flex;
+  flex-direction: column; 
+  row-gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
+.editForm__text {
+  font-size: 24px;
+  padding-left: 10px;    
+  padding-right: 10px;  
+  
+}
