@@ -27,8 +27,6 @@ const customStyles = {
 
 
 export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
-    // console.log('name in EditModal', contactName);
-    // console.log('number in EditModal', contactNumber);
   return (
     <Modal
       isOpen={isOpen}
@@ -39,12 +37,7 @@ export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
       onRequestClose={onClose}
       
     >
-      <ContactEditor
-        // contactName={contactName}
-        // contactNumber={contactNumber}
-        {...otherProps}
-        // operationType="Edit contact"
-      />
+      <ContactEditor {...otherProps} />
     </Modal>
   )
 }

@@ -13,7 +13,8 @@ import { useLocalStorage } from 'hooks/useLocalStorage';
 
 export const App = () => {
   const [contacts, setContacts] = useLocalStorage('contacts', []);  
-  const [filter, setFilter] = useState('');
+  const [filterName, setFilterName] = useState('');
+  const [filterNumber, setFilterNumber] = useState('');
 
 
   const addContact = (contact) => {
@@ -58,20 +59,14 @@ export const App = () => {
   }
   
   
-  
   const deleteContact = (contactId) => {
     setContacts(contacts.filter(contact => contact.id !== contactId));
   }
 
- 
 
   const changeContact = (contact) => {
 
-    console.log(contacts);
-
-
-    setContacts(
-      contacts.map(el => {
+    const updatedContacts = contacts.map(el => {
       if (el.name === contact.name) {
         const newEl = {
           id: nanoid(),
@@ -79,7 +74,9 @@ export const App = () => {
           number: contact.number,
         }
         return newEl;
-      } else if (el.number === contact.number) {
+      }
+      
+      if (el.number === contact.number) {
         const newEl = {
           id: nanoid(),
           name: contact.name,
@@ -87,44 +84,37 @@ export const App = () => {
         }
         return newEl;
       }
+
       return el;
     })
-    )
 
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.map(el => {
-  //     if (el.name === contact.name) {
-  //       const newEl = {
-  //         id: nanoid(),
-  //         name: el.name,
-  //         number: contact.number,
-  //       }
-  //       return newEl;
-  //     } else if (el.number === contact.number) {
-  //       const newEl = {
-  //         id: nanoid(),
-  //         name: contact.name,
-  //         number: el.number,
-  //       }
-  //       return newEl;
-  //     }
-  //     return el;
-  //   })
-  //   }))
+    setContacts(updatedContacts);
   }
 
-  const changeFilter = (e) => {
-    setFilter(e.currentTarget.value)
+
+  const changeFilter = ({ target: { name, value } }) => {
+      switch (name) {
+      case 'name':
+        setFilterName(value);
+        break;
+       case 'number':
+        setFilterNumber(value);
+        break;
+      default:
+        return console.warn(`Type of field with name ${name} is not found`)
+      
+    }
   }
   
 
   const getFilteredContacts = () => {
-    const normalizeFilter = filter.toLowerCase();
-    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
+    const normalizeFilter = filterName.toLowerCase();
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter))
+                    .filter(contact => contact.number.includes(filterNumber));
   }
 
   
-    const filteredContacts = getFilteredContacts();
+  const filteredContacts = getFilteredContacts();
   const hasContactsInBook = contacts.length !== 0;
   
     return (
@@ -138,7 +128,11 @@ export const App = () => {
             ?
             (
               <>
-              <Filter value={filter} onChange={changeFilter} />
+              <Filter value={filterName} onChange={changeFilter} name='name' type ='Find contacts by name' />
+              <Filter value={filterNumber} onChange={changeFilter} name='number' type='Find contacts by number' />
+              {filteredContacts.length === 0 && filterName  && filterNumber &&  <Notification message={`Nothing found by selected name "${filterName}"  and number "${filterNumber}"`} />}
+               {filteredContacts.length === 0 && filterName && !filterNumber && <Notification message={`Nothing found by selected name "${filterName}" `} />}   
+               {filteredContacts.length === 0 && filterNumber && !filterName && <Notification message={`Nothing found by selected number "${filterNumber}" `} />}   
               <ContactList contacts={filteredContacts} onDeleteContact={deleteContact} onChangeContact={changeContact}></ContactList>
               </>
             )

@@ -6,30 +6,19 @@ import './ContactEditor.css';
 
 
 export const ContactEditor = ({contactName, contactNumber, onEditContact }) => {
-    console.log('contactName in ContactEditor', contactName);
-    console.log('contactNumber in ContactEditor', contactNumber);
-
   
  const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
 
-
-
   useEffect(() => {
-    console.log(contactName);
     setName(contactName)
   }, [contactName])
   
 
   useEffect(() => {
-    console.log(contactNumber);
     setNumber(contactNumber);
-},[contactNumber])
-
-
-
-
+  },[contactNumber])
 
 
   const handleChange = ({ target: { name, value } }) =>{
@@ -66,7 +55,6 @@ export const ContactEditor = ({contactName, contactNumber, onEditContact }) => {
       return toast.info(`Contact with number ${number} is already exist. Please, check number and write correct`);
     }
     const updatedContact = { updatedName: name, updatedNumber: number }
-    console.log('Updated contact from ContactEditor goes to func onEditContact()', updatedContact);
     onEditContact(updatedContact);
 
   }
@@ -102,8 +90,6 @@ export const ContactEditor = ({contactName, contactNumber, onEditContact }) => {
       </>
       
     );
-
-
 } 
 
 
@@ -111,6 +97,5 @@ ContactEditor.propTypes = {
     onEditContact: PropTypes.func.isRequired,
     contactName: PropTypes.string.isRequired,            
     contactNumber: PropTypes.string.isRequired,
-    // operationType: PropTypes.string.isRequired,
   };  
  

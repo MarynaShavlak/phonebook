@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import { FilterBlock } from './Filter.styled';
 
-export function Filter({ value, onChange }) {
+export function Filter({ name, value, onChange, type }) {
   return (
     <FilterBlock>
     <label className="filter__field">
-        <span className="filter__label">Find contacts by name</span>
+        <span className="filter__label">{type}</span>
         <input
           className="filter__input"
           type="text"
+          name={name}
+          placeholder={`Enter ${name} to search contact...`}
           value={value}
           onChange={onChange}
          />
@@ -19,4 +21,6 @@ export function Filter({ value, onChange }) {
 Filter.propTypes = {
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
 }

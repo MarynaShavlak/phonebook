@@ -16,7 +16,6 @@ export const Contact = ({ contact, onDeleteContact, onChangeContact }) => {
     const [isContactEdited, setIsContactEdited] = useState(false);
   
   useEffect(() => {
-    console.log(contact.name);
     setName(contact.name)
   }, [contact.name])
   
@@ -41,32 +40,13 @@ export const Contact = ({ contact, onDeleteContact, onChangeContact }) => {
   }, [name, number, isContactEdited, onChangeContact])
   
 
-
-
-
-  // }
-
-  // componentDidUpdate(_, prevState) {
-    
-  //   if (prevState.isContactEdited !== this.state.isContactEdited) {
-  //     const edittedContact = {
-  //       name: this.state.name,
-  //       number: this.state.number
-  //     }
-  //         this.props.onChangeContact(edittedContact);
-  //   }
-
-  // }
-
   const toggleModal = () => {
     if (isModalOpen) {
       setIsModalOpen(false);
-      // setIsContactEdited(true);
     } else {
       setIsModalOpen(true);
       setIsContactEdited(false);
     }
-    // isModalOpen ? this.setState({ isModalOpen: false }) : this.setState({ isModalOpen: true, isContactEdited:false })
   }
 
   const editContact = ({updatedName, updatedNumber}) => {
@@ -74,22 +54,15 @@ export const Contact = ({ contact, onDeleteContact, onChangeContact }) => {
         toast.error(`There are no changes. You didn't change neither contact name or phone number`);
         setIsModalOpen(false);
         setIsContactEdited(true);
-      //  this.setState({ isModalOpen: false, isContactEdited: true,});
        return;
     } 
         setIsModalOpen(false);
         setName(updatedName);
         setNumber(updatedNumber);
         setIsContactEdited(true);
-    
-    
-    // this.setState({ isModalOpen: false, isContactEdited: true, name: name, number: number });
-    
-    
+
   }
  
-    console.log('name in CONTACT', name);
-    console.log('number in CONTACT', number);
     return (
       <>
         <EditModal
