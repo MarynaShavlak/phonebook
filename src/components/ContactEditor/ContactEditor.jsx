@@ -1,64 +1,56 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
 import './ContactEditor.css';
 
 
-export class ContactEditor extends Component {
-  state = {
-    name: '',
-    number: '',
-    contacts: [],
-  }
+export const ContactEditor = ({contactName, contactNumber, operationType, onEditContact }) => {
+
   
-
-  componentDidMount() {
-    const { contactName, contactNumber } = this.props;
-    console.log('name in ContactEDitor', contactName);
-    console.log('number in ContactEDitor', contactNumber);
-    const savedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(savedContacts);
-    
-    this.setState({ number: contactNumber, name: contactName, contacts: parsedContacts });
-  }
+  const [name, setName] = useState(contactName ?? '');
+  const [number, setNumber] = useState(contactNumber ?? '');
 
 
-  handleChange = ({ target: { name, value } }) =>{
-    this.setState({
-      [name]: value,
-    });
+  const handleChange = ({ target: { name, value } }) =>{
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+       case 'number':
+        setNumber(value);
+        break;
+      default:
+        return console.warn(`Type of field with name ${name} is not found`)
+      
+    }
 }
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { contactName, contactNumber } = this.props;
-    const { contacts } = this.state;
-    if (contactName !== this.state.name && contactNumber !== this.state.number) {
+    if (contactName !== name && contactNumber !== number) {
       return toast.error(`You cannot change both name and number. To make full change, delete this contact and create new with correct info.`);
      
     }
+    const сontactsInBook = JSON.parse(localStorage.getItem('contacts'));
+    const filteredContactsByName = сontactsInBook.filter(contact => contact.name !== contactName);
+    const isNameExist = filteredContactsByName.some(contact => contact.name === name);
 
-    const filteredContactsByName = contacts.filter(contact => contact.name !== contactName);
-    const isNameExist = filteredContactsByName.some(contact => contact.name === this.state.name);
-
-    const filteredContactsByNumber = contacts.filter(contact => contact.number !== contactNumber);
-    const isNumberExist = filteredContactsByNumber.some(contact => contact.number === this.state.number);
+    const filteredContactsByNumber = сontactsInBook.filter(contact => contact.number !== contactNumber);
+    const isNumberExist = filteredContactsByNumber.some(contact => contact.number === number);
     
     if (isNameExist) {
-      return toast.info(`Contact with name ${this.state.name} is already exist. Please, write another name `);
+      return toast.info(`Contact with name ${name} is already exist. Please, write another name `);
    }
     if (isNumberExist) {
-      return toast.info(`Contact with number ${this.state.number} is already exist. Please, check number and write correct`);
+      return toast.info(`Contact with number ${number} is already exist. Please, check number and write correct`);
     }
-
-    this.props.onEditContact(this.state);
+    const updatedContact = { name, number }
+    console.log('Updated contact from ContactEditor goes to func onEditContact()', updatedContact);
+    onEditContact(updatedContact);
 
   }
 
-  render() {
-    const { name, number } = this.state;
-    const { operationType } = this.props;
 
     return (
       <>
@@ -67,11 +59,11 @@ export class ContactEditor extends Component {
           <p>You try to edit contact with</p>
           <p className='contact__info' >
             <span className='contact__category'>Name:</span>
-            <span><b>{this.props.contactName}</b></span>
+            <span><b>{contactName}</b></span>
           </p>
           <p className='contact__info' >
             <span className='contact__category'>Number:</span>
-            <span><b>{this.props.contactNumber}</b></span>
+            <span><b>{contactNumber}</b></span>
           </p>
 
                     
@@ -84,14 +76,14 @@ export class ContactEditor extends Component {
         name ={name}
         number ={number}
         operationType={operationType}
-        onSubmit={this.handleSubmit}
-        onChange={this.handleChange}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
       />
       </>
       
     );
 
-}
+
 } 
 
 
