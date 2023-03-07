@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
 import { nanoid } from 'nanoid';
 import { Container } from "./App.styled";
 import { Section } from "components/Section";
@@ -8,38 +8,16 @@ import { Filter } from 'components/Filter';
 import { Notification } from 'components/Notification';
 import { ToastContainer, toast } from 'react-toastify';
 import { Layout } from 'components/Layout';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 
-export class App extends Component {
-  state = {
-  contacts: [],
-  filter: '',
-  }
-  
-  componentDidMount() {
-    const savedContacts = localStorage.getItem('contacts');
-    if (savedContacts !== null) {
-      const parsedContacts = JSON.parse(savedContacts);
-      return this.setState({ contacts: parsedContacts });
-     }
-  }
+export const App = () => {
+  const [contacts, setContacts] = useLocalStorage('contacts', []);  
+  const [filter, setFilter] = useState('');
 
 
-
-  componentDidUpdate(_, prevState) {
-    const currentContacts = this.state.contacts;
-    const prevContacts = prevState.contacts;
-
-    if (currentContacts !== prevContacts) {
-      localStorage.setItem('contacts', JSON.stringify(currentContacts));
-    }
-}
-
-
-
-
-  addContact = (contact) => {
-    let isExist =this.checkContactInBook(contact)
+  const addContact = (contact) => {
+    let isExist = checkContactInBook(contact)
     if (isExist) {
       return;
     }
@@ -49,15 +27,15 @@ export class App extends Component {
       ...contact,
     }
     
-    this.setState(({ contacts }) => ({ contacts: [contactWithId, ...contacts] }))
+    setContacts([contactWithId, ...contacts])
     return isExist= true;
 
-}
+  }
 
-  checkContactInBook = (contact) => {
+  const checkContactInBook = (contact) => {
     let isContactExist = false;
-    let isNumberExist = this.state.contacts.some(el => el.number === contact.number);
-    let isNameExist = this.state.contacts.some(el => el.name === contact.name);
+    let isNumberExist = contacts.some(el => el.number === contact.number);
+    let isNameExist = contacts.some(el => el.name === contact.name);
     if (isNameExist && isNumberExist) {
         toast.error(`Ooops, contact with name ${contact.name} and number ${contact.number} is already in your phonebook`
       );
@@ -81,17 +59,19 @@ export class App extends Component {
   
   
   
-  deleteContact = (contactId) => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)}))
+  const deleteContact = (contactId) => {
+    setContacts(contacts.filter(contact => contact.id !== contactId));
   }
 
  
 
-  changeContact = (contact) => {
-    console.log(this.state.contacts);
-    this.setState(prevState => ({
-      contacts: prevState.contacts.map(el => {
+  const changeContact = (contact) => {
+
+    console.log(contacts);
+
+
+    setContacts(
+      contacts.map(el => {
       if (el.name === contact.name) {
         const newEl = {
           id: nanoid(),
@@ -109,37 +89,57 @@ export class App extends Component {
       }
       return el;
     })
-    }))
+    )
+
+  //   this.setState(prevState => ({
+  //     contacts: prevState.contacts.map(el => {
+  //     if (el.name === contact.name) {
+  //       const newEl = {
+  //         id: nanoid(),
+  //         name: el.name,
+  //         number: contact.number,
+  //       }
+  //       return newEl;
+  //     } else if (el.number === contact.number) {
+  //       const newEl = {
+  //         id: nanoid(),
+  //         name: contact.name,
+  //         number: el.number,
+  //       }
+  //       return newEl;
+  //     }
+  //     return el;
+  //   })
+  //   }))
   }
 
-  changeFilter = (e) => {
-   this.setState({filter: e.currentTarget.value})
+  const changeFilter = (e) => {
+    setFilter(e.currentTarget.value)
   }
   
 
-  getFilteredContacts = () => {
-    const { filter, contacts } = this.state;
+  const getFilteredContacts = () => {
     const normalizeFilter = filter.toLowerCase();
     return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
   }
 
-  render() {
-    const { filter, contacts } = this.state;
-    const filteredContacts = this.getFilteredContacts();
-    const hasContactsInBook = contacts.length !== 0;
+  
+    const filteredContacts = getFilteredContacts();
+  const hasContactsInBook = contacts.length !== 0;
+  
     return (
       <Layout>
       <Container>
         <Section title="Phonebook">
-          <ContactForm onSubmit={this.addContact} operationType ="Add contact" />
+          <ContactForm onSubmit={addContact} operationType ="Add contact" />
         </Section>
         <Section title="Contacts">
           {hasContactsInBook
             ?
             (
               <>
-              <Filter value={filter} onChange={this.changeFilter} />
-              <ContactList contacts={filteredContacts} onDeleteContact={this.deleteContact} onChangeContact={this.changeContact}></ContactList>
+              <Filter value={filter} onChange={changeFilter} />
+              <ContactList contacts={filteredContacts} onDeleteContact={deleteContact} onChangeContact={changeContact}></ContactList>
               </>
             )
             :
@@ -159,6 +159,4 @@ export class App extends Component {
       </Layout>
       
     );
-  }
-  
-};
+}
