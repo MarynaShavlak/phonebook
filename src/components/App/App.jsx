@@ -89,7 +89,7 @@ export class App extends Component {
  
 
   changeContact = (contact) => {
-
+    console.log(this.state.contacts);
     this.setState(prevState => ({
       contacts: prevState.contacts.map(el => {
       if (el.name === contact.name) {

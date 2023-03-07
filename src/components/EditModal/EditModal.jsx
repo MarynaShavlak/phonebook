@@ -26,9 +26,9 @@ const customStyles = {
 };
 
 
-export const EditModal = ({ isOpen, onClose, contactName, contactNumber, ...otherProps }) => {
-    console.log('name in EditModal', contactName);
-    console.log('number in EditModal', contactNumber);
+export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
+    // console.log('name in EditModal', contactName);
+    // console.log('number in EditModal', contactNumber);
   return (
     <Modal
       isOpen={isOpen}
@@ -39,7 +39,12 @@ export const EditModal = ({ isOpen, onClose, contactName, contactNumber, ...othe
       onRequestClose={onClose}
       
     >
-      <ContactEditor contactName={contactName} contactNumber={contactNumber } {...otherProps} operationType="Edit contact"/>
+      <ContactEditor
+        // contactName={contactName}
+        // contactNumber={contactNumber}
+        {...otherProps}
+        // operationType="Edit contact"
+      />
     </Modal>
   )
 }
@@ -47,8 +52,5 @@ export const EditModal = ({ isOpen, onClose, contactName, contactNumber, ...othe
 EditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  // onEditContact: PropTypes.func.isRequired,
-  contactName: PropTypes.string.isRequired,
-  contactNumber: PropTypes.string.isRequired,
   };  
  

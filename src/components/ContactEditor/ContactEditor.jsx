@@ -1,15 +1,35 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
 import './ContactEditor.css';
 
 
-export const ContactEditor = ({contactName, contactNumber, operationType, onEditContact }) => {
+export const ContactEditor = ({contactName, contactNumber, onEditContact }) => {
+    console.log('contactName in ContactEditor', contactName);
+    console.log('contactNumber in ContactEditor', contactNumber);
 
   
-  const [name, setName] = useState(contactName ?? '');
-  const [number, setNumber] = useState(contactNumber ?? '');
+ const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+
+
+
+  useEffect(() => {
+    console.log(contactName);
+    setName(contactName)
+  }, [contactName])
+  
+
+  useEffect(() => {
+    console.log(contactNumber);
+    setNumber(contactNumber);
+},[contactNumber])
+
+
+
+
 
 
   const handleChange = ({ target: { name, value } }) =>{
@@ -45,7 +65,7 @@ export const ContactEditor = ({contactName, contactNumber, operationType, onEdit
     if (isNumberExist) {
       return toast.info(`Contact with number ${number} is already exist. Please, check number and write correct`);
     }
-    const updatedContact = { name, number }
+    const updatedContact = { updatedName: name, updatedNumber: number }
     console.log('Updated contact from ContactEditor goes to func onEditContact()', updatedContact);
     onEditContact(updatedContact);
 
@@ -75,7 +95,7 @@ export const ContactEditor = ({contactName, contactNumber, operationType, onEdit
         <Form
         name ={name}
         number ={number}
-        operationType={operationType}
+        operationType='Edit contact'
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
@@ -91,6 +111,6 @@ ContactEditor.propTypes = {
     onEditContact: PropTypes.func.isRequired,
     contactName: PropTypes.string.isRequired,            
     contactNumber: PropTypes.string.isRequired,
-    operationType: PropTypes.string.isRequired,
+    // operationType: PropTypes.string.isRequired,
   };  
  

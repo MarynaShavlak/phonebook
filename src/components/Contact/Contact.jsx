@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import css from './Contact.module.css';
 import { renderIcons } from 'utils/renderIcons';
@@ -9,71 +9,93 @@ import { toast } from 'react-toastify';
 
 
 
-export class Contact extends Component {
+export const Contact = ({ contact, onDeleteContact, onChangeContact }) => {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isContactEdited, setIsContactEdited] = useState(false);
+  
+  useEffect(() => {
+    console.log(contact.name);
+    setName(contact.name)
+  }, [contact.name])
+  
 
-    static propTypes = {
-      contact: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
-            }).isRequired,
-            onDeleteContact: PropTypes.func.isRequired,
-  };  
-
-
-  state = {
-    isModalOpen: false,
-    isContactEdited: false,
-    name: '',
-    number: '',
-  }
-
-  componentDidMount() {
-    const { contact: {name, number } } = this.props;
-    this.setState({ number: number, name: name });
-
-
-  }
-
-  componentDidUpdate(_, prevState) {
+  useEffect(() => {
+    setNumber(contact.number);
+  },[contact.number])
+  
+  
+  
+  useEffect(() => {
+    if (isContactEdited) {
+        const edittedContact = {
+        name: name,
+        number:number
+        }
+    onChangeContact(edittedContact)
     
-    if (prevState.isContactEdited !== this.state.isContactEdited) {
-      const edittedContact = {
-        name: this.state.name,
-        number: this.state.number
       }
-          this.props.onChangeContact(edittedContact);
+     
+        
+  }, [name, number, isContactEdited, onChangeContact])
+  
+
+
+
+
+  // }
+
+  // componentDidUpdate(_, prevState) {
+    
+  //   if (prevState.isContactEdited !== this.state.isContactEdited) {
+  //     const edittedContact = {
+  //       name: this.state.name,
+  //       number: this.state.number
+  //     }
+  //         this.props.onChangeContact(edittedContact);
+  //   }
+
+  // }
+
+  const toggleModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(false);
+      // setIsContactEdited(true);
+    } else {
+      setIsModalOpen(true);
+      setIsContactEdited(false);
     }
-
+    // isModalOpen ? this.setState({ isModalOpen: false }) : this.setState({ isModalOpen: true, isContactEdited:false })
   }
 
-  toggleModal = () => {
-    const { isModalOpen } = this.state;
-    isModalOpen ? this.setState({ isModalOpen: false }) : this.setState({ isModalOpen: true, isContactEdited:false })
-  }
-
-  editContact = ({name, number}) => {
-     if (name === this.state.name && number === this.state.number) {
+  const editContact = ({updatedName, updatedNumber}) => {
+     if (updatedName === name && updatedNumber === number) {
         toast.error(`There are no changes. You didn't change neither contact name or phone number`);
-       this.setState({ isModalOpen: false, isContactEdited: true,});
+        setIsModalOpen(false);
+        setIsContactEdited(true);
+      //  this.setState({ isModalOpen: false, isContactEdited: true,});
        return;
-      } 
-    this.setState({ isModalOpen: false, isContactEdited: true, name: name, number: number });
+    } 
+        setIsModalOpen(false);
+        setName(updatedName);
+        setNumber(updatedNumber);
+        setIsContactEdited(true);
+    
+    
+    // this.setState({ isModalOpen: false, isContactEdited: true, name: name, number: number });
     
     
   }
  
-  render() {
-    const { contact: {id}, onDeleteContact} = this.props;
-    const { isModalOpen, name, number } = this.state;
     console.log('name in CONTACT', name);
     console.log('number in CONTACT', number);
     return (
       <>
         <EditModal
           isOpen={isModalOpen}
-          onClose={this.toggleModal}
-          onEditContact={this.editContact}
+          onClose={toggleModal}
+          onEditContact={editContact}
           contactName={name}
           contactNumber={number}
         />
@@ -81,14 +103,14 @@ export class Contact extends Component {
           <span className={css.contact__name}>{name}: </span>
           <span className={css.contact__number}>{number}</span>
           <IconButton
-            onClick={this.toggleModal}
+            onClick={toggleModal}
             aria-label = "Edit Contact"
           >
             {renderIcons('edit', iconSize.sm)}
          </IconButton>
         
           <IconButton
-            onClick={() => onDeleteContact(id)}
+            onClick={() => onDeleteContact(contact.id)}
             aria-label = "Delete contact"
           >
             {renderIcons('delete', iconSize.sm)}
@@ -96,6 +118,16 @@ export class Contact extends Component {
       </>
       
     )
-    }
-  }
+}
+  
+
+Contact.propTypes = {
+      contact: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+            }).isRequired,
+            onDeleteContact: PropTypes.func.isRequired,
+            onChangeContact: PropTypes.func.isRequired,
+  };  
   
