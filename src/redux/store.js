@@ -11,12 +11,14 @@ import {
 import { filterByNameReducer } from './filterByNameSlice';
 import { filterByNumberReducer } from './filterByNumberSlice';
 import { contactListReducer } from './contactListSlice';
+import { editContactReducer } from './editContactSlice';
 
 export const store = configureStore({
   reducer: {
     contacts: contactListReducer,
     filterName: filterByNameReducer,
     filterNumber: filterByNumberReducer,
+    edditedContact: editContactReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

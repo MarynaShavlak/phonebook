@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
 import css from './Contact.module.css';
 import { toast } from 'react-toastify';
 import { renderIcons } from 'utils/renderIcons';
@@ -9,6 +8,8 @@ import { iconSize } from 'constants';
 import { IconButton } from 'components/IconButton';
 import { EditModal } from 'components/EditModal';
 import { deleteContact, updateContactList } from 'redux/contactListSlice';
+import { useDispatch } from 'react-redux';
+import { setContact } from 'redux/editContactSlice';
 
 export const Contact = ({ contact }) => {
   const [name, setName] = useState('');
@@ -17,13 +18,22 @@ export const Contact = ({ contact }) => {
   const [isContactEdited, setIsContactEdited] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setName(contact.name);
-  }, [contact.name]);
+  // const [initialContactState, setInitialContactState] = useState({
+  //   name: contact.name,
+  //   number: contact.number,
+  // });
+
+  // useEffect(() => {
+  //   dispatch(setContact(initialContactState));
+  // }, [dispatch, initialContactState]);
 
   useEffect(() => {
     setNumber(contact.number);
   }, [contact.number]);
+
+  useEffect(() => {
+    setName(contact.name);
+  }, [contact.name]);
 
   useEffect(() => {
     if (isContactEdited) {

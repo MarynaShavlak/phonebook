@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
 import { getContacts } from 'redux/selectors';
+import { setContact } from 'redux/editContactSlice';
 import './ContactEditor.css';
 
 export const ContactEditor = ({
@@ -13,15 +16,29 @@ export const ContactEditor = ({
 }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [initialContactState, setInitialContactState] = useState({
+    name: contactName,
+    number: contactNumber,
+  });
+
   const contacts = useSelector(getContacts);
 
-  useEffect(() => {
-    setName(contactName);
-  }, [contactName]);
+  console.log('contactName: ', contactName);
+  console.log('contactNumber: ', contactNumber);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setNumber(contactNumber);
-  }, [contactNumber]);
+    dispatch(setContact(initialContactState));
+  }, [dispatch, initialContactState]);
+
+  // useEffect(() => {
+  //   setName(contactName);
+  // }, [contactName]);
+
+  // useEffect(() => {
+  //   setNumber(contactNumber);
+  // }, [contactNumber]);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
