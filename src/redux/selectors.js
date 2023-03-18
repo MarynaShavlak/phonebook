@@ -3,6 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const getContacts = state => state.contacts.contacts;
 export const getFilterByName = state => state.filterName.value;
 export const getFilterByNumber = state => state.filterNumber.value;
+export const isEditContactModalOpen = state => state.edditedContact.isModalOpen;
 
 export const getFilteredContacts = createSelector(
   [getContacts, getFilterByName, getFilterByNumber],

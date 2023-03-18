@@ -9,31 +9,14 @@ import { IconButton } from 'components/IconButton';
 import { EditModal } from 'components/EditModal';
 import { deleteContact, updateContactList } from 'redux/contactListSlice';
 import { useDispatch } from 'react-redux';
-import { setContact } from 'redux/editContactSlice';
 
 export const Contact = ({ contact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [name, setName] = useState(contact.name);
+  const [number, setNumber] = useState(contact.number);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isContactEdited, setIsContactEdited] = useState(false);
+
   const dispatch = useDispatch();
-
-  // const [initialContactState, setInitialContactState] = useState({
-  //   name: contact.name,
-  //   number: contact.number,
-  // });
-
-  // useEffect(() => {
-  //   dispatch(setContact(initialContactState));
-  // }, [dispatch, initialContactState]);
-
-  useEffect(() => {
-    setNumber(contact.number);
-  }, [contact.number]);
-
-  useEffect(() => {
-    setName(contact.name);
-  }, [contact.name]);
 
   useEffect(() => {
     if (isContactEdited) {
@@ -58,27 +41,31 @@ export const Contact = ({ contact }) => {
   const editContact = ({ updatedName, updatedNumber }) => {
     if (updatedName === name && updatedNumber === number) {
       toast.error(
-        `There are no changes. You didn't change neither contact name or phone number`
+        `There are no changes. You didn't change either contact name or phone number`
       );
+
       setIsModalOpen(false);
       setIsContactEdited(true);
       return;
     }
+
     setIsModalOpen(false);
+    setIsContactEdited(true);
     setName(updatedName);
     setNumber(updatedNumber);
-    setIsContactEdited(true);
   };
 
   return (
     <>
-      <EditModal
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        onEditContact={editContact}
-        contactName={name}
-        contactNumber={number}
-      />
+      {isModalOpen && (
+        <EditModal
+          isOpen={isModalOpen}
+          onClose={toggleModal}
+          onEditContact={editContact}
+          contact={contact}
+        />
+      )}
+
       {renderIcons('contact', iconSize.md)}
       <span className={css.contact__name}>{contact.name}: </span>
       <span className={css.contact__number}>{contact.number}</span>

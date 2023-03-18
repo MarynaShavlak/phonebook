@@ -8,7 +8,7 @@ Modal.setAppElement('#root');
 
 const customStyles = {
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)'
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
   content: {
     top: '50%',
@@ -21,29 +21,25 @@ const customStyles = {
     padding: '30px 20px',
     border: 'none',
     transform: 'translate(-50%, -50%)',
-   
   },
 };
-
 
 export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
   return (
     <Modal
       isOpen={isOpen}
-      contentLabel='Large size of image'
+      contentLabel="Large size of image"
       style={customStyles}
       closeTimeoutMS={300}
       shouldCloseOnOverlayClick={true}
       onRequestClose={onClose}
-      
     >
       <ContactEditor {...otherProps} />
     </Modal>
-  )
-}
+  );
+};
 
 EditModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  };  
- 
+};

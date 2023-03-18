@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  name: '',
-  number: '',
-  // isModalOpen: false,
-  // isContactEdited: false,
+  contact: null,
 };
 
 const editContactSlice = createSlice({
@@ -12,29 +9,13 @@ const editContactSlice = createSlice({
   initialState,
   reducers: {
     setContact(state, action) {
-      const { name, number } = action.payload;
-      state.name = name;
-      state.number = number;
-      // state.isModalOpen = isModalOpen;
-      // state.isContactEdited = isContactEdited;
+      state.contact = action.payload;
     },
-
-    setContactName(state, action) {
-      state.name = action.payload;
-      // state.isContactEdited = true;
+    resetContact(state) {
+      state.contact = null;
     },
-    setContactNumber(state, action) {
-      state.number = action.payload;
-      // state.isContactEdited = true;
-    },
-    // toggleModal(state) {
-    //   state.isModalOpen
-    //     ? (state.isModalOpen = false)
-    //     : (state.isModalOpen = true);
-    // },
   },
 });
 
-export const { setContact, setContactName, setContactNumber } =
-  editContactSlice.actions;
+export const { setContact, resetContact } = editContactSlice.actions;
 export const editContactReducer = editContactSlice.reducer;

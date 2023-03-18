@@ -6,39 +6,18 @@ import { useDispatch } from 'react-redux';
 import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
 import { getContacts } from 'redux/selectors';
-import { setContact } from 'redux/editContactSlice';
+import { setContact, resetContact } from 'redux/editContactSlice';
 import './ContactEditor.css';
 
-export const ContactEditor = ({
-  contactName,
-  contactNumber,
-  onEditContact,
-}) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [initialContactState, setInitialContactState] = useState({
-    name: contactName,
-    number: contactNumber,
-  });
-
+export const ContactEditor = ({ contact, onEditContact }) => {
+  const [name, setName] = useState(contact.name);
+  const [number, setNumber] = useState(contact.number);
   const contacts = useSelector(getContacts);
-
-  console.log('contactName: ', contactName);
-  console.log('contactNumber: ', contactNumber);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setContact(initialContactState));
-  }, [dispatch, initialContactState]);
-
-  // useEffect(() => {
-  //   setName(contactName);
-  // }, [contactName]);
-
-  // useEffect(() => {
-  //   setNumber(contactNumber);
-  // }, [contactNumber]);
+    dispatch(setContact(contact));
+  }, [dispatch, contact]);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -55,23 +34,21 @@ export const ContactEditor = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (contactName !== name && contactNumber !== number) {
+    if (contact.name !== name && contact.number !== number) {
       return toast.error(
         `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`
       );
     }
     const filteredContactsByName = contacts.filter(
-      contact => contact.name !== contactName
+      el => el.name !== contact.name
     );
-    const isNameExist = filteredContactsByName.some(
-      contact => contact.name === name
-    );
+    const isNameExist = filteredContactsByName.some(el => el.name === name);
 
     const filteredContactsByNumber = contacts.filter(
-      contact => contact.number !== contactNumber
+      el => el.number !== contact.number
     );
     const isNumberExist = filteredContactsByNumber.some(
-      contact => contact.number === number
+      el => el.number === number
     );
 
     if (isNameExist) {
@@ -86,6 +63,7 @@ export const ContactEditor = ({
     }
     const updatedContact = { updatedName: name, updatedNumber: number };
     onEditContact(updatedContact);
+    dispatch(resetContact());
   };
 
   return (
@@ -96,13 +74,13 @@ export const ContactEditor = ({
         <p className="contact__info">
           <span className="contact__category">Name:</span>
           <span>
-            <b>{contactName}</b>
+            <b>{contact.name}</b>
           </span>
         </p>
         <p className="contact__info">
           <span className="contact__category">Number:</span>
           <span>
-            <b>{contactNumber}</b>
+            <b>{contact.number}</b>
           </span>
         </p>
       </div>
@@ -128,6 +106,9 @@ export const ContactEditor = ({
 
 ContactEditor.propTypes = {
   onEditContact: PropTypes.func.isRequired,
-  contactName: PropTypes.string.isRequired,
-  contactNumber: PropTypes.string.isRequired,
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
 };
