@@ -13,9 +13,7 @@ export const ContactsList = styled.ul`
 export const ContactItem = styled.li`
   margin: 0;
   display: flex;
-  column-gap: 10px;
+  /*column-gap: 10px;
   align-items: center;
-  font-size: 30px;
-  
+  font-size: 30px; */
 `;
-

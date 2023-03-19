@@ -3,6 +3,8 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
+import { ImCancelCircle } from 'react-icons/im';
+import { GiConfirmed } from 'react-icons/gi';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -16,6 +18,10 @@ export function renderIcons(param, size) {
       return <BsTelephoneFill size={size} className="contact-form__icon" />;
     case 'edit':
       return <RiEdit2Fill size={size} className="contact-form__icon" />;
+    case 'cancel':
+      return <ImCancelCircle size={size} className="contact-form__icon" />;
+    case 'confirm':
+      return <GiConfirmed size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }

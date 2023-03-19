@@ -28,7 +28,7 @@ export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
   return (
     <Modal
       isOpen={isOpen}
-      contentLabel="Large size of image"
+      contentLabel="Modal window to edit contact info"
       style={customStyles}
       closeTimeoutMS={300}
       shouldCloseOnOverlayClick={true}

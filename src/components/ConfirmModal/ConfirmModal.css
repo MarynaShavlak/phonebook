@@ -1,0 +1,25 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.action-buttons {
+  display: flex;
+  column-gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+}
+.confirmation__message {
+  font-size: 24px;
+  text-align: center;
+line-height: 1.67;
+
+}
