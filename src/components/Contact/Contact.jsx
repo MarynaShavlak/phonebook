@@ -17,6 +17,7 @@ export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
+  const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
   const [isContactEdited, setIsContactEdited] = useState(false);
 
   const dispatch = useDispatch();
@@ -51,6 +52,8 @@ export const Contact = ({ contact }) => {
   const toggleDeleteBtnHoverEffect = () =>
     setIsDeleteBtnHovered(!isDeleteBtnHovered);
 
+  const toggleEditBtnHoverEffect = () => setIsEditBtnHovered(!isEditBtnHovered);
+
   const editContact = ({ updatedName, updatedNumber }) => {
     if (updatedName === name && updatedNumber === number) {
       toast.error(
@@ -68,6 +71,13 @@ export const Contact = ({ contact }) => {
     setNumber(updatedNumber);
   };
   const deleteClass = [css.contact, css.toDelete].join(' ');
+  const editClass = [css.contact, css.toEdit].join(' ');
+
+  const contactClass = isDeleteBtnHovered
+    ? deleteClass
+    : isEditBtnHovered
+    ? editClass
+    : css.contact;
   return (
     <>
       {isEditModalOpen && (
@@ -86,13 +96,19 @@ export const Contact = ({ contact }) => {
         />
       )}
 
-      <p className={isDeleteBtnHovered ? deleteClass : css.contact}>
+      <p className={contactClass}>
+        {/* <p className={isDeleteBtnHovered ? deleteClass : css.contact}> */}
         {renderIcons('contact', iconSize.md)}
         <span className={css.contact__name}>{contact.name}: </span>
         <span className={css.contact__number}>{contact.number}</span>
       </p>
       <p className={css.contact__buttons}>
-        <IconButton onClick={toggleEditModal} aria-label="Edit Contact">
+        <IconButton
+          onClick={toggleEditModal}
+          aria-label="Edit Contact"
+          onMouseEnter={toggleEditBtnHoverEffect}
+          onMouseLeave={toggleEditBtnHoverEffect}
+        >
           {renderIcons('edit', iconSize.sm)}
         </IconButton>
         <IconButton

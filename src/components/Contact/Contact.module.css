@@ -18,11 +18,9 @@
   .contact__name {
     font-style: italic;
    }
-
-
-
     .toDelete {
       color: red;
-
-      
+    }
+    .toEdit {
+      color: blue;
     }
