@@ -1,23 +1,16 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
 import { getContacts } from 'redux/selectors';
-import { setContact, resetContact } from 'redux/editContactSlice';
 import './ContactEditor.css';
 
 export const ContactEditor = ({ contact, onEditContact }) => {
   const [name, setName] = useState(contact.name);
   const [number, setNumber] = useState(contact.number);
   const contacts = useSelector(getContacts);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setContact(contact));
-  }, [dispatch, contact]);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -63,7 +56,6 @@ export const ContactEditor = ({ contact, onEditContact }) => {
     }
     const updatedContact = { updatedName: name, updatedNumber: number };
     onEditContact(updatedContact);
-    dispatch(resetContact());
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './Contact.module.css';
@@ -12,63 +12,35 @@ import { updateContactList } from 'redux/contactListSlice';
 import { useDispatch } from 'react-redux';
 
 export const Contact = ({ contact }) => {
-  const [name, setName] = useState(contact.name);
-  const [number, setNumber] = useState(contact.number);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
-  const [isContactEdited, setIsContactEdited] = useState(false);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isContactEdited) {
-      const edittedContact = {
-        id: nanoid(),
-        name: name,
-        number: number,
-      };
-      dispatch(updateContactList(edittedContact));
-    }
-  }, [name, number, isContactEdited, dispatch]);
-
-  const toggleEditModal = () => {
-    if (isEditModalOpen) {
-      setIsEditModalOpen(false);
-    } else {
-      setIsEditModalOpen(true);
-      setIsContactEdited(false);
-    }
-  };
-  const toggleConfirmModal = () => {
-    if (isConfirmModalOpen) {
-      setIsConfirmModalOpen(false);
-    } else {
-      setIsConfirmModalOpen(true);
-    }
-  };
-
+  const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
+  const toggleConfirmModal = () => setIsConfirmModalOpen(!isConfirmModalOpen);
   const toggleDeleteBtnHoverEffect = () =>
     setIsDeleteBtnHovered(!isDeleteBtnHovered);
 
   const toggleEditBtnHoverEffect = () => setIsEditBtnHovered(!isEditBtnHovered);
 
-  const editContact = ({ updatedName, updatedNumber }) => {
-    if (updatedName === name && updatedNumber === number) {
-      toast.error(
+  const editContact = updatedContact => {
+    setIsEditModalOpen(false);
+    const { updatedName, updatedNumber } = updatedContact;
+
+    if (updatedName === contact.name && updatedNumber === contact.number) {
+      return toast.error(
         `There are no changes. You didn't change either contact name or phone number`
       );
-
-      setIsEditModalOpen(false);
-      setIsContactEdited(true);
-      return;
     }
 
-    setIsEditModalOpen(false);
-    setIsContactEdited(true);
-    setName(updatedName);
-    setNumber(updatedNumber);
+    const edittedContact = {
+      id: nanoid(),
+      name: updatedName,
+      number: updatedNumber,
+    };
+    dispatch(updateContactList(edittedContact));
   };
   const deleteClass = [css.contact, css.toDelete].join(' ');
   const editClass = [css.contact, css.toEdit].join(' ');
@@ -97,7 +69,6 @@ export const Contact = ({ contact }) => {
       )}
 
       <p className={contactClass}>
-        {/* <p className={isDeleteBtnHovered ? deleteClass : css.contact}> */}
         {renderIcons('contact', iconSize.md)}
         <span className={css.contact__name}>{contact.name}: </span>
         <span className={css.contact__number}>{contact.number}</span>
