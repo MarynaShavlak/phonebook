@@ -6,9 +6,14 @@ import { getFilteredContacts } from 'redux/selectors';
 
 export function ContactList() {
   const contacts = useSelector(getFilteredContacts);
+  const sortedContacts = contacts.sort((firstContact, secondContact) =>
+    firstContact.name.localeCompare(secondContact.name)
+  );
+  console.log('sortedContacts: ', sortedContacts);
+
   return (
     <ContactsList>
-      {contacts.map(contact => (
+      {sortedContacts.map(contact => (
         <ContactItem key={contact.id}>
           <Contact contact={contact} />
         </ContactItem>

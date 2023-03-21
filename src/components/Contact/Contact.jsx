@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from 'utils/hoverStyles.module.css';
 import { toast } from 'react-toastify';
+import Avatar from 'react-avatar';
 import Highlighter from 'react-highlight-words';
 import { IconButton, EditModal, ConfirmModal } from 'components';
 import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
@@ -83,7 +84,7 @@ export const Contact = ({ contact }) => {
       )}
 
       <ContactEl className={contactClass}>
-        {renderIcons('contact', iconSize.md)}
+        <Avatar size="50" name={contact.name} unstyled={false} round="50%" />
         <ContactName
           highlightClassName={highlighClass}
           searchWords={[`${filterByName}`]}

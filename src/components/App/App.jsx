@@ -85,6 +85,7 @@ export const App = () => {
           pauseOnHover={false}
           theme="colored"
           autoClose={4000}
+          style={{ width: '500px', fontSize: '28px', lineHeight: '1.2' }}
         />
       </Container>
     </Layout>

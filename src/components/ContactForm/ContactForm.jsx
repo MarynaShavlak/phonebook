@@ -60,6 +60,9 @@ export const ContactForm = () => {
       ...createdContact,
     };
     dispatch(contactsOperations.addContact(newContact));
+    toast.success(
+      `You just add contact with name ${name} and number ${number}  in your phonebook`
+    );
     reset();
   };
 
