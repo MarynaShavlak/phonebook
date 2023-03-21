@@ -57,7 +57,6 @@ export const ContactForm = () => {
     let isExist = checkContactInBook(createdContact);
     if (isExist) return;
     const newContact = {
-      // id: nanoid(),
       ...createdContact,
     };
     dispatch(contactsOperations.addContact(newContact));

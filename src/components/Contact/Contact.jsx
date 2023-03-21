@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { nanoid } from 'nanoid';
 import css from './Contact.module.css';
 import { toast } from 'react-toastify';
 import { renderIcons } from 'utils/renderIcons';
@@ -9,7 +8,6 @@ import { IconButton } from 'components/IconButton';
 import { EditModal } from 'components/EditModal';
 import { ConfirmModal } from 'components/ConfirmModal';
 import * as contactsOperations from 'redux/contactsOperations';
-// import { updateContactList } from 'redux/contactListSlice';
 import { useDispatch } from 'react-redux';
 
 export const Contact = ({ contact }) => {

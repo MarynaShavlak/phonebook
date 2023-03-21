@@ -5,6 +5,7 @@ import { BsTelephoneFill } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
+import { FaRegSadCry } from 'react-icons/fa';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -22,6 +23,8 @@ export function renderIcons(param, size) {
       return <ImCancelCircle size={size} className="contact-form__icon" />;
     case 'confirm':
       return <GiConfirmed size={size} className="contact-form__icon" />;
+    case 'error':
+      return <FaRegSadCry size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }
