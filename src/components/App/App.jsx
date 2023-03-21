@@ -7,7 +7,9 @@ import { Filter } from 'components/Filter';
 import { Notification } from 'components/Notification';
 import { ToastContainer } from 'react-toastify';
 import { Layout } from 'components/Layout';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import * as contactsOperations from 'redux/contactsOperations';
+import { useEffect } from 'react';
 import {
   getContacts,
   getFilteredContacts,
@@ -16,6 +18,12 @@ import {
 } from 'redux/selectors';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
+
   const filteredContacts = useSelector(getFilteredContacts);
   const allContacts = useSelector(getContacts);
   const filterByName = useSelector(getFilterByName);

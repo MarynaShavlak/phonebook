@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const getContacts = state => state.contacts.contacts;
+export const getContacts = state => state.contacts.items;
 export const getFilterByName = state => state.filterName.value;
 export const getFilterByNumber = state => state.filterNumber.value;
 export const isEditContactModalOpen = state => state.edditedContact.isModalOpen;
@@ -11,7 +11,7 @@ export const getFilteredContacts = createSelector(
   (contacts, filterByName, filterByNumber) => {
     const normalizeFilter = filterByName.toLowerCase();
     return contacts
-      .filter(contact => contact.name.toLowerCase().includes(normalizeFilter))
-      .filter(contact => contact.number.includes(filterByNumber));
+      .filter(({ name }) => name.toLowerCase().includes(normalizeFilter))
+      .filter(({ number }) => number.includes(filterByNumber));
   }
 );

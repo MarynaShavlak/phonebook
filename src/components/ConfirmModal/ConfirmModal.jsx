@@ -5,7 +5,7 @@ import './ConfirmModal.css';
 import { IconButton } from 'components/IconButton';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import { deleteContact } from 'redux/contactListSlice';
+import * as contactsOperations from 'redux/contactsOperations';
 import { useDispatch } from 'react-redux';
 
 Modal.setAppElement('#root');
@@ -53,7 +53,7 @@ export const ConfirmModal = ({ isOpen, onClose, contact }) => {
       <div className="action-buttons">
         <IconButton
           aria-label="Cofirm delete contact"
-          onClick={() => dispatch(deleteContact(contact.id))}
+          onClick={() => dispatch(contactsOperations.deleteContact(contact.id))}
         >
           {renderIcons('confirm', iconSize.md)}
         </IconButton>

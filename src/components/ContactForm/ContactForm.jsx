@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'components/Form';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactListSlice';
+import * as contactsOperations from 'redux/contactsOperations';
 import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
@@ -58,10 +57,10 @@ export const ContactForm = () => {
     let isExist = checkContactInBook(createdContact);
     if (isExist) return;
     const newContact = {
-      id: nanoid(),
+      // id: nanoid(),
       ...createdContact,
     };
-    dispatch(addContact(newContact));
+    dispatch(contactsOperations.addContact(newContact));
     reset();
   };
 
