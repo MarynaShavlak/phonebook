@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FormStyled, FormItem, FormList } from './Form.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import { OperationButton } from 'components/OperationButton';
+import { OperationButton } from 'components';
 
 export function Form({ name, number, operationType, onSubmit, onChange }) {
   return (

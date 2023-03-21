@@ -1,16 +1,20 @@
 import React from 'react';
-import { Container } from './App.styled';
-import { Section } from 'components/Section';
-import { ContactForm } from 'components/ContactForm';
-import { ContactList } from 'components/ContactList';
-import { Filter } from 'components/Filter';
-import { Loader } from 'components/Loader';
-import { Notification } from 'components/Notification';
-import { ToastContainer } from 'react-toastify';
-import { Layout } from 'components/Layout';
-import { useSelector, useDispatch } from 'react-redux';
-import * as contactsOperations from 'redux/contactsOperations';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { Container } from './App.styled';
+import {
+  ErrorMessage,
+  Section,
+  ContactForm,
+  ContactList,
+  Filter,
+  Layout,
+  Loader,
+  Notification,
+} from 'components';
+
+import * as contactsOperations from 'redux/contactsOperations';
 import {
   getContacts,
   getIsLoading,
@@ -19,8 +23,7 @@ import {
   getFilterByName,
   getFilterByNumber,
 } from 'redux/selectors';
-import { ErrorMessage } from 'components/ErrorMessage';
-
+import { ToastContainer } from 'react-toastify';
 export const App = () => {
   const dispatch = useDispatch();
 
@@ -45,8 +48,6 @@ export const App = () => {
         </Section>
         <Section title="Contacts">
           <>
-            {/* {error && <ErrorMessage />} */}
-
             {allContacts.length !== 0 && (
               <>
                 <Filter name="name" />

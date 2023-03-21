@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form } from 'components/Form';
+import { toast } from 'react-toastify';
+import { Form } from 'components';
 import { getContacts } from 'redux/selectors';
 import * as contactsOperations from 'redux/contactsOperations';
-import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');

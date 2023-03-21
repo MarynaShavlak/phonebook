@@ -1,13 +1,12 @@
-import Modal from 'react-modal';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import './ConfirmModal.css';
-import { IconButton } from 'components/IconButton';
+import Modal from 'react-modal';
+import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contactsOperations';
-import { useDispatch } from 'react-redux';
-
 Modal.setAppElement('#root');
 
 const customStyles = {

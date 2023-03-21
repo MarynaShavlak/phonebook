@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './EditModal.css';
-import { ContactEditor } from 'components/ContactEditor';
+import { ContactEditor } from 'components';
 
 Modal.setAppElement('#root');
 

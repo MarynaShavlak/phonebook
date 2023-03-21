@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import css from './Contact.module.css';
 import { toast } from 'react-toastify';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import { IconButton } from 'components/IconButton';
-import { EditModal } from 'components/EditModal';
-import { ConfirmModal } from 'components/ConfirmModal';
+import { IconButton, EditModal, ConfirmModal } from 'components';
 import * as contactsOperations from 'redux/contactsOperations';
-import { useDispatch } from 'react-redux';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

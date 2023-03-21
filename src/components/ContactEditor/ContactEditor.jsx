@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import { Form } from 'components/Form';
 import { toast } from 'react-toastify';
+import { Form } from 'components';
 import { getContacts } from 'redux/selectors';
 import './ContactEditor.css';
 
