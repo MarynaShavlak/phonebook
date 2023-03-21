@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import css from './Contact.module.css';
+import css from 'utils/hoverStyles.module.css';
 import { toast } from 'react-toastify';
+import Highlighter from 'react-highlight-words';
+import { IconButton, EditModal, ConfirmModal } from 'components';
+import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import { IconButton, EditModal, ConfirmModal } from 'components';
+import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
+
+import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from 'redux/contactsOperations';
+import { getFilterByName, getFilterByNumber } from 'redux/selectors';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -14,6 +19,8 @@ export const Contact = ({ contact }) => {
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
   const dispatch = useDispatch();
+  const filterByName = useSelector(getFilterByName);
+  const filterByNumber = useSelector(getFilterByNumber);
 
   const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
   const toggleConfirmModal = () => setIsConfirmModalOpen(!isConfirmModalOpen);
@@ -39,14 +46,24 @@ export const Contact = ({ contact }) => {
     };
     dispatch(contactsOperations.updateContact(edittedContact));
   };
-  const deleteClass = [css.contact, css.toDelete].join(' ');
-  const editClass = [css.contact, css.toEdit].join(' ');
 
-  const contactClass = isDeleteBtnHovered
-    ? deleteClass
-    : isEditBtnHovered
-    ? editClass
-    : css.contact;
+  const contactClass =
+    isDeleteBtnHovered || isEditBtnHovered
+      ? addClassForHoverEffect({
+          basicClass: '',
+          isDeleteBtnHovered,
+          isEditBtnHovered,
+        })
+      : '';
+
+  const highlighClass =
+    isDeleteBtnHovered || isEditBtnHovered
+      ? addClassForHoverEffect({
+          basicClass: css.hightlightByFilterValue,
+          isDeleteBtnHovered,
+          isEditBtnHovered,
+        })
+      : css.hightlightByFilterValue;
   return (
     <>
       {isEditModalOpen && (
@@ -65,12 +82,22 @@ export const Contact = ({ contact }) => {
         />
       )}
 
-      <p className={contactClass}>
+      <ContactEl className={contactClass}>
         {renderIcons('contact', iconSize.md)}
-        <span className={css.contact__name}>{contact.name}: </span>
-        <span className={css.contact__number}>{contact.number}</span>
-      </p>
-      <p className={css.contact__buttons}>
+        <ContactName
+          highlightClassName={highlighClass}
+          searchWords={[`${filterByName}`]}
+          autoEscape={true}
+          textToHighlight={`${contact.name}:`}
+        />
+        <Highlighter
+          highlightClassName={highlighClass}
+          searchWords={[`${filterByNumber}`]}
+          autoEscape={true}
+          textToHighlight={` ${contact.number}`}
+        />
+      </ContactEl>
+      <ContactButtons>
         <IconButton
           onClick={toggleEditModal}
           aria-label="Edit Contact"
@@ -87,7 +114,7 @@ export const Contact = ({ contact }) => {
         >
           {renderIcons('delete', iconSize.sm)}
         </IconButton>
-      </p>
+      </ContactButtons>
     </>
   );
 };

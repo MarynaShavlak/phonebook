@@ -1,0 +1,17 @@
+      .contact {
+      color: black;
+    }
+
+
+    .hightlightByFilterValue {
+      background-color: #f66fa5;
+      font-weight: 700;
+      border-radius: 5px;
+    }
+    .toDelete {
+              color: red;
+    }        
+      
+    .toEdit {
+      color: blue;
+    }        
