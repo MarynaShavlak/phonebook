@@ -5,7 +5,7 @@ export const ContactButtons = styled.div`
   display: flex;
   column-gap: 20px;
 `;
-export const ContactEl = styled.p`
+export const ContactEl = styled.div`
   display: flex;
   column-gap: 10px;
   align-items: center;

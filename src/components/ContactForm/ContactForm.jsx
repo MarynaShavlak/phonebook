@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { Form } from 'components';
 import { getContacts } from 'redux/selectors';
 import * as contactsOperations from 'redux/contactsOperations';
+import * as Notifications from 'utils/notifications';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -25,44 +25,19 @@ export const ContactForm = () => {
   };
 
   const checkContactInBook = contact => {
-    let isContactExist = false;
-    let isNumberExist = contacts.some(el => el.number === contact.number);
-    let isNameExist = contacts.some(el => el.name === contact.name);
-    if (isNameExist && isNumberExist) {
-      toast.error(
-        `Ooops, contact with name ${contact.name} and number ${contact.number} is already in your phonebook`
-      );
-      return (isContactExist = true);
-    }
-    if (isNameExist) {
-      toast.error(
-        `Ooops, contact with name ${contact.name} is already in your phonebook`
-      );
-      return (isContactExist = true);
-    }
-    if (isNumberExist) {
-      toast.error(
-        `Ooops, contact with number ${contact.number} is already in your phonebook`
-      );
-
-      return (isContactExist = true);
-    }
-
+    const isNumberExist = contacts.some(el => el.number === contact.number);
+    const isNameExist = contacts.some(el => el.name === contact.name);
+    Notifications.showInfoNotification(isNameExist, isNumberExist, contact);
+    const isContactExist = isNameExist || isNumberExist;
     return isContactExist;
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     const createdContact = { name, number };
-    let isExist = checkContactInBook(createdContact);
-    if (isExist) return;
-    const newContact = {
-      ...createdContact,
-    };
-    dispatch(contactsOperations.addContact(newContact));
-    toast.success(
-      `You just add contact with name ${name} and number ${number}  in your phonebook`
-    );
+    if (checkContactInBook(createdContact)) return;
+    dispatch(contactsOperations.addContact(createdContact));
+    Notifications.showSuccessNotification(createdContact);
     reset();
   };
 

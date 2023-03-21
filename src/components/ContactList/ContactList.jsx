@@ -9,7 +9,6 @@ export function ContactList() {
   const sortedContacts = contacts.sort((firstContact, secondContact) =>
     firstContact.name.localeCompare(secondContact.name)
   );
-  console.log('sortedContacts: ', sortedContacts);
 
   return (
     <ContactsList>

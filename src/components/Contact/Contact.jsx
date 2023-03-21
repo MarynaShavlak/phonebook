@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from 'utils/hoverStyles.module.css';
-import { toast } from 'react-toastify';
 import Avatar from 'react-avatar';
 import Highlighter from 'react-highlight-words';
 import { IconButton, EditModal, ConfirmModal } from 'components';
@@ -9,6 +8,7 @@ import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
+import * as Notifications from 'utils/notifications';
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from 'redux/contactsOperations';
@@ -35,9 +35,7 @@ export const Contact = ({ contact }) => {
     const { updatedName, updatedNumber } = updatedContact;
 
     if (updatedName === contact.name && updatedNumber === contact.number) {
-      return toast.error(
-        `There are no changes. You didn't change either contact name or phone number`
-      );
+      return Notifications.showWarnNotification();
     }
 
     const edittedContact = {
@@ -84,7 +82,7 @@ export const Contact = ({ contact }) => {
       )}
 
       <ContactEl className={contactClass}>
-        <Avatar size="50" name={contact.name} unstyled={false} round="50%" />
+        <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
         <ContactName
           highlightClassName={highlighClass}
           searchWords={[`${filterByName}`]}

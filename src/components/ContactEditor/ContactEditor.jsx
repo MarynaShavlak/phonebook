@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { Form } from 'components';
 import { getContacts } from 'redux/selectors';
+import * as Notifications from 'utils/notifications';
 import './ContactEditor.css';
 
 export const ContactEditor = ({ contact, onEditContact }) => {
@@ -27,9 +27,7 @@ export const ContactEditor = ({ contact, onEditContact }) => {
   const handleSubmit = e => {
     e.preventDefault();
     if (contact.name !== name && contact.number !== number) {
-      return toast.error(
-        `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`
-      );
+      return Notifications.showFailureNotification();
     }
     const filteredContactsByName = contacts.filter(
       el => el.name !== contact.name
@@ -43,16 +41,11 @@ export const ContactEditor = ({ contact, onEditContact }) => {
       el => el.number === number
     );
 
-    if (isNameExist) {
-      return toast.info(
-        `Contact with name ${name} is already exist. Please, write another name `
-      );
-    }
-    if (isNumberExist) {
-      return toast.info(
-        `Contact with number ${number} is already exist. Please, check number and write correct`
-      );
-    }
+    Notifications.showInfoNotification(isNameExist, isNumberExist, {
+      name,
+      number,
+    });
+    if (isNameExist || isNumberExist) return;
     const updatedContact = { updatedName: name, updatedNumber: number };
     onEditContact(updatedContact);
   };
