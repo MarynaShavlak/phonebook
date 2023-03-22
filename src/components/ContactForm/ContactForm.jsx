@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'components';
 import { getContacts } from 'redux/selectors';
 import * as contactsOperations from 'redux/contactsOperations';
 import * as Notifications from 'utils/notifications';
 
-export const ContactForm = () => {
+export const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const contacts = useSelector(getContacts);
@@ -39,6 +40,7 @@ export const ContactForm = () => {
     dispatch(contactsOperations.addContact(createdContact));
     Notifications.showSuccessNotification('add', createdContact);
     reset();
+    onSubmit();
   };
 
   const reset = () => {
@@ -47,12 +49,18 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form
-      name={name}
-      number={number}
-      operationType="Add contact"
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-    />
+    <>
+      <Form
+        name={name}
+        number={number}
+        operationType="Add new contact"
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />
+    </>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func,
 };

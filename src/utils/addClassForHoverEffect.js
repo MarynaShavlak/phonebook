@@ -1,4 +1,5 @@
 import css from 'utils/hoverStyles.module.css';
+
 export function addClassForHoverEffect({
   basicClass,
   isDeleteBtnHovered,
@@ -14,3 +15,16 @@ export function addClassForHoverEffect({
     ? `${basicClass} ${css.toEdit} `
     : basicClass;
 }
+
+// export function addActiveSortOptionClass(
+//   sortType,
+//   isSortedByAlphabet,
+//   isSortedByDate
+// ) {
+//   if (sortType === 'alphabet') {
+//     return isSortedByAlphabet ? `active` : '';
+//   }
+//   if (sortType === 'date') {
+//     return isSortedByDate ? `active` : '';
+//   }
+// }

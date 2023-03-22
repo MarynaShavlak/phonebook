@@ -8,3 +8,9 @@ export const Container = styled.div`
   margin: 0 auto;
   row-gap: 30px;
 `;
+export const Info = styled.p`
+  font-size: 35px;
+  span {
+    font-weight: 700;
+  }
+`;

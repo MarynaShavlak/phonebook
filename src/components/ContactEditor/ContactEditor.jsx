@@ -52,7 +52,6 @@ export const ContactEditor = ({ contact, onEditContact }) => {
 
   return (
     <>
-      <h3 className="editForm__title">Contact Editor</h3>
       <div className="editForm__info">
         <p>You try to edit contact with</p>
         <p className="contact__info">

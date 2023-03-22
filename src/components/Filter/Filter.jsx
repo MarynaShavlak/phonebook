@@ -1,16 +1,24 @@
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { FilterBlock } from './Filter.styled';
+import { FilterBlock, Info } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { setFilterByName } from 'redux/filterByNameSlice';
 import { setFilterByNumber } from 'redux/filterByNumberSlice';
-import { getFilterByName, getFilterByNumber } from 'redux/selectors';
+import {
+  getFilterByName,
+  getFilterByNumber,
+  getFilteredContacts,
+} from 'redux/selectors';
 
 export function Filter({ name }) {
   const filterByName = useSelector(getFilterByName);
   const filterByNumber = useSelector(getFilterByNumber);
+  const filteredContacts = useSelector(getFilteredContacts);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
+  const input = useRef();
+  const inputFilterValue = input.current?.value;
 
   const setFilterValue = name => {
     switch (name) {
@@ -39,9 +47,8 @@ export function Filter({ name }) {
 
   const updateQueryString = (name, value) => {
     const newParams = new URLSearchParams(searchParams.toString());
-    console.log('newParams: ', newParams);
     newParams.delete(name);
-    if (value) newParams.append(name, value);
+    if (value) newParams.append(name, value.toLowerCase());
     newParams.sort();
     setSearchParams(newParams);
   };
@@ -51,6 +58,7 @@ export function Filter({ name }) {
       <label className="filter__field">
         <span className="filter__label">{`Find contacts by ${name}`}</span>
         <input
+          ref={input}
           className="filter__input"
           type="text"
           name={name}
@@ -59,6 +67,11 @@ export function Filter({ name }) {
           onChange={onChangeFilter}
         />
       </label>
+      {inputFilterValue && (
+        <Info>
+          Quantity of found contacts : <span>{filteredContacts.length}</span>
+        </Info>
+      )}
     </FilterBlock>
   );
 }

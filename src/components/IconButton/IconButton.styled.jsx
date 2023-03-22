@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const IconButtonStyled = styled.button`
-   display: flex;
+  display: flex;
   column-gap: 10px;
   min-width: 40px;
   align-self: center;
   align-items: center;
   padding: 10px 10px;
   background-color: #fde7f0;
-  color: black; 
+  color: black;
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 20px;

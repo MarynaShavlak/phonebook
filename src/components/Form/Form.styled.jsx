@@ -3,10 +3,17 @@ import styled from 'styled-components';
 export const FormStyled = styled.form`
   padding: 10px;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   row-gap: 40px;
 `;
-
+export const FormTitle = styled.h2`
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  color: black;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+`;
 
 export const FormList = styled.ul`
   padding: 0;
@@ -19,40 +26,38 @@ export const FormList = styled.ul`
 `;
 
 export const FormItem = styled.li`
-    .contact-form__field {
-      display: flex;
-      flex-direction:column;
-      row-gap: 8px;
-    }
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
 
-    .contact-from__wrapper {
-      position: relative;
-    }
-    .contact-form__icon {
-      position:absolute;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-       
+  .contact-from__wrapper {
+    position: relative;
+  }
+  .contact-form__icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+  }
+  .contact-form__label {
+    font-size: 30px;
+    font-weight: 700;
+  }
 
+  .contact-form__input {
+    height: 70px;
+    width: 100%;
+    padding-left: 70px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #f66fa5;
+    border: 5px solid #fab7d2;
+    border-radius: 10px;
+    &:focus {
+      outline: none;
+      border: 5px solid #f787b4;
     }
-    .contact-form__label {
-      font-size: 30px;
-      font-weight: 700;;
-    }
-
-    .contact-form__input {
-      height: 70px;
-      width: 100%;
-      padding-left: 70px;
-      font-size: 24px;
-      font-weight: 600;
-      color: #f66fa5;
-      border: 5px solid #fab7d2;
-      border-radius: 10px;
-      &:focus {
-        outline: none;
-        border: 5px solid #f787b4;
-      }
-    }
+  }
 `;

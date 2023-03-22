@@ -6,7 +6,6 @@ import {
   NavigationList,
   NavigationLink,
 } from './SharedLayout.styled';
-// import { Layout } from 'components/Layout';
 import { Loader } from 'components/Loader';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';

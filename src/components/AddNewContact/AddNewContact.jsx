@@ -1,40 +1,51 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
-import { IconButton, EditModal } from 'components';
+import React, { useState } from 'react';
 import { StickyBtn } from './AddNewContact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
+import Modal from 'react-modal';
+import { ContactForm } from 'components';
+
+Modal.setAppElement('#root');
+
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    background: '#fab7d2',
+    width: '700px',
+    padding: '30px 20px',
+    border: 'none',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 const AddNewContact = () => {
-  const [addBtnHeight, setAddBtnHeight] = useState(0);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const addBtnRef = React.createRef(null);
-
-  useLayoutEffect(() => {
-    setAddBtnHeight(addBtnRef.current.offsetHeight);
-  }, []);
   const toggleAddModal = () => setIsAddModalOpen(!isAddModalOpen);
-
-  const windowHeight = useRef(window.innerHeight);
-  const addBtnPosition = windowHeight.current - addBtnHeight - 40;
 
   return (
     <>
-      {' '}
-      {/* {isAddModalOpen && (
-        <EditModal
-          isOpen={isAddModalOpen}
-          onClose={toggleAddModal}
-          // onEditContact={editContact}
-        />
-      )} */}
-      <StickyBtn
-        aria-label="Add new contact"
-        ref={addBtnRef}
-        onClick={toggleAddModal}
-      >
+      <StickyBtn aria-label="Add new contact" onClick={toggleAddModal}>
         {renderIcons('add', iconSize.md)}
       </StickyBtn>
-      {/* <ContactForm /> */}
+      {isAddModalOpen && (
+        <Modal
+          isOpen={isAddModalOpen}
+          contentLabel="Modal window to edit contact info"
+          style={customStyles}
+          closeTimeoutMS={300}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={toggleAddModal}
+        >
+          <ContactForm onSubmit={toggleAddModal} />
+        </Modal>
+      )}
     </>
   );
 };

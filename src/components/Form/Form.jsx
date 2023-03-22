@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { FormStyled, FormItem, FormList } from './Form.styled';
+import { FormStyled, FormItem, FormList, FormTitle } from './Form.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import { OperationButton } from 'components';
@@ -8,6 +8,7 @@ export function Form({ name, number, operationType, onSubmit, onChange }) {
   return (
     <FormStyled onSubmit={onSubmit}>
       <FormList>
+        <FormTitle>{operationType}</FormTitle>
         <FormItem>
           <label className="contact-form__field">
             <span className="contact-form__label">Name</span>

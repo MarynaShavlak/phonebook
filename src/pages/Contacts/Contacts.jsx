@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container } from './Contacts.styled';
+import { Container, Info } from './Contacts.styled';
 import {
   ErrorMessage,
   Section,
-  ContactForm,
   ContactList,
   Filter,
   Loader,
   Notification,
-  IconButton,
 } from 'components';
 import * as contactsOperations from 'redux/contactsOperations';
 import {
@@ -21,22 +19,13 @@ import {
   getFilterByNumber,
 } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
-import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
 import AddNewContact from 'components/AddNewContact/AddNewContact';
 
 const Contacts = () => {
-  // const [addBtnHeight, setAddBtnHeight] = useState(0);
-
   const dispatch = useDispatch();
-  // const addBtnRef = React.createRef(null);
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
-
-  // useLayoutEffect(() => {
-  //   setAddBtnHeight(addBtnRef.current.offsetHeight);
-  // }, []);
 
   const filteredContacts = useSelector(getFilteredContacts);
   const allContacts = useSelector(getContacts);
@@ -46,25 +35,18 @@ const Contacts = () => {
   const filterByNumber = useSelector(getFilterByNumber);
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts.length;
-  // const windowHeight = useRef(window.innerHeight);
-  // const addBtnPosition = windowHeight.current - addBtnHeight - 40;
 
   return (
     <>
       <Container>
-        {/* <Sticky top={addBtnPosition}>
-          <IconButton aria-label="Add new contact" ref={addBtnRef}>
-            {renderIcons('add', iconSize.lg)}
-          </IconButton>
-        </Sticky> */}
-        {/* <Section title="Phonebook">
-          <ContactForm />
-        </Section> */}
         <Section title="Contacts">
           <>
-            <AddNewContact></AddNewContact>
             {allContacts.length !== 0 && (
               <>
+                <Info>
+                  You have <span>{allContacts.length}</span> contacts in your
+                  phoneBook
+                </Info>
                 <Filter name="name" />
                 <Filter name="number" />
               </>
@@ -75,7 +57,10 @@ const Contacts = () => {
             ) : error && isLoading === false ? (
               <ErrorMessage />
             ) : filteredContacts.length ? (
-              <ContactList />
+              <>
+                <AddNewContact />
+                <ContactList />
+              </>
             ) : isFiltered ? (
               <Notification
                 message={

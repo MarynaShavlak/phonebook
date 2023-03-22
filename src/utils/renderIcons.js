@@ -10,6 +10,8 @@ import { FaRegSadCry } from 'react-icons/fa';
 import { BsFillStarFill } from 'react-icons/bs';
 import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
+import { FaSortAlphaDown } from 'react-icons/fa';
+import { FaSortAmountUp } from 'react-icons/fa';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -37,6 +39,10 @@ export function renderIcons(param, size) {
       return <RiGroupFill size={size} className="contact-form__icon" />;
     case 'home':
       return <AiFillHome size={size} className="contact-form__icon" />;
+    case 'alphaDown':
+      return <FaSortAlphaDown size={size} className="contact-form__icon" />;
+    case 'dateUp':
+      return <FaSortAmountUp size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }
