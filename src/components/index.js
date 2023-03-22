@@ -1,5 +1,7 @@
 export { ConfirmDeleteModal } from 'components/ConfirmDeleteModal';
+export { ConfirmRestoreModal } from 'components/ConfirmRestoreModal';
 export { Contact } from 'components/Contact';
+export { DeletedContact } from 'components/DeletedContact';
 export { ContactEditor } from 'components/ContactEditor';
 export { ContactForm } from 'components/ContactForm';
 export { ContactList } from 'components/ContactList';

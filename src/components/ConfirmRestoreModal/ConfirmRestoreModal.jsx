@@ -1,15 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import './ConfirmDeleteModal.css';
+import './ConfirmRestoreModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contactsOperations';
 import * as Notifications from 'utils/notifications';
-import { addContactToRecycleBin } from 'redux/recycleBinSlice';
-import { getRecycleBinContacts } from 'redux/selectors';
+import { removeContactFromRecycleBin } from 'redux/recycleBinSlice';
+import { getContacts } from 'redux/selectors';
+
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -30,29 +31,36 @@ const customStyles = {
   },
 };
 
-export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
-  const contacts = useSelector(getRecycleBinContacts);
+export const ConfirmRestoreModal = ({ isOpen, onClose, contact }) => {
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
-  const confirmDeleteContact = () => {
-    dispatch(contactsOperations.deleteContact(contact.id));
-
-    dispatch(addContactToRecycleBin(contact));
-
-    Notifications.showSuccessNotification('delete', contact);
+  const confirmRestoreContact = () => {
+    console.log('confirm restore');
+    const checkContactInBook = contact => {
+      const isNumberExist = contacts.some(el => el.number === contact.number);
+      const isNameExist = contacts.some(el => el.name === contact.name);
+      Notifications.showInfoNotification(isNameExist, isNumberExist, contact);
+      const isContactExist = isNameExist || isNumberExist;
+      return isContactExist;
+    };
+    if (checkContactInBook(contact)) return;
+    dispatch(contactsOperations.addContact(contact));
+    dispatch(removeContactFromRecycleBin(contact.id));
+    Notifications.showSuccessNotification('restore', contact);
   };
 
   return (
     <Modal
       isOpen={isOpen}
-      contentLabel="Modal window to confirm to delete contact"
+      contentLabel="Modal window to confirm to restore contact"
       style={customStyles}
       closeTimeoutMS={300}
       shouldCloseOnOverlayClick={true}
       onRequestClose={onClose}
     >
       <p className="confirmation__message">
-        <span>Are you sure you want to remove contact with name</span>{' '}
+        <span>Are you sure you want to restore contact with name</span>{' '}
         <span>
           <b>{contact.name}</b>
         </span>{' '}
@@ -60,17 +68,17 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
         <span>
           <b>{contact.number}</b>{' '}
         </span>
-        to recycle bin?
+        in your contacts list?
       </p>
       <div className="action-buttons">
         <IconButton
-          aria-label="Confirm delete contact"
-          onClick={() => confirmDeleteContact()}
+          aria-label="Confirm restore contact"
+          onClick={() => confirmRestoreContact()}
         >
           {renderIcons('confirm', iconSize.md)}
         </IconButton>
         <IconButton
-          aria-label="Cancel delete contact"
+          aria-label="Cancel restore contact"
           onClick={() => onClose()}
         >
           {renderIcons('cancel', iconSize.md)}
@@ -80,7 +88,7 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
   );
 };
 
-ConfirmDeleteModal.propTypes = {
+ConfirmRestoreModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   contact: PropTypes.shape({

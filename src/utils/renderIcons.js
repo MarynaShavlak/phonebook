@@ -12,6 +12,7 @@ import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { FaSortAmountUp } from 'react-icons/fa';
+import { MdSettingsBackupRestore } from 'react-icons/md';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -27,6 +28,10 @@ export function renderIcons(param, size) {
       return <BsTelephoneFill size={size} className="contact-form__icon" />;
     case 'edit':
       return <RiEdit2Fill size={size} className="contact-form__icon" />;
+    case 'restore':
+      return (
+        <MdSettingsBackupRestore size={size} className="contact-form__icon" />
+      );
     case 'cancel':
       return <ImCancelCircle size={size} className="contact-form__icon" />;
     case 'confirm':

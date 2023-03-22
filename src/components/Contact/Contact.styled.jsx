@@ -16,3 +16,7 @@ export const ContactEl = styled.div`
 export const ContactName = styled(Highlighter)`
   font-style: italic;
 `;
+export const Name = styled.p`
+  font-style: italic;
+`;
+export const Number = styled.p``;

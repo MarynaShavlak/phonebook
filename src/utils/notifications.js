@@ -2,17 +2,17 @@ import { toast } from 'react-toastify';
 
 export function showInfoNotification(isNameExist, isNumberExist, contactToAdd) {
   if (isNameExist && isNumberExist) {
-    toast.info(
+    return toast.info(
       `Ooops, contact with name ${contactToAdd.name} and number ${contactToAdd.number} is already exist in your phonebook`
     );
   }
   if (isNameExist) {
-    toast.info(
+    return toast.info(
       `Ooops, contact with name ${contactToAdd.name} is already in exist your phonebook. Please, white another name`
     );
   }
   if (isNumberExist) {
-    toast.info(
+    return toast.info(
       `Ooops, contact with number ${contactToAdd.number} is already exist in your phonebook. Please, white another number`
     );
   }
@@ -27,6 +27,10 @@ export function showSuccessNotification(operation, contact) {
     case 'delete':
       return toast.success(
         `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`
+      );
+    case 'restore':
+      return toast.success(
+        `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`
       );
     default:
       return console.warn(

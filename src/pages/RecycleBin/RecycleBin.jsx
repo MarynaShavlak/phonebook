@@ -7,7 +7,7 @@ import {
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
 import { Container } from 'pages/Contacts/Contacts.styled';
-import { Contact, Section } from 'components';
+import { DeletedContact, Section } from 'components';
 
 const RecycleBin = () => {
   const contacts = useSelector(getRecycleBinContacts);
@@ -19,7 +19,7 @@ const RecycleBin = () => {
         <ContactsList>
           {contacts.map(contact => (
             <ContactItem key={contact.id}>
-              <Contact contact={contact} />
+              <DeletedContact contact={contact} />
             </ContactItem>
           ))}
         </ContactsList>
