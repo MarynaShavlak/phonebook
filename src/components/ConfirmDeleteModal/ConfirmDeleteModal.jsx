@@ -8,6 +8,7 @@ import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contactsOperations';
 import * as Notifications from 'utils/notifications';
+import { addContactToRecycleBin } from 'redux/recycleBinSlice';
 
 Modal.setAppElement('#root');
 
@@ -34,6 +35,8 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
 
   const confirmDeleteContact = () => {
     dispatch(contactsOperations.deleteContact(contact.id));
+    dispatch(addContactToRecycleBin(contact));
+
     Notifications.showSuccessNotification('delete', contact);
   };
 
@@ -47,15 +50,15 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
       onRequestClose={onClose}
     >
       <p className="confirmation__message">
-        <span>Are you sure you want to delete contact with name</span>{' '}
+        <span>Are you sure you want to remove contact with name</span>{' '}
         <span>
           <b>{contact.name}</b>
         </span>{' '}
         <span>and number</span>{' '}
         <span>
-          <b>{contact.number}</b>
+          <b>{contact.number}</b>{' '}
         </span>
-        ?
+        to recycle bin?
       </p>
       <div className="action-buttons">
         <IconButton

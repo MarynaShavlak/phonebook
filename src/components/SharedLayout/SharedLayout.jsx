@@ -37,6 +37,11 @@ export const SharedLayout = () => {
                   {renderIcons('group', iconSize.md)}Groups
                 </NavigationLink>
               </li>
+              <li>
+                <NavigationLink to="/recycleBin">
+                  {renderIcons('delete', iconSize.md)}Recycle Bin
+                </NavigationLink>
+              </li>
             </NavigationList>
           </nav>
         </Container>

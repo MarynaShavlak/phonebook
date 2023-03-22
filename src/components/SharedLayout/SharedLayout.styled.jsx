@@ -21,7 +21,7 @@ export const Header = styled.header`
 `;
 export const NavigationList = styled.ul`
   display: flex;
-  column-gap: 40px;
+  column-gap: 20px;
   justify-content: center;
 `;
 

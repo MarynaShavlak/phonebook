@@ -22,11 +22,11 @@ export function showSuccessNotification(operation, contact) {
   switch (operation) {
     case 'add':
       return toast.success(
-        `You just add contact with name ${contact.name} and number ${contact.number}  in your phonebook`
+        `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`
       );
     case 'delete':
       return toast.success(
-        `You just delete contact with name ${contact.name} and number ${contact.number}  from your phonebook`
+        `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`
       );
     default:
       return console.warn(

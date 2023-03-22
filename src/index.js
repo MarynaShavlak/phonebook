@@ -4,19 +4,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider } from 'react-avatar';
 import { App } from 'components/App';
 import { GlobalStyle } from 'components/GlobalStyle';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { store, persistor } from 'redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { getRandomColors } from 'utils/getRandomColor';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <BrowserRouter>
     <Provider store={store}>
-      <ConfigProvider colors={getRandomColors()}>
-        <App />
-      </ConfigProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConfigProvider colors={getRandomColors()}>
+          <App />
+        </ConfigProvider>
+        <GlobalStyle />
+      </PersistGate>
     </Provider>
-    <GlobalStyle />
   </BrowserRouter>
 
   // </React.StrictMode>
