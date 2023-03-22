@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import css from 'utils/hoverStyles.module.css';
 import Avatar from 'react-avatar';
 import Highlighter from 'react-highlight-words';
-import { IconButton, EditModal, ConfirmModal } from 'components';
+import { IconButton, EditModal, ConfirmDeleteModal } from 'components';
 import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
@@ -74,7 +74,7 @@ export const Contact = ({ contact }) => {
         />
       )}
       {isConfirmModalOpen && (
-        <ConfirmModal
+        <ConfirmDeleteModal
           isOpen={isConfirmModalOpen}
           onClose={toggleConfirmModal}
           contact={contact}

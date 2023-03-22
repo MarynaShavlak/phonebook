@@ -37,7 +37,7 @@ export const ContactForm = () => {
     const createdContact = { name, number };
     if (checkContactInBook(createdContact)) return;
     dispatch(contactsOperations.addContact(createdContact));
-    Notifications.showSuccessNotification(createdContact);
+    Notifications.showSuccessNotification('add', createdContact);
     reset();
   };
 

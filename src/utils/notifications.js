@@ -18,10 +18,21 @@ export function showInfoNotification(isNameExist, isNumberExist, contactToAdd) {
   }
 }
 
-export function showSuccessNotification(contact) {
-  return toast.success(
-    `You just add contact with name ${contact.name} and number ${contact.number}  in your phonebook`
-  );
+export function showSuccessNotification(operation, contact) {
+  switch (operation) {
+    case 'add':
+      return toast.success(
+        `You just add contact with name ${contact.name} and number ${contact.number}  in your phonebook`
+      );
+    case 'delete':
+      return toast.success(
+        `You just delete contact with name ${contact.name} and number ${contact.number}  from your phonebook`
+      );
+    default:
+      return console.warn(
+        `Type of field with operation  ${operation} is not found`
+      );
+  }
 }
 
 export function showWarnNotification() {

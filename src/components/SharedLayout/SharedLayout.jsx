@@ -8,6 +8,8 @@ import {
 } from './SharedLayout.styled';
 // import { Layout } from 'components/Layout';
 import { Loader } from 'components/Loader';
+import { renderIcons } from 'utils/renderIcons';
+import { iconSize } from 'constants';
 
 export const SharedLayout = () => {
   return (
@@ -17,16 +19,24 @@ export const SharedLayout = () => {
           <nav>
             <NavigationList>
               <li>
-                <NavigationLink to="/">Home</NavigationLink>
+                <NavigationLink to="/">
+                  {renderIcons('home', iconSize.md)}Home
+                </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/contacts">Contacts</NavigationLink>
+                <NavigationLink to="/contacts">
+                  {renderIcons('contact', iconSize.md)}Contacts
+                </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/favourites">Favourites</NavigationLink>
+                <NavigationLink to="/favourites">
+                  {renderIcons('favourite', iconSize.md)}Favourites
+                </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/groups">Groups</NavigationLink>
+                <NavigationLink to="/groups">
+                  {renderIcons('group', iconSize.md)}Groups
+                </NavigationLink>
               </li>
             </NavigationList>
           </nav>

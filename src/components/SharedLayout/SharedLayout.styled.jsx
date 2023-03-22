@@ -21,14 +21,16 @@ export const Header = styled.header`
 `;
 export const NavigationList = styled.ul`
   display: flex;
-  column-gap: 30px;
+  column-gap: 40px;
+  justify-content: center;
 `;
 
 export const NavigationLink = styled(NavLink)`
   display: flex;
+  align-items: center;
   column-gap: 10px;
   padding: 15px 10px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 800;
   color: black;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),

@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import './ConfirmModal.css';
+import './ConfirmDeleteModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contactsOperations';
+import * as Notifications from 'utils/notifications';
+
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -27,8 +29,14 @@ const customStyles = {
   },
 };
 
-export const ConfirmModal = ({ isOpen, onClose, contact }) => {
+export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
   const dispatch = useDispatch();
+
+  const confirmDeleteContact = () => {
+    dispatch(contactsOperations.deleteContact(contact.id));
+    Notifications.showSuccessNotification('delete', contact);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -51,8 +59,8 @@ export const ConfirmModal = ({ isOpen, onClose, contact }) => {
       </p>
       <div className="action-buttons">
         <IconButton
-          aria-label="Cofirm delete contact"
-          onClick={() => dispatch(contactsOperations.deleteContact(contact.id))}
+          aria-label="Confirm delete contact"
+          onClick={() => confirmDeleteContact()}
         >
           {renderIcons('confirm', iconSize.md)}
         </IconButton>
@@ -67,7 +75,7 @@ export const ConfirmModal = ({ isOpen, onClose, contact }) => {
   );
 };
 
-ConfirmModal.propTypes = {
+ConfirmDeleteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   contact: PropTypes.shape({

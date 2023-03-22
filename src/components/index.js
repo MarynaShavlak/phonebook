@@ -1,4 +1,4 @@
-export { ConfirmModal } from 'components/ConfirmModal';
+export { ConfirmDeleteModal } from 'components/ConfirmDeleteModal';
 export { Contact } from 'components/Contact';
 export { ContactEditor } from 'components/ContactEditor';
 export { ContactForm } from 'components/ContactForm';
