@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgoit_react_hw_07_phonebook=self.webpackChunkgoit_react_hw_07_phonebook||[]).push([[709],{3709:function(e,o,t){t.r(o);t(2791);var n=t(184);o.default=function(){return(0,n.jsx)("main",{children:(0,n.jsx)("p",{style:{fontSize:"70px"},children:"Soon you will be able to add contacts to favourites..."})})}}}]);
+//# sourceMappingURL=709.c5dfea76.chunk.js.map

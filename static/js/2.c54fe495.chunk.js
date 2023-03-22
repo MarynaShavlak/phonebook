@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgoit_react_hw_07_phonebook=self.webpackChunkgoit_react_hw_07_phonebook||[]).push([[2],{1002:function(e,o,n){n.r(o);n(2791);var t=n(184);o.default=function(){return(0,t.jsx)("main",{children:(0,t.jsx)("p",{style:{fontSize:"70px"},children:"Soon you will be able to create your own contact groups ..."})})}}}]);
+//# sourceMappingURL=2.c54fe495.chunk.js.map
