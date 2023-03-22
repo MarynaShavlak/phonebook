@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { FilterBlock } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { setFilterByName } from 'redux/filterByNameSlice';
 import { setFilterByNumber } from 'redux/filterByNumberSlice';
 import { getFilterByName, getFilterByNumber } from 'redux/selectors';
@@ -8,6 +9,7 @@ import { getFilterByName, getFilterByNumber } from 'redux/selectors';
 export function Filter({ name }) {
   const filterByName = useSelector(getFilterByName);
   const filterByNumber = useSelector(getFilterByNumber);
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const setFilterValue = name => {
@@ -22,6 +24,7 @@ export function Filter({ name }) {
   };
 
   const onChangeFilter = ({ target: { name, value } }) => {
+    updateQueryString(name, value);
     switch (name) {
       case 'name':
         dispatch(setFilterByName(value));
@@ -34,6 +37,15 @@ export function Filter({ name }) {
     }
   };
 
+  const updateQueryString = (name, value) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    console.log('newParams: ', newParams);
+    newParams.delete(name);
+    if (value) newParams.append(name, value);
+    newParams.sort();
+    setSearchParams(newParams);
+  };
+
   return (
     <FilterBlock>
       <label className="filter__field">
@@ -43,7 +55,7 @@ export function Filter({ name }) {
           type="text"
           name={name}
           placeholder={`Enter ${name} to search contact...`}
-          value={setFilterValue()}
+          value={setFilterValue(name)}
           onChange={onChangeFilter}
         />
       </label>

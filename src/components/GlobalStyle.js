@@ -18,6 +18,7 @@ code {
 h1,
 h2,
 h3,
+h4,
 p {
   margin-top: 0;
   margin-bottom: 0;
@@ -37,6 +38,9 @@ button {
   padding: 0;
   font-family: inherit;
   cursor: pointer;
+}
+a {
+   text-decoration: none;
 }
 
 `;
