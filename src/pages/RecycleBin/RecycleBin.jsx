@@ -7,22 +7,24 @@ import {
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
 import { Container } from 'pages/Contacts/Contacts.styled';
-import { DeletedContact, Section } from 'components';
+import { DeletedContact, Section, Notification } from 'components';
 
 const RecycleBin = () => {
   const contacts = useSelector(getRecycleBinContacts);
-  console.log('contacts : ', contacts);
-
   return (
     <Container>
       <Section title={null}>
-        <ContactsList>
-          {contacts.map(contact => (
-            <ContactItem key={contact.id}>
-              <DeletedContact contact={contact} />
-            </ContactItem>
-          ))}
-        </ContactsList>
+        {contacts.length !== 0 ? (
+          <ContactsList>
+            {contacts.map(contact => (
+              <ContactItem key={contact.id}>
+                <DeletedContact contact={contact} />
+              </ContactItem>
+            ))}
+          </ContactsList>
+        ) : (
+          <Notification message="There are no contacts in recycle bin now" />
+        )}
       </Section>
       <ToastContainer
         position="bottom-right"

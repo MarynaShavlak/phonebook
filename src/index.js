@@ -10,17 +10,16 @@ import { store, persistor } from 'redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { getRandomColors } from 'utils/getRandomColor';
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <BrowserRouter>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ConfigProvider colors={getRandomColors()}>
-          <App />
-        </ConfigProvider>
-        <GlobalStyle />
-      </PersistGate>
-    </Provider>
-  </BrowserRouter>
-
-  // </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter basename="/goit-react-hw-07-phonebook/">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ConfigProvider colors={getRandomColors()}>
+            <App />
+          </ConfigProvider>
+          <GlobalStyle />
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import css from 'utils/hoverStyles.module.css';
 import Avatar from 'react-avatar';
 import {
   IconButton,
@@ -16,12 +15,6 @@ import {
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 
-import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
-import * as Notifications from 'utils/notifications';
-
-import { useSelector, useDispatch } from 'react-redux';
-import * as contactsOperations from 'redux/contactsOperations';
-
 export const DeletedContact = ({ contact }) => {
   const [isConfirmRestoreModalOpen, setIsConfirmRestoreModalOpen] =
     useState(false);
@@ -29,31 +22,18 @@ export const DeletedContact = ({ contact }) => {
     useState(false);
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isRestoreBtnHovered, setIsRestoreBtnHovered] = useState(false);
-  const dispatch = useDispatch();
 
   const toggleRestoreModal = () =>
     setIsConfirmRestoreModalOpen(!isConfirmRestoreModalOpen);
+
   const toggleDeleteModal = () =>
     setIsConfirmDeleteModalOpen(!isConfirmDeleteModalOpen);
+
   const toggleDeleteBtnHoverEffect = () =>
     setIsDeleteBtnHovered(!isDeleteBtnHovered);
 
   const toggleRestoreBtnHoverEffect = () =>
     setIsRestoreBtnHovered(!isRestoreBtnHovered);
-
-  const restoreContact = updatedContact => {
-    setIsConfirmRestoreModalOpen(false);
-    // dispatch(contactsOperations.updateContact(RestoretedContact));
-  };
-
-  const contactClass =
-    isDeleteBtnHovered || isRestoreBtnHovered
-      ? addClassForHoverEffect({
-          basicClass: '',
-          isDeleteBtnHovered,
-          isRestoreBtnHovered,
-        })
-      : '';
 
   return (
     <>
@@ -72,7 +52,7 @@ export const DeletedContact = ({ contact }) => {
         />
       )}
 
-      <ContactEl className={contactClass}>
+      <ContactEl>
         <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
         <Name>{contact.name}:</Name>
         <Number>{contact.number}</Number>

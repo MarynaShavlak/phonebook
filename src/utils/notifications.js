@@ -44,6 +44,16 @@ export function showWarnNotification() {
     `There are no changes. You didn't change either contact name or phone number`
   );
 }
+export function showWarnRecycleBinNotification(contact) {
+  return toast.warn(
+    `Contact with same name ${contact.name} and number ${contact.number} in already exist in recycle bin. We left only ONE `
+  );
+}
+export function showInfoRecycleBinNotification(contact) {
+  return toast.info(
+    `You've just delete contact with name ${contact.name} and number ${contact.number} from recycle bin`
+  );
+}
 
 export function showFailureNotification() {
   return toast.error(

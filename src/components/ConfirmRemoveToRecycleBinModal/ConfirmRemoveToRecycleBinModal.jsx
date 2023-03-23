@@ -1,13 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import './ConfirmDeleteModal.css';
+import './ConfirmRemoveToRecycleBinModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
+import * as contactsOperations from 'redux/contactsOperations';
 import * as Notifications from 'utils/notifications';
-import { removeContactFromRecycleBin } from 'redux/recycleBinSlice';
+import { addContactToRecycleBin } from 'redux/recycleBinSlice';
+import { getRecycleBinContacts } from 'redux/selectors';
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -28,11 +30,28 @@ const customStyles = {
   },
 };
 
-export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
+export const ConfirmRemoveToRecycleBinModal = ({
+  isOpen,
+  onClose,
+  contact,
+}) => {
+  const contacts = useSelector(getRecycleBinContacts);
   const dispatch = useDispatch();
+
   const confirmDeleteContact = () => {
-    dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showInfoRecycleBinNotification(contact);
+    dispatch(contactsOperations.deleteContact(contact.id));
+
+    const checkContactInRecycleBin = contact => {
+      const isContactExist = contacts.some(el => el.id === contact.id);
+      if (isContactExist) {
+        Notifications.showWarnRecycleBinNotification(contact);
+      }
+      return isContactExist;
+    };
+
+    if (checkContactInRecycleBin(contact)) return;
+    Notifications.showSuccessNotification('delete', contact);
+    dispatch(addContactToRecycleBin(contact));
   };
 
   return (
@@ -45,7 +64,7 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
       onRequestClose={onClose}
     >
       <p className="confirmation__message">
-        <span>Are you sure you want to delete contact with name</span>{' '}
+        <span>Are you sure you want to remove contact with name</span>{' '}
         <span>
           <b>{contact.name}</b>
         </span>{' '}
@@ -53,10 +72,7 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
         <span>
           <b>{contact.number}</b>{' '}
         </span>
-        from recycle bin?
-      </p>
-      <p className="confirmation__message">
-        It will be impossible to restore this contact.
+        to recycle bin?
       </p>
       <div className="action-buttons">
         <IconButton
@@ -76,7 +92,7 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
   );
 };
 
-ConfirmDeleteModal.propTypes = {
+ConfirmRemoveToRecycleBinModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   contact: PropTypes.shape({
