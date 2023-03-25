@@ -19,30 +19,6 @@ const recycleBinSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
-
-    // updateContactList(state, action) {
-    //   state.contacts = state.contacts.map(el => {
-    //     if (el.name === action.payload.name) {
-    //       const newEl = {
-    //         id: el.id,
-    //         name: el.name,
-    //         number: action.payload.number,
-    //       };
-    //       return newEl;
-    //     }
-
-    //     if (el.number === action.payload.number) {
-    //       const newEl = {
-    //         id: el.id,
-    //         name: action.payload.name,
-    //         number: el.number,
-    //       };
-    //       return newEl;
-    //     }
-
-    //     return el;
-    //   });
-    // },
   },
 });
 

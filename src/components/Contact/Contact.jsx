@@ -15,8 +15,8 @@ import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
 import * as Notifications from 'utils/notifications';
 
 import { useSelector, useDispatch } from 'react-redux';
-import * as contactsOperations from 'redux/contactsOperations';
-import { getFilterByName, getFilterByNumber } from 'redux/selectors';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
+import { selectFilterByName, selectFilterByNumber } from 'redux/selectors';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -24,8 +24,8 @@ export const Contact = ({ contact }) => {
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
   const dispatch = useDispatch();
-  const filterByName = useSelector(getFilterByName);
-  const filterByNumber = useSelector(getFilterByNumber);
+  const filterByName = useSelector(selectFilterByName);
+  const filterByNumber = useSelector(selectFilterByNumber);
 
   const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
   const toggleConfirmModal = () => setIsConfirmModalOpen(!isConfirmModalOpen);

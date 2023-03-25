@@ -4,9 +4,9 @@ import {
   addContact,
   deleteContact,
   updateContact,
+  getActions,
 } from './contactsOperations';
-const extraActions = [fetchContacts, addContact, deleteContact, updateContact];
-const getActions = type => extraActions.map(action => action[type]);
+import { userLogOut } from '../auth/authOperations';
 
 const initialState = {
   items: [],
@@ -52,9 +52,14 @@ const contactListSlice = createSlice({
         });
         state.items = newContacts;
       })
-      .addMatcher(isAnyOf(...getActions('pending')), (state, action) => {
+      .addCase(userLogOut.fulfilled, state => {
+        state.items = [];
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addMatcher(isAnyOf(...getActions('pending')), state => {
         state.isLoading = true;
-        state.error = action.payload;
+        state.error = null;
       })
       .addMatcher(isAnyOf(...getActions('rejected')), (state, action) => {
         state.isLoading = false;

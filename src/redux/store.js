@@ -8,13 +8,15 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { authReducer } from 'redux/auth/authSlice';
 import { filterByNameReducer } from './filterByNameSlice';
 import { filterByNumberReducer } from './filterByNumberSlice';
-import { contactListReducer } from './contactListSlice';
+import { contactListReducer } from './contacts/contactListSlice';
 import { recycleBinReducer } from './recycleBinSlice';
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     contacts: contactListReducer,
     filterName: filterByNameReducer,
     filterNumber: filterByNumberReducer,

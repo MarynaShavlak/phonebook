@@ -6,10 +6,10 @@ import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import * as contactsOperations from 'redux/contactsOperations';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
 import { removeContactFromRecycleBin } from 'redux/recycleBinSlice';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 Modal.setAppElement('#root');
 
@@ -32,7 +32,7 @@ const customStyles = {
 };
 
 export const ConfirmRestoreModal = ({ isOpen, onClose, contact }) => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const confirmRestoreContact = () => {

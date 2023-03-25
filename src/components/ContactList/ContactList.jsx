@@ -8,12 +8,12 @@ import {
   SortButtons,
   SortBtn,
 } from './ContactList.styled';
-import { getFilteredContacts } from 'redux/selectors';
+import { selectFilteredContacts } from 'redux/selectors';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 
 export function ContactList() {
-  const contacts = useSelector(getFilteredContacts);
+  const contacts = useSelector(selectFilteredContacts);
   const [sortOption, setSortOption] = useState('ByAlphabet');
 
   const contactsToDisplay = useMemo(

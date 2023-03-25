@@ -6,15 +6,15 @@ import { useSearchParams } from 'react-router-dom';
 import { setFilterByName } from 'redux/filterByNameSlice';
 import { setFilterByNumber } from 'redux/filterByNumberSlice';
 import {
-  getFilterByName,
-  getFilterByNumber,
-  getFilteredContacts,
+  selectFilterByName,
+  selectFilterByNumber,
+  selectFilteredContacts,
 } from 'redux/selectors';
 
 export function Filter({ name }) {
-  const filterByName = useSelector(getFilterByName);
-  const filterByNumber = useSelector(getFilterByNumber);
-  const filteredContacts = useSelector(getFilteredContacts);
+  const filterByName = useSelector(selectFilterByName);
+  const filterByNumber = useSelector(selectFilterByNumber);
+  const filteredContacts = useSelector(selectFilteredContacts);
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const input = useRef();

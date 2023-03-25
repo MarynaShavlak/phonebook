@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form } from 'components';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import * as Notifications from 'utils/notifications';
 import './ContactEditor.css';
 
 export const ContactEditor = ({ contact, onEditContact }) => {
   const [name, setName] = useState(contact.name);
   const [number, setNumber] = useState(contact.number);
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {

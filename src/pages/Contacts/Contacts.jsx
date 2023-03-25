@@ -9,14 +9,14 @@ import {
   Loader,
   Notification,
 } from 'components';
-import * as contactsOperations from 'redux/contactsOperations';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
 import {
-  getContacts,
-  getIsLoading,
-  getError,
-  getFilteredContacts,
-  getFilterByName,
-  getFilterByNumber,
+  selectContacts,
+  selectIsLoading,
+  selectError,
+  selectFilteredContacts,
+  selectFilterByName,
+  selectFilterByNumber,
 } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import AddNewContact from 'components/AddNewContact/AddNewContact';
@@ -27,12 +27,12 @@ const Contacts = () => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
 
-  const filteredContacts = useSelector(getFilteredContacts);
-  const allContacts = useSelector(getContacts);
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-  const filterByName = useSelector(getFilterByName);
-  const filterByNumber = useSelector(getFilterByNumber);
+  const filteredContacts = useSelector(selectFilteredContacts);
+  const allContacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const filterByName = useSelector(selectFilterByName);
+  const filterByNumber = useSelector(selectFilterByNumber);
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts.length;
 

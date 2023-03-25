@@ -1,15 +1,16 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const getContacts = state => state.contacts.items;
-export const getRecycleBinContacts = state => state.recycleBin.recycleBin;
-export const getIsLoading = state => state.contacts.isLoading;
-export const getError = state => state.contacts.error;
-export const getFilterByName = state => state.filterName.value;
-export const getFilterByNumber = state => state.filterNumber.value;
-export const isEditContactModalOpen = state => state.edditedContact.isModalOpen;
+export const selectContacts = state => state.contacts.items;
+export const selectRecycleBinContacts = state => state.recycleBin.recycleBin;
+export const selectIsLoading = state => state.contacts.isLoading;
+export const selectError = state => state.contacts.error;
+export const selectFilterByName = state => state.filterName.value;
+export const selectFilterByNumber = state => state.filterNumber.value;
+export const selectIsEditContactModalOpen = state =>
+  state.edditedContact.isModalOpen;
 
-export const getFilteredContacts = createSelector(
-  [getContacts, getFilterByName, getFilterByNumber],
+export const selectFilteredContacts = createSelector(
+  [selectContacts, selectFilterByName, selectFilterByNumber],
 
   (contacts, filterByName, filterByNumber) => {
     const normalizeFilter = filterByName.toLowerCase();

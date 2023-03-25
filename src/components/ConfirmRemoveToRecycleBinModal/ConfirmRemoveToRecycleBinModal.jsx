@@ -6,10 +6,10 @@ import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import * as contactsOperations from 'redux/contactsOperations';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
 import { addContactToRecycleBin } from 'redux/recycleBinSlice';
-import { getRecycleBinContacts } from 'redux/selectors';
+import { selectRecycleBinContacts } from 'redux/selectors';
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -35,7 +35,7 @@ export const ConfirmRemoveToRecycleBinModal = ({
   onClose,
   contact,
 }) => {
-  const contacts = useSelector(getRecycleBinContacts);
+  const contacts = useSelector(selectRecycleBinContacts);
   const dispatch = useDispatch();
 
   const confirmDeleteContact = () => {

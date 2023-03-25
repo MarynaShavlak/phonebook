@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getRecycleBinContacts } from 'redux/selectors';
+import { selectRecycleBinContacts } from 'redux/selectors';
 import { ToastContainer } from 'react-toastify';
 import {
   ContactsList,
@@ -10,7 +10,7 @@ import { Container } from 'pages/Contacts/Contacts.styled';
 import { DeletedContact, Section, Notification } from 'components';
 
 const RecycleBin = () => {
-  const contacts = useSelector(getRecycleBinContacts);
+  const contacts = useSelector(selectRecycleBinContacts);
   return (
     <Container>
       <Section title={null}>

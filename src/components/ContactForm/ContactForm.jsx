@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'components';
-import { getContacts } from 'redux/selectors';
-import * as contactsOperations from 'redux/contactsOperations';
+import { selectContacts } from 'redux/selectors';
+import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
 
 export const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
