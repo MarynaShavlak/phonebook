@@ -1,67 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   fetchContacts,
   addContact,
   deleteContact,
   updateContact,
 } from './contactsOperations';
+const extraActions = [fetchContacts, addContact, deleteContact, updateContact];
+const getActions = type => extraActions.map(action => action[type]);
 
 const initialState = {
   items: [],
   isLoading: false,
   error: null,
 };
-const handlePendingReducer = state => {
-  return {
-    ...state,
-    isLoading: true,
-    error: null,
-  };
-};
-const handleRejectedReducer = (state, action) => {
-  return {
-    ...state,
-    isLoading: false,
-    error: action.payload,
-  };
-};
-
 const contactListSlice = createSlice({
   name: 'contacts',
   initialState,
   extraReducers: builder =>
     builder
-      .addCase(fetchContacts.pending, handlePendingReducer)
-      .addCase(fetchContacts.fulfilled, (_, action) => {
-        return {
-          items: action.payload,
-          isLoading: false,
-          error: null,
-        };
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.items = action.payload;
       })
-      .addCase(fetchContacts.rejected, handleRejectedReducer)
-      .addCase(addContact.pending, handlePendingReducer)
       .addCase(addContact.fulfilled, (state, action) => {
-        return {
-          items: [action.payload, ...state.items],
-          isLoading: false,
-          error: null,
-        };
+        state.items.push(action.payload);
       })
-      .addCase(addContact.rejected, handleRejectedReducer)
-      .addCase(deleteContact.pending, handlePendingReducer)
       .addCase(deleteContact.fulfilled, (state, action) => {
-        const newContacts = state.items.filter(
-          contact => contact.id !== action.payload.id
+        const index = state.items.findIndex(
+          contact => contact.id === action.payload.id
         );
-        return {
-          items: newContacts,
-          isLoading: false,
-          error: null,
-        };
+        state.items.splice(index, 1);
       })
-      .addCase(deleteContact.rejected, handleRejectedReducer)
-      .addCase(updateContact.pending, handlePendingReducer)
       .addCase(updateContact.fulfilled, (state, action) => {
         const newContacts = state.items.map(el => {
           if (el.name === action.payload.name) {
@@ -82,14 +50,20 @@ const contactListSlice = createSlice({
           }
           return el;
         });
-
-        return {
-          items: newContacts,
-          isLoading: false,
-          error: null,
-        };
+        state.items = newContacts;
       })
-      .addCase(updateContact.rejected, handleRejectedReducer),
+      .addMatcher(isAnyOf(...getActions('pending')), (state, action) => {
+        state.isLoading = true;
+        state.error = action.payload;
+      })
+      .addMatcher(isAnyOf(...getActions('rejected')), (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addMatcher(isAnyOf(...getActions('fulfilled')), state => {
+        state.isLoading = false;
+        state.error = null;
+      }),
 });
 
 export const contactListReducer = contactListSlice.reducer;
