@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectRecycleBinContacts } from 'redux/selectors';
-import { ToastContainer } from 'react-toastify';
+import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
 import {
   ContactsList,
   ContactItem,
@@ -26,16 +25,6 @@ const RecycleBin = () => {
           <Notification message="There are no contacts in recycle bin now" />
         )}
       </Section>
-      <ToastContainer
-        position="bottom-right"
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        pauseOnHover={false}
-        theme="colored"
-        autoClose={4000}
-        style={{ width: '500px', fontSize: '28px', lineHeight: '1.2' }}
-      />
     </Container>
   );
 };

@@ -16,7 +16,10 @@ import * as Notifications from 'utils/notifications';
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
-import { selectFilterByName, selectFilterByNumber } from 'redux/selectors';
+import {
+  selectFilterByName,
+  selectFilterByNumber,
+} from 'redux/filters/selectors';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

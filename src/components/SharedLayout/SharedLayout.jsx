@@ -1,56 +1,29 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import {
-  Container,
-  Header,
-  NavigationList,
-  NavigationLink,
-} from './SharedLayout.styled';
-import { Loader } from 'components/Loader';
-import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
+import { Container } from './SharedLayout.styled';
+import { Loader } from 'components';
+import { ToastContainer } from 'react-toastify';
+import { AppBar } from 'components/AppBar/AppBar';
 
 export const SharedLayout = () => {
   return (
     <>
-      <Header>
-        <Container>
-          <nav>
-            <NavigationList>
-              <li>
-                <NavigationLink to="/">
-                  {renderIcons('home', iconSize.md)}Home
-                </NavigationLink>
-              </li>
-              <li>
-                <NavigationLink to="/contacts">
-                  {renderIcons('contact', iconSize.md)}Contacts
-                </NavigationLink>
-              </li>
-              <li>
-                <NavigationLink to="/favourites">
-                  {renderIcons('favourite', iconSize.md)}Favourites
-                </NavigationLink>
-              </li>
-              <li>
-                <NavigationLink to="/groups">
-                  {renderIcons('group', iconSize.md)}Groups
-                </NavigationLink>
-              </li>
-              <li>
-                <NavigationLink to="/recycleBin">
-                  {renderIcons('delete', iconSize.md)}Recycle Bin
-                </NavigationLink>
-              </li>
-            </NavigationList>
-          </nav>
-        </Container>
-      </Header>
+      <AppBar />
       <Suspense fallback={<Loader />}>
         <Container>
           <Outlet />
         </Container>
       </Suspense>
+      <ToastContainer
+        position="bottom-right"
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover={false}
+        theme="colored"
+        autoClose={4000}
+        style={{ width: '500px', fontSize: '28px', lineHeight: '1.2' }}
+      />
     </>
   );
 };

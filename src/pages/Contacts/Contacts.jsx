@@ -15,10 +15,11 @@ import {
   selectIsLoading,
   selectError,
   selectFilteredContacts,
+} from 'redux/contacts/selectors';
+import {
   selectFilterByName,
   selectFilterByNumber,
-} from 'redux/selectors';
-import { ToastContainer } from 'react-toastify';
+} from 'redux/filters/selectors';
 import AddNewContact from 'components/AddNewContact/AddNewContact';
 
 const Contacts = () => {
@@ -76,16 +77,6 @@ const Contacts = () => {
             )}
           </>
         </Section>
-        <ToastContainer
-          position="bottom-right"
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss
-          pauseOnHover={false}
-          theme="colored"
-          autoClose={4000}
-          style={{ width: '500px', fontSize: '28px', lineHeight: '1.2' }}
-        />
       </Container>
     </>
   );

@@ -8,7 +8,7 @@ import {
   SortButtons,
   SortBtn,
 } from './ContactList.styled';
-import { selectFilteredContacts } from 'redux/selectors';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 

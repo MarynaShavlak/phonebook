@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ReactComponent as HomeLogo } from './images/home.svg';
 const Home = () => {
   return (
     <main>
@@ -7,6 +7,7 @@ const Home = () => {
       <p style={{ fontSize: '70px' }}>
         Registration will be available soon...{' '}
       </p>
+      <HomeLogo />
     </main>
   );
 };

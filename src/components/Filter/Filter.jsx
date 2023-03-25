@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { FilterBlock, Info } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { setFilterByName } from 'redux/filterByNameSlice';
-import { setFilterByNumber } from 'redux/filterByNumberSlice';
+import { setFilterByName } from 'redux/filters/filterByNameSlice';
+import { setFilterByNumber } from 'redux/filters/filterByNumberSlice';
 import {
   selectFilterByName,
   selectFilterByNumber,
-  selectFilteredContacts,
-} from 'redux/selectors';
+} from 'redux/filters/selectors';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
 
 export function Filter({ name }) {
   const filterByName = useSelector(selectFilterByName);

@@ -9,10 +9,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { authReducer } from 'redux/auth/authSlice';
-import { filterByNameReducer } from './filterByNameSlice';
-import { filterByNumberReducer } from './filterByNumberSlice';
+import { filterByNameReducer } from './filters/filterByNameSlice';
+import { filterByNumberReducer } from './filters/filterByNumberSlice';
 import { contactListReducer } from './contacts/contactListSlice';
-import { recycleBinReducer } from './recycleBinSlice';
+import { recycleBinReducer } from './recycleBin/recycleBinSlice';
 
 export const store = configureStore({
   reducer: {

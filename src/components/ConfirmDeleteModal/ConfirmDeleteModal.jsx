@@ -7,7 +7,7 @@ import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as Notifications from 'utils/notifications';
-import { removeContactFromRecycleBin } from 'redux/recycleBinSlice';
+import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 Modal.setAppElement('#root');
 
 const customStyles = {

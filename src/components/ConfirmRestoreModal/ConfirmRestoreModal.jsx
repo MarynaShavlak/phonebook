@@ -8,8 +8,8 @@ import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
-import { removeContactFromRecycleBin } from 'redux/recycleBinSlice';
-import { selectContacts } from 'redux/selectors';
+import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
+import { selectContacts } from 'redux/contacts/selectors';
 
 Modal.setAppElement('#root');
 
