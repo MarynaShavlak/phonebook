@@ -5,23 +5,45 @@ export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
 `;
+
 export const StyledForm = styled(Form)`
-  width: 600px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid transparent;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 30px 20px;
+  padding-top: 30px;
+  background-color: #fde7f0;
+
   .privacy-container {
     margin-top: 20px;
   }
   .privacy {
     font-style: italic;
+    font-size: 14px;
+    text-decoration: underline;
   }
 `;
 export const FormTitle = styled.h2`
   font-size: 20px;
-  margin-bottom: 12px;
-  font-weight: 700;
+  font-weight: 900;
+  color: white;
   line-height: 1.5;
   text-align: center;
   letter-spacing: 0.03em;
+  background-color: #f787b4;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 export const InfoList = styled.ul`
   display: flex;
@@ -34,7 +56,7 @@ export const InfoField = styled.span`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  .register-form__icon {
+  .user-form__icon {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -42,13 +64,14 @@ export const InfoField = styled.span`
     fill: #757575;
     transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  &:focus-within > .register-form__icon {
+  &:focus-within > .user-form__icon {
     fill: #fc458e;
   }
 
-  &:focus-within > .register-form__info-label {
+  &:focus-within > .user-form__info-label {
     transform: translate(-50px, -40px);
-    color: #fc458e;
+    color: black;
+    font-weight: 700;
   }
 `;
 
@@ -64,7 +87,7 @@ export const InfoInput = styled(Field)`
   font-size: 18px;
   font-weight: 500;
   transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:not(:placeholder-shown) + .register-form__info-label {
+  &:not(:placeholder-shown) + .user-form__info-label {
     transform: translate(-50px, -40px);
   }
   &:hover {
@@ -90,6 +113,8 @@ export const InfoLabel = styled.label`
   left: 50px;
   transform: translateY(-50%);
   font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.03em;
   font-weight: 500;
   color: #757575;
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -98,25 +123,22 @@ export const InfoLabel = styled.label`
 
 export const SignUpButton = styled.button`
   display: flex;
-  column-gap: 10px;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 200px;
   justify-content: center;
   padding: 10px 30px;
-  background-color: #fde7f0;
+  background-color: #f787b4;
+
   color: black;
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;
-  box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   cursor: pointer;
-  transition: 250ms background-color ease-in, 250ms color ease-in;
+  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
+    250ms color cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: #f787b4;
+    background-color: #fc458e;
     color: white;
   }
 `;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
@@ -15,6 +16,7 @@ import {
 } from './SignUpForm.styled';
 import * as yup from 'yup';
 import Checkbox from 'react-custom-checkbox';
+import * as authOperations from 'redux/auth/authOperations';
 
 const initialValues = {
   name: '',
@@ -35,7 +37,7 @@ const schema = yup.object().shape({
   email: yup.string().email().required('Enter your email'),
   password: yup
     .string()
-    .min(6, ({ min }) => `Password must be at least ${min} characters`)
+    .min(7, ({ min }) => `Password must be at least ${min} characters`)
     .max(16, ({ max }) => `Password must be no longer than ${max} characters`)
     .matches(/\d/, 'Password must have a number')
     .required('Enter your password'),
@@ -50,14 +52,22 @@ const schema = yup.object().shape({
 });
 
 export const SignUpForm = () => {
+  const dispatch = useDispatch();
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log('values: ', values);
     setSubmitting(false);
+    dispatch(
+      authOperations.userSignUp({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      })
+    );
     resetForm();
   };
   return (
     <FormWrapper>
-      <FormTitle>SIGN UP</FormTitle>
+      <FormTitle>Sign Up Form</FormTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
@@ -72,10 +82,7 @@ export const SignUpForm = () => {
 
                   <InfoInput type="text" name="name" placeholder=" " />
 
-                  <InfoLabel
-                    htmlFor="name"
-                    className="register-form__info-label"
-                  >
+                  <InfoLabel htmlFor="name" className="user-form__info-label">
                     Username
                   </InfoLabel>
                 </InfoField>
@@ -86,10 +93,7 @@ export const SignUpForm = () => {
                   {renderIcons('email', iconSize.xs)}
 
                   <InfoInput type="email" name="email" placeholder=" " />
-                  <InfoLabel
-                    htmlFor="email"
-                    className="register-form__info-label"
-                  >
+                  <InfoLabel htmlFor="email" className="user-form__info-label">
                     Email
                   </InfoLabel>
                 </InfoField>
@@ -107,7 +111,7 @@ export const SignUpForm = () => {
                   />
                   <InfoLabel
                     htmlFor="password"
-                    className="register-form__info-label"
+                    className="user-form__info-label"
                   >
                     Password
                   </InfoLabel>
@@ -126,7 +130,7 @@ export const SignUpForm = () => {
                   />
                   <InfoLabel
                     htmlFor="confirm"
-                    className="register-form__info-label"
+                    className="user-form__info-label"
                   >
                     Confirm Password
                   </InfoLabel>
@@ -161,9 +165,7 @@ export const SignUpForm = () => {
               containerClassName="privacy-container"
               labelClassName="privacy"
             />
-
             <ErrorMessage name="privacy" component={InfoError} />
-
             <SignUpButton type="submit" disabled={isSubmitting}>
               SIGN UP
             </SignUpButton>

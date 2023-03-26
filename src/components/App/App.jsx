@@ -7,6 +7,7 @@ const Groups = lazy(() => import('pages/Groups/Groups'));
 const RecycleBin = lazy(() => import('pages/RecycleBin/RecycleBin'));
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 const RegisterView = lazy(() => import('pages/Register/Register'));
+// const LogInView = lazy(() => import('pages/LogIn/LogIn'));
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
         <Route path="groups" element={<Groups />} />
         <Route path="recycleBin" element={<RecycleBin />} />
         <Route path="register" element={<RegisterView />} />
+        {/* <Route path="login" element={<LogInView />} /> */}
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

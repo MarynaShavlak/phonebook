@@ -27,15 +27,15 @@ export function renderIcons(param, size) {
     case 'delete':
       return <RiDeleteBin6Fill size={size} />;
     case 'person':
-      return <RiContactsFill size={size} className="register-form__icon" />;
+      return <RiContactsFill size={size} className="user-form__icon" />;
     case 'lock':
-      return <RiLock2Fill size={size} className="register-form__icon" />;
+      return <RiLock2Fill size={size} className="user-form__icon" />;
     case 'check':
-      return <FiCheck size={size} className="register-form__icon" />;
+      return <FiCheck size={size} className="user-form__icon" />;
     case 'unCheck':
       return <FaRegCircle size={size} className="unCheck__icon" />;
     case 'email':
-      return <MdMail size={size} className="register-form__icon" />;
+      return <MdMail size={size} className="user-form__icon" />;
     case 'number':
       return <BsTelephoneFill size={size} className="contact-form__icon" />;
     case 'edit':

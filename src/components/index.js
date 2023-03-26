@@ -21,3 +21,4 @@ export { Loader } from 'components/Loader';
 export { Notification } from 'components/Notification';
 export { OperationButton } from 'components/OperationButton';
 export { SignUpForm } from 'components/SignUpForm';
+export { LogInForm } from 'components/LogInForm';
