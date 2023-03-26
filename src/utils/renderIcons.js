@@ -3,6 +3,8 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
+import { RiLock2Fill } from 'react-icons/ri';
+import { MdMail } from 'react-icons/md';
 import { MdPersonAddAlt1 } from 'react-icons/md';
 import { ImCancelCircle } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
@@ -23,7 +25,11 @@ export function renderIcons(param, size) {
     case 'delete':
       return <RiDeleteBin6Fill size={size} />;
     case 'person':
-      return <RiContactsFill size={size} className="contact-form__icon" />;
+      return <RiContactsFill size={size} className="register-form__icon" />;
+    case 'lock':
+      return <RiLock2Fill size={size} className="register-form__icon" />;
+    case 'email':
+      return <MdMail size={size} className="register-form__icon" />;
     case 'number':
       return <BsTelephoneFill size={size} className="contact-form__icon" />;
     case 'edit':
