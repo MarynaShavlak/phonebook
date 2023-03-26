@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent as HomeLogo } from './images/home.svg';
+import { ReactComponent as Logo } from './images/initial-fashion-logo.svg';
 const Home = () => {
   return (
     <main>
@@ -8,6 +9,7 @@ const Home = () => {
         Registration will be available soon...{' '}
       </p>
       <HomeLogo />
+      <Logo></Logo>
     </main>
   );
 };

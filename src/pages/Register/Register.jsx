@@ -3,7 +3,6 @@ import React from 'react';
 const RegisterView = () => {
   return (
     <main>
-      <p style={{ fontSize: '70px' }}>Registration</p>
       <RegisterForm />
     </main>
   );

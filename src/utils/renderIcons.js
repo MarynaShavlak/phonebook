@@ -14,6 +14,8 @@ import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { FaSortAmountUp } from 'react-icons/fa';
+import { FiCheck } from 'react-icons/fi';
+import { FaRegCircle } from 'react-icons/fa';
 import { MdSettingsBackupRestore } from 'react-icons/md';
 
 export function renderIcons(param, size) {
@@ -28,6 +30,10 @@ export function renderIcons(param, size) {
       return <RiContactsFill size={size} className="register-form__icon" />;
     case 'lock':
       return <RiLock2Fill size={size} className="register-form__icon" />;
+    case 'check':
+      return <FiCheck size={size} className="register-form__icon" />;
+    case 'unCheck':
+      return <FaRegCircle size={size} className="unCheck__icon" />;
     case 'email':
       return <MdMail size={size} className="register-form__icon" />;
     case 'number':
