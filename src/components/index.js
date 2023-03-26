@@ -20,4 +20,4 @@ export { UserMenu } from 'components/UserMenu';
 export { Loader } from 'components/Loader';
 export { Notification } from 'components/Notification';
 export { OperationButton } from 'components/OperationButton';
-export { RegisterForm } from 'components/RegisterForm';
+export { SignUpForm } from 'components/SignUpForm';

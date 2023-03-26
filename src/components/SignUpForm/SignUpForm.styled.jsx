@@ -96,7 +96,7 @@ export const InfoLabel = styled.label`
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-export const RegisterButton = styled.button`
+export const SignUpButton = styled.button`
   display: flex;
   column-gap: 10px;
   margin-top: 20px;

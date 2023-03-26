@@ -1,9 +1,9 @@
-import { RegisterForm } from 'components';
+import { SignUpForm } from 'components';
 import React from 'react';
 const RegisterView = () => {
   return (
     <main>
-      <RegisterForm />
+      <SignUpForm />
     </main>
   );
 };
