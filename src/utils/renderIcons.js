@@ -19,6 +19,8 @@ import { FaRegCircle } from 'react-icons/fa';
 import { MdSettingsBackupRestore } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
+import { FiSettings } from 'react-icons/fi';
+import { BsPerson } from 'react-icons/bs';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -64,6 +66,10 @@ export function renderIcons(param, size) {
       return <FaSortAmountUp size={size} className="contact-form__icon" />;
     case 'logOut':
       return <FiLogOut size={size} className="contact-form__icon" />;
+    case 'settings':
+      return <FiSettings size={size} className="contact-form__icon" />;
+    case 'profile':
+      return <BsPerson size={size} className="contact-form__icon" />;
     case 'dropDown':
       return (
         <MdOutlineArrowDropDown size={size} className="contact-form__icon" />
