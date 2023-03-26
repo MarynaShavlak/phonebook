@@ -10,7 +10,8 @@ export const Navigation = () => {
       <NavigationList>
         <li>
           <NavigationLink to="/">
-            {renderIcons('home', iconSize.md)}Home
+            {renderIcons('home', iconSize.sm)}
+            <span>Home</span>
           </NavigationLink>
         </li>
         {isLoggedIn && (
@@ -18,22 +19,26 @@ export const Navigation = () => {
             {' '}
             <li>
               <NavigationLink to="/contacts">
-                {renderIcons('contact', iconSize.md)}Contacts
+                {renderIcons('contact', iconSize.sm)}
+                <span>Contacts</span>
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/favourites">
-                {renderIcons('favourite', iconSize.md)}Favourites
+                {renderIcons('favourite', iconSize.sm)}
+                <span>Favourites</span>
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/groups">
-                {renderIcons('group', iconSize.md)}Groups
+                {renderIcons('group', iconSize.sm)}
+                <span>Groups</span>
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/recycleBin">
-                {renderIcons('delete', iconSize.md)}Recycle Bin
+                {renderIcons('delete', iconSize.sm)}
+                <span>Recycle Bin</span>
               </NavigationLink>
             </li>
           </>

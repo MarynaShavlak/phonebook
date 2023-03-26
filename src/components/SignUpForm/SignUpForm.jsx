@@ -56,13 +56,14 @@ export const SignUpForm = () => {
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log('values: ', values);
     setSubmitting(false);
-    dispatch(
-      authOperations.userSignUp({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      })
-    );
+    const newUser = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+
+    console.log('newUser: ', newUser);
+    dispatch(authOperations.userSignUp(newUser));
     resetForm();
   };
   return (

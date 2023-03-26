@@ -12,7 +12,7 @@ export const NavigationLink = styled(NavLink)`
   align-items: center;
   column-gap: 10px;
   padding: 15px 10px;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 800;
   color: black;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -25,5 +25,8 @@ export const NavigationLink = styled(NavLink)`
   :hover:not(.active),
   :focus-visible:not(.active) {
     color: #f787b4;
+  }
+  span {
+    align-self: end;
   }
 `;
