@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   HomeTitle,
   HomeLogo,
+  HomeInfo,
   HomeWrapper,
   AppDescription,
   BenefitsListTitle,
@@ -11,17 +13,20 @@ import {
   BenefitTitle,
   BenefitDescription,
   StartButton,
+  LogIn,
   LogInLink,
 } from './Home.styled';
 import Logo from './images/home.png';
 import { renderIcons } from 'utils/renderIcons';
+import { useAuth } from 'hooks';
 
 const Home = () => {
+  const { isLoggedIn } = useAuth();
   return (
     <main>
       <HomeTitle>Let Phone Genie Grant Your Every Connection Wish!</HomeTitle>
       <HomeWrapper>
-        <div>
+        <HomeInfo>
           <AppDescription>
             <p>
               &nbsp;&nbsp;Welcome to <span>Phone Genie</span> - the ultimate
@@ -48,14 +53,21 @@ const Home = () => {
               with <span>Phone Genie</span>. Try it now!
             </p>
           </AppDescription>
-          <StartButton>GET STARTED</StartButton>
-          <p>
-            Have an account? <LogInLink to="/login">Log In</LogInLink>
-          </p>
-        </div>
+          {!isLoggedIn && (
+            <>
+              <Link to="/register">
+                <StartButton>GET STARTED</StartButton>
+              </Link>
 
+              <LogIn>
+                Have an account? <LogInLink to="/login">Log In</LogInLink>
+              </LogIn>
+            </>
+          )}
+        </HomeInfo>
         <HomeLogo src={Logo} alt="home-logo" />
       </HomeWrapper>
+
       <BenefitsListTitle>Our benefits</BenefitsListTitle>
       <BenefitsList>
         <BenefitsItem>

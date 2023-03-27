@@ -3,18 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 export const NavigationList = styled.ul`
   display: flex;
-  column-gap: 20px;
-  height: 80px;
   justify-content: center;
 `;
 
 export const NavigationLink = styled(NavLink)`
   display: flex;
   align-items: center;
-  column-gap: 10px;
+  column-gap: 5px;
   height: 100%;
   padding: 10px;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 800;
   color: black;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),

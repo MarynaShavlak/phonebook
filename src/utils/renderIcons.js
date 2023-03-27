@@ -1,5 +1,5 @@
 import { RiContactsBook2Fill } from 'react-icons/ri';
-import { RiDeleteBin6Line } from 'react-icons/ri';
+import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
@@ -32,7 +32,7 @@ export function renderIcons(param, size) {
     case 'add':
       return <MdPersonAddAlt1 size={size} />;
     case 'delete':
-      return <RiDeleteBin6Line size={size} />;
+      return <RiDeleteBin6Fill size={size} />;
     case 'person':
       return <RiContactsFill size={size} className="user-form__icon" />;
     case 'lock':

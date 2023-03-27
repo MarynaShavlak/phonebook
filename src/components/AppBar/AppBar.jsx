@@ -10,7 +10,8 @@ export const AppBar = () => {
       <Header>
         <StyledAppBar>
           <Navigation />
-          {isLoggedIn ? <UserMenu /> : <AuthNav />}
+          {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
+          {isLoggedIn && <UserMenu />}
         </StyledAppBar>
       </Header>
     </>

@@ -17,6 +17,12 @@ export const HomeWrapper = styled.div`
   column-gap: 20px;
   margin-bottom: 50px;
 `;
+export const HomeInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+`;
 export const AppDescription = styled.div`
   display: flex;
   flex-direction: column;
@@ -84,7 +90,6 @@ export const BenefitDescription = styled.p`
 
 export const StartButton = styled.button`
   display: flex;
-  margin: 0 auto;
   justify-content: center;
   padding: 10px 30px;
   background-color: #f787b4;
@@ -105,4 +110,5 @@ export const LogInLink = styled(NavLink)`
   color: #fc458e;
   font-weight: 700;
 `;
+export const LogIn = styled.span``;
 // #ef4287, #f2c94c, #bb6bd9, #9b51e0, #f787b4, #f8f3ff
