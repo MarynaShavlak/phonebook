@@ -1,6 +1,6 @@
 import { SignUpForm } from 'components';
 import React from 'react';
-const RegisterView = () => {
+const SignUp = () => {
   return (
     <main>
       <SignUpForm />
@@ -8,4 +8,4 @@ const RegisterView = () => {
   );
 };
 
-export default RegisterView;
+export default SignUp;

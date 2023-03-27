@@ -18,11 +18,8 @@ import * as yup from 'yup';
 import * as authOperations from 'redux/auth/authOperations';
 
 const initialValues = {
-  name: '',
   email: '',
   password: '',
-  confirm: '',
-  privacy: false,
 };
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter your email'),
@@ -33,8 +30,13 @@ export const LogInForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log('values: ', values);
+    const user = {
+      email: values.email,
+      password: values.password,
+    };
+    console.log('user: ', user);
     setSubmitting(false);
-    dispatch(authOperations.userSignIn(values));
+    dispatch(authOperations.userSignIn(user));
     resetForm();
   };
   return (

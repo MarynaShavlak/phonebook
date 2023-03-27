@@ -1,70 +1,72 @@
 import React, { useState } from 'react';
-import Dropdown from 'rc-dropdown';
-import Menu, { MenuItem } from 'rc-menu';
-// import  Menu from 'rc-dropdown';
-// import Item  from 'rc-dropdown';
-// import 'rc-dropdown/assets/index.css';
-import { IconButton } from 'components/IconButton';
+import Downshift from 'downshift';
+import Avatar from 'react-avatar';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
-import { UserMenuWrapper, StyledDropdown } from './UserMenu.styled';
-import Avatar from 'react-avatar';
-console.log('Dropdown: ', Dropdown);
-console.log('Menu: ', Menu);
+import {
+  UserMenuWrapper,
+  DropdownMenu,
+  DropdownMenuItem,
+  LogoutButton,
+} from './UserMenu.styled';
+import * as authOperations from 'redux/auth/authOperations';
 
 export const UserMenu = () => {
-  const [visible, setVisible] = useState(false);
+  const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
+
   const dispatch = useDispatch();
   const { user } = useAuth();
 
-  const handleMenuClick = ({ key }) => {
-    if (key === 'logout') {
-      console.log('logout');
-      // onLogout();
-    }
+  const handleDropdownMenu = () => {
+    setIsDropdownMenuOpen(!isDropdownMenuOpen);
   };
-
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <MenuItem key="username" disabled>
-        Signed in with email {user.email}
-      </MenuItem>
-      <MenuItem key="profile" disabled>
-        {renderIcons('profile', iconSize.xs)}Profile
-      </MenuItem>
-      <MenuItem key="settings" disabled>
-        {renderIcons('settings', iconSize.xs)}Settings
-      </MenuItem>
-      <MenuItem key="logout">
-        {renderIcons('logOut', iconSize.xs)}Logout
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <UserMenuWrapper>
       <p>
         Welcome, <span>{user.name}!</span>{' '}
       </p>
-      <StyledDropdown
-        visible={visible}
-        onVisibleChange={v => setVisible(v)}
-        overlay={menu}
-        trigger={['click']}
+      <Downshift
+        isOpen={isDropdownMenuOpen}
+        onOuterClick={() => setIsDropdownMenuOpen(false)}
       >
-        <div>
-          <Avatar
-            size="40"
-            name={user.name}
-            unstyled={false}
-            round="50%"
-            cursor="pointer"
-          />
-          {renderIcons('dropDown', iconSize.xs)}
-        </div>
-      </StyledDropdown>
+        {({ getItemProps, getMenuProps, isOpen }) => (
+          <div>
+            <div onClick={handleDropdownMenu}>
+              <Avatar
+                size="40"
+                name={user.name}
+                unstyled={false}
+                round="50%"
+                cursor="pointer"
+              />
+              {renderIcons('dropDown', iconSize.xs)}
+            </div>
+
+            {isOpen && (
+              <DropdownMenu {...getMenuProps()}>
+                <DropdownMenuItem {...getItemProps({ item: 'profile' })}>
+                  Signed in with email
+                  <span className="registation-info"> {user.email}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="user-logout"
+                  {...getItemProps({ item: 'logout' })}
+                >
+                  <LogoutButton
+                    type="button"
+                    onClick={() => dispatch(authOperations.userLogOut())}
+                  >
+                    {renderIcons('logOut', iconSize.xs)}Logout
+                  </LogoutButton>
+                </DropdownMenuItem>
+              </DropdownMenu>
+            )}
+          </div>
+        )}
+      </Downshift>
     </UserMenuWrapper>
   );
 };
