@@ -1,13 +1,19 @@
-import { NavigationList, NavigationLink } from './Navigation.styled';
+import { NavigationList, NavigationLink, PhoneLogo } from './Navigation.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import { useAuth } from 'hooks';
+import Logo from './images/phone-genie-logo.png';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
   return (
     <nav>
       <NavigationList>
+        <li>
+          {/* <NavigationLink to="/"> */}
+          <PhoneLogo src={Logo} alt="logo" />
+          {/* </NavigationLink> */}
+        </li>
         <li>
           <NavigationLink to="/">
             {renderIcons('home', iconSize.sm)}

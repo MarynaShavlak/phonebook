@@ -1,5 +1,5 @@
 import { RiContactsBook2Fill } from 'react-icons/ri';
-import { RiDeleteBin6Fill } from 'react-icons/ri';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
@@ -21,6 +21,9 @@ import { FiLogOut } from 'react-icons/fi';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { FiSettings } from 'react-icons/fi';
 import { BsPerson } from 'react-icons/bs';
+import { MdPersonSearch } from 'react-icons/md';
+import { MdSort } from 'react-icons/md';
+import { IoIosCreate } from 'react-icons/io';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -29,7 +32,7 @@ export function renderIcons(param, size) {
     case 'add':
       return <MdPersonAddAlt1 size={size} />;
     case 'delete':
-      return <RiDeleteBin6Fill size={size} />;
+      return <RiDeleteBin6Line size={size} />;
     case 'person':
       return <RiContactsFill size={size} className="user-form__icon" />;
     case 'lock':
@@ -74,6 +77,12 @@ export function renderIcons(param, size) {
       return (
         <MdOutlineArrowDropDown size={size} className="contact-form__icon" />
       );
+    case 'quickSearch':
+      return <MdPersonSearch size={size} className="contact-form__icon" />;
+    case 'sort':
+      return <MdSort size={size} className="contact-form__icon" />;
+    case 'create':
+      return <IoIosCreate size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }
