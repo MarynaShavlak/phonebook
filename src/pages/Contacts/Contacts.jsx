@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Info, ContentWrapper, AddNewContactBtn } from './Contacts.styled';
+import { Button } from 'components/OperationButton/OperationButton.styled';
 import {
   ErrorMessage,
   Section,
@@ -28,6 +29,8 @@ import { iconSize } from 'constants';
 const Contacts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
@@ -49,11 +52,10 @@ const Contacts = () => {
             <>
               <AddNewContactBtn
                 aria-label="Add new contact"
-                onClick={() => navigate('./create')}
+                onClick={() => navigate('/create')}
               >
                 {renderIcons('add', iconSize.md)}
               </AddNewContactBtn>
-              {/* <AddNewContact /> */}
               <Info>
                 You have <span>{getContactsQuantity(allContacts)}</span> in your
                 phone book
@@ -69,8 +71,7 @@ const Contacts = () => {
             <ErrorMessage />
           ) : filteredContacts.length ? (
             <>
-              {/* <AddNewContact /> */}
-              <ContactList />
+              <ContactList state={{ from: location }} />
             </>
           ) : isFiltered ? (
             <Notification
@@ -84,7 +85,10 @@ const Contacts = () => {
             />
           ) : (
             <>
-              <Notification message="There are no contacts in your phonebook yet" />
+              <Notification message="Add your first contact today and discover the amazing possibilities of Phone Genie!" />
+              <Button type="button" onClick={() => navigate('/create')}>
+                Add contact to phone book
+              </Button>
             </>
           )}
         </ContentWrapper>

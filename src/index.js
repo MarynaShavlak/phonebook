@@ -8,7 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from 'redux/store';
 import 'react-toastify/dist/ReactToastify.css';
-import { getRandomColors } from 'utils/getRandomColor';
+// import { getRandomColors } from 'utils/getRandomColor';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <BrowserRouter

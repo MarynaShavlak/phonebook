@@ -1,4 +1,4 @@
-import { Navigation, UserMenu, AuthNav } from 'components';
+import { Navigation, UserMenu } from 'components';
 import { Header } from './AppBar.styled';
 import { StyledAppBar } from './AppBar.styled';
 import { useAuth } from 'hooks';
@@ -10,7 +10,6 @@ export const AppBar = () => {
       <Header>
         <StyledAppBar>
           <Navigation />
-          {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
           {isLoggedIn && <UserMenu />}
         </StyledAppBar>
       </Header>

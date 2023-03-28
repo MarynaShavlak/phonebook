@@ -8,7 +8,7 @@ export const FormStyled = styled.form`
 `;
 export const FormTitle = styled.h2`
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 900;
   color: black;
   text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
@@ -42,7 +42,7 @@ export const FormItem = styled.li`
     transform: translateY(-50%);
   }
   .contact-form__label {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
   }
 
