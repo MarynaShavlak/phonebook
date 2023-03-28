@@ -6,9 +6,12 @@
 .ReactModal__Overlay--after-open {
   opacity: 1;
 }
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
 
-.ReactModal__Overlay--before-close {
-  opacity: 0;
+.ReactModal__Contect--before-close {
+  position: relative;
 }
 
 .action-buttons {
@@ -22,4 +25,26 @@
   text-align: center;
 line-height: 1.67;
 
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  column-gap: 10px;
+  align-self: center;
+  align-items: center;
+  background-color: transparent;
+  color: black;
+  border: 1px solid transparent;
+      /* border-radius: 50%; */
+  cursor: pointer;
+  transition:  250ms color cubic-bezier(0.4, 0, 0.2, 1);
+     
+    
+      
+}
+.close-modal-btn:hover {
+  color: #ef4287;
 }

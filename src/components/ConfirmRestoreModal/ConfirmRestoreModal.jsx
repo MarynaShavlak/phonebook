@@ -59,6 +59,13 @@ export const ConfirmRestoreModal = ({ isOpen, onClose, contact }) => {
       shouldCloseOnOverlayClick={true}
       onRequestClose={onClose}
     >
+      <button
+        aria-label="Close modal"
+        onClick={() => onClose()}
+        className="close-modal-btn"
+      >
+        {renderIcons('close', 30)}
+      </button>
       <p className="confirmation__message">
         <span>Are you sure you want to restore contact with name</span>{' '}
         <span>

@@ -17,6 +17,7 @@ const RecycleBin = lazy(() => import('pages/RecycleBin/RecycleBin'));
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 const SignUp = lazy(() => import('pages/SignUp/SignUp'));
 const LogIn = lazy(() => import('pages/LogIn/LogIn'));
+const AddNewContact = lazy(() => import('pages/AddNewContact/AddNewContact'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -33,35 +34,37 @@ export const App = () => {
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
         <Route
-          path="/contacts"
+          path="contacts"
           element={
             <PrivateRoute redirectTo="/login" component={<Contacts />} />
           }
         />
+
+        <Route path="contacts/create" element={<AddNewContact />} />
         <Route
-          path="/favourites"
+          path="favourites"
           element={
             <PrivateRoute redirectTo="/login" component={<Favourites />} />
           }
         />
         <Route
-          path="/groups"
+          path="groups"
           element={<PrivateRoute redirectTo="/login" component={<Groups />} />}
         />
         <Route
-          path="/recyclebin"
+          path="recyclebin"
           element={
             <PrivateRoute redirectTo="/login" component={<RecycleBin />} />
           }
         />
         <Route
-          path="/login"
+          path="login"
           element={
             <RestrictedRoute redirectTo="/contacts" component={<LogIn />} />
           }
         />
         <Route
-          path="/register"
+          path="register"
           element={
             <RestrictedRoute redirectTo="/contacts" component={<SignUp />} />
           }

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Form } from 'components';
 import { selectContacts } from 'redux/contacts/selectors';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'name':
@@ -40,7 +40,7 @@ export const ContactForm = ({ onSubmit }) => {
     dispatch(contactsOperations.addContact(createdContact));
     Notifications.showSuccessNotification('add', createdContact);
     reset();
-    onSubmit();
+    navigate('/contacts');
   };
 
   const reset = () => {
@@ -61,6 +61,6 @@ export const ContactForm = ({ onSubmit }) => {
   );
 };
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func,
-};
+// ContactForm.propTypes = {
+//   onSubmit: PropTypes.func,
+// };

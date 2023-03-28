@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Info, ContentWrapper } from './Contacts.styled';
+import { useNavigate } from 'react-router-dom';
+import { Info, ContentWrapper, AddNewContactBtn } from './Contacts.styled';
 import {
   ErrorMessage,
   Section,
@@ -20,10 +21,13 @@ import {
   selectFilterByName,
   selectFilterByNumber,
 } from 'redux/filters/selectors';
-import AddNewContact from 'components/AddNewContact/AddNewContact';
+import { getContactsQuantity } from 'utils/getContactsQuantity';
+import { renderIcons } from 'utils/renderIcons';
+import { iconSize } from 'constants';
 
 const Contacts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
@@ -43,10 +47,16 @@ const Contacts = () => {
         <ContentWrapper>
           {allContacts.length !== 0 && (
             <>
-              <AddNewContact />
+              <AddNewContactBtn
+                aria-label="Add new contact"
+                onClick={() => navigate('./create')}
+              >
+                {renderIcons('add', iconSize.md)}
+              </AddNewContactBtn>
+              {/* <AddNewContact /> */}
               <Info>
-                You have <span>{allContacts.length}</span> contacts in your
-                phoneBook
+                You have <span>{getContactsQuantity(allContacts)}</span> in your
+                phone book
               </Info>
               <Filter name="name" />
               <Filter name="number" />
