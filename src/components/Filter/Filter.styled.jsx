@@ -8,7 +8,7 @@ export const FilterBlock = styled.div`
   }
 
   .filter__label {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
   }
 

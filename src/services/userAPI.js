@@ -15,7 +15,7 @@ export async function logOutRequest() {
   await axios.post(`/users/logout`);
 }
 export async function currentUserDetailsRequest() {
-  const { data } = await axios.post(`/users/current`);
+  const { data } = await axios.get(`/users/current`);
   console.log('data: ', data);
   return data;
 }

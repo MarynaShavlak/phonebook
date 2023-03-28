@@ -23,7 +23,7 @@ export const UserMenuWrapper = styled.div`
 export const DropdownMenu = styled.ul`
   position: absolute;
   right: 0;
-
+  z-index: 999;
   margin-top: 10px;
   background-color: #fde7f0;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);

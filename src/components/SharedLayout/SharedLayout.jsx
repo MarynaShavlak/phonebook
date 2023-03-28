@@ -10,9 +10,10 @@ export const SharedLayout = () => {
     <>
       <AppBar />
       <Suspense fallback={<Loader />}>
-        <Container>
-          <Outlet />
-        </Container>
+        {/* <Suspense fallback={null}> */}
+        {/* <Container> */}
+        <Outlet />
+        {/* </Container> */}
       </Suspense>
       <ToastContainer
         position="bottom-right"
@@ -22,7 +23,7 @@ export const SharedLayout = () => {
         pauseOnHover={false}
         theme="colored"
         autoClose={4000}
-        style={{ width: '500px', fontSize: '28px', lineHeight: '1.2' }}
+        style={{ width: '400px', fontSize: '20px', lineHeight: '1.2' }}
       />
     </>
   );

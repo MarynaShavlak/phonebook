@@ -13,7 +13,7 @@ export function Form({ name, number, operationType, onSubmit, onChange }) {
           <label className="contact-form__field">
             <span className="contact-form__label">Name</span>
             <span className="contact-from__wrapper">
-              {renderIcons('person', iconSize.sm)}
+              {renderIcons('man', iconSize.sm)}
               <input
                 className="contact-form__input"
                 type="text"

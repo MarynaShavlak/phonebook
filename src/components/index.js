@@ -22,3 +22,5 @@ export { Notification } from 'components/Notification';
 export { OperationButton } from 'components/OperationButton';
 export { SignUpForm } from 'components/SignUpForm';
 export { LogInForm } from 'components/LogInForm';
+export { PrivateRoute } from 'components/PrivateRoute/PrivateRoute.jsx';
+export { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute.jsx';

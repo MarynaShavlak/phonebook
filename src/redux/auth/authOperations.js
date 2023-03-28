@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as userAPI from 'services/userAPI';
+import * as Notifications from 'utils/notifications';
+
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const authHeader = {
@@ -21,6 +23,7 @@ export const userSignUp = createAsyncThunk(
       authHeader.set(data.token);
       return data;
     } catch (error) {
+      Notifications.showAuthErrorNotification();
       return rejectWithValue(error.message);
     }
   }
@@ -33,6 +36,7 @@ export const userSignIn = createAsyncThunk(
       authHeader.set(data.token);
       return data;
     } catch (error) {
+      Notifications.showAuthErrorNotification();
       return rejectWithValue(error.message);
     }
   }

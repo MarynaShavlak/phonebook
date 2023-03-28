@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Info } from './Contacts.styled';
+import { Info, ContentWrapper } from './Contacts.styled';
 import {
   ErrorMessage,
   Section,
@@ -38,47 +38,48 @@ const Contacts = () => {
     (!!filterByName || !!filterByNumber) && !!allContacts.length;
 
   return (
-    <>
-      <Container>
-        <Section title="Contacts">
-          <>
-            {allContacts.length !== 0 && (
-              <>
-                <Info>
-                  You have <span>{allContacts.length}</span> contacts in your
-                  phoneBook
-                </Info>
-                <Filter name="name" />
-                <Filter name="number" />
-              </>
-            )}
+    <main>
+      <Section>
+        <ContentWrapper>
+          {allContacts.length !== 0 && (
+            <>
+              <AddNewContact />
+              <Info>
+                You have <span>{allContacts.length}</span> contacts in your
+                phoneBook
+              </Info>
+              <Filter name="name" />
+              <Filter name="number" />
+            </>
+          )}
 
-            {isLoading ? (
-              <Loader />
-            ) : error && isLoading === false ? (
-              <ErrorMessage />
-            ) : filteredContacts.length ? (
-              <>
-                <AddNewContact />
-                <ContactList />
-              </>
-            ) : isFiltered ? (
-              <Notification
-                message={
-                  filterByName && filterByNumber
-                    ? `Nothing found by selected name "${filterByName}"  and number "${filterByNumber}"`
-                    : filterByName
-                    ? `Nothing found by selected name "${filterByName}" `
-                    : `Nothing found by selected number "${filterByNumber}" `
-                }
-              />
-            ) : (
+          {isLoading ? (
+            <Loader />
+          ) : error && isLoading === false ? (
+            <ErrorMessage />
+          ) : filteredContacts.length ? (
+            <>
+              {/* <AddNewContact /> */}
+              <ContactList />
+            </>
+          ) : isFiltered ? (
+            <Notification
+              message={
+                filterByName && filterByNumber
+                  ? `Nothing found by selected name "${filterByName}"  and number "${filterByNumber}"`
+                  : filterByName
+                  ? `Nothing found by selected name "${filterByName}" `
+                  : `Nothing found by selected number "${filterByNumber}" `
+              }
+            />
+          ) : (
+            <>
               <Notification message="There are no contacts in your phonebook yet" />
-            )}
-          </>
-        </Section>
-      </Container>
-    </>
+            </>
+          )}
+        </ContentWrapper>
+      </Section>
+    </main>
   );
 };
 

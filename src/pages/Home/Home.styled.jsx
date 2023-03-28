@@ -68,7 +68,6 @@ export const IconWrap = styled.div`
   border-radius: 5px;
   background-color: #f8f3ff;
   svg {
-    /* fill: #ef4287; */
     fill: #ef4287;
   }
 `;

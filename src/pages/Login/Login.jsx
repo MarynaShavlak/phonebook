@@ -1,10 +1,11 @@
 import { LogInForm } from 'components';
 import React from 'react';
+import { Main } from './LogIn.styled';
 const LogInView = () => {
   return (
-    <main>
+    <Main>
       <LogInForm />
-    </main>
+    </Main>
   );
 };
 

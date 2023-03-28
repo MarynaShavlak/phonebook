@@ -42,7 +42,7 @@ export const Navigation = () => {
               </NavigationLink>
             </li>
             <li>
-              <NavigationLink to="/recycleBin">
+              <NavigationLink to="/recyclebin">
                 {renderIcons('delete', 20)}
                 <span>Recycle Bin</span>
               </NavigationLink>

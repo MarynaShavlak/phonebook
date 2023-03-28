@@ -5,27 +5,29 @@ import {
   ContactsList,
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
-import { Container } from 'pages/Contacts/Contacts.styled';
 import { DeletedContact, Section, Notification } from 'components';
+import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 
 const RecycleBin = () => {
   const contacts = useSelector(selectRecycleBinContacts);
   return (
-    <Container>
-      <Section title={null}>
-        {contacts.length !== 0 ? (
-          <ContactsList>
-            {contacts.map(contact => (
-              <ContactItem key={contact.id}>
-                <DeletedContact contact={contact} />
-              </ContactItem>
-            ))}
-          </ContactsList>
-        ) : (
-          <Notification message="There are no contacts in recycle bin now" />
-        )}
+    <main>
+      <Section>
+        <ContentWrapper>
+          {contacts.length !== 0 ? (
+            <ContactsList>
+              {contacts.map(contact => (
+                <ContactItem key={contact.id}>
+                  <DeletedContact contact={contact} />
+                </ContactItem>
+              ))}
+            </ContactsList>
+          ) : (
+            <Notification message="There are no contacts in recycle bin now" />
+          )}
+        </ContentWrapper>
       </Section>
-    </Container>
+    </main>
   );
 };
 

@@ -24,6 +24,7 @@ import { BsPerson } from 'react-icons/bs';
 import { MdPersonSearch } from 'react-icons/md';
 import { MdSort } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
+import { BsPersonFill } from 'react-icons/bs';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -45,6 +46,8 @@ export function renderIcons(param, size) {
       return <MdMail size={size} className="user-form__icon" />;
     case 'number':
       return <BsTelephoneFill size={size} className="contact-form__icon" />;
+    case 'man':
+      return <BsPersonFill size={size} className="contact-form__icon" />;
     case 'edit':
       return <RiEdit2Fill size={size} className="contact-form__icon" />;
     case 'restore':

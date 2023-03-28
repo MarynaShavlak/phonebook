@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StickyBtn } from './AddNewContact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import Modal from 'react-modal';
 import { ContactForm } from 'components';
+import { AddNewContactBtn } from './AddNewContact.styled';
 
 Modal.setAppElement('#root');
 
@@ -31,9 +31,9 @@ const AddNewContact = () => {
 
   return (
     <>
-      <StickyBtn aria-label="Add new contact" onClick={toggleAddModal}>
+      <AddNewContactBtn aria-label="Add new contact" onClick={toggleAddModal}>
         {renderIcons('add', iconSize.md)}
-      </StickyBtn>
+      </AddNewContactBtn>
       {isAddModalOpen && (
         <Modal
           isOpen={isAddModalOpen}

@@ -15,8 +15,5 @@ export const Header = styled.header`
 export const StyledAppBar = styled(Container)`
   display: flex;
   align-items: center;
-
   justify-content: space-between;
-  padding-left: 15px;
-  padding-right: 15px;
 `;

@@ -60,3 +60,8 @@ export function showFailureNotification() {
     `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`
   );
 }
+export function showAuthErrorNotification() {
+  return toast.error(
+    `Your email is invaild. PLease, check your email and try again`
+  );
+}

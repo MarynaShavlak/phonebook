@@ -18,14 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         {/* <ConfigProvider colors={getRandomColors()}> */}
         <ConfigProvider
-          colors={[
-            '#ef4287',
-            '#f2c94c',
-            '#bb6bd9',
-            '#9b51e0',
-            '#f787b4',
-            '#f8f3ff',
-          ]}
+          colors={['#ef4287', '#f2c94c', '#bb6bd9', '#9b51e0', '#f787b4']}
         >
           <App />
         </ConfigProvider>
