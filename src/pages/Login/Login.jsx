@@ -1,7 +1,8 @@
 import { LogInForm } from 'components';
 import React from 'react';
 import { Main } from './LogIn.styled';
-const LogInView = () => {
+
+const LogIn = () => {
   return (
     <Main>
       <LogInForm />
@@ -9,4 +10,4 @@ const LogInView = () => {
   );
 };
 
-export default LogInView;
+export default LogIn;
