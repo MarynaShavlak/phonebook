@@ -5,6 +5,7 @@ import './ConfirmRemoveToRecycleBinModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
 import { renderIcons } from 'utils/renderIcons';
+import { getCurrentTime } from 'utils/getCurrentTime';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import * as Notifications from 'utils/notifications';
@@ -51,7 +52,9 @@ export const ConfirmRemoveToRecycleBinModal = ({
 
     if (checkContactInRecycleBin(contact)) return;
     Notifications.showSuccessNotification('delete', contact);
-    dispatch(addContactToRecycleBin(contact));
+    const removalContactTime = getCurrentTime();
+    console.log('removalContactTime: ', removalContactTime);
+    dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
   };
 
   return (

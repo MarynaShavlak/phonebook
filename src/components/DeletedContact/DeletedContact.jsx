@@ -11,6 +11,7 @@ import {
   Name,
   Number,
   ContactButtons,
+  RemovalTime,
 } from 'components/Contact/Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
@@ -57,6 +58,10 @@ export const DeletedContact = ({ contact }) => {
         <Name>{contact.name}:</Name>
         <Number>{contact.number}</Number>
       </ContactEl>
+      <RemovalTime>
+        deleted at <b>{contact.removalContactTime}</b>
+      </RemovalTime>
+
       <ContactButtons>
         <IconButton
           onClick={toggleRestoreModal}
@@ -84,5 +89,6 @@ DeletedContact.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
+    removalContactTime: PropTypes.string.isRequired,
   }).isRequired,
 };

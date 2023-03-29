@@ -20,3 +20,15 @@ export const Name = styled.p`
   font-style: italic;
 `;
 export const Number = styled.p``;
+
+export const RemovalTime = styled.p`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  margin-right: 20px;
+`;
+
+// export const ContactWrapper = styled.div`
+//   display: flex;
+//   column-gap: 15px;
+// `;
