@@ -21,7 +21,7 @@ export const Name = styled.p`
 `;
 export const Number = styled.p``;
 
-export const RemovalTime = styled.p`
+export const Time = styled.p`
   display: flex;
   column-gap: 10px;
   align-items: center;

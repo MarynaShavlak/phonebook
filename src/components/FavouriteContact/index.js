@@ -1,0 +1,1 @@
+export { FavouriteContact } from './FavouriteContact';

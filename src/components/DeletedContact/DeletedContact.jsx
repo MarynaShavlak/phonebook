@@ -11,7 +11,7 @@ import {
   Name,
   Number,
   ContactButtons,
-  RemovalTime,
+  Time,
 } from 'components/Contact/Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
@@ -58,9 +58,9 @@ export const DeletedContact = ({ contact }) => {
         <Name>{contact.name}:</Name>
         <Number>{contact.number}</Number>
       </ContactEl>
-      <RemovalTime>
+      <Time>
         deleted at <b>{contact.removalContactTime}</b>
-      </RemovalTime>
+      </Time>
 
       <ContactButtons>
         <IconButton

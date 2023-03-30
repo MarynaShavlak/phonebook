@@ -13,6 +13,7 @@ import { filterByNameReducer } from './filters/filterByNameSlice';
 import { filterByNumberReducer } from './filters/filterByNumberSlice';
 import { contactListReducer } from './contacts/contactListSlice';
 import { recycleBinReducer } from './recycleBin/recycleBinSlice';
+import { favouritesReducer } from './favourites/favouritesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     filterName: filterByNameReducer,
     filterNumber: filterByNumberReducer,
     recycleBin: recycleBinReducer,
+    favourites: favouritesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -7,20 +7,23 @@ import {
   IconButton,
   EditModal,
   ConfirmRemoveToRecycleBinModal,
+  CheckboxWithStarIcon,
 } from 'components';
 import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
 import * as Notifications from 'utils/notifications';
-
 import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import {
   selectFilterByName,
   selectFilterByNumber,
 } from 'redux/filters/selectors';
-import { CheckboxWithStarIcon } from 'components/CheckboxWithStarIcon';
+import {
+  addContactToFavourites,
+  removeContactFromFavourites,
+} from 'redux/favourites/favouritesSlice';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -56,8 +59,13 @@ export const Contact = ({ contact }) => {
     dispatch(contactsOperations.updateContact(edittedContact));
   };
   const handleCheckboxChange = () => {
-    console.log('click');
+    console.log(contact);
     setIsFavorite(!isFavorite);
+    if (!isFavorite) {
+      dispatch(addContactToFavourites(contact));
+    } else {
+      dispatch(removeContactFromFavourites(contact.id));
+    }
   };
   const contactClass =
     isDeleteBtnHovered || isEditBtnHovered
@@ -128,10 +136,7 @@ export const Contact = ({ contact }) => {
           {renderIcons('delete', iconSize.sm)}
         </IconButton>
       </ContactButtons>
-      <CheckboxWithStarIcon
-        checked={isFavorite}
-        onChange={handleCheckboxChange}
-      />
+      <CheckboxWithStarIcon onChange={handleCheckboxChange} />
     </>
   );
 };
