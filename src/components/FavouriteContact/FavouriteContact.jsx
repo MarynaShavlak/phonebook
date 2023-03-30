@@ -1,17 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import Avatar from 'react-avatar';
 import { CheckboxWithStarIcon } from 'components';
 import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
-
 import { removeContactFromFavourites } from 'redux/favourites/favouritesSlice';
+import * as Notifications from 'utils/notifications';
 
 export const FavouriteContact = ({ contact }) => {
   const dispatch = useDispatch();
   const removeFromFavourites = () => {
-    console.log(contact);
+    Notifications.showSuccessNotification('removeFromFavourites', contact);
+
     dispatch(removeContactFromFavourites(contact.id));
   };
 
@@ -33,6 +33,5 @@ FavouriteContact.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    removalContactTime: PropTypes.string.isRequired,
   }).isRequired,
 };

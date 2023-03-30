@@ -6,13 +6,12 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 export const CheckboxWithStarIcon = ({ checked = false, onChange }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox ' } };
-  const defaultIcon = checked ? <StarIcon /> : <StarBorderIcon />;
-  const checkedIcon = checked ? <StarBorderIcon /> : <StarIcon />;
   return (
     <Checkbox
       {...label}
-      icon={defaultIcon}
-      checkedIcon={checkedIcon}
+      checked={checked}
+      icon={<StarBorderIcon />}
+      checkedIcon={<StarIcon />}
       onChange={onChange}
       sx={{
         '& .MuiSvgIcon-root': { fontSize: 40 },

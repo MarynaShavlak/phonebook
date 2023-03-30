@@ -32,6 +32,14 @@ export function showSuccessNotification(operation, contact) {
       return toast.success(
         `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`
       );
+    case 'addToFavourites':
+      return toast.success(
+        `You've just added contact with name ${contact.name} and number ${contact.number}  to your favourites `
+      );
+    case 'removeFromFavourites':
+      return toast.success(
+        `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favourites `
+      );
     default:
       return console.warn(
         `Type of field with operation  ${operation} is not found`

@@ -23,7 +23,7 @@ const RecycleBin = () => {
               ))}
             </ContactsList>
           ) : (
-            <Notification message="Thare are no contacts in your favourites yet" />
+            <Notification message="There are no contacts in your favourites yet" />
           )}
         </ContentWrapper>
       </Section>

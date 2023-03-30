@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from 'utils/hoverStyles.module.css';
 import Avatar from 'react-avatar';
@@ -10,27 +11,34 @@ import {
   CheckboxWithStarIcon,
 } from 'components';
 import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
-import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
 import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
-import * as Notifications from 'utils/notifications';
-import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import {
   selectFilterByName,
   selectFilterByNumber,
 } from 'redux/filters/selectors';
+import { selectFavouritesContacts } from 'redux/favourites/selectors';
 import {
   addContactToFavourites,
   removeContactFromFavourites,
 } from 'redux/favourites/favouritesSlice';
+import { renderIcons } from 'utils/renderIcons';
+import * as Notifications from 'utils/notifications';
+import { iconSize } from 'constants';
 
 export const Contact = ({ contact }) => {
+  const favouriteContacts = useSelector(selectFavouritesContacts);
+
+  const checkContactIsinFavourites = contact => {
+    const isinFavourites = favouriteContacts.some(el => el.id === contact.id);
+    return isinFavourites;
+  };
+  const inFavourite = checkContactIsinFavourites(contact);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(inFavourite);
 
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
@@ -58,15 +66,19 @@ export const Contact = ({ contact }) => {
     };
     dispatch(contactsOperations.updateContact(edittedContact));
   };
+
   const handleCheckboxChange = () => {
     console.log(contact);
     setIsFavorite(!isFavorite);
     if (!isFavorite) {
       dispatch(addContactToFavourites(contact));
+      Notifications.showSuccessNotification('addToFavourites', contact);
     } else {
+      Notifications.showSuccessNotification('removeFromFavourites', contact);
       dispatch(removeContactFromFavourites(contact.id));
     }
   };
+
   const contactClass =
     isDeleteBtnHovered || isEditBtnHovered
       ? addClassForHoverEffect({
@@ -136,7 +148,10 @@ export const Contact = ({ contact }) => {
           {renderIcons('delete', iconSize.sm)}
         </IconButton>
       </ContactButtons>
-      <CheckboxWithStarIcon onChange={handleCheckboxChange} />
+      <CheckboxWithStarIcon
+        checked={isFavorite}
+        onChange={handleCheckboxChange}
+      />
     </>
   );
 };
