@@ -20,12 +20,15 @@ import {
   selectFilterByName,
   selectFilterByNumber,
 } from 'redux/filters/selectors';
+import { CheckboxWithStarIcon } from 'components/CheckboxWithStarIcon';
 
 export const Contact = ({ contact }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
   const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
@@ -52,7 +55,10 @@ export const Contact = ({ contact }) => {
     };
     dispatch(contactsOperations.updateContact(edittedContact));
   };
-
+  const handleCheckboxChange = () => {
+    console.log('click');
+    setIsFavorite(!isFavorite);
+  };
   const contactClass =
     isDeleteBtnHovered || isEditBtnHovered
       ? addClassForHoverEffect({
@@ -103,6 +109,7 @@ export const Contact = ({ contact }) => {
           textToHighlight={` ${contact.number}`}
         />
       </ContactEl>
+
       <ContactButtons>
         <IconButton
           onClick={toggleEditModal}
@@ -121,6 +128,10 @@ export const Contact = ({ contact }) => {
           {renderIcons('delete', iconSize.sm)}
         </IconButton>
       </ContactButtons>
+      <CheckboxWithStarIcon
+        checked={isFavorite}
+        onChange={handleCheckboxChange}
+      />
     </>
   );
 };
