@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import Highlighter from 'react-highlight-words';
-
 export const ContactButtons = styled.div`
   display: flex;
   column-gap: 20px;
@@ -12,10 +10,23 @@ export const ContactEl = styled.div`
   font-size: 30px;
   flex-grow: 1;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  .marked {
+    background-color: #f66fa5;
+    font-weight: 700;
+    border-radius: 5px;
+  }
+  &.toDelete,
+  .marked.toDelete {
+    color: red;
+  }
+
+  &.toEdit,
+  .marked.toEdit {
+    color: blue;
+  }
 `;
-export const ContactName = styled(Highlighter)`
-  font-style: italic;
-`;
+
 export const Name = styled.p`
   font-style: italic;
 `;
@@ -27,8 +38,3 @@ export const Time = styled.p`
   align-items: center;
   margin-right: 20px;
 `;
-
-// export const ContactWrapper = styled.div`
-//   display: flex;
-//   column-gap: 15px;
-// `;

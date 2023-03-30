@@ -27,6 +27,7 @@ import { IoIosCreate } from 'react-icons/io';
 import { BsPersonFill } from 'react-icons/bs';
 import { RiCloseLine } from 'react-icons/ri';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { MdGroupAdd } from 'react-icons/md';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -92,6 +93,8 @@ export function renderIcons(param, size) {
       return <RiCloseLine size={size} className="contact-form__icon" />;
     case 'back':
       return <IoMdArrowRoundBack size={size} className="contact-form__icon" />;
+    case 'addGroup':
+      return <MdGroupAdd size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }

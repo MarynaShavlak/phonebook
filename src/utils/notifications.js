@@ -63,6 +63,14 @@ export function showInfoRecycleBinNotification(contact) {
   );
 }
 
+export function showSuccessGroupsNotification(groupName) {
+  return toast.success(`You've just add group with name "${groupName}" `);
+}
+
+export function showWarnGroupsNotification(groupName) {
+  return toast.warn(`Group with name "${groupName}"  in already exist`);
+}
+
 export function showFailureNotification() {
   return toast.error(
     `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`

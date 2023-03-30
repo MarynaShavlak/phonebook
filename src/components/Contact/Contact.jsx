@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import css from 'utils/hoverStyles.module.css';
-import Avatar from 'react-avatar';
 import Highlighter from 'react-highlight-words';
+import Avatar from 'react-avatar';
 import {
   IconButton,
   EditModal,
   ConfirmRemoveToRecycleBinModal,
   CheckboxWithStarIcon,
 } from 'components';
-import { ContactEl, ContactName, ContactButtons } from './Contact.styled';
-import { addClassForHoverEffect } from 'utils/addClassForHoverEffect';
+import { ContactEl, ContactButtons } from './Contact.styled';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import {
   selectFilterByName,
@@ -25,6 +23,7 @@ import {
 import { renderIcons } from 'utils/renderIcons';
 import * as Notifications from 'utils/notifications';
 import { iconSize } from 'constants';
+import { clsx } from 'clsx';
 
 export const Contact = ({ contact }) => {
   const favouriteContacts = useSelector(selectFavouritesContacts);
@@ -78,24 +77,12 @@ export const Contact = ({ contact }) => {
       dispatch(removeContactFromFavourites(contact.id));
     }
   };
+  const defaultHighlighterClass = 'marked';
+  const dynamicHighlighterClasses = clsx({
+    toDelete: isDeleteBtnHovered,
+    toEdit: isEditBtnHovered,
+  });
 
-  const contactClass =
-    isDeleteBtnHovered || isEditBtnHovered
-      ? addClassForHoverEffect({
-          basicClass: '',
-          isDeleteBtnHovered,
-          isEditBtnHovered,
-        })
-      : '';
-
-  const highlighClass =
-    isDeleteBtnHovered || isEditBtnHovered
-      ? addClassForHoverEffect({
-          basicClass: css.hightlightByFilterValue,
-          isDeleteBtnHovered,
-          isEditBtnHovered,
-        })
-      : css.hightlightByFilterValue;
   return (
     <>
       {isEditModalOpen && (
@@ -114,16 +101,27 @@ export const Contact = ({ contact }) => {
         />
       )}
 
-      <ContactEl className={contactClass}>
+      <ContactEl
+        className={clsx({
+          toDelete: isDeleteBtnHovered,
+          toEdit: isEditBtnHovered,
+        })}
+      >
         <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
-        <ContactName
-          highlightClassName={highlighClass}
+        <Highlighter
+          highlightClassName={clsx(
+            defaultHighlighterClass,
+            dynamicHighlighterClasses
+          )}
           searchWords={[`${filterByName}`]}
           autoEscape={true}
           textToHighlight={`${contact.name}:`}
         />
         <Highlighter
-          highlightClassName={highlighClass}
+          highlightClassName={clsx(
+            defaultHighlighterClass,
+            dynamicHighlighterClasses
+          )}
           searchWords={[`${filterByNumber}`]}
           autoEscape={true}
           textToHighlight={` ${contact.number}`}

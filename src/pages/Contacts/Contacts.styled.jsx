@@ -12,7 +12,7 @@ export const ContentWrapper = styled.div`
   width: 800px;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 40px;
 `;
 
 export const AddNewContactBtn = styled.button`
