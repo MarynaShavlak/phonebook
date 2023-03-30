@@ -6,12 +6,7 @@ import {
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
 import { Button } from 'components/OperationButton/OperationButton.styled';
-import {
-  FavouriteContact,
-  Section,
-  Notification,
-  CreateGroupModal,
-} from 'components';
+import { Contact, Section, Notification, CreateGroupModal } from 'components';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 
 const Groups = () => {
@@ -25,13 +20,13 @@ const Groups = () => {
       <Section>
         <ContentWrapper>
           {groups.length !== 0 ? (
-            <ContactsList>
-              {groups.map(contact => (
-                <ContactItem key={contact.id}>
-                  <FavouriteContact contact={contact} />
-                </ContactItem>
+            <ul>
+              {groups.map(group => (
+                <li key={group.id}>
+                  <p>{group.name}</p>
+                </li>
               ))}
-            </ContactsList>
+            </ul>
           ) : (
             <>
               {' '}

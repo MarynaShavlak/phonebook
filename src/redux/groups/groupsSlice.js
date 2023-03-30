@@ -30,15 +30,19 @@ const groupsSlice = createSlice({
         groupIndex
       ].contacts.filter(contact => contact !== action.payload.contact);
     },
-    addContactGroup: (state, action) => {
-      state.groups.push({ name: action.payload.groupName, contacts: [] });
+    addNewGroup: (state, action) => {
+      state.groups.push({
+        name: action.payload.name,
+        id: action.payload.id,
+        contacts: [],
+      });
     },
-    deleteContactGroup: (state, action) => {
+    deleteGroup: (state, action) => {
       state.groups = state.groups.filter(
         group => group.name !== action.payload.groupName
       );
     },
-    renameContactGroup: (state, action) => {
+    renameGroup: (state, action) => {
       const groupIndex = state.groups.findIndex(
         group => group.name === action.payload.oldGroupName
       );
@@ -50,9 +54,9 @@ const groupsSlice = createSlice({
 export const {
   addContactToGroup,
   deleteContactFromGroup,
-  addContactGroup,
-  deleteContactGroup,
-  renameContactGroup,
+  addNewGroup,
+  deleteGroup,
+  renameGroup,
 } = groupsSlice.actions;
 
 export const groupsReducer = persistReducer(persistConfig, groupsSlice.reducer);

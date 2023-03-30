@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import './CreateGroupModal.css';
 import Modal from 'react-modal';
-import { IconButton, OperationButton } from 'components';
-import { Button } from 'components/OperationButton/OperationButton.styled';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
 import * as Notifications from 'utils/notifications';
+import { addNewGroup } from 'redux/groups/groupsSlice';
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -30,14 +29,14 @@ const customStyles = {
 
 export const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const addContactGroup = e => {
     e.preventDefault();
     console.log(e);
-
+    const groupId = nanoid();
     console.log(groupName);
-    // dispatch(removeContactFromRecycleBin(contact.id));
+    dispatch(addNewGroup({ name: groupName, id: groupId }));
     // Notifications.showInfoRecycleBinNotification(contact);
   };
 
