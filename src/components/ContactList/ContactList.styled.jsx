@@ -39,7 +39,8 @@ export const SortBtn = styled.button`
   font-size: 20px;
   font-weight: 800;
   cursor: pointer;
-  transition: 250ms background-color ease-in, 250ms color ease-in;
+  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
+    250ms color cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #f787b4;
     color: white;

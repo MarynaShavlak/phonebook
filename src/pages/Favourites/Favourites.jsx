@@ -8,7 +8,7 @@ import {
 import { FavouriteContact, Section, Notification } from 'components';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 
-const RecycleBin = () => {
+const Favourites = () => {
   const contacts = useSelector(selectFavouritesContacts);
   return (
     <main>
@@ -31,4 +31,4 @@ const RecycleBin = () => {
   );
 };
 
-export default RecycleBin;
+export default Favourites;

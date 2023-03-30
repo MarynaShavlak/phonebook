@@ -4,6 +4,7 @@ export { SharedLayout } from 'components/SharedLayout';
 export { ConfirmDeleteModal } from 'components/ConfirmDeleteModal';
 export { ConfirmRestoreModal } from 'components/ConfirmRestoreModal';
 export { ConfirmRemoveToRecycleBinModal } from 'components/ConfirmRemoveToRecycleBinModal';
+export { CreateGroupModal } from 'components/CreateGroupModal';
 export { Contact } from 'components/Contact';
 export { DeletedContact } from 'components/DeletedContact';
 export { FavouriteContact } from 'components/FavouriteContact';

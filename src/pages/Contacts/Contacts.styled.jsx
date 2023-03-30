@@ -32,7 +32,8 @@ export const AddNewContactBtn = styled.button`
   font-weight: 800;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   cursor: pointer;
-  transition: 250ms background-color ease-in, 250ms color ease-in;
+  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
+    250ms color cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #ef4287;
     color: white;

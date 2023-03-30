@@ -1,0 +1,100 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Contect--before-close {
+  position: relative;
+}
+
+.action-buttons {
+  display: flex;
+  column-gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+}
+.confirmation__message {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.67;
+  margin-bottom: 20px;
+
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  column-gap: 10px;
+  align-self: center;
+  align-items: center;
+  background-color: transparent;
+  color: black;
+  border: 1px solid transparent;
+      /* border-radius: 50%; */
+  cursor: pointer;
+  transition:  250ms color cubic-bezier(0.4, 0, 0.2, 1);
+     
+    
+      
+}
+.close-modal-btn:hover {
+  color: #ef4287;
+}
+
+.group-form__wrapper {
+  display: flex;
+  column-gap: 20px;
+}
+
+
+.group-form__input {
+  height: 70px;
+    width: 100%;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #f66fa5;
+    border: 5px solid #fab7d2;
+    border-radius: 10px;
+    flex-grow: 1;
+  
+    
+}
+.group-form__input:focus {
+  outline: none;
+  border: 5px solid #f787b4;
+}
+
+.add-group-btn {
+  display: flex;
+    column-gap: 10px;
+    align-self: center;
+    align-items: center;
+    padding: 10px ;
+    background-color: #fde7f0;
+    color: black;
+    border: 5px solid transparent;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
+    cursor: pointer;
+    transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1), 250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  
+    
+}
+.add-group-btn:hover {
+  background-color: #f787b4;
+  color: white;
+}
