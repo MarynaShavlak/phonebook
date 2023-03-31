@@ -6,10 +6,10 @@
 .ReactModal__Overlay--after-open {
   opacity: 1;
 }
-
-.ReactModal__Overlay--before-close {
-  opacity: 0;
+.ReactModal__Overlay--after-open {
+  opacity: 1;
 }
+
 .ReactModal__Contect--before-close {
   position: relative;
 }
@@ -20,12 +20,7 @@
   justify-content: center;
   margin-top: 40px;
 }
-.confirmation__message {
-  font-size: 24px;
-  text-align: center;
-line-height: 1.67;
 
-}
 .close-modal-btn {
   position: absolute;
   top: 0;
@@ -38,9 +33,17 @@ line-height: 1.67;
   color: black;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: 250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  transition:  250ms color cubic-bezier(0.4, 0, 0.2, 1);
+     
+    
+      
 }
-
 .close-modal-btn:hover {
   color: #ef4287;
+}
+
+.confirmation__message {
+  font-size: 24px;
+  text-align: center;
+  line-height: 1.67;
 }

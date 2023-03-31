@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import {
   EditModal,
-  ConfirmRemoveToRecycleBinModal,
+  RemoveToRecycleBinModal,
   CheckboxWithStarIcon,
   IconButtonWithHoverEffect,
   HighlightContactDetails,
@@ -91,7 +91,7 @@ export const Contact = ({ contact }) => {
         />
       )}
       {isDeleteModalOpen && (
-        <ConfirmRemoveToRecycleBinModal
+        <RemoveToRecycleBinModal
           isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
           contact={contact}

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import {
   IconButton,
-  ConfirmDeleteModal,
-  ConfirmRestoreModal,
+  DeleteFromRecycleBinModal,
+  RestoreFromRecycleBinModal,
 } from 'components';
 import {
   ContactEl,
@@ -39,14 +39,14 @@ export const DeletedContact = ({ contact }) => {
   return (
     <>
       {isConfirmRestoreModalOpen && (
-        <ConfirmRestoreModal
+        <RestoreFromRecycleBinModal
           isOpen={isConfirmRestoreModalOpen}
           onClose={toggleRestoreModal}
           contact={contact}
         />
       )}
       {isConfirmDeleteModalOpen && (
-        <ConfirmDeleteModal
+        <DeleteFromRecycleBinModal
           isOpen={isConfirmDeleteModalOpen}
           onClose={toggleDeleteModal}
           contact={contact}

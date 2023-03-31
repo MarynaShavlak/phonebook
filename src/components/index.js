@@ -1,9 +1,11 @@
 export { Layout } from 'components/Layout';
 export { Section } from 'components/Section';
 export { SharedLayout } from 'components/SharedLayout';
-export { ConfirmDeleteModal } from 'components/ConfirmDeleteModal';
-export { ConfirmRestoreModal } from 'components/ConfirmRestoreModal';
-export { ConfirmRemoveToRecycleBinModal } from 'components/ConfirmRemoveToRecycleBinModal';
+export { ModalActionButtons } from 'components/Modals/ModalActionButtons';
+export { ConfirmationModal } from 'components/Modals/ConfirmationModal';
+export { DeleteFromRecycleBinModal } from 'components/Modals/DeleteFromRecycleBinModal';
+export { RestoreFromRecycleBinModal } from 'components/Modals/RestoreFromRecycleBinModal';
+export { RemoveToRecycleBinModal } from 'components/Modals/RemoveToRecycleBinModal';
 export { CreateGroupModal } from 'components/CreateGroupModal';
 export { Contact } from 'components/Contact';
 export { Group } from 'components/Group';
