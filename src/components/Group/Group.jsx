@@ -11,6 +11,8 @@ import { ControlButtons } from 'components/Contact/Contact.styled';
 import { deleteGroup, renameGroup } from 'redux/groups/groupsSlice';
 
 export const Group = ({ group }) => {
+  const contactsQuantityInGroup = group.contacts.length;
+  console.log('contactsQuantityInGroup', contactsQuantityInGroup);
   const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(
     OPERATION_TYPES.DELETE
@@ -61,7 +63,7 @@ export const Group = ({ group }) => {
           toEdit: isHovered.edit,
         })}
       >
-        {group.name}
+        {group.name}&nbsp; ({contactsQuantityInGroup})
       </GroupEl>
       <ControlButtons>
         <IconButton

@@ -11,9 +11,10 @@ import {
   OperationModal,
   CheckboxWithStarIcon,
   HighlightContactDetails,
-  IconButton,
+  DropdownMenu,
 } from 'components';
-import { ContactEl, ControlButtons } from './Contact.styled';
+import { ContactEl, DropdownButton } from './Contact.styled';
+
 import {
   addContactToRecycleBin,
   selectRecycleBinContacts,
@@ -31,6 +32,7 @@ import {
 
 export const Contact = ({ contact }) => {
   const favoriteContacts = useSelector(selectFavoritesContacts);
+
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)
   );
@@ -102,7 +104,7 @@ export const Contact = ({ contact }) => {
           action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
         />
       )}
-
+      <div></div>
       <ContactEl
         className={clsx({
           toRemove: isHovered.remove,
@@ -117,26 +119,38 @@ export const Contact = ({ contact }) => {
           isHovered={isHovered}
         />
       </ContactEl>
-
-      <ControlButtons>
-        <IconButton
-          ariaLabel={CONTACT_ACTIONS.EDIT}
-          onClick={toggleEditModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-        >
-          {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}
-        </IconButton>
-        <IconButton
-          ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
-          onClick={toggleRemoveModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
-        >
-          {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}
-        </IconButton>
-      </ControlButtons>
       <CheckboxWithStarIcon checked={isFavorite} onChange={toggleFavorite} />
+      <DropdownMenu
+        elements={[
+          {
+            label: OPERATION_TYPES.EDIT,
+            icon: (
+              <DropdownButton
+                ariaLabel={CONTACT_ACTIONS.EDIT}
+                onClick={toggleEditModal}
+                onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+                onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+              >
+                {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)} Edit
+              </DropdownButton>
+            ),
+          },
+          {
+            label: OPERATION_TYPES.REMOVE,
+            icon: (
+              <DropdownButton
+                ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+                onClick={toggleRemoveModal}
+                onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
+                onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
+              >
+                {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)} Remove to
+                recycle bin
+              </DropdownButton>
+            ),
+          },
+        ]}
+      />
     </>
   );
 };

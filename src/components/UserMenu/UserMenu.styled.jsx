@@ -29,6 +29,7 @@ export const DropdownMenu = styled.ul`
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   border-radius: 5px;
   overflow: hidden;
+
   .user-logout {
     margin-top: 10px;
     cursor: pointer;

@@ -10,6 +10,7 @@ import { ImCancelCircle } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
 import { FaRegSadCry } from 'react-icons/fa';
 import { BsFillStarFill } from 'react-icons/bs';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
@@ -97,6 +98,8 @@ export function renderIcons(param, size) {
       return <IoMdArrowRoundBack size={size} className="contact-form__icon" />;
     case 'addGroup':
       return <MdGroupAdd size={size} className="contact-form__icon" />;
+    case 'dots':
+      return <BsThreeDotsVertical size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }

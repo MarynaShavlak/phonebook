@@ -28,6 +28,6 @@ export { OperationButton } from 'components/OperationButton';
 export { SignUpForm } from 'components/SignUpForm';
 export { LogInForm } from 'components/LogInForm';
 export { HighlightContactDetails } from 'components/HighlightContactDetails';
-
+export { DropdownMenu } from 'components/DropdownMenu';
 export { PrivateRoute } from 'components/PrivateRoute/PrivateRoute.jsx';
 export { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute.jsx';

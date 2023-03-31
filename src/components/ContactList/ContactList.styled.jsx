@@ -11,6 +11,7 @@ export const ContactsList = styled.ul`
 `;
 
 export const ContactItem = styled.li`
+  position: relative;
   margin: 0;
   display: flex;
   /* justify-content: space-between; */
