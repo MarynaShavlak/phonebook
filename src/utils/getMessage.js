@@ -1,8 +1,8 @@
-import { ContactActions } from 'constants';
+import { CONTACT_ACTIONS } from 'constants';
 
 export const getMessage = ({ action, contact }) => {
   switch (action) {
-    case `${ContactActions.REMOVE_TO_RECYCLE_BIN}`:
+    case `${CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}`:
       return (
         <>
           <span>Are you sure you want to remove contact with name </span>
@@ -15,7 +15,7 @@ export const getMessage = ({ action, contact }) => {
           </p>
         </>
       );
-    case `${ContactActions.RESTORE}`:
+    case `${CONTACT_ACTIONS.RESTORE}`:
       return (
         <>
           <span>Are you sure you want to restore contact with name </span>
@@ -25,7 +25,7 @@ export const getMessage = ({ action, contact }) => {
           <span> in your contacts list?</span>
         </>
       );
-    case `${ContactActions.DELETE}`:
+    case `${CONTACT_ACTIONS.DELETE}`:
       return (
         <>
           <span>Are you sure you want to delete contact with name </span>

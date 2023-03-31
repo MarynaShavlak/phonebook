@@ -11,7 +11,7 @@ import {
   Time,
 } from 'components/Contact/Contact.styled';
 import { renderIcons, Notifications } from 'utils';
-import { iconSize, ContactActions } from 'constants';
+import { iconSize, CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
 import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 import { addContact } from 'redux/contacts/contactsOperations';
 
@@ -58,7 +58,7 @@ export const DeletedContact = ({ contact }) => {
     if (checkContactInBook(contact)) return;
     dispatch(addContact(contact));
     dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showContactSuccess('restore', contact);
+    Notifications.showContactSuccess(OPERATION_TYPES.RESTORE, contact);
   };
 
   return (
@@ -69,7 +69,7 @@ export const DeletedContact = ({ contact }) => {
           onClose={toggleRestoreModal}
           contact={contact}
           onConfirm={restoreContact}
-          action={ContactActions.RESTORE}
+          action={CONTACT_ACTIONS.RESTORE}
         />
       )}
       {isConfirmDeleteModalOpen && (
@@ -78,7 +78,7 @@ export const DeletedContact = ({ contact }) => {
           onClose={toggleDeleteModal}
           contact={contact}
           onConfirm={deleteContact}
-          action={ContactActions.DELETE}
+          action={CONTACT_ACTIONS.DELETE}
         />
       )}
 
@@ -94,19 +94,19 @@ export const DeletedContact = ({ contact }) => {
       <ControlButtons>
         <IconButton
           onClick={toggleRestoreModal}
-          aria-label={ContactActions.RESTORE}
+          aria-label={CONTACT_ACTIONS.RESTORE}
           onMouseEnter={toggleRestoreBtnHoverEffect}
           onMouseLeave={toggleRestoreBtnHoverEffect}
         >
-          {renderIcons('restore', iconSize.sm)}
+          {renderIcons(OPERATION_TYPES.RESTORE, iconSize.sm)}
         </IconButton>
         <IconButton
           onClick={toggleDeleteModal}
           onMouseEnter={toggleDeleteBtnHoverEffect}
           onMouseLeave={toggleDeleteBtnHoverEffect}
-          aria-label={ContactActions.DELETE}
+          aria-label={CONTACT_ACTIONS.DELETE}
         >
-          {renderIcons('delete', iconSize.sm)}
+          {renderIcons(OPERATION_TYPES.DELETE, iconSize.sm)}
         </IconButton>
       </ControlButtons>
     </>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectFavouritesContacts } from 'redux/favourites/selectors';
+import { selectFavoritesContacts } from 'redux/favorites/selectors';
 import {
   ContactsList,
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
-import { FavouriteContact, Section, Notification } from 'components';
+import { FavoriteContact, Section, Notification } from 'components';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 
-const Favourites = () => {
-  const contacts = useSelector(selectFavouritesContacts);
+const Favorites = () => {
+  const contacts = useSelector(selectFavoritesContacts);
   return (
     <main>
       <Section>
@@ -18,12 +18,12 @@ const Favourites = () => {
             <ContactsList>
               {contacts.map(contact => (
                 <ContactItem key={contact.id}>
-                  <FavouriteContact contact={contact} />
+                  <FavoriteContact contact={contact} />
                 </ContactItem>
               ))}
             </ContactsList>
           ) : (
-            <Notification message="There are no contacts in your favourites yet" />
+            <Notification message="There are no contacts in your favorites yet" />
           )}
         </ContentWrapper>
       </Section>
@@ -31,4 +31,4 @@ const Favourites = () => {
   );
 };
 
-export default Favourites;
+export default Favorites;

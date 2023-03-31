@@ -6,9 +6,13 @@ export const HighlightContactDetails = ({
   contact,
   filterByName,
   filterByNumber,
-  defaultHighlighterClass,
-  dynamicHighlighterClasses,
+  defaultHighlighterClass = 'marked',
+  isHovered,
 }) => {
+  const dynamicHighlighterClasses = clsx({
+    toDelete: isHovered?.delete,
+    toEdit: isHovered?.edit,
+  });
   return (
     <>
       <Highlighter
@@ -40,6 +44,9 @@ HighlightContactDetails.propTypes = {
   }).isRequired,
   filterByName: PropTypes.string.isRequired,
   filterByNumber: PropTypes.string.isRequired,
-  defaultHighlighterClass: PropTypes.string.isRequired,
-  dynamicHighlighterClasses: PropTypes.string.isRequired,
+  defaultHighlighterClass: PropTypes.string,
+  isHovered: PropTypes.shape({
+    delete: PropTypes.bool,
+    edit: PropTypes.bool,
+  }),
 };

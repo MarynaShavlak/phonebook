@@ -13,7 +13,7 @@ import { filterByNameReducer } from './filters/filterByNameSlice';
 import { filterByNumberReducer } from './filters/filterByNumberSlice';
 import { contactListReducer } from './contacts/contactListSlice';
 import { recycleBinReducer } from './recycleBin/recycleBinSlice';
-import { favouritesReducer } from './favourites/favouritesSlice';
+import { favoritesReducer } from './favorites/favoritesSlice';
 import { groupsReducer } from './groups/groupsSlice';
 
 export const store = configureStore({
@@ -23,7 +23,7 @@ export const store = configureStore({
     filterName: filterByNameReducer,
     filterNumber: filterByNumberReducer,
     recycleBin: recycleBinReducer,
-    favourites: favouritesReducer,
+    favorites: favoritesReducer,
     groups: groupsReducer,
   },
   middleware: getDefaultMiddleware =>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ConfirmationModal } from 'components';
 import { getMessage } from 'utils';
-import { ContactActions } from 'constants';
+import { CONTACT_ACTIONS } from 'constants';
 
 export const ContactOperationModal = ({
   contact,
@@ -28,9 +28,9 @@ ContactOperationModal.propTypes = {
     number: PropTypes.string.isRequired,
   }).isRequired,
   action: PropTypes.oneOf([
-    ContactActions.REMOVE_TO_RECYCLE_BIN,
-    ContactActions.RESTORE,
-    ContactActions.DELETE,
+    CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
+    CONTACT_ACTIONS.RESTORE,
+    CONTACT_ACTIONS.DELETE,
   ]).isRequired,
 
   onConfirm: PropTypes.func,

@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import Avatar from 'react-avatar';
 import { CheckboxWithStarIcon } from 'components';
 import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
-import { removeContactFromFavourites } from 'redux/favourites/favouritesSlice';
+import { removeContactFromFavorites } from 'redux/favorites/favoritesSlice';
 import * as Notifications from 'utils/notifications';
 
-export const FavouriteContact = ({ contact }) => {
+export const FavoriteContact = ({ contact }) => {
   const dispatch = useDispatch();
-  const removeFromFavourites = () => {
-    Notifications.showContactSuccess('removeFromFavourites', contact);
+  const removeFromFavorites = () => {
+    Notifications.showContactSuccess('removeFromFavorites', contact);
 
-    dispatch(removeContactFromFavourites(contact.id));
+    dispatch(removeContactFromFavorites(contact.id));
   };
 
   return (
@@ -23,12 +23,12 @@ export const FavouriteContact = ({ contact }) => {
         <Number>{contact.number}</Number>
       </ContactEl>
 
-      <CheckboxWithStarIcon onChange={removeFromFavourites} checked />
+      <CheckboxWithStarIcon onChange={removeFromFavorites} checked />
     </>
   );
 };
 
-FavouriteContact.propTypes = {
+FavoriteContact.propTypes = {
   contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

@@ -17,16 +17,16 @@ export const Group = ({ group }) => {
     toggleEditBtnHoverEffect,
   } = useHoverEffects();
 
-  // const favouriteContacts = useSelector(selectFavouritesContacts);
+  // const favoriteContacts = useSelector(selectFavoritesContacts);
 
-  // const checkContactIsinFavourites = contact => {
-  //   const isinFavourites = favouriteContacts.some(el => el.id === contact.id);
-  //   return isinFavourites;
+  // const checkContactIsinFavorites = contact => {
+  //   const isinFavorites = favoriteContacts.some(el => el.id === contact.id);
+  //   return isinFavorites;
   // };
-  // const inFavourite = checkContactIsinFavourites(contact);
+  // const inFavorite = checkContactIsinFavorites(contact);
   // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   // const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  // const [isFavorite, setIsFavorite] = useState(inFavourite);
+  // const [isFavorite, setIsFavorite] = useState(inFavorite);
   // const {
   //   isDeleteBtnHovered,
   //   isEditBtnHovered,
@@ -61,11 +61,11 @@ export const Group = ({ group }) => {
   //   console.log(contact);
   //   setIsFavorite(!isFavorite);
   //   if (!isFavorite) {
-  //     dispatch(addContactToFavourites(contact));
-  //     Notifications.showContactSuccess('addToFavourites', contact);
+  //     dispatch(addContactToFavorites(contact));
+  //     Notifications.showContactSuccess('addToFavorites', contact);
   //   } else {
-  //     Notifications.showContactSuccess('removeFromFavourites', contact);
-  //     dispatch(removeContactFromFavourites(contact.id));
+  //     Notifications.showContactSuccess('removeFromFavorites', contact);
+  //     dispatch(removeContactFromFavorites(contact.id));
   //   }
   // };
   // const defaultHighlighterClass = 'marked';

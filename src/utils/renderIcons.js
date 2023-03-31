@@ -63,7 +63,7 @@ export function renderIcons(param, size) {
       return <GiConfirmed size={size} className="contact-form__icon" />;
     case 'error':
       return <FaRegSadCry size={size} className="contact-form__icon" />;
-    case 'favourite':
+    case 'favorite':
       return <BsFillStarFill size={size} className="contact-form__icon" />;
     case 'group':
       return <RiGroupFill size={size} className="contact-form__icon" />;

@@ -20,6 +20,7 @@ import { Section } from 'components';
 import Logo from './images/home.png';
 import { renderIcons } from 'utils/renderIcons';
 import { useAuth } from 'hooks';
+import { OPERATION_TYPES } from 'constants';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
@@ -102,7 +103,7 @@ const Home = () => {
             </BenefitsItem>
 
             <BenefitsItem>
-              <IconWrap>{renderIcons('delete', 40)}</IconWrap>
+              <IconWrap>{renderIcons(OPERATION_TYPES.DELETE, 40)}</IconWrap>
               <BenefitTitle>Recycle bin feature</BenefitTitle>
               <BenefitDescription>
                 Never worry about accidentally deleting a contact again. Instead
@@ -123,10 +124,10 @@ const Home = () => {
             </BenefitsItem>
 
             <BenefitsItem>
-              <IconWrap>{renderIcons('favourite', 40)}</IconWrap>
-              <BenefitTitle>Favourites list</BenefitTitle>
+              <IconWrap>{renderIcons('favorite', 40)}</IconWrap>
+              <BenefitTitle>Favorites list</BenefitTitle>
               <BenefitDescription>
-                Easily mark your most frequently used contacts as favourites for
+                Easily mark your most frequently used contacts as favorites for
                 quick and easy access. You can streamline your communication and
                 stay connected with those who matter most.
               </BenefitDescription>

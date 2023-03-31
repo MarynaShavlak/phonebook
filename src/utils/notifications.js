@@ -32,8 +32,8 @@ export function showContactSuccess(operation, contact) {
     add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
     delete: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
     restore: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
-    addToFavourites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favourites `,
-    removeFromFavourites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favourites `,
+    addToFavorites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
+    removeFromFavorites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
   };
   const message =
     messages[operation] ||

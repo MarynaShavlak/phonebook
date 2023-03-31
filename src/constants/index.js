@@ -1,2 +1,3 @@
 export * from './iconSize';
-export { ContactActions } from './contactActions';
+export { CONTACT_ACTIONS } from './contactActions';
+export { OPERATION_TYPES } from './operationTypes';

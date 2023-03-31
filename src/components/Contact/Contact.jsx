@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
-import {} from 'components';
-import { renderIcons } from 'utils';
+import { clsx } from 'clsx';
+import { renderIcons, getCurrentTime, Notifications } from 'utils';
+import { useHoverEffects, useModal } from 'hooks';
+import { CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
 import {
   EditModal,
   ContactOperationModal,
@@ -12,40 +14,36 @@ import {
   IconButton,
 } from 'components';
 import { ContactEl, ControlButtons } from './Contact.styled';
-import { addContactToRecycleBin } from 'redux/recycleBin/recycleBinSlice';
+import {
+  addContactToRecycleBin,
+  selectRecycleBinContacts,
+} from 'redux/recycleBin';
+import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
+import {
+  selectFavoritesContacts,
+  addContactToFavorites,
+  removeContactFromFavorites,
+} from 'redux/favorites';
 import {
   deleteContact,
   updateContact,
 } from 'redux/contacts/contactsOperations';
-import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
-
-import {
-  selectFilterByName,
-  selectFilterByNumber,
-} from 'redux/filters/selectors';
-import { selectFavouritesContacts } from 'redux/favourites/selectors';
-import {
-  addContactToFavourites,
-  removeContactFromFavourites,
-} from 'redux/favourites/favouritesSlice';
-import { getCurrentTime, Notifications } from 'utils';
-import { clsx } from 'clsx';
-import { useHoverEffects, useModal } from 'hooks';
-import { ContactActions } from 'constants';
 
 export const Contact = ({ contact }) => {
-  const favouriteContacts = useSelector(selectFavouritesContacts);
+  const favoriteContacts = useSelector(selectFavoritesContacts);
   const [isFavorite, setIsFavorite] = useState(
-    favouriteContacts.some(el => el.id === contact.id)
+    favoriteContacts.some(el => el.id === contact.id)
   );
 
-  const {
-    isEditModalOpen,
-    isDeleteModalOpen,
-    toggleEditModal,
-    toggleDeleteModal,
-  } = useModal();
-  const { isHovered, toggleHoverEffect } = useHoverEffects(['delete', 'edit']);
+  const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
+  const { isDeleteModalOpen, toggleDeleteModal } = useModal(
+    OPERATION_TYPES.DELETE
+  );
+
+  const { isHovered, toggleHoverEffect } = useHoverEffects([
+    OPERATION_TYPES.DELETE,
+    OPERATION_TYPES.EDIT,
+  ]);
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
@@ -66,16 +64,13 @@ export const Contact = ({ contact }) => {
     dispatch(updateContact(edittedContact));
   };
 
-  const handleCheckboxChange = () => {
-    console.log(contact);
+  const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    if (!isFavorite) {
-      dispatch(addContactToFavourites(contact));
-      Notifications.showContactSuccess('addToFavourites', contact);
-    } else {
-      Notifications.showContactSuccess('removeFromFavourites', contact);
-      dispatch(removeContactFromFavourites(contact.id));
-    }
+    return isFavorite
+      ? (Notifications.showContactSuccess('removeFromFavorites', contact),
+        dispatch(removeContactFromFavorites(contact.id)))
+      : (dispatch(addContactToFavorites(contact)),
+        Notifications.showContactSuccess('addToFavorites', contact));
   };
 
   const removeContactToRecycleBin = () => {
@@ -85,15 +80,11 @@ export const Contact = ({ contact }) => {
       Notifications.showRecyclebinWarn(contact);
       return;
     }
-    Notifications.showContactSuccess('delete', contact);
+    Notifications.showContactSuccess(OPERATION_TYPES.DELETE, contact);
     const removalContactTime = getCurrentTime();
     dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
   };
-  const defaultHighlighterClass = 'marked';
-  const dynamicHighlighterClasses = clsx({
-    toDelete: isHovered.delete,
-    toEdit: isHovered.edit,
-  });
+
   return (
     <>
       {isEditModalOpen && (
@@ -110,7 +101,7 @@ export const Contact = ({ contact }) => {
           onClose={toggleDeleteModal}
           contact={contact}
           onConfirm={removeContactToRecycleBin}
-          action={ContactActions.REMOVE_TO_RECYCLE_BIN}
+          action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
         />
       )}
 
@@ -125,33 +116,29 @@ export const Contact = ({ contact }) => {
           contact={contact}
           filterByName={filterByName}
           filterByNumber={filterByNumber}
-          defaultHighlighterClass={defaultHighlighterClass}
-          dynamicHighlighterClasses={dynamicHighlighterClasses}
+          isHovered={isHovered}
         />
       </ContactEl>
 
       <ControlButtons>
         <IconButton
           onClick={toggleEditModal}
-          ariaLabel="Edit Contact"
-          onMouseEnter={() => toggleHoverEffect('edit')}
-          onMouseLeave={() => toggleHoverEffect('edit')}
+          ariaLabel={CONTACT_ACTIONS.EDIT}
+          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
         >
-          {renderIcons('edit', 30)}
+          {renderIcons(OPERATION_TYPES.EDIT, 30)}
         </IconButton>
         <IconButton
           onClick={toggleDeleteModal}
-          onMouseEnter={() => toggleHoverEffect('delete')}
-          onMouseLeave={() => toggleHoverEffect('delete')}
-          ariaLabel={ContactActions.DELETE}
+          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
+          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
+          ariaLabel={CONTACT_ACTIONS.DELETE}
         >
-          {renderIcons('delete', 30)}
+          {renderIcons(OPERATION_TYPES.DELETE, 30)}
         </IconButton>
       </ControlButtons>
-      <CheckboxWithStarIcon
-        checked={isFavorite}
-        onChange={handleCheckboxChange}
-      />
+      <CheckboxWithStarIcon checked={isFavorite} onChange={toggleFavorite} />
     </>
   );
 };

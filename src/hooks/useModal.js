@@ -1,16 +1,35 @@
 import { useState } from 'react';
 
-export const useModal = () => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+export const useModal = action => {
+  const [modalType, setModalType] = useState(null);
 
-  const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
-  const toggleDeleteModal = () => setIsDeleteModalOpen(!isDeleteModalOpen);
+  const openModal = () => {
+    setModalType(action);
+  };
 
+  const closeModal = () => {
+    setModalType(null);
+  };
+
+  const isModalOpen = () => {
+    return modalType === action;
+  };
+
+  const toggleModal = () => {
+    setModalType(prevType => (prevType === action ? null : action));
+  };
+
+  const modalStatus = {};
+
+  modalStatus[
+    `is${action.charAt(0).toUpperCase()}${action.slice(1)}ModalOpen`
+  ] = isModalOpen();
+  modalStatus[
+    `toggle${action.charAt(0).toUpperCase()}${action.slice(1)}Modal`
+  ] = toggleModal;
   return {
-    isEditModalOpen,
-    isDeleteModalOpen,
-    toggleEditModal,
-    toggleDeleteModal,
+    openModal,
+    closeModal,
+    ...modalStatus,
   };
 };

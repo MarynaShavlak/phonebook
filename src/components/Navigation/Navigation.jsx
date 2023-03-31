@@ -1,8 +1,9 @@
 import { NavigationList, NavigationLink, PhoneLogo } from './Navigation.styled';
-import { renderIcons } from 'utils/renderIcons';
+import { renderIcons } from 'utils';
 import { useAuth } from 'hooks';
 import Logo from './images/phone-genie-logo.png';
 import { Link } from 'react-router-dom';
+import { OPERATION_TYPES } from 'constants';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -30,9 +31,9 @@ export const Navigation = () => {
               </NavigationLink>
             </li>
             <li>
-              <NavigationLink to="/favourites">
-                {renderIcons('favourite', 20)}
-                <span>Favourites</span>
+              <NavigationLink to="/favorites">
+                {renderIcons('favorite', 20)}
+                <span>Favorites</span>
               </NavigationLink>
             </li>
             <li>
@@ -43,7 +44,7 @@ export const Navigation = () => {
             </li>
             <li>
               <NavigationLink to="/recyclebin">
-                {renderIcons('delete', 20)}
+                {renderIcons(OPERATION_TYPES.DELETE, 20)}
                 <span>Recycle Bin</span>
               </NavigationLink>
             </li>
