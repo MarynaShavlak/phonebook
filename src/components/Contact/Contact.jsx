@@ -4,13 +4,19 @@ import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import {
   EditModal,
-  RemoveToRecycleBinModal,
+  ContactOperationModal,
   CheckboxWithStarIcon,
   IconButtonWithHoverEffect,
   HighlightContactDetails,
 } from 'components';
 import { ContactEl, ControlButtons } from './Contact.styled';
-import * as contactsOperations from 'redux/contacts/contactsOperations';
+import { addContactToRecycleBin } from 'redux/recycleBin/recycleBinSlice';
+import {
+  deleteContact,
+  updateContact,
+} from 'redux/contacts/contactsOperations';
+import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
+
 import {
   selectFilterByName,
   selectFilterByNumber,
@@ -20,9 +26,10 @@ import {
   addContactToFavourites,
   removeContactFromFavourites,
 } from 'redux/favourites/favouritesSlice';
-import { Notifications } from 'utils';
+import { getCurrentTime, Notifications } from 'utils';
 import { clsx } from 'clsx';
 import { useHoverEffects, useModal } from 'hooks';
+import { ContactActions } from 'constants';
 
 export const Contact = ({ contact }) => {
   const favouriteContacts = useSelector(selectFavouritesContacts);
@@ -36,6 +43,7 @@ export const Contact = ({ contact }) => {
     toggleEditModal,
     toggleDeleteModal,
   } = useModal();
+
   const {
     isDeleteBtnHovered,
     isEditBtnHovered,
@@ -46,6 +54,7 @@ export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
+  const contacts = useSelector(selectRecycleBinContacts);
 
   const editContact = updatedContact => {
     toggleEditModal();
@@ -59,7 +68,7 @@ export const Contact = ({ contact }) => {
       name: updatedName,
       number: updatedNumber,
     };
-    dispatch(contactsOperations.updateContact(edittedContact));
+    dispatch(updateContact(edittedContact));
   };
 
   const handleCheckboxChange = () => {
@@ -74,6 +83,17 @@ export const Contact = ({ contact }) => {
     }
   };
 
+  const removeContactToRecycleBin = () => {
+    dispatch(deleteContact(contact.id));
+    const isContactExist = contacts.some(el => el.id === contact.id);
+    if (isContactExist) {
+      Notifications.showRecyclebinWarn(contact);
+      return;
+    }
+    Notifications.showContactSuccess('delete', contact);
+    const removalContactTime = getCurrentTime();
+    dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
+  };
   const defaultHighlighterClass = 'marked';
   const dynamicHighlighterClasses = clsx({
     toDelete: isDeleteBtnHovered,
@@ -91,10 +111,12 @@ export const Contact = ({ contact }) => {
         />
       )}
       {isDeleteModalOpen && (
-        <RemoveToRecycleBinModal
+        <ContactOperationModal
           isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
           contact={contact}
+          onConfirm={removeContactToRecycleBin}
+          action={ContactActions.REMOVE_TO_RECYCLE_BIN}
         />
       )}
 
@@ -128,7 +150,7 @@ export const Contact = ({ contact }) => {
           operationType="delete"
           onMouseEnter={toggleDeleteBtnHoverEffect}
           onMouseLeave={toggleDeleteBtnHoverEffect}
-          ariaLabel="Delete contact"
+          ariaLabel={ContactActions.DELETE}
         />
       </ControlButtons>
       <CheckboxWithStarIcon
