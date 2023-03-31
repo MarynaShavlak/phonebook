@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export const ContactButtons = styled.div`
+export const ControlButtons = styled.div`
   display: flex;
   column-gap: 20px;
 `;

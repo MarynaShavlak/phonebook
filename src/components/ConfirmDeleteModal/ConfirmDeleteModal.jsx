@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import './ConfirmDeleteModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
-import { renderIcons } from 'utils/renderIcons';
+import { renderIcons, Notifications } from 'utils';
 import { iconSize } from 'constants';
-import * as Notifications from 'utils/notifications';
 import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 Modal.setAppElement('#root');
 
@@ -32,7 +31,7 @@ export const ConfirmDeleteModal = ({ isOpen, onClose, contact }) => {
   const dispatch = useDispatch();
   const confirmDeleteContact = () => {
     dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showInfoRecycleBinNotification(contact);
+    Notifications.showRecyclebinInfo(contact);
   };
 
   return (

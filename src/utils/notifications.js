@@ -1,83 +1,84 @@
 import { toast } from 'react-toastify';
 
-export function showInfoNotification(isNameExist, isNumberExist, contactToAdd) {
-  if (isNameExist && isNumberExist) {
-    return toast.info(
-      `Ooops, contact with name ${contactToAdd.name} and number ${contactToAdd.number} is already exist in your phonebook`
-    );
-  }
-  if (isNameExist) {
-    return toast.info(
-      `Ooops, contact with name ${contactToAdd.name} is already in exist your phonebook. Please, white another name`
-    );
-  }
-  if (isNumberExist) {
-    return toast.info(
-      `Ooops, contact with number ${contactToAdd.number} is already exist in your phonebook. Please, white another number`
-    );
-  }
-}
-
-export function showSuccessNotification(operation, contact) {
-  switch (operation) {
-    case 'add':
-      return toast.success(
-        `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`
-      );
-    case 'delete':
-      return toast.success(
-        `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`
-      );
-    case 'restore':
-      return toast.success(
-        `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`
-      );
-    case 'addToFavourites':
-      return toast.success(
-        `You've just added contact with name ${contact.name} and number ${contact.number}  to your favourites `
-      );
-    case 'removeFromFavourites':
-      return toast.success(
-        `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favourites `
-      );
+function showMessage(type, message) {
+  switch (type) {
+    case 'success':
+      return toast.success(message);
+    case 'warning':
+      return toast.warning(message);
+    case 'error':
+      return toast.error(message);
+    case 'info':
     default:
-      return console.warn(
-        `Type of field with operation  ${operation} is not found`
-      );
+      return toast.info(message);
   }
 }
 
-export function showWarnNotification() {
-  return toast.warn(
+export function showContactWarn(isNameExist, isNumberExist, contactToAdd) {
+  const message =
+    isNameExist && isNumberExist
+      ? `Ooops, contact with name ${contactToAdd.name} and number ${contactToAdd.number} is already exist in your phonebook`
+      : isNameExist
+      ? `Ooops, contact with name ${contactToAdd.name} is already in exist your phonebook. Please, white another name`
+      : isNumberExist
+      ? `Ooops, contact with number ${contactToAdd.number} is already exist in your phonebook. Please, white another number`
+      : '';
+
+  return showMessage('warning', message);
+}
+
+export function showContactSuccess(operation, contact) {
+  const messages = {
+    add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
+    delete: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
+    restore: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
+    addToFavourites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favourites `,
+    removeFromFavourites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favourites `,
+  };
+  const message =
+    messages[operation] ||
+    `Type of field with operation ${operation} is not found`;
+
+  return showMessage('success', message);
+}
+
+export function showContactInfo() {
+  return showMessage(
+    'info',
     `There are no changes. You didn't change either contact name or phone number`
   );
 }
-export function showWarnRecycleBinNotification(contact) {
-  return toast.warn(
-    `Contact with same name ${contact.name} and number ${contact.number} in already exist in recycle bin. We left only ONE `
-  );
-}
-export function showInfoRecycleBinNotification(contact) {
-  return toast.info(
-    `You've just delete contact with name ${contact.name} and number ${contact.number} from recycle bin`
-  );
-}
 
-export function showSuccessGroupsNotification(groupName) {
-  return toast.success(`You've just add group with name "${groupName}" `);
-}
-
-export function showWarnGroupsNotification(groupName) {
-  return toast.warn(`Group with name "${groupName}"  in already exist`);
-}
-
-export function showFailureNotification() {
-  return toast.error(
+export function showContactFailure() {
+  return showMessage(
+    'error',
     `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`
   );
 }
-export function showAuthErrorNotification() {
-  return toast.error(
-    `Your email is invaild. PLease, check your email and try again`
+
+export function showRecyclebinWarn(contact) {
+  const message = `Contact with same name ${contact.name} and number ${contact.number} in already exist in recycle bin. We left only ONE `;
+  return showMessage('warning', message);
+}
+
+export function showRecyclebinInfo(contact) {
+  const message = `You've just delete contact with name ${contact.name} and number ${contact.number} from recycle bin`;
+  return showMessage('info', message);
+}
+
+export function showGroupSuccess(groupName) {
+  const message = `You've just add group with name "${groupName}" `;
+  return showMessage('success', message);
+}
+
+export function showGroupWarn(groupName) {
+  const message = `Group with name "${groupName}"  in already exist`;
+  return showMessage('warning', message);
+}
+
+export function showAuthError() {
+  return showMessage(
+    'error',
+    `Your email is invalid. Please check your email and try again.`
   );
 }

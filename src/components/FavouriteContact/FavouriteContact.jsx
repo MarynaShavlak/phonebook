@@ -10,7 +10,7 @@ import * as Notifications from 'utils/notifications';
 export const FavouriteContact = ({ contact }) => {
   const dispatch = useDispatch();
   const removeFromFavourites = () => {
-    Notifications.showSuccessNotification('removeFromFavourites', contact);
+    Notifications.showContactSuccess('removeFromFavourites', contact);
 
     dispatch(removeContactFromFavourites(contact.id));
   };

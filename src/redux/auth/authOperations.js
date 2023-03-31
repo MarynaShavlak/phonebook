@@ -23,7 +23,7 @@ export const userSignUp = createAsyncThunk(
       authHeader.set(data.token);
       return data;
     } catch (error) {
-      Notifications.showAuthErrorNotification();
+      Notifications.showAuthError();
       return rejectWithValue(error.message);
     }
   }
@@ -36,7 +36,7 @@ export const userSignIn = createAsyncThunk(
       authHeader.set(data.token);
       return data;
     } catch (error) {
-      Notifications.showAuthErrorNotification();
+      Notifications.showAuthError();
       return rejectWithValue(error.message);
     }
   }

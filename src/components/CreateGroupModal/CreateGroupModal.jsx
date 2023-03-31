@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import './CreateGroupModal.css';
 import Modal from 'react-modal';
-import { renderIcons } from 'utils/renderIcons';
-import * as Notifications from 'utils/notifications';
+import { renderIcons, Notifications } from 'utils';
 import { addNewGroup } from 'redux/groups/groupsSlice';
 import { selectContactGroups } from 'redux/groups/selectors';
 
@@ -42,7 +41,7 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
     const groupId = nanoid();
     dispatch(addNewGroup({ name: groupName, id: groupId }));
     onClose();
-    Notifications.showSuccessGroupsNotification(groupName);
+    Notifications.showGroupSuccess(groupName);
   };
 
   const handleInputChange = e => {
@@ -55,7 +54,7 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
     );
     if (isGroupExist) {
       console.log('such group is already exist');
-      Notifications.showWarnGroupsNotification(groupName);
+      Notifications.showGroupWarn(groupName);
     }
     return isGroupExist;
   };

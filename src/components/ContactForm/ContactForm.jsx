@@ -26,8 +26,10 @@ export const ContactForm = () => {
   const checkContactInBook = contact => {
     const isNumberExist = contacts.some(el => el.number === contact.number);
     const isNameExist = contacts.some(el => el.name === contact.name);
-    Notifications.showInfoNotification(isNameExist, isNumberExist, contact);
+
     const isContactExist = isNameExist || isNumberExist;
+    if (isContactExist)
+      Notifications.showContactWarn(isNameExist, isNumberExist, contact);
     return isContactExist;
   };
 
@@ -36,7 +38,7 @@ export const ContactForm = () => {
     const createdContact = { name, number };
     if (checkContactInBook(createdContact)) return;
     dispatch(contactsOperations.addContact(createdContact));
-    Notifications.showSuccessNotification('add', createdContact);
+    Notifications.showContactSuccess('add', createdContact);
     reset();
     console.log('submit add contact');
   };

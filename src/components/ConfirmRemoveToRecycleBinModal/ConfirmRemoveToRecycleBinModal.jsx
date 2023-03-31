@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import './ConfirmRemoveToRecycleBinModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
-import { renderIcons } from 'utils/renderIcons';
-import { getCurrentTime } from 'utils/getCurrentTime';
+import { getCurrentTime, Notifications, renderIcons } from 'utils';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
-import * as Notifications from 'utils/notifications';
 import { addContactToRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
 Modal.setAppElement('#root');
@@ -45,13 +43,13 @@ export const ConfirmRemoveToRecycleBinModal = ({
     const checkContactInRecycleBin = contact => {
       const isContactExist = contacts.some(el => el.id === contact.id);
       if (isContactExist) {
-        Notifications.showWarnRecycleBinNotification(contact);
+        Notifications.showRecyclebinWarn(contact);
       }
       return isContactExist;
     };
 
     if (checkContactInRecycleBin(contact)) return;
-    Notifications.showSuccessNotification('delete', contact);
+    Notifications.showContactSuccess('delete', contact);
     const removalContactTime = getCurrentTime();
     console.log('removalContactTime: ', removalContactTime);
     dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));

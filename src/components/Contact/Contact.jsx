@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Highlighter from 'react-highlight-words';
 import Avatar from 'react-avatar';
 import {
-  IconButton,
   EditModal,
   ConfirmRemoveToRecycleBinModal,
   CheckboxWithStarIcon,
+  IconButtonWithHoverEffect,
+  HighlightContactDetails,
 } from 'components';
-import { ContactEl, ContactButtons } from './Contact.styled';
+import { ContactEl, ControlButtons } from './Contact.styled';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
 import {
   selectFilterByName,
@@ -20,42 +20,38 @@ import {
   addContactToFavourites,
   removeContactFromFavourites,
 } from 'redux/favourites/favouritesSlice';
-import { renderIcons } from 'utils/renderIcons';
-import * as Notifications from 'utils/notifications';
-import { iconSize } from 'constants';
+import { Notifications } from 'utils';
 import { clsx } from 'clsx';
+import { useHoverEffects, useModal } from 'hooks';
 
 export const Contact = ({ contact }) => {
   const favouriteContacts = useSelector(selectFavouritesContacts);
+  const [isFavorite, setIsFavorite] = useState(
+    favouriteContacts.some(el => el.id === contact.id)
+  );
 
-  const checkContactIsinFavourites = contact => {
-    const isinFavourites = favouriteContacts.some(el => el.id === contact.id);
-    return isinFavourites;
-  };
-  const inFavourite = checkContactIsinFavourites(contact);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
-  const [isEditBtnHovered, setIsEditBtnHovered] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(inFavourite);
+  const {
+    isEditModalOpen,
+    isDeleteModalOpen,
+    toggleEditModal,
+    toggleDeleteModal,
+  } = useModal();
+  const {
+    isDeleteBtnHovered,
+    isEditBtnHovered,
+    toggleDeleteBtnHoverEffect,
+    toggleEditBtnHoverEffect,
+  } = useHoverEffects();
 
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
 
-  const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
-  const toggleConfirmModal = () => setIsConfirmModalOpen(!isConfirmModalOpen);
-  const toggleDeleteBtnHoverEffect = () =>
-    setIsDeleteBtnHovered(!isDeleteBtnHovered);
-
-  const toggleEditBtnHoverEffect = () => setIsEditBtnHovered(!isEditBtnHovered);
-
   const editContact = updatedContact => {
-    setIsEditModalOpen(false);
+    toggleEditModal();
     const { updatedName, updatedNumber } = updatedContact;
-
     if (updatedName === contact.name && updatedNumber === contact.number) {
-      return Notifications.showWarnNotification();
+      return Notifications.showContactInfo();
     }
 
     const edittedContact = {
@@ -71,12 +67,13 @@ export const Contact = ({ contact }) => {
     setIsFavorite(!isFavorite);
     if (!isFavorite) {
       dispatch(addContactToFavourites(contact));
-      Notifications.showSuccessNotification('addToFavourites', contact);
+      Notifications.showContactSuccess('addToFavourites', contact);
     } else {
-      Notifications.showSuccessNotification('removeFromFavourites', contact);
+      Notifications.showContactSuccess('removeFromFavourites', contact);
       dispatch(removeContactFromFavourites(contact.id));
     }
   };
+
   const defaultHighlighterClass = 'marked';
   const dynamicHighlighterClasses = clsx({
     toDelete: isDeleteBtnHovered,
@@ -93,10 +90,10 @@ export const Contact = ({ contact }) => {
           contact={contact}
         />
       )}
-      {isConfirmModalOpen && (
+      {isDeleteModalOpen && (
         <ConfirmRemoveToRecycleBinModal
-          isOpen={isConfirmModalOpen}
-          onClose={toggleConfirmModal}
+          isOpen={isDeleteModalOpen}
+          onClose={toggleDeleteModal}
           contact={contact}
         />
       )}
@@ -108,44 +105,32 @@ export const Contact = ({ contact }) => {
         })}
       >
         <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
-        <Highlighter
-          highlightClassName={clsx(
-            defaultHighlighterClass,
-            dynamicHighlighterClasses
-          )}
-          searchWords={[`${filterByName}`]}
-          autoEscape={true}
-          textToHighlight={`${contact.name}:`}
-        />
-        <Highlighter
-          highlightClassName={clsx(
-            defaultHighlighterClass,
-            dynamicHighlighterClasses
-          )}
-          searchWords={[`${filterByNumber}`]}
-          autoEscape={true}
-          textToHighlight={` ${contact.number}`}
+        <HighlightContactDetails
+          contact={contact}
+          filterByName={filterByName}
+          filterByNumber={filterByNumber}
+          defaultHighlighterClass={defaultHighlighterClass}
+          dynamicHighlighterClasses={dynamicHighlighterClasses}
         />
       </ContactEl>
 
-      <ContactButtons>
-        <IconButton
+      <ControlButtons>
+        <IconButtonWithHoverEffect
           onClick={toggleEditModal}
-          aria-label="Edit Contact"
+          ariaLabel="Edit Contact"
+          operationType="edit"
           onMouseEnter={toggleEditBtnHoverEffect}
           onMouseLeave={toggleEditBtnHoverEffect}
-        >
-          {renderIcons('edit', iconSize.sm)}
-        </IconButton>
-        <IconButton
-          onClick={toggleConfirmModal}
+        />
+
+        <IconButtonWithHoverEffect
+          onClick={toggleDeleteModal}
+          operationType="delete"
           onMouseEnter={toggleDeleteBtnHoverEffect}
           onMouseLeave={toggleDeleteBtnHoverEffect}
-          aria-label="Delete contact"
-        >
-          {renderIcons('delete', iconSize.sm)}
-        </IconButton>
-      </ContactButtons>
+          ariaLabel="Delete contact"
+        />
+      </ControlButtons>
       <CheckboxWithStarIcon
         checked={isFavorite}
         onChange={handleCheckboxChange}

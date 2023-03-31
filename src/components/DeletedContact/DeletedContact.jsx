@@ -10,10 +10,10 @@ import {
   ContactEl,
   Name,
   Number,
-  ContactButtons,
+  ControlButtons,
   Time,
 } from 'components/Contact/Contact.styled';
-import { renderIcons } from 'utils/renderIcons';
+import { renderIcons } from 'utils';
 import { iconSize } from 'constants';
 
 export const DeletedContact = ({ contact }) => {
@@ -62,7 +62,7 @@ export const DeletedContact = ({ contact }) => {
         deleted at <b>{contact.removalContactTime}</b>
       </Time>
 
-      <ContactButtons>
+      <ControlButtons>
         <IconButton
           onClick={toggleRestoreModal}
           aria-label="Restore Contact"
@@ -79,7 +79,7 @@ export const DeletedContact = ({ contact }) => {
         >
           {renderIcons('delete', iconSize.sm)}
         </IconButton>
-      </ContactButtons>
+      </ControlButtons>
     </>
   );
 };

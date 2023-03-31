@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import './ConfirmRestoreModal.css';
 import Modal from 'react-modal';
 import { IconButton } from 'components';
-import { renderIcons } from 'utils/renderIcons';
+import { renderIcons, Notifications } from 'utils';
 import { iconSize } from 'constants';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
-import * as Notifications from 'utils/notifications';
 import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 import { selectContacts } from 'redux/contacts/selectors';
 
@@ -40,14 +39,16 @@ export const ConfirmRestoreModal = ({ isOpen, onClose, contact }) => {
     const checkContactInBook = contact => {
       const isNumberExist = contacts.some(el => el.number === contact.number);
       const isNameExist = contacts.some(el => el.name === contact.name);
-      Notifications.showInfoNotification(isNameExist, isNumberExist, contact);
+
       const isContactExist = isNameExist || isNumberExist;
+      if (isContactExist)
+        Notifications.showContactWarn(isNameExist, isNumberExist, contact);
       return isContactExist;
     };
     if (checkContactInBook(contact)) return;
     dispatch(contactsOperations.addContact(contact));
     dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showSuccessNotification('restore', contact);
+    Notifications.showContactSuccess('restore', contact);
   };
 
   return (

@@ -27,7 +27,7 @@ export const ContactEditor = ({ contact, onEditContact }) => {
   const handleSubmit = e => {
     e.preventDefault();
     if (contact.name !== name && contact.number !== number) {
-      return Notifications.showFailureNotification();
+      return Notifications.showContactFailure();
     }
     const filteredContactsByName = contacts.filter(
       el => el.name !== contact.name
@@ -41,7 +41,7 @@ export const ContactEditor = ({ contact, onEditContact }) => {
       el => el.number === number
     );
 
-    Notifications.showInfoNotification(isNameExist, isNumberExist, {
+    Notifications.showContactWarn(isNameExist, isNumberExist, {
       name,
       number,
     });
