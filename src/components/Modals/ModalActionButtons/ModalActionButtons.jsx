@@ -11,8 +11,6 @@ export const ModalActionButtons = ({
   onCancel,
   onConfirm,
 }) => {
-  console.log('confirmAriaLabel', confirmAriaLabel);
-  console.log('cancelAriaLabel', cancelAriaLabel);
   return (
     <ModalButtonsBlock>
       <IconButton aria-label={confirmAriaLabel} onClick={() => onConfirm()}>

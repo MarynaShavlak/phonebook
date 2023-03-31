@@ -39,7 +39,7 @@ const groupsSlice = createSlice({
     },
     deleteGroup: (state, action) => {
       state.groups = state.groups.filter(
-        group => group.name !== action.payload.groupName
+        group => group.name !== action.payload.name
       );
     },
     renameGroup: (state, action) => {

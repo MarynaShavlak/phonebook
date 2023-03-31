@@ -5,4 +5,4 @@ export {
   addNewGroup,
   deleteGroup,
   renameGroup,
-} from './groups';
+} from './groupsSlice';

@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React from 'react';
-import './EditModal.css';
+import './EditContactModal.css';
 import { ContactEditor } from 'components';
 
 Modal.setAppElement('#root');
@@ -24,7 +24,7 @@ const customStyles = {
   },
 };
 
-export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
+export const EditContactModal = ({ isOpen, onClose, data, ...otherProps }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -34,12 +34,12 @@ export const EditModal = ({ isOpen, onClose, ...otherProps }) => {
       shouldCloseOnOverlayClick={true}
       onRequestClose={onClose}
     >
-      <ContactEditor {...otherProps} />
+      <ContactEditor contact={data} {...otherProps} />
     </Modal>
   );
 };
 
-EditModal.propTypes = {
+EditContactModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };

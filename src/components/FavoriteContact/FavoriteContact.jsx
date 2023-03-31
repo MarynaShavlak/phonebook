@@ -5,13 +5,12 @@ import Avatar from 'react-avatar';
 import { CheckboxWithStarIcon } from 'components';
 import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites/favoritesSlice';
-import * as Notifications from 'utils/notifications';
+import { Notifications } from 'utils';
 
 export const FavoriteContact = ({ contact }) => {
   const dispatch = useDispatch();
   const removeFromFavorites = () => {
     Notifications.showContactSuccess('removeFromFavorites', contact);
-
     dispatch(removeContactFromFavorites(contact.id));
   };
 

@@ -30,7 +30,7 @@ export function showContactWarn(isNameExist, isNumberExist, contactToAdd) {
 export function showContactSuccess(operation, contact) {
   const messages = {
     add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
-    delete: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
+    remove: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
     restore: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
     addToFavorites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
     removeFromFavorites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
@@ -69,6 +69,15 @@ export function showRecyclebinInfo(contact) {
 export function showGroupSuccess(groupName) {
   const message = `You've just add group with name "${groupName}" `;
   return showMessage('success', message);
+}
+export function showGroupRenameSuccess({ oldGroupName, newGroupName }) {
+  const message = `The group name has been changed from "${oldGroupName}" to "${newGroupName}"`;
+  return showMessage('success', message);
+}
+
+export function showGroupInfo(groupName) {
+  const message = `You've just delete group with name "${groupName}" `;
+  return showMessage('info', message);
 }
 
 export function showGroupWarn(groupName) {

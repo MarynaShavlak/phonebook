@@ -37,6 +37,8 @@ export function renderIcons(param, size) {
       return <MdPersonAddAlt1 size={size} />;
     case 'delete':
       return <RiDeleteBin6Fill size={size} />;
+    case 'remove':
+      return <RiDeleteBin6Fill size={size} />;
     case 'person':
       return <RiContactsFill size={size} className="user-form__icon" />;
     case 'lock':

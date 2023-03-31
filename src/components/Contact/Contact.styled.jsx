@@ -16,12 +16,14 @@ export const ContactEl = styled.div`
     font-weight: 700;
     border-radius: 5px;
   }
+  &.toRemove,
   &.toDelete,
   .marked.toDelete {
     color: red;
   }
 
   &.toEdit,
+  &.toRestore,
   .marked.toEdit {
     color: blue;
   }

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
-import { IconButton, ContactOperationModal } from 'components';
+import { clsx } from 'clsx';
+import { IconButton, OperationModal } from 'components';
 import {
   ContactEl,
   Name,
@@ -11,38 +12,32 @@ import {
   Time,
 } from 'components/Contact/Contact.styled';
 import { renderIcons, Notifications } from 'utils';
-import { iconSize, CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
+import { useHoverEffects, useModal } from 'hooks';
+import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
 import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 import { addContact } from 'redux/contacts/contactsOperations';
 
 import { selectContacts } from 'redux/contacts/selectors';
 
 export const DeletedContact = ({ contact }) => {
-  const [isConfirmRestoreModalOpen, setIsConfirmRestoreModalOpen] =
-    useState(false);
-  const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] =
-    useState(false);
-  const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(false);
-  const [isRestoreBtnHovered, setIsRestoreBtnHovered] = useState(false);
-
-  const toggleRestoreModal = () =>
-    setIsConfirmRestoreModalOpen(!isConfirmRestoreModalOpen);
-
-  const toggleDeleteModal = () =>
-    setIsConfirmDeleteModalOpen(!isConfirmDeleteModalOpen);
-
-  const toggleDeleteBtnHoverEffect = () =>
-    setIsDeleteBtnHovered(!isDeleteBtnHovered);
-
-  const toggleRestoreBtnHoverEffect = () =>
-    setIsRestoreBtnHovered(!isRestoreBtnHovered);
+  const contacts = useSelector(selectContacts);
+  const { isRestoreModalOpen, toggleRestoreModal } = useModal(
+    OPERATION_TYPES.RESTORE
+  );
+  const { isDeleteModalOpen, toggleDeleteModal } = useModal(
+    OPERATION_TYPES.DELETE
+  );
+  const { isHovered, toggleHoverEffect } = useHoverEffects([
+    OPERATION_TYPES.RESTORE,
+    OPERATION_TYPES.DELETE,
+  ]);
   const dispatch = useDispatch();
 
   const deleteContact = () => {
     dispatch(removeContactFromRecycleBin(contact.id));
     Notifications.showRecyclebinInfo(contact);
   };
-  const contacts = useSelector(selectContacts);
+
   const checkContactInBook = contact => {
     const isNumberExist = contacts.some(el => el.number === contact.number);
     const isNameExist = contacts.some(el => el.name === contact.name);
@@ -54,6 +49,7 @@ export const DeletedContact = ({ contact }) => {
 
     return false;
   };
+
   const restoreContact = () => {
     if (checkContactInBook(contact)) return;
     dispatch(addContact(contact));
@@ -63,26 +59,31 @@ export const DeletedContact = ({ contact }) => {
 
   return (
     <>
-      {isConfirmRestoreModalOpen && (
-        <ContactOperationModal
-          isOpen={isConfirmRestoreModalOpen}
+      {isRestoreModalOpen && (
+        <OperationModal
+          isOpen={isRestoreModalOpen}
           onClose={toggleRestoreModal}
-          contact={contact}
+          data={contact}
           onConfirm={restoreContact}
           action={CONTACT_ACTIONS.RESTORE}
         />
       )}
-      {isConfirmDeleteModalOpen && (
-        <ContactOperationModal
-          isOpen={isConfirmDeleteModalOpen}
+      {isDeleteModalOpen && (
+        <OperationModal
+          isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
-          contact={contact}
+          data={contact}
           onConfirm={deleteContact}
           action={CONTACT_ACTIONS.DELETE}
         />
       )}
 
-      <ContactEl>
+      <ContactEl
+        className={clsx({
+          toRestore: isHovered.restore,
+          toDelete: isHovered.delete,
+        })}
+      >
         <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
         <Name>{contact.name}:</Name>
         <Number>{contact.number}</Number>
@@ -93,18 +94,18 @@ export const DeletedContact = ({ contact }) => {
 
       <ControlButtons>
         <IconButton
+          ariaLabel={CONTACT_ACTIONS.RESTORE}
           onClick={toggleRestoreModal}
-          aria-label={CONTACT_ACTIONS.RESTORE}
-          onMouseEnter={toggleRestoreBtnHoverEffect}
-          onMouseLeave={toggleRestoreBtnHoverEffect}
+          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.RESTORE)}
+          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.RESTORE)}
         >
           {renderIcons(OPERATION_TYPES.RESTORE, iconSize.sm)}
         </IconButton>
         <IconButton
+          ariaLabel={CONTACT_ACTIONS.DELETE}
           onClick={toggleDeleteModal}
-          onMouseEnter={toggleDeleteBtnHoverEffect}
-          onMouseLeave={toggleDeleteBtnHoverEffect}
-          aria-label={CONTACT_ACTIONS.DELETE}
+          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
+          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
         >
           {renderIcons(OPERATION_TYPES.DELETE, iconSize.sm)}
         </IconButton>
