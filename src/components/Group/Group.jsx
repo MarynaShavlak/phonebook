@@ -85,7 +85,7 @@ export const Group = ({ group }) => {
       >
         {group.name}
       </GroupEl>
-      <ControlButtons>
+      {/* <ControlButtons>
         <IconButtonWithHoverEffect
           // onClick={toggleEditModal}
           ariaLabel="Edit Group name"
@@ -101,7 +101,7 @@ export const Group = ({ group }) => {
           onMouseLeave={toggleDeleteBtnHoverEffect}
           ariaLabel="Delete group"
         />
-      </ControlButtons>
+      </ControlButtons> */}
     </>
   );
 };

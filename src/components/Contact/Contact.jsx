@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
+import {} from 'components';
+import { renderIcons } from 'utils';
 import {
   EditModal,
   ContactOperationModal,
   CheckboxWithStarIcon,
-  IconButtonWithHoverEffect,
   HighlightContactDetails,
+  IconButton,
 } from 'components';
 import { ContactEl, ControlButtons } from './Contact.styled';
 import { addContactToRecycleBin } from 'redux/recycleBin/recycleBinSlice';
@@ -43,14 +45,7 @@ export const Contact = ({ contact }) => {
     toggleEditModal,
     toggleDeleteModal,
   } = useModal();
-
-  const {
-    isDeleteBtnHovered,
-    isEditBtnHovered,
-    toggleDeleteBtnHoverEffect,
-    toggleEditBtnHoverEffect,
-  } = useHoverEffects();
-
+  const { isHovered, toggleHoverEffect } = useHoverEffects(['delete', 'edit']);
   const dispatch = useDispatch();
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
@@ -96,10 +91,9 @@ export const Contact = ({ contact }) => {
   };
   const defaultHighlighterClass = 'marked';
   const dynamicHighlighterClasses = clsx({
-    toDelete: isDeleteBtnHovered,
-    toEdit: isEditBtnHovered,
+    toDelete: isHovered.delete,
+    toEdit: isHovered.edit,
   });
-
   return (
     <>
       {isEditModalOpen && (
@@ -122,8 +116,8 @@ export const Contact = ({ contact }) => {
 
       <ContactEl
         className={clsx({
-          toDelete: isDeleteBtnHovered,
-          toEdit: isEditBtnHovered,
+          toDelete: isHovered.delete,
+          toEdit: isHovered.edit,
         })}
       >
         <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
@@ -137,21 +131,22 @@ export const Contact = ({ contact }) => {
       </ContactEl>
 
       <ControlButtons>
-        <IconButtonWithHoverEffect
+        <IconButton
           onClick={toggleEditModal}
           ariaLabel="Edit Contact"
-          operationType="edit"
-          onMouseEnter={toggleEditBtnHoverEffect}
-          onMouseLeave={toggleEditBtnHoverEffect}
-        />
-
-        <IconButtonWithHoverEffect
+          onMouseEnter={() => toggleHoverEffect('edit')}
+          onMouseLeave={() => toggleHoverEffect('edit')}
+        >
+          {renderIcons('edit', 30)}
+        </IconButton>
+        <IconButton
           onClick={toggleDeleteModal}
-          operationType="delete"
-          onMouseEnter={toggleDeleteBtnHoverEffect}
-          onMouseLeave={toggleDeleteBtnHoverEffect}
+          onMouseEnter={() => toggleHoverEffect('delete')}
+          onMouseLeave={() => toggleHoverEffect('delete')}
           ariaLabel={ContactActions.DELETE}
-        />
+        >
+          {renderIcons('delete', 30)}
+        </IconButton>
       </ControlButtons>
       <CheckboxWithStarIcon
         checked={isFavorite}

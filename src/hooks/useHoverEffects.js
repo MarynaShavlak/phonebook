@@ -1,21 +1,19 @@
 import { useState } from 'react';
-
-export const useHoverEffects = (
-  initialState = { delete: false, edit: false }
-) => {
-  const [isDeleteBtnHovered, setIsDeleteBtnHovered] = useState(
-    initialState.delete
+export const useHoverEffects = operations => {
+  const initialState = operations.reduce(
+    (acc, operation) => ({ ...acc, [operation]: false }),
+    {}
   );
-  const [isEditBtnHovered, setIsEditBtnHovered] = useState(initialState.edit);
 
-  const toggleDeleteBtnHoverEffect = () =>
-    setIsDeleteBtnHovered(!isDeleteBtnHovered);
-  const toggleEditBtnHoverEffect = () => setIsEditBtnHovered(!isEditBtnHovered);
+  const [isHovered, setIsHovered] = useState(initialState);
+
+  const toggleHoverEffect = operation => {
+    const newState = { ...isHovered, [operation]: !isHovered[operation] };
+    setIsHovered(newState);
+  };
 
   return {
-    isDeleteBtnHovered,
-    isEditBtnHovered,
-    toggleDeleteBtnHoverEffect,
-    toggleEditBtnHoverEffect,
+    isHovered,
+    toggleHoverEffect,
   };
 };
