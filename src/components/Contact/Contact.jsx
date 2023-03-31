@@ -125,28 +125,49 @@ export const Contact = ({ contact }) => {
           {
             label: OPERATION_TYPES.EDIT,
             icon: (
-              <DropdownButton
-                ariaLabel={CONTACT_ACTIONS.EDIT}
-                onClick={toggleEditModal}
-                onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-                onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-              >
-                {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)} Edit
-              </DropdownButton>
+              <>
+                <DropdownButton
+                  ariaLabel={CONTACT_ACTIONS.EDIT}
+                  onClick={toggleEditModal}
+                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+                >
+                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}
+                </DropdownButton>
+                Edit
+              </>
             ),
           },
           {
             label: OPERATION_TYPES.REMOVE,
             icon: (
-              <DropdownButton
-                ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
-                onClick={toggleRemoveModal}
-                onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
-                onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
-              >
-                {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)} Remove to
-                recycle bin
-              </DropdownButton>
+              <>
+                <DropdownButton
+                  ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+                  onClick={toggleRemoveModal}
+                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
+                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
+                >
+                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}
+                </DropdownButton>
+                Remove to recycle bin
+              </>
+            ),
+          },
+          {
+            label: OPERATION_TYPES.ADD,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={CONTACT_ACTIONS.ADD_TO_GROUP}
+                  onClick={toggleRemoveModal}
+                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
+                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
+                >
+                  {renderIcons('group', iconSize.sm)}
+                </DropdownButton>
+                Add to group
+              </>
             ),
           },
         ]}

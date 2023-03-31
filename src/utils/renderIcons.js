@@ -29,6 +29,7 @@ import { BsPersonFill } from 'react-icons/bs';
 import { RiCloseLine } from 'react-icons/ri';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { MdGroupAdd } from 'react-icons/md';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -39,7 +40,7 @@ export function renderIcons(param, size) {
     case 'delete':
       return <RiDeleteBin6Fill size={size} />;
     case 'remove':
-      return <RiDeleteBin6Fill size={size} />;
+      return <RiDeleteBin2Fill size={size} />;
     case 'person':
       return <RiContactsFill size={size} className="user-form__icon" />;
     case 'lock':

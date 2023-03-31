@@ -3,4 +3,5 @@ export const OPERATION_TYPES = {
   DELETE: 'delete',
   RESTORE: 'restore',
   REMOVE: 'remove',
+  ADD: 'add',
 };

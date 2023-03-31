@@ -4,7 +4,7 @@ export const DropdownList = styled.ul`
   position: absolute;
   right: 60px;
   top: 0px;
-
+  z-index: 2;
   background-color: #fde7f0;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   border-radius: 5px;
@@ -21,8 +21,20 @@ export const DropdownList = styled.ul`
 `;
 export const DropdownItem = styled.li`
   padding: 4px 8px;
-  font-size: 12px;
-  width: 150px;
+  font-size: 14px;
+  font-weight: 700;
+  width: 180px;
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  transition: 250ms color cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: white;
+  }
+  &:hover svg {
+    fill: white;
+  }
 `;
 export const DropdownToggleBtn = styled(IconButton)`
   background-color: transparent;

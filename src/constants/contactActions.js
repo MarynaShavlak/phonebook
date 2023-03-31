@@ -3,4 +3,5 @@ export const CONTACT_ACTIONS = {
   RESTORE: 'restore contact',
   DELETE: 'delete contact',
   EDIT: 'edit contact',
+  ADD_TO_GROUP: 'add contact to group',
 };

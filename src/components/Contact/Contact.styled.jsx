@@ -45,7 +45,7 @@ export const DropdownButton = styled.button`
   display: flex;
   column-gap: 10px;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
   background-color: transparent;
   color: black;
   border: 5px solid transparent;
