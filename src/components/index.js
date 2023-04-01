@@ -7,6 +7,7 @@ export { OperationModal } from 'components/Modals/OperationModal';
 export { CreateGroupModal } from 'components/CreateGroupModal';
 export { Contact } from 'components/Contact';
 export { Group } from 'components/Group';
+export { AddContactToGroupModal } from 'components/AddContactToGroupModal';
 export { DeletedContact } from 'components/DeletedContact';
 export { FavoriteContact } from 'components/FavoriteContact';
 export { ContactEditor } from 'components/ContactEditor';

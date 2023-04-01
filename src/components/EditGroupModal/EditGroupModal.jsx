@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ConfirmationModal } from 'components';
 import { Notifications } from 'utils';
-import { selectContactGroups } from 'redux/groups';
+import { selectGroups } from 'redux/groups';
 
 export const EditGroupModal = ({ data, onClose, onConfirm, ...otherProps }) => {
   const { name } = data;
   const [groupName, setGroupName] = useState(name);
-  const groups = useSelector(selectContactGroups);
+  const groups = useSelector(selectGroups);
 
   const editGroup = e => {
     if (checkGroupExistence(groupName)) return;

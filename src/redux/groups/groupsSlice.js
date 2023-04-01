@@ -18,17 +18,17 @@ const groupsSlice = createSlice({
   reducers: {
     addContactToGroup: (state, action) => {
       const groupIndex = state.groups.findIndex(
-        group => group.name === action.payload.groupName
+        group => group.name === action.payload.group
       );
       state.groups[groupIndex].contacts.push(action.payload.contact);
     },
     deleteContactFromGroup: (state, action) => {
       const groupIndex = state.groups.findIndex(
-        group => group.name === action.payload.groupName
+        group => group.name === action.payload.group
       );
       state.groups[groupIndex].contacts = state.groups[
         groupIndex
-      ].contacts.filter(contact => contact !== action.payload.contact);
+      ].contacts.filter(contact => contact.id !== action.payload.contact.id);
     },
     addNewGroup: (state, action) => {
       state.groups.push({

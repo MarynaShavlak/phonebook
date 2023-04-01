@@ -9,6 +9,7 @@ import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
 import {
   EditContactModal,
   OperationModal,
+  AddContactToGroupModal,
   CheckboxWithStarIcon,
   HighlightContactDetails,
   DropdownMenu,
@@ -40,6 +41,8 @@ export const Contact = ({ contact }) => {
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(
     OPERATION_TYPES.REMOVE
   );
+  const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
+
   const { isHovered, toggleHoverEffect } = useHoverEffects([
     OPERATION_TYPES.REMOVE,
     OPERATION_TYPES.EDIT,
@@ -85,6 +88,10 @@ export const Contact = ({ contact }) => {
     dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
   };
 
+  const addContactToGroup = groups => {
+    console.log(`Contact  has been added to such groups : ${groups} `);
+  };
+
   return (
     <>
       {isEditModalOpen && (
@@ -104,7 +111,16 @@ export const Contact = ({ contact }) => {
           action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
         />
       )}
-      <div></div>
+      {isAddModalOpen && (
+        <AddContactToGroupModal
+          isOpen={isAddModalOpen}
+          onClose={toggleAddModal}
+          contact={contact}
+          onConfirm={addContactToGroup}
+          action={CONTACT_ACTIONS.ADD_TO_GROUP}
+        />
+      )}
+
       <ContactEl
         className={clsx({
           toRemove: isHovered.remove,
@@ -132,9 +148,8 @@ export const Contact = ({ contact }) => {
                   onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
                   onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
                 >
-                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}
+                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
                 </DropdownButton>
-                Edit
               </>
             ),
           },
@@ -148,9 +163,9 @@ export const Contact = ({ contact }) => {
                   onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
                   onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
                 >
-                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}
+                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}Remove to
+                  recycle bin
                 </DropdownButton>
-                Remove to recycle bin
               </>
             ),
           },
@@ -160,13 +175,12 @@ export const Contact = ({ contact }) => {
               <>
                 <DropdownButton
                   ariaLabel={CONTACT_ACTIONS.ADD_TO_GROUP}
-                  onClick={toggleRemoveModal}
+                  onClick={toggleAddModal}
                   onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
                   onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
                 >
-                  {renderIcons('group', iconSize.sm)}
+                  {renderIcons('group', iconSize.sm)}Add to group
                 </DropdownButton>
-                Add to group
               </>
             ),
           },

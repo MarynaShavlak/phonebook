@@ -1,4 +1,4 @@
-export { selectContactGroups } from './selectors';
+export { selectGroupNames, selectGroups } from './selectors';
 export {
   addContactToGroup,
   deleteContactFromGroup,

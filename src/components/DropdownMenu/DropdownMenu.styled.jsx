@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { IconButton } from 'components/IconButton';
+
 export const DropdownList = styled.ul`
   position: absolute;
+  /* padding: 4px 8px; */
   right: 60px;
   top: 0px;
   z-index: 2;
@@ -20,7 +22,6 @@ export const DropdownList = styled.ul`
   }
 `;
 export const DropdownItem = styled.li`
-  padding: 4px 8px;
   font-size: 14px;
   font-weight: 700;
   width: 180px;

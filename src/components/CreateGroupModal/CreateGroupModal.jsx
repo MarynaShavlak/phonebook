@@ -6,7 +6,7 @@ import './CreateGroupModal.css';
 import Modal from 'react-modal';
 import { renderIcons, Notifications } from 'utils';
 import { addNewGroup } from 'redux/groups/groupsSlice';
-import { selectContactGroups } from 'redux/groups/selectors';
+import { selectGroups } from 'redux/groups/selectors';
 
 Modal.setAppElement('#root');
 
@@ -31,11 +31,11 @@ const customStyles = {
 export const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const dispatch = useDispatch();
-  const groups = useSelector(selectContactGroups);
+  const groups = useSelector(selectGroups);
 
   const addContactGroup = e => {
     e.preventDefault();
-    console.log('groups: ', groups);
+
     if (checkGroupExistence(groupName)) return;
     console.log(groupName);
     const groupId = nanoid();
@@ -49,6 +49,7 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
   };
 
   const checkGroupExistence = groupName => {
+    console.log('groups: ', typeof groups);
     const isGroupExist = groups.some(
       el => el.name.toLowerCase() === groupName.toLowerCase()
     );
