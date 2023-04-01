@@ -17,46 +17,38 @@ export const AddContactToGroupModal = ({
   onConfirm,
   action,
 }) => {
-  const [selectedGroups, setSelectedGroups] = useState([]);
-  const dispatch = useDispatch();
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
+  const dispatch = useDispatch();
 
   const handleGroupClick = groupName => {
     const isSelected = selectedGroups.includes(groupName);
-    const isContactExistInGroup = checkContactExistanceInGroup({
-      contact,
-      groupName,
-    });
 
     if (isSelected) {
       setSelectedGroups(selectedGroups.filter(el => el !== groupName));
-      console.log('you delete contact');
       dispatch(deleteContactFromGroup({ group: groupName, contact }));
     } else {
-      if (isContactExistInGroup) {
-        console.log('contact already exist in group');
-        return;
-      }
       setSelectedGroups([...selectedGroups, groupName]);
-      console.log('you add contact');
       dispatch(addContactToGroup({ group: groupName, contact }));
     }
   };
 
   const addContactToGroupList = () => {
-    console.log('add to group');
-    onConfirm(groupNames);
+    onConfirm(selectedGroups);
+    onClose();
   };
 
-  const checkContactExistanceInGroup = ({ contact, groupName }) => {
-    return groups.some(
-      group =>
-        group.name === groupName &&
-        group.contacts.find(c => c.id === contact.id && c.name === contact.name)
-    );
+  const getGroupNamesByContact = (groups, contact) => {
+    return groups
+      .filter(group => {
+        return group.contacts.some(
+          c => c.id === contact.id && c.name === contact.name
+        );
+      })
+      .map(group => group.name);
   };
-
+  const groupNamesByContact = getGroupNamesByContact(groups, contact);
+  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
   return (
     <ConfirmationModal
       isOpen={isOpen}
@@ -65,7 +57,6 @@ export const AddContactToGroupModal = ({
       onConfirm={addContactToGroupList}
     >
       <>
-        <ModalText>You can add contact to following groups:</ModalText>
         <ModalText>
           Сhoose groups to add contact with name <b>{contact.name}</b> and
           number <b>{contact.number}</b>:
@@ -83,6 +74,13 @@ export const AddContactToGroupModal = ({
             </li>
           ))}
         </GroupsList>
+        {selectedGroups.length ? (
+          <ModalText>
+            Contact is added to groups: <b>{selectedGroups.join(', ')}</b>
+          </ModalText>
+        ) : (
+          <ModalText>Contact has not been added to any groups yet</ModalText>
+        )}
       </>
     </ConfirmationModal>
   );

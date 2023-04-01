@@ -89,7 +89,7 @@ export const Contact = ({ contact }) => {
   };
 
   const addContactToGroup = groups => {
-    console.log(`Contact  has been added to such groups : ${groups} `);
+    Notifications.showContactSuccess('addToGroup', contact, groups.join(', '));
   };
 
   return (

@@ -4,6 +4,7 @@ export const GroupsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 20px;
 `;
 
 export const GroupButton = styled.button`
@@ -26,12 +27,12 @@ export const GroupButton = styled.button`
     box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   }
   &.selected {
-    background-color: #fc458e;
+    background-color: #bb6bd9;
   }
 `;
 
 export const ModalText = styled.p`
-  font-size: 24px;
+  font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 20px;

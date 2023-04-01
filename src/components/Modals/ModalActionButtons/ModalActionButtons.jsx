@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { renderIcons } from 'utils';
-import { iconSize } from 'constants';
-import { IconButton } from 'components/IconButton';
-import { ModalButtonsBlock } from './ModalActionButtons.styled';
+import { ModalButtonsBlock, Button } from './ModalActionButtons.styled';
 
 export const ModalActionButtons = ({
   confirmAriaLabel,
@@ -13,12 +10,16 @@ export const ModalActionButtons = ({
 }) => {
   return (
     <ModalButtonsBlock>
-      <IconButton aria-label={confirmAriaLabel} onClick={() => onConfirm()}>
-        {renderIcons('confirm', iconSize.md)}
-      </IconButton>
-      <IconButton aria-label={cancelAriaLabel} onClick={() => onCancel()}>
-        {renderIcons('cancel', iconSize.md)}
-      </IconButton>
+      <li>
+        <Button aria-label={confirmAriaLabel} onClick={() => onConfirm()}>
+          CONFIRM
+        </Button>
+      </li>
+      <li>
+        <Button aria-label={cancelAriaLabel} onClick={() => onCancel()}>
+          CANCEL
+        </Button>
+      </li>
     </ModalButtonsBlock>
   );
 };
