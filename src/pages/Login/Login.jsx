@@ -1,6 +1,5 @@
 import React from 'react';
 import { LogInForm, Section } from 'components';
-import {} from 'components';
 import { ContentWrapper, Info, SignUpLink, RedirectLink } from './LogIn.styled';
 
 const LogIn = () => {
@@ -30,7 +29,8 @@ const LogIn = () => {
               using our app!
             </p>
             <RedirectLink>
-              Have an account? <SignUpLink to="/register">Sign Up </SignUpLink>
+              Haven't an account yet?{' '}
+              <SignUpLink to="/register">Sign Up </SignUpLink>
             </RedirectLink>
           </Info>
 
