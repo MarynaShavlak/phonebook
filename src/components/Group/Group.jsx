@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
@@ -11,7 +11,11 @@ import { ControlButtons } from 'components/Contact/Contact.styled';
 import { deleteGroup, renameGroup } from 'redux/groups/groupsSlice';
 
 export const Group = ({ group }) => {
+  const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
   const contactsQuantityInGroup = group.contacts.length;
+
+  const contactsInGroup = group.contacts;
+  console.log('contactsInGroup: ', contactsInGroup);
   console.log('contactsQuantityInGroup', contactsQuantityInGroup);
   const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(
@@ -33,6 +37,10 @@ export const Group = ({ group }) => {
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
     Notifications.showGroupInfo(group.name);
+  };
+
+  const toggleGroupContent = () => {
+    setIsGroupContentVisible(!isGroupContentVisible);
   };
 
   return (
@@ -62,6 +70,7 @@ export const Group = ({ group }) => {
           toDelete: isHovered.delete,
           toEdit: isHovered.edit,
         })}
+        onClick={toggleGroupContent}
       >
         {group.name}&nbsp; ({contactsQuantityInGroup})
       </GroupEl>
@@ -83,6 +92,17 @@ export const Group = ({ group }) => {
           {renderIcons(OPERATION_TYPES.DELETE, iconSize.sm)}
         </IconButton>
       </ControlButtons>
+      {isGroupContentVisible && (
+        <ul>
+          {contactsInGroup.map((contact, index) => (
+            <li key={index}>
+              <p type="button">
+                {contact.name}: {contact.number}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

@@ -41,7 +41,6 @@ export const AddContactToGroupModal = ({
   const addContactToGroupList = () => {
     const message = compareGroups(initialSelectedGroups, selectedGroups);
     Notifications.showAddToGroups(message);
-    console.log('message', message);
     onClose();
   };
 
@@ -78,8 +77,8 @@ export const AddContactToGroupModal = ({
       .map(group => group.name);
   };
   const groupNamesByContact = getGroupNamesByContact(groups, contact);
-  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
   const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
 
   useEffect(() => {
     setInitialSelectedGroups(selectedGroups);

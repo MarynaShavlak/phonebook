@@ -6,6 +6,7 @@ export const GroupEl = styled.p`
   align-items: center;
   font-size: 30px;
   flex-grow: 1;
+  cursor: pointer;
   &.toDelete {
     color: red;
   }
