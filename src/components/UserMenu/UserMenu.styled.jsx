@@ -61,8 +61,8 @@ export const LogoutButton = styled.button`
   border-radius: 10px;
   font-size: 14px;
   font-weight: 800;
-  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
-    250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     color: white;
   }

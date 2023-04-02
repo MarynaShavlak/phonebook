@@ -14,7 +14,8 @@ import {
   HighlightContactDetails,
   DropdownMenu,
 } from 'components';
-import { ContactEl, DropdownButton } from './Contact.styled';
+import { ContactEl } from './Contact.styled';
+import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
 
 import {
   addContactToRecycleBin,
@@ -112,7 +113,6 @@ export const Contact = ({ contact }) => {
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
           contact={contact}
-          // onConfirm={addContactToGroup}
           action={CONTACT_ACTIONS.ADD_TO_GROUP}
         />
       )}

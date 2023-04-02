@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const ContactsList = styled.ul`
-  padding: 0;
+  /* padding: 0;
   margin: 0;
-  list-style: none;
+  list-style: none; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,8 +40,8 @@ export const SortBtn = styled.button`
   font-size: 20px;
   font-weight: 800;
   cursor: pointer;
-  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
-    250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #f787b4;
     color: white;

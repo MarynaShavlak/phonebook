@@ -12,7 +12,6 @@ const Groups = () => {
 
   const groups = useSelector(selectGroups);
 
-  console.log('groups: ', groups);
   const toggleCreateGroupModal = () => {
     setIsCreateGroupModalOpen(!isCreateGroupModalOpen);
   };

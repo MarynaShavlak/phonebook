@@ -15,8 +15,8 @@ export const NavigationLink = styled(NavLink)`
   font-size: 14px;
   font-weight: 800;
   color: black;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &.active {
     color: white;
     background-color: #fc458e;

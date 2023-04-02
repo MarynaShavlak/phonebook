@@ -4,5 +4,5 @@ export const NotificationMessage = styled.p`
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
 `;

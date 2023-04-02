@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { clsx } from 'clsx';
+import Avatar from 'react-avatar';
 import { renderIcons, Notifications } from 'utils';
-import { useHoverEffects, useModal } from 'hooks';
+import { useModal } from 'hooks';
 import { GROUP_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
-import { IconButton, OperationModal, EditGroupModal } from 'components';
-import { GroupAvatar, GroupEl } from './Group.styled';
-import { ControlButtons } from 'components/Contact/Contact.styled';
-import { deleteGroup, renameGroup } from 'redux/groups/groupsSlice';
+import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
+import {
+  Content,
+  GroupAvatar,
+  Element,
+  GroupEl,
+  GroupWrapper,
+  ContactsList,
+  DropButton,
+  IconButton,
+  ContactEl,
+} from './Group.styled';
+import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
+import { deleteGroup, renameGroup, deleteContactFromGroup } from 'redux/groups';
 
 export const Group = ({ group }) => {
   const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
   const contactsQuantityInGroup = group.contacts.length;
 
   const contactsInGroup = group.contacts;
-  console.log('contactsInGroup: ', contactsInGroup);
-  console.log('contactsQuantityInGroup', contactsQuantityInGroup);
   const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(
     OPERATION_TYPES.DELETE
   );
-  const { isHovered, toggleHoverEffect } = useHoverEffects([
-    OPERATION_TYPES.DELETE,
-    OPERATION_TYPES.EDIT,
-  ]);
+
   const dispatch = useDispatch();
 
   const onEditGroup = ({ oldGroupName, newGroupName }) => {
@@ -42,10 +47,80 @@ export const Group = ({ group }) => {
   const toggleGroupContent = () => {
     setIsGroupContentVisible(!isGroupContentVisible);
   };
-
+  const deleteContact = contact => {
+    const groupName = group.name;
+    dispatch(deleteContactFromGroup({ group: groupName, contact }));
+    Notifications.showDeleteFromGroup({ groupName, contact });
+    console.log('you delete contact from group');
+  };
   return (
     <>
-      {' '}
+      <GroupWrapper>
+        <GroupEl>
+          <GroupAvatar>{renderIcons('group', 24)}</GroupAvatar>
+          <Content onClick={toggleGroupContent}>
+            <Element>
+              {group.name}&nbsp; ({contactsQuantityInGroup})
+            </Element>
+            <DropButton type="button">{renderIcons('dropDown', 40)}</DropButton>
+          </Content>
+        </GroupEl>
+
+        {isGroupContentVisible && (
+          <ContactsList>
+            {contactsInGroup.map((contact, index) => (
+              <li key={index}>
+                <IconButton
+                  type="button"
+                  onClick={() => deleteContact(contact)}
+                >
+                  {renderIcons('delete', 18)}
+                </IconButton>
+                <ContactEl>
+                  <Avatar
+                    size="30"
+                    name={contact.name}
+                    unstyled={false}
+                    round="50%"
+                  />
+                  <p>{contact.name}:</p>
+                  <p>{contact.number}</p>
+                </ContactEl>
+              </li>
+            ))}
+          </ContactsList>
+        )}
+      </GroupWrapper>
+      <DropdownMenu
+        elements={[
+          {
+            label: OPERATION_TYPES.EDIT,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={GROUP_ACTIONS.EDIT}
+                  onClick={toggleEditModal}
+                >
+                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
+                </DropdownButton>
+              </>
+            ),
+          },
+          {
+            label: OPERATION_TYPES.REMOVE,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={GROUP_ACTIONS.DELETE}
+                  onClick={toggleDeleteModal}
+                >
+                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}Delete
+                </DropdownButton>
+              </>
+            ),
+          },
+        ]}
+      />{' '}
       {isEditModalOpen && (
         <EditGroupModal
           isOpen={isEditModalOpen}
@@ -63,45 +138,6 @@ export const Group = ({ group }) => {
           onConfirm={onDeleteGroup}
           action={GROUP_ACTIONS.DELETE}
         />
-      )}
-      <GroupAvatar>{renderIcons('group', 30)}</GroupAvatar>
-      <GroupEl
-        className={clsx({
-          toDelete: isHovered.delete,
-          toEdit: isHovered.edit,
-        })}
-        onClick={toggleGroupContent}
-      >
-        {group.name}&nbsp; ({contactsQuantityInGroup})
-      </GroupEl>
-      <ControlButtons>
-        <IconButton
-          ariaLabel={GROUP_ACTIONS.EDIT}
-          onClick={toggleEditModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-        >
-          {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}
-        </IconButton>
-        <IconButton
-          ariaLabel={GROUP_ACTIONS.DELETE}
-          onClick={toggleDeleteModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-        >
-          {renderIcons(OPERATION_TYPES.DELETE, iconSize.sm)}
-        </IconButton>
-      </ControlButtons>
-      {isGroupContentVisible && (
-        <ul>
-          {contactsInGroup.map((contact, index) => (
-            <li key={index}>
-              <p type="button">
-                {contact.name}: {contact.number}
-              </p>
-            </li>
-          ))}
-        </ul>
       )}
     </>
   );

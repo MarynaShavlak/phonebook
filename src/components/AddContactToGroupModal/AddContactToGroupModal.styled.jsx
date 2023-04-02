@@ -19,8 +19,8 @@ export const GroupButton = styled.button`
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
-  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1),
-    250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #f787b4;
     color: white;

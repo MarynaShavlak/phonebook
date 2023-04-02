@@ -49,7 +49,7 @@ export const BenefitsList = styled.ul`
 export const BenefitsListTitle = styled.h2`
   text-align: center;
   margin-bottom: 30px;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.14;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -99,7 +99,7 @@ export const StartButton = styled.button`
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
-  transition: 250ms background-color cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #fc458e;
   }

@@ -28,7 +28,7 @@ export const DropdownItem = styled.li`
   display: flex;
   column-gap: 5px;
   align-items: center;
-  transition: 250ms color cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     color: white;
@@ -44,5 +44,24 @@ export const DropdownToggleBtn = styled(IconButton)`
   &:hover {
     background-color: transparent;
     color: #ef4287;
+  }
+`;
+
+export const DropdownButton = styled.button`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  background-color: transparent;
+  color: black;
+  border: 5px solid transparent;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    color: white;
   }
 `;
