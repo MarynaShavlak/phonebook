@@ -6,4 +6,5 @@ export { getRandomColors } from './getRandomColors';
 export { getMessage } from './getMessage';
 export { makeSlug } from './makeSlug';
 export { removeExtraWhitespace } from './removeExtraWhitespace';
+export { convertHyphenatedString } from './convertHyphenatedString';
 export * as Notifications from './notifications';

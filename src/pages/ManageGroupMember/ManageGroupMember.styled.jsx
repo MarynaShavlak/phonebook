@@ -35,5 +35,5 @@ export const Text = styled.p`
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;

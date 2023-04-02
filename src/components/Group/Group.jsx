@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { renderIcons, Notifications, makeSlug } from 'utils';
@@ -52,9 +52,7 @@ export const Group = ({ group }) => {
   };
 
   const contactsQuantityInGroup = group.contacts.length;
-
   const contactsInGroup = group.contacts;
-  console.log('contactsInGroup: ', contactsInGroup);
 
   return (
     <>
@@ -155,16 +153,6 @@ export const Group = ({ group }) => {
           action={GROUP_ACTIONS.DELETE}
         />
       )}
-      {/* {isAddModalOpen && (
-        <GroupMemberManager
-          isOpen={isAddModalOpen}
-          onClose={toggleAddModal}
-          group={group}
-          contactsInGroup={contactsInGroup}
-          onConfirm={onDeleteGroup}
-          action={GROUP_ACTIONS.ADD}
-        />
-      )} */}
     </>
   );
 };
