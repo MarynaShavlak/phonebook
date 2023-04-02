@@ -19,6 +19,9 @@ const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 const SignUp = lazy(() => import('pages/SignUp/SignUp'));
 const LogIn = lazy(() => import('pages/LogIn/LogIn'));
 const AddNewContact = lazy(() => import('pages/AddNewContact/AddNewContact'));
+const ManageGroupMember = lazy(() =>
+  import('pages/ManageGroupMember/ManageGroupMember')
+);
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -61,6 +64,16 @@ export const App = () => {
           path="groups"
           element={<PrivateRoute redirectTo="/login" component={<Groups />} />}
         />
+        <Route
+          path="manage-group-member/:groupName"
+          element={
+            <PrivateRoute
+              redirectTo="/login"
+              component={<ManageGroupMember />}
+            />
+          }
+        />
+
         <Route
           path="recyclebin"
           element={

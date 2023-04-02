@@ -11,10 +11,13 @@ import { renderIcons, getGroupsQuantity } from 'utils';
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const dispatch = useDispatch();
+
   const groups = useSelector(selectGroups);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   const toggleCreateGroupModal = () => {
     setIsCreateGroupModalOpen(!isCreateGroupModalOpen);
   };

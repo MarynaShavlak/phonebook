@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'components';
 import { selectContacts } from 'redux/contacts/selectors';
 import * as contactsOperations from 'redux/contacts/contactsOperations';
-import * as Notifications from 'utils/notifications';
+import { Notifications, removeExtraWhitespace } from 'utils';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -24,8 +24,9 @@ export const ContactForm = () => {
   };
 
   const checkContactInBook = contact => {
+    const normalizedContactName = removeExtraWhitespace(contact.name);
     const isNumberExist = contacts.some(el => el.number === contact.number);
-    const isNameExist = contacts.some(el => el.name === contact.name);
+    const isNameExist = contacts.some(el => el.name === normalizedContactName);
 
     const isContactExist = isNameExist || isNumberExist;
     if (isContactExist)

@@ -4,4 +4,6 @@ export { renderIcons } from './renderIcons';
 export { getCurrentTime } from './getCurrentTime';
 export { getRandomColors } from './getRandomColors';
 export { getMessage } from './getMessage';
+export { makeSlug } from './makeSlug';
+export { removeExtraWhitespace } from './removeExtraWhitespace';
 export * as Notifications from './notifications';

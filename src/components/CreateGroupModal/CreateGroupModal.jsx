@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import './CreateGroupModal.css';
 import Modal from 'react-modal';
-import { renderIcons, Notifications } from 'utils';
+import { renderIcons, Notifications, removeExtraWhitespace } from 'utils';
 import { addNewGroup } from 'redux/groups/groupsSlice';
 import { selectGroups } from 'redux/groups/selectors';
 
@@ -49,9 +49,9 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
   };
 
   const checkGroupExistence = groupName => {
-    console.log('groups: ', typeof groups);
+    const normalizedGroupName = removeExtraWhitespace(groupName).toLowerCase();
     const isGroupExist = groups.some(
-      el => el.name.toLowerCase() === groupName.toLowerCase()
+      el => el.name.toLowerCase() === normalizedGroupName
     );
     if (isGroupExist) {
       console.log('such group is already exist');

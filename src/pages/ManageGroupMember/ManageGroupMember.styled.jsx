@@ -31,7 +31,7 @@ export const GroupButton = styled.button`
   }
 `;
 
-export const ModalText = styled.p`
+export const Text = styled.p`
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
-import { renderIcons, Notifications } from 'utils';
+import { renderIcons, Notifications, makeSlug } from 'utils';
 import { useModal } from 'hooks';
 import { GROUP_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
 
-import {
-  OperationModal,
-  EditGroupModal,
-  GroupMemberAdder,
-  DropdownMenu,
-} from 'components';
+import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
   GroupAvatar,
@@ -28,14 +24,10 @@ import { deleteGroup, renameGroup, deleteContactFromGroup } from 'redux/groups';
 
 export const Group = ({ group }) => {
   const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
-  const contactsQuantityInGroup = group.contacts.length;
-
-  const contactsInGroup = group.contacts;
   const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(
     OPERATION_TYPES.DELETE
   );
-  const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
   const dispatch = useDispatch();
 
   const onEditGroup = ({ oldGroupName, newGroupName }) => {
@@ -49,16 +41,21 @@ export const Group = ({ group }) => {
     dispatch(deleteGroup(group));
     Notifications.showGroupInfo(group.name);
   };
-
   const toggleGroupContent = () => {
     setIsGroupContentVisible(!isGroupContentVisible);
   };
-  const deleteContact = contact => {
+  const onDeleteContact = contact => {
     const groupName = group.name;
     dispatch(deleteContactFromGroup({ group: groupName, contact }));
     Notifications.showDeleteFromGroup({ groupName, contact });
     console.log('you delete contact from group');
   };
+
+  const contactsQuantityInGroup = group.contacts.length;
+
+  const contactsInGroup = group.contacts;
+  console.log('contactsInGroup: ', contactsInGroup);
+
   return (
     <>
       <GroupWrapper>
@@ -78,7 +75,7 @@ export const Group = ({ group }) => {
               <li key={index}>
                 <IconButton
                   type="button"
-                  onClick={() => deleteContact(contact)}
+                  onClick={() => onDeleteContact(contact)}
                 >
                   {renderIcons('delete', 18)}
                 </IconButton>
@@ -129,13 +126,12 @@ export const Group = ({ group }) => {
             label: OPERATION_TYPES.ADD,
             icon: (
               <>
-                <DropdownButton
-                  ariaLabel={GROUP_ACTIONS.DELETE}
-                  onClick={toggleAddModal}
-                >
-                  {renderIcons(OPERATION_TYPES.ADD, iconSize.sm)}Add contacts to
-                  group
-                </DropdownButton>
+                <Link to={`/manage-group-member/${makeSlug(`${group.name}`)}`}>
+                  <DropdownButton ariaLabel={GROUP_ACTIONS.ADD}>
+                    {renderIcons(OPERATION_TYPES.ADD, iconSize.sm)}Manage
+                    contacts
+                  </DropdownButton>
+                </Link>
               </>
             ),
           },
@@ -159,8 +155,8 @@ export const Group = ({ group }) => {
           action={GROUP_ACTIONS.DELETE}
         />
       )}
-      {isAddModalOpen && (
-        <GroupMemberAdder
+      {/* {isAddModalOpen && (
+        <GroupMemberManager
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
           group={group}
@@ -168,7 +164,7 @@ export const Group = ({ group }) => {
           onConfirm={onDeleteGroup}
           action={GROUP_ACTIONS.ADD}
         />
-      )}
+      )} */}
     </>
   );
 };
