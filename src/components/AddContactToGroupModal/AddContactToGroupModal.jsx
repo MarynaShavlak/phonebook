@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { ConfirmationModal } from 'components';
-import { selectGroupNames, selectGroups } from 'redux/groups/selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { ConfirmationModal } from 'components';
+import {
+  selectGroupNames,
+  selectGroups,
+  addContactToGroup,
+  deleteContactFromGroup,
+} from 'redux/groups';
 import {
   GroupsList,
   GroupButton,
   ModalText,
 } from './AddContactToGroupModal.styled';
-import { addContactToGroup, deleteContactFromGroup } from 'redux/groups';
+import { Notifications } from 'utils';
 
 export const AddContactToGroupModal = ({
   contact,
   isOpen,
   onClose,
-  onConfirm,
+  // onConfirm,
   action,
 }) => {
   const groupNames = useSelector(selectGroupNames);
@@ -34,8 +39,33 @@ export const AddContactToGroupModal = ({
   };
 
   const addContactToGroupList = () => {
-    onConfirm(selectedGroups);
+    const message = compareGroups(initialSelectedGroups, selectedGroups);
+    Notifications.showAddToGroups(message);
+    console.log('message', message);
     onClose();
+  };
+
+  const compareGroups = (initialState, finalState) => {
+    const removedGroups = initialState.filter(
+      group => !finalState.includes(group)
+    );
+    const addedGroups = finalState.filter(
+      group => !initialState.includes(group)
+    );
+
+    const message =
+      (removedGroups.length > 0
+        ? `Contact was deleted from group${
+            removedGroups.length > 1 ? 's' : ''
+          } "${removedGroups.join('", "')}". `
+        : '') +
+      (addedGroups.length > 0
+        ? `Contact was added to group${
+            addedGroups.length > 1 ? 's' : ''
+          } "${addedGroups.join('", "')}".`
+        : '');
+
+    return message;
   };
 
   const getGroupNamesByContact = (groups, contact) => {
@@ -49,6 +79,13 @@ export const AddContactToGroupModal = ({
   };
   const groupNamesByContact = getGroupNamesByContact(groups, contact);
   const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
+  const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
+
+  useEffect(() => {
+    setInitialSelectedGroups(selectedGroups);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ConfirmationModal
       isOpen={isOpen}

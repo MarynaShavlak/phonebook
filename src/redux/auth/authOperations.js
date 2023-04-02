@@ -13,6 +13,7 @@ const authHeader = {
     axios.defaults.headers.common.Authorization = '';
   },
 };
+
 export const userSignUp = createAsyncThunk(
   'user/userSignUp',
   async (credentials, { rejectWithValue }) => {
@@ -52,8 +53,8 @@ export const userLogOut = createAsyncThunk(
     }
   }
 );
-export const userRefresh = createAsyncThunk(
-  'user/userRefresh',
+export const userInit = createAsyncThunk(
+  'user/userInit',
   async (_, { rejectWithValue, getState }) => {
     const state = getState();
     const persistedToken = state.auth.token;
@@ -68,5 +69,5 @@ export const userRefresh = createAsyncThunk(
   }
 );
 
-const extraActions = [userSignUp, userSignIn, userLogOut, userRefresh];
+const extraActions = [userSignUp, userSignIn, userLogOut, userInit];
 export const getActions = type => extraActions.map(action => action[type]);

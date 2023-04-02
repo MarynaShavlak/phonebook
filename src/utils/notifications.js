@@ -27,17 +27,13 @@ export function showContactWarn(isNameExist, isNumberExist, contactToAdd) {
   return showMessage('warning', message);
 }
 
-export function showContactSuccess(operation, contact, groups = null) {
+export function showContactSuccess(operation, contact) {
   const messages = {
     add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
     remove: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
     restore: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
     addToFavorites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
     removeFromFavorites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
-    addToGroup:
-      groups.length === 0
-        ? `The contact has not been added to any groups`
-        : `The contact with name ${contact.name} and number ${contact.number} has been added to groups:  "${groups}" `,
   };
   const message =
     messages[operation] ||
@@ -94,4 +90,8 @@ export function showAuthError() {
     'error',
     `Your email is invalid. Please check your email and try again.`
   );
+}
+
+export function showAddToGroups(message) {
+  return showMessage('info', message);
 }

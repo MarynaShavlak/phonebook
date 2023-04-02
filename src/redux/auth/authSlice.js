@@ -5,7 +5,7 @@ import {
   userSignUp,
   userSignIn,
   userLogOut,
-  userRefresh,
+  userInit,
   getActions,
 } from './authOperations';
 
@@ -13,6 +13,7 @@ const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
+  isLoading: true,
   isRefreshing: false,
 };
 const authSlice = createSlice({
@@ -35,9 +36,13 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(userRefresh.fulfilled, (state, action) => {
+      .addCase(userInit.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+      .addCase(userInit.rejected, (state, action) => {
+        state.isLoading = false;
       })
       .addMatcher(isAnyOf(...getActions('pending')), state => {
         state.isRefreshing = true;

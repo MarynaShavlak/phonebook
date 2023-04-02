@@ -7,9 +7,10 @@ import {
   Loader,
 } from 'components';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from 'hooks';
 import * as authOperations from 'redux/auth/authOperations';
+import { selectIsLoading } from 'redux/auth/selectors';
 const Home = lazy(() => import('pages/Home/Home'));
 const Favorites = lazy(() => import('pages/Favorites/Favorites'));
 const Groups = lazy(() => import('pages/Groups/Groups'));
@@ -23,9 +24,13 @@ export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
 
+  const IsLoading = useSelector(selectIsLoading);
+
   useEffect(() => {
-    dispatch(authOperations.userRefresh());
+    dispatch(authOperations.userInit());
   }, [dispatch]);
+
+  if (IsLoading) return <Loader />;
 
   return isRefreshing ? (
     <Loader />

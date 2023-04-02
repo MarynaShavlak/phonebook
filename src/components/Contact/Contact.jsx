@@ -88,10 +88,6 @@ export const Contact = ({ contact }) => {
     dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
   };
 
-  const addContactToGroup = groups => {
-    Notifications.showContactSuccess('addToGroup', contact, groups.join(', '));
-  };
-
   return (
     <>
       {isEditModalOpen && (
@@ -116,7 +112,7 @@ export const Contact = ({ contact }) => {
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
           contact={contact}
-          onConfirm={addContactToGroup}
+          // onConfirm={addContactToGroup}
           action={CONTACT_ACTIONS.ADD_TO_GROUP}
         />
       )}
