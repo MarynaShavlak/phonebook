@@ -5,8 +5,9 @@ export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 400px;
-  margin: 0 auto;
+  margin: auto 0;
   border-radius: 10px;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
 `;
@@ -15,6 +16,7 @@ export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* height: 100%; */
   border: 1px solid transparent;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;

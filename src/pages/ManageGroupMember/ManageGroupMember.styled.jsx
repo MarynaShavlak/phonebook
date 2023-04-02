@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Select from 'react-select';
 
 export const GroupsList = styled.ul`
   display: flex;
@@ -35,5 +36,4 @@ export const Text = styled.p`
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  /* margin-bottom: 20px; */
 `;

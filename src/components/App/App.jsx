@@ -43,26 +43,22 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route
           path="contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Contacts />} />
-          }
+          element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
         />
         <Route
           path="/create"
           element={
-            <PrivateRoute redirectTo="/login" component={<AddNewContact />} />
+            <PrivateRoute redirectTo="/" component={<AddNewContact />} />
           }
         />
 
         <Route
           path="favorites"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Favorites />} />
-          }
+          element={<PrivateRoute redirectTo="/" component={<Favorites />} />}
         />
         <Route
           path="groups"
-          element={<PrivateRoute redirectTo="/login" component={<Groups />} />}
+          element={<PrivateRoute redirectTo="/" component={<Groups />} />}
         />
         <Route
           path="manage-group-member/:groupName"

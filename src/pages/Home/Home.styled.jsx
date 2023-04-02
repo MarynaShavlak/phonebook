@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const HomeTitle = styled.h1`
-  font-size: 44px;
+  font-size: 30px;
   text-align: center;
   margin-bottom: 20px;
 `;
@@ -15,7 +15,6 @@ export const HomeLogo = styled.img`
 export const HomeWrapper = styled.div`
   display: flex;
   column-gap: 20px;
-  margin-bottom: 50px;
 `;
 export const HomeInfo = styled.div`
   display: flex;
@@ -45,6 +44,7 @@ export const AppDescription = styled.div`
 export const BenefitsList = styled.ul`
   display: flex;
   column-gap: 20px;
+  margin-top: 50px;
 `;
 export const BenefitsListTitle = styled.h2`
   text-align: center;
