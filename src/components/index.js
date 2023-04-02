@@ -15,6 +15,7 @@ export { ContactForm } from 'components/ContactForm';
 export { ContactList } from 'components/ContactList';
 export { EditContactModal } from 'components/EditContactModal';
 export { EditGroupModal } from 'components/EditGroupModal';
+export { GroupMemberAdder } from 'components/GroupMemberAdder';
 export { ErrorMessage } from 'components/ErrorMessage';
 export { Filter } from 'components/Filter';
 export { Form } from 'components/Form';

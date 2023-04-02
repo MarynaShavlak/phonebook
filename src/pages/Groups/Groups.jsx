@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectGroups } from 'redux/groups';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
 import { Button } from 'components/OperationButton/OperationButton.styled';
 import { Section, Notification, CreateGroupModal, Group } from 'components';
 import { ContentWrapper, Info } from 'pages/Contacts/Contacts.styled';
@@ -9,9 +10,11 @@ import { renderIcons, getGroupsQuantity } from 'utils';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const groups = useSelector(selectGroups);
-
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
   const toggleCreateGroupModal = () => {
     setIsCreateGroupModalOpen(!isCreateGroupModalOpen);
   };

@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import { renderIcons, Notifications } from 'utils';
 import { useModal } from 'hooks';
 import { GROUP_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
-import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
+
+import {
+  OperationModal,
+  EditGroupModal,
+  GroupMemberAdder,
+  DropdownMenu,
+} from 'components';
 import {
   Content,
   GroupAvatar,
@@ -29,7 +35,7 @@ export const Group = ({ group }) => {
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(
     OPERATION_TYPES.DELETE
   );
-
+  const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
   const dispatch = useDispatch();
 
   const onEditGroup = ({ oldGroupName, newGroupName }) => {
@@ -119,6 +125,20 @@ export const Group = ({ group }) => {
               </>
             ),
           },
+          {
+            label: OPERATION_TYPES.ADD,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={GROUP_ACTIONS.DELETE}
+                  onClick={toggleAddModal}
+                >
+                  {renderIcons(OPERATION_TYPES.ADD, iconSize.sm)}Add contacts to
+                  group
+                </DropdownButton>
+              </>
+            ),
+          },
         ]}
       />{' '}
       {isEditModalOpen && (
@@ -137,6 +157,16 @@ export const Group = ({ group }) => {
           data={group}
           onConfirm={onDeleteGroup}
           action={GROUP_ACTIONS.DELETE}
+        />
+      )}
+      {isAddModalOpen && (
+        <GroupMemberAdder
+          isOpen={isAddModalOpen}
+          onClose={toggleAddModal}
+          group={group}
+          contactsInGroup={contactsInGroup}
+          onConfirm={onDeleteGroup}
+          action={GROUP_ACTIONS.ADD}
         />
       )}
     </>

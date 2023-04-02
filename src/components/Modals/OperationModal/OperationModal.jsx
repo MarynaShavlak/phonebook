@@ -43,6 +43,7 @@ OperationModal.propTypes = {
     CONTACT_ACTIONS.DELETE,
     GROUP_ACTIONS.DELETE,
     GROUP_ACTIONS.EDIT,
+    GROUP_ACTIONS.ADD,
   ]).isRequired,
 
   onConfirm: PropTypes.func,
