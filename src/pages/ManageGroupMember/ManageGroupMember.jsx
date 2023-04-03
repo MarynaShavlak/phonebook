@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGroups } from 'redux/groups';
 import { Link, useParams } from 'react-router-dom';
@@ -61,18 +61,25 @@ const ManageGroupMember = () => {
         })
       );
     }
-    //  } else {
-    //    setSelectedGroups([...selectedGroups, groupName]);
-    //    dispatch(addContactToGroup({ group: groupName, contact }));
-    //  }
   };
 
-  const contactsInGroup = getContactsByGroupName({ groupName, groups });
-  const contactsToSelect = getContactsToSelect({
-    contactsInGroup,
-    allContacts,
-  });
-  const originalGroupName = getOriginalGroupName(groupName);
+  const contactsInGroup = useMemo(
+    () => getContactsByGroupName({ groupName, groups }),
+    [groupName, groups]
+  );
+  const contactsToSelect = useMemo(
+    () =>
+      getContactsToSelect({
+        contactsInGroup,
+        allContacts,
+      }),
+    [contactsInGroup, allContacts]
+  );
+  const originalGroupName = useMemo(
+    () => getOriginalGroupName(groupName),
+    // eslint-disable-next-line
+    [groupName]
+  );
   const [contactsToAdd, setContactsToAdd] = useState(contactsInGroup);
   const [initialContactsInGroup, setInitialContactsInGroup] = useState([]);
 
@@ -80,9 +87,7 @@ const ManageGroupMember = () => {
     setInitialContactsInGroup(contactsInGroup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // const addContactToGroupList = () => {
   const contactsNames = initialContactsInGroup.map(contact => contact.name);
-  // };
 
   const options = contactsToSelect.map(contact => ({
     label: `${contact.name}: ${contact.number} `,

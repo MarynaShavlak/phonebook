@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
@@ -27,14 +27,20 @@ import {
   addContactToFavorites,
   removeContactFromFavorites,
 } from 'redux/favorites';
+import { selectGroups, deleteContactFromGroup } from 'redux/groups';
 import {
   deleteContact,
   updateContact,
 } from 'redux/contacts/contactsOperations';
 
 export const Contact = ({ contact }) => {
+  const filterByName = useSelector(selectFilterByName);
+  const filterByNumber = useSelector(selectFilterByNumber);
+  const contacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
+  const groups = useSelector(selectGroups);
 
+  const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)
   );
@@ -43,15 +49,10 @@ export const Contact = ({ contact }) => {
     OPERATION_TYPES.REMOVE
   );
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
-
   const { isHovered, toggleHoverEffect } = useHoverEffects([
     OPERATION_TYPES.REMOVE,
     OPERATION_TYPES.EDIT,
   ]);
-  const dispatch = useDispatch();
-  const filterByName = useSelector(selectFilterByName);
-  const filterByNumber = useSelector(selectFilterByNumber);
-  const contacts = useSelector(selectRecycleBinContacts);
 
   const editContact = updatedContact => {
     toggleEditModal();
@@ -87,7 +88,25 @@ export const Contact = ({ contact }) => {
     Notifications.showContactSuccess(OPERATION_TYPES.REMOVE, contact);
     const removalContactTime = getCurrentTime();
     dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
+
+    if (isFavorite) {
+      dispatch(removeContactFromFavorites(contact.id));
+    }
+
+    const groupNames = findGroupsForContact({ contact, groups });
+
+    groupNames.forEach(groupName => {
+      dispatch(deleteContactFromGroup({ group: groupName, contact }));
+    });
   };
+
+  const findGroupsForContact = useMemo(() => {
+    return ({ contact, groups }) => {
+      return groups
+        .filter(group => group.contacts.some(c => c.id === contact.id))
+        .flatMap(group => group.name);
+    };
+  }, []);
 
   return (
     <>
