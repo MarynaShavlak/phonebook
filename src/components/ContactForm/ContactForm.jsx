@@ -1,53 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from 'components';
 import { selectContacts } from 'redux/contacts/selectors';
-import * as contactsOperations from 'redux/contacts/contactsOperations';
-import { Notifications, removeExtraWhitespace } from 'utils';
+import { fetchContacts, addContact } from 'redux/contacts/contactsOperations';
+import {
+  Notifications,
+  removeExtraWhitespace,
+  isExistByNumber,
+  isExistByName,
+} from 'utils';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return console.warn(`Type of field with name ${name} is not found`);
-    }
-  };
 
-  const checkContactInBook = contact => {
-    const normalizedContactName = removeExtraWhitespace(contact.name);
-    const isNumberExist = contacts.some(el => el.number === contact.number);
-    const isNameExist = contacts.some(el => el.name === normalizedContactName);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-    const isContactExist = isNameExist || isNumberExist;
-    if (isContactExist)
-      Notifications.showContactExistWarn(isNameExist, isNumberExist, contact);
-    return isContactExist;
-  };
+  const contacts = useSelector(selectContacts);
 
-  const handleSubmit = e => {
+  function handleChange(e) {
+    const { name, value } = e.target;
+    name === 'name' ? setName(value) : setNumber(value);
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
-    const createdContact = { name, number };
-    if (checkContactInBook(createdContact)) return;
-    dispatch(contactsOperations.addContact(createdContact));
+    const normalizedContactName = removeExtraWhitespace(name);
+    const createdContact = { name: normalizedContactName, number };
+
+    const isNameExist = isExistByName({
+      newName: normalizedContactName,
+      contacts,
+    });
+    const isNumberExist = isExistByNumber({ newNumber: number, contacts });
+
+    const isDuplicate = isNameExist || isNumberExist;
+
+    if (isDuplicate) {
+      return Notifications.showContactExistWarn({
+        isNameExist,
+        isNumberExist,
+        contact: createdContact,
+      });
+    }
+    dispatch(addContact(createdContact));
     Notifications.showContactSuccess('add', createdContact);
     reset();
-    console.log('submit add contact');
-  };
+  }
 
-  const reset = () => {
+  function reset() {
     setName('');
     setNumber('');
-  };
+  }
 
   return (
     <>
@@ -61,7 +68,3 @@ export const ContactForm = () => {
     </>
   );
 };
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func,
-// };

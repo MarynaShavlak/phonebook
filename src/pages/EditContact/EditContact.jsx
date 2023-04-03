@@ -74,15 +74,20 @@ const EditContact = () => {
     }
 
     const updatedContact = { name, number };
+    const isNameExist = isExistByName({ newName: name, contact, contacts });
+    const isNumberExist = isExistByNumber({
+      newNumber: number,
+      contact,
+      contacts,
+    });
+    const isDuplicate = isNameExist || isNumberExist;
 
-    const isDuplicateContact =
-      isExistByName({ newName: name, contact, contacts }) ||
-      isExistByNumber({ newNumber: number, contact, contacts });
-
-    console.log('isDuplicateContact: ', isDuplicateContact);
-
-    if (isDuplicateContact) {
-      return Notifications.showContactExistWarn(contact, updatedContact);
+    if (isDuplicate) {
+      return Notifications.showContactExistWarn({
+        isNameExist,
+        isNumberExist,
+        contact: updatedContact,
+      });
     }
 
     editContact(updatedContact);

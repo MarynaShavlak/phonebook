@@ -14,18 +14,15 @@ function showMessage(type, message) {
   }
 }
 
-export function showContactExistWarn(prevContact, updatedContact) {
-  const nameExists = prevContact['name'] !== updatedContact['name'];
-  const numberExists = prevContact['number'] !== updatedContact['number'];
-
-  if (nameExists && numberExists) {
-    const message = `Oops, a contact with name ${updatedContact['name']} and number ${updatedContact['number']} already exists in your phonebook.`;
+export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
+  if (isNameExist && isNumberExist) {
+    const message = `Oops, a contact with name ${contact.name} and number ${contact.number} already exists in your phonebook.`;
     return showMessage('warning', message);
-  } else if (nameExists) {
-    const message = `Oops, a contact with name ${updatedContact['name']} already exists in your phonebook. Please enter a different name.`;
+  } else if (isNameExist) {
+    const message = `Oops, a contact with name ${contact.name} already exists in your phonebook. Please enter a different name.`;
     return showMessage('warning', message);
-  } else if (numberExists) {
-    const message = `Oops, a contact with number ${updatedContact['number']} already exists in your phonebook. Please enter a different number.`;
+  } else if (isNumberExist) {
+    const message = `Oops, a contact with number ${contact.number} already exists in your phonebook. Please enter a different number.`;
     return showMessage('warning', message);
   }
 }
