@@ -1,22 +1,19 @@
 import React, { useState, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { clsx } from 'clsx';
-import { renderIcons, getCurrentTime, Notifications } from 'utils';
 import { useHoverEffects, useModal } from 'hooks';
-import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
 import {
-  EditContactModal,
   OperationModal,
   AddContactToGroupModal,
   CheckboxWithStarIcon,
   HighlightContactDetails,
   DropdownMenu,
 } from 'components';
-import { ContactEl } from './Contact.styled';
-import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
-
+import { renderIcons, getCurrentTime, Notifications } from 'utils';
+import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
 import {
   addContactToRecycleBin,
   selectRecycleBinContacts,
@@ -28,10 +25,9 @@ import {
   removeContactFromFavorites,
 } from 'redux/favorites';
 import { selectGroups, deleteContactFromGroup } from 'redux/groups';
-import {
-  deleteContact,
-  updateContact,
-} from 'redux/contacts/contactsOperations';
+import { deleteContact } from 'redux/contacts/contactsOperations';
+import { ContactEl } from './Contact.styled';
+import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
 
 export const Contact = ({ contact }) => {
   const filterByName = useSelector(selectFilterByName);
@@ -44,7 +40,6 @@ export const Contact = ({ contact }) => {
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)
   );
-  const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(
     OPERATION_TYPES.REMOVE
   );
@@ -53,21 +48,6 @@ export const Contact = ({ contact }) => {
     OPERATION_TYPES.REMOVE,
     OPERATION_TYPES.EDIT,
   ]);
-
-  const editContact = updatedContact => {
-    toggleEditModal();
-    const { updatedName, updatedNumber } = updatedContact;
-    if (updatedName === contact.name && updatedNumber === contact.number) {
-      return Notifications.showContactInfo();
-    }
-
-    const edittedContact = {
-      id: contact.id,
-      name: updatedName,
-      number: updatedNumber,
-    };
-    dispatch(updateContact(edittedContact));
-  };
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -110,14 +90,6 @@ export const Contact = ({ contact }) => {
 
   return (
     <>
-      {isEditModalOpen && (
-        <EditContactModal
-          isOpen={isEditModalOpen}
-          onClose={toggleEditModal}
-          onEditContact={editContact}
-          data={contact}
-        />
-      )}
       {isRemoveModalOpen && (
         <OperationModal
           isOpen={isRemoveModalOpen}
@@ -157,14 +129,15 @@ export const Contact = ({ contact }) => {
             label: OPERATION_TYPES.EDIT,
             icon: (
               <>
-                <DropdownButton
-                  ariaLabel={CONTACT_ACTIONS.EDIT}
-                  onClick={toggleEditModal}
-                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-                >
-                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
-                </DropdownButton>
+                <Link to={`/edit-contact/${contact.id}`}>
+                  <DropdownButton
+                    ariaLabel={CONTACT_ACTIONS.EDIT}
+                    onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+                    onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
+                  >
+                    {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
+                  </DropdownButton>
+                </Link>
               </>
             ),
           },

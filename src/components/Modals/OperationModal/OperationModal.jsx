@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ConfirmationModal } from 'components';
-import { getMessage } from 'utils';
+import { getModalMessage } from 'utils';
 import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
 
 export const OperationModal = ({ data, action, ...otherProps }) => {
@@ -10,7 +10,7 @@ export const OperationModal = ({ data, action, ...otherProps }) => {
   return (
     <ConfirmationModal action={action} {...otherProps}>
       <div className="confirmation__message">
-        {getMessage({ action, data })}
+        {getModalMessage({ action, data })}
       </div>
     </ConfirmationModal>
   );

@@ -47,8 +47,6 @@ export const Group = ({ group }) => {
   const onDeleteContact = contact => {
     const groupName = group.name;
     dispatch(deleteContactFromGroup({ group: groupName, contact }));
-    Notifications.showDeleteFromGroup({ groupName, contact });
-    console.log('you delete contact from group');
   };
 
   const contactsQuantityInGroup = group.contacts.length;

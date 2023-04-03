@@ -14,17 +14,20 @@ function showMessage(type, message) {
   }
 }
 
-export function showContactWarn(isNameExist, isNumberExist, contactToAdd) {
-  const message =
-    isNameExist && isNumberExist
-      ? `Ooops, contact with name ${contactToAdd.name} and number ${contactToAdd.number} is already exist in your phonebook`
-      : isNameExist
-      ? `Ooops, contact with name ${contactToAdd.name} is already in exist your phonebook. Please, white another name`
-      : isNumberExist
-      ? `Ooops, contact with number ${contactToAdd.number} is already exist in your phonebook. Please, white another number`
-      : '';
+export function showContactExistWarn(prevContact, updatedContact) {
+  const nameExists = prevContact['name'] !== updatedContact['name'];
+  const numberExists = prevContact['number'] !== updatedContact['number'];
 
-  return showMessage('warning', message);
+  if (nameExists && numberExists) {
+    const message = `Oops, a contact with name ${updatedContact['name']} and number ${updatedContact['number']} already exists in your phonebook.`;
+    return showMessage('warning', message);
+  } else if (nameExists) {
+    const message = `Oops, a contact with name ${updatedContact['name']} already exists in your phonebook. Please enter a different name.`;
+    return showMessage('warning', message);
+  } else if (numberExists) {
+    const message = `Oops, a contact with number ${updatedContact['number']} already exists in your phonebook. Please enter a different number.`;
+    return showMessage('warning', message);
+  }
 }
 
 export function showContactSuccess(operation, contact) {
@@ -42,18 +45,28 @@ export function showContactSuccess(operation, contact) {
   return showMessage('success', message);
 }
 
-export function showContactInfo() {
+export function showNoChangesMessage() {
   return showMessage(
     'info',
     `There are no changes. You didn't change either contact name or phone number`
   );
 }
 
-export function showContactFailure() {
+export function showEditContactFailure() {
   return showMessage(
     'error',
     `You cannot change both name and number. To make full change, delete this contact and create new with correct info.`
   );
+}
+
+export function showEditContactSuccess(prevContact, updatedContact) {
+  let message;
+  if (prevContact.name !== updatedContact.name) {
+    message = `The name of the contact (name: ${prevContact.name}, number: ${prevContact.number}) was changed to "${updatedContact.name}".`;
+  } else if (prevContact.number !== updatedContact.number) {
+    message = `The number of the contact (name: ${prevContact.name}, number: ${prevContact.number}) was changed to "${updatedContact.number}".`;
+  }
+  return showMessage('success', message);
 }
 
 export function showRecyclebinWarn(contact) {

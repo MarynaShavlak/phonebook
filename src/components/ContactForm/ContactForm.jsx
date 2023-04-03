@@ -30,7 +30,7 @@ export const ContactForm = () => {
 
     const isContactExist = isNameExist || isNumberExist;
     if (isContactExist)
-      Notifications.showContactWarn(isNameExist, isNumberExist, contact);
+      Notifications.showContactExistWarn(isNameExist, isNumberExist, contact);
     return isContactExist;
   };
 

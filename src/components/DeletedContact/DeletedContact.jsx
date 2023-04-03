@@ -43,7 +43,7 @@ export const DeletedContact = ({ contact }) => {
     const isNameExist = contacts.some(el => el.name === contact.name);
 
     if (isNameExist || isNumberExist) {
-      Notifications.showContactWarn(isNameExist, isNumberExist, contact);
+      Notifications.showContactExistWarn(isNameExist, isNumberExist, contact);
       return true;
     }
 

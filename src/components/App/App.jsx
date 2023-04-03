@@ -19,6 +19,7 @@ const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 const SignUp = lazy(() => import('pages/SignUp/SignUp'));
 const LogIn = lazy(() => import('pages/LogIn/LogIn'));
 const AddNewContact = lazy(() => import('pages/AddNewContact/AddNewContact'));
+const EditContact = lazy(() => import('pages/EditContact/EditContact'));
 const ManageGroupMember = lazy(() =>
   import('pages/ManageGroupMember/ManageGroupMember')
 );
@@ -27,13 +28,13 @@ export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
 
-  const IsLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(authOperations.userInit());
   }, [dispatch]);
 
-  if (IsLoading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return isRefreshing ? (
     <Loader />
@@ -51,7 +52,12 @@ export const App = () => {
             <PrivateRoute redirectTo="/" component={<AddNewContact />} />
           }
         />
-
+        <Route
+          path="edit-contact/:contactId"
+          element={
+            <PrivateRoute redirectTo="/login" component={<EditContact />} />
+          }
+        />
         <Route
           path="favorites"
           element={<PrivateRoute redirectTo="/" component={<Favorites />} />}
