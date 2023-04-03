@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormStyled, FormItem, FormList, FormTitle } from './Form.styled';
 import { renderIcons } from 'utils/renderIcons';
