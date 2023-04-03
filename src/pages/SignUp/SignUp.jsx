@@ -5,7 +5,7 @@ import {
   Info,
   SignUpLink,
   RedirectLink,
-} from 'pages/Log/LogIn.styled';
+} from 'pages/LogIn/LogIn.styled';
 
 const SignUp = () => {
   return (
