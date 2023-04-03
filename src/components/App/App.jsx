@@ -17,7 +17,7 @@ const Groups = lazy(() => import('../../pages/Groups/Groups.jsx'));
 const RecycleBin = lazy(() => import('../../pages/RecycleBin/RecycleBin.jsx'));
 const Contacts = lazy(() => import('../../pages/Contacts/Contacts.jsx'));
 const SignUp = lazy(() => import('../../pages/SignUp/SignUp.jsx'));
-const LogIn = lazy(() => import('../../pages/LogIn/LogIn.jsx'));
+const LogIn = lazy(() => import('../../pages/Log/Log.jsx'));
 const AddNewContact = lazy(() =>
   import('../../pages/AddNewContact/AddNewContact.jsx')
 );
