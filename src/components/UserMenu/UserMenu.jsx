@@ -11,7 +11,10 @@ import {
   DropdownMenuItem,
   LogoutButton,
 } from './UserMenu.styled';
-import * as authOperations from 'redux/auth/authOperations';
+import { clearRecycleBin } from 'redux/recycleBin/recycleBinSlice';
+import { clearFavourites } from 'redux/favorites/favoritesSlice';
+import { clearGroups } from 'redux/groups/groupsSlice';
+import { userLogOut } from 'redux/auth/authOperations';
 
 export const UserMenu = () => {
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
@@ -19,9 +22,16 @@ export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
-  const handleDropdownMenu = () => {
+  function handleDropdownMenu() {
     setIsDropdownMenuOpen(!isDropdownMenuOpen);
-  };
+  }
+
+  function onLogout() {
+    dispatch(clearFavourites());
+    dispatch(clearGroups());
+    dispatch(clearRecycleBin());
+    dispatch(userLogOut());
+  }
 
   return (
     <UserMenuWrapper>
@@ -55,10 +65,7 @@ export const UserMenu = () => {
                   className="user-logout"
                   {...getItemProps({ item: 'logout' })}
                 >
-                  <LogoutButton
-                    type="button"
-                    onClick={() => dispatch(authOperations.userLogOut())}
-                  >
+                  <LogoutButton type="button" onClick={() => onLogout()}>
                     {renderIcons('logOut', iconSize.xs)}Logout
                   </LogoutButton>
                 </DropdownMenuItem>

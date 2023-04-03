@@ -48,6 +48,9 @@ const groupsSlice = createSlice({
       );
       state.groups[groupIndex].name = action.payload.newGroupName;
     },
+    clearGroups(state) {
+      state.groups = [];
+    },
   },
 });
 
@@ -57,6 +60,7 @@ export const {
   addNewGroup,
   deleteGroup,
   renameGroup,
+  clearGroups,
 } = groupsSlice.actions;
 
 export const groupsReducer = persistReducer(persistConfig, groupsSlice.reducer);

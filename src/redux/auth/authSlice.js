@@ -16,7 +16,7 @@ const initialState = {
   isLoading: true,
   isRefreshing: false,
 };
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: builder =>

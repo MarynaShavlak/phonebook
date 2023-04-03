@@ -19,6 +19,9 @@ const recycleBinSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
+    clearRecycleBin(state) {
+      state.recycleBin = [];
+    },
   },
 });
 
@@ -28,8 +31,11 @@ const persistConfig = {
   whitelist: ['recycleBin'],
 };
 
-export const { addContactToRecycleBin, removeContactFromRecycleBin } =
-  recycleBinSlice.actions;
+export const {
+  addContactToRecycleBin,
+  removeContactFromRecycleBin,
+  clearRecycleBin,
+} = recycleBinSlice.actions;
 
 export const recycleBinReducer = persistReducer(
   persistConfig,

@@ -19,6 +19,9 @@ const favoritesSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
+    clearFavourites(state) {
+      state.favorites = [];
+    },
   },
 });
 
@@ -28,8 +31,11 @@ const persistConfig = {
   whitelist: ['favorites'],
 };
 
-export const { addContactToFavorites, removeContactFromFavorites } =
-  favoritesSlice.actions;
+export const {
+  addContactToFavorites,
+  removeContactFromFavorites,
+  clearFavourites,
+} = favoritesSlice.actions;
 
 export const favoritesReducer = persistReducer(
   persistConfig,

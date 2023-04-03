@@ -41,11 +41,6 @@ export const AppDescription = styled.div`
   }
 `;
 
-export const BenefitsList = styled.ul`
-  display: flex;
-  column-gap: 20px;
-  margin-top: 50px;
-`;
 export const BenefitsListTitle = styled.h2`
   text-align: center;
   margin-bottom: 30px;
@@ -54,6 +49,11 @@ export const BenefitsListTitle = styled.h2`
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #ef4287;
+`;
+export const BenefitsList = styled.ul`
+  display: flex;
+  column-gap: 20px;
+  margin-top: 50px;
 `;
 export const BenefitsItem = styled.li`
   flex-basis: calc((100% - 5 * 20px) / 6);
@@ -111,3 +111,38 @@ export const LogInLink = styled(NavLink)`
 `;
 export const LogIn = styled.span``;
 // #ef4287, #f2c94c, #bb6bd9, #9b51e0, #f787b4, #f8f3ff
+
+// export const BenefitTitle = styled.h3`
+//   height: 30px;
+//   text-align: center;
+//   margin-bottom: 10px;
+//   font-size: 14px;
+//   line-height: 1.14;
+//   letter-spacing: 0.03em;
+//   text-transform: uppercase;
+//   transform: translateY(100%);
+//   transition: transform 0.3s ease-in-out;
+// `;
+// export const BenefitDescription = styled.p`
+//   font-size: 14px;
+//   line-height: 1.71;
+//   letter-spacing: 0.03em;
+//   transform: translateY(100%);
+//   transition: transform 0.3s ease-in-out;
+// `;
+// export const IconWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 120px;
+//   margin-bottom: 30px;
+//   border-radius: 5px;
+//   background-color: #f8f3ff;
+//   svg {
+//     fill: #ef4287;
+//   }
+//   &:hover ~ ${BenefitTitle}, &:hover ~ ${BenefitDescription} {
+//     transform: translateY(-100%);
+//     transition: transform 0.3s ease-in-out;
+//   }
+// `;
