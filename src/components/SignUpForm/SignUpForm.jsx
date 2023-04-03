@@ -54,7 +54,6 @@ const schema = yup.object().shape({
 export const SignUpForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log('values: ', values);
     setSubmitting(false);
     const newUser = {
       name: values.name,
@@ -62,7 +61,6 @@ export const SignUpForm = () => {
       password: values.password,
     };
 
-    console.log('newUser: ', newUser);
     dispatch(authOperations.userSignUp(newUser));
     resetForm();
   };

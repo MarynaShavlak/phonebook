@@ -35,7 +35,6 @@ export const Contact = ({ contact }) => {
   const contacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
-  // console.log(`${contact.name} : ${contact.id}`);
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)

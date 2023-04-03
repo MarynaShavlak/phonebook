@@ -8,6 +8,5 @@ export function getCurrentTime() {
   const formattedTime = `${month} ${day}, ${year} ${hours
     .toString()
     .padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-  console.log(formattedTime);
   return formattedTime;
 }

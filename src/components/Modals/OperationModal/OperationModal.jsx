@@ -5,8 +5,6 @@ import { getModalMessage } from 'utils';
 import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
 
 export const OperationModal = ({ data, action, ...otherProps }) => {
-  // const { id, name, number, contacts } = data;
-  console.log('action', action);
   return (
     <ConfirmationModal action={action} {...otherProps}>
       <div className="confirmation__message">

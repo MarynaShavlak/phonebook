@@ -3,8 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as userAPI from 'services/userAPI';
 import * as Notifications from 'utils/notifications';
 
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
 const authHeader = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -19,8 +17,9 @@ export const userSignUp = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const data = await userAPI.signUpRequest(credentials);
+      // eslint-disable-next-line
       const tokin = data.token;
-      console.log('tokin: ', tokin);
+
       authHeader.set(data.token);
       return data;
     } catch (error) {

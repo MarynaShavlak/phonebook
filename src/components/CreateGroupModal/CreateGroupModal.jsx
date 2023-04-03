@@ -53,7 +53,6 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
       el => el.name.toLowerCase() === normalizedGroupName
     );
     if (isGroupExist) {
-      console.log('such group is already exist');
       Notifications.showGroupWarn(groupName);
     }
     return isGroupExist;

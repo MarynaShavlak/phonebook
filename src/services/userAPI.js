@@ -16,6 +16,5 @@ export async function logOutRequest() {
 }
 export async function currentUserDetailsRequest() {
   const { data } = await axios.get(`/users/current`);
-  console.log('data: ', data);
   return data;
 }

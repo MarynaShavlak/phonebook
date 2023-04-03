@@ -49,7 +49,6 @@ const ManageGroupMember = () => {
   };
   const handleContactClick = contact => {
     const isSelected = contactsToAdd.map(el => el.id).includes(contact.id);
-    console.log('isSelected: ', isSelected);
 
     if (isSelected) {
       setContactsToAdd(contactsToAdd.filter(el => el.id !== contact.id));
