@@ -42,6 +42,9 @@ export const Group = ({ group }) => {
     Notifications.showGroupInfo(group.name);
   };
   const toggleGroupContent = () => {
+    if (!contactsQuantityInGroup) {
+      return;
+    }
     setIsGroupContentVisible(!isGroupContentVisible);
   };
   const onDeleteContact = contact => {

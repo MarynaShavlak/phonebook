@@ -14,7 +14,9 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
-import { FaSortAmountUp } from 'react-icons/fa';
+import { FaSortAlphaDownAlt } from 'react-icons/fa';
+import { FaSortNumericDown } from 'react-icons/fa';
+import { FaSortNumericDownAlt } from 'react-icons/fa';
 import { FiCheck } from 'react-icons/fi';
 import { FaRegCircle } from 'react-icons/fa';
 import { MdSettingsBackupRestore } from 'react-icons/md';
@@ -75,8 +77,14 @@ export function renderIcons(param, size) {
       return <AiFillHome size={size} className="contact-form__icon" />;
     case 'alphaDown':
       return <FaSortAlphaDown size={size} className="contact-form__icon" />;
+    case 'alphaUp':
+      return <FaSortAlphaDownAlt size={size} className="contact-form__icon" />;
+    case 'dateDown':
+      return (
+        <FaSortNumericDownAlt size={size} className="contact-form__icon" />
+      );
     case 'dateUp':
-      return <FaSortAmountUp size={size} className="contact-form__icon" />;
+      return <FaSortNumericDown size={size} className="contact-form__icon" />;
     case 'logOut':
       return <FiLogOut size={size} className="contact-form__icon" />;
     case 'settings':

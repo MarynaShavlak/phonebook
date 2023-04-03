@@ -28,7 +28,6 @@ const ManageGroupMember = () => {
   }, [dispatch]);
 
   const choseContactToAddInGroup = contact => {
-    console.log(contact);
     setContactsToAdd(prevContacts => [...prevContacts, contact]);
     dispatch(addContactToGroup({ group: originalGroupName, contact }));
   };

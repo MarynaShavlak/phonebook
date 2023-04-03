@@ -76,6 +76,7 @@ export const ContactsList = styled.ul`
   flex-direction: column;
   justify-content: center;
   row-gap: 20px;
+
   padding-left: 60px;
   li {
     position: relative;

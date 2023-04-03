@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Contact } from 'components';
 import { clsx } from 'clsx';
@@ -9,47 +9,62 @@ import {
   SortBtn,
 } from './ContactList.styled';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
-import { renderIcons } from 'utils/renderIcons';
+import { renderIcons } from 'utils';
 import { iconSize } from 'constants';
+import { useSort } from 'hooks';
 
 export function ContactList() {
   const contacts = useSelector(selectFilteredContacts);
-  const [sortOption, setSortOption] = useState('ByAlphabet');
 
-  const contactsToDisplay = useMemo(
-    () =>
-      [...contacts].sort((firstContact, secondContact) =>
-        sortOption === 'ByAlphabet'
-          ? firstContact.name.localeCompare(secondContact.name)
-          : secondContact.id - firstContact.id
-      ),
-    [contacts, sortOption]
+  const [sortOption, setSortOption] = useState(
+    localStorage.getItem('sortOption') || 'ByAlphabet'
+  );
+  const [reverseSort, setReverseSort] = useState(
+    localStorage.getItem('reverseSort') === 'true' ? true : false
   );
 
-  const sortByAlphabet = () => {
-    setSortOption('ByAlphabet');
-  };
+  useEffect(() => {
+    localStorage.setItem('sortOption', sortOption);
+    localStorage.setItem('reverseSort', reverseSort);
+  }, [sortOption, reverseSort]);
 
-  const sortByDate = () => {
+  const { handleSortByAlphabet, handleSortByDate, sortContacts } = useSort(
+    sortOption,
+    reverseSort
+  );
+  const contactsToDisplay = sortContacts(contacts);
+
+  const toggleAlhabetSortBtn = () => {
+    setSortOption('ByAlphabet');
+    setReverseSort(!reverseSort);
+    handleSortByAlphabet();
+  };
+  const toggleDateSortBtn = () => {
     setSortOption('ByDate');
+    setReverseSort(!reverseSort);
+    handleSortByDate();
   };
 
   return (
     <>
       <SortButtons>
         <SortBtn
-          onClick={() => sortByAlphabet()}
-          aria-label="Sort contacts by date of alphabet"
+          onClick={toggleAlhabetSortBtn}
+          aria-label="Sort contacts by alphabet"
           className={clsx({ active: sortOption === 'ByAlphabet' })}
         >
-          {renderIcons('alphaDown', iconSize.sm)}
+          {reverseSort
+            ? renderIcons('alphaUp', iconSize.sm)
+            : renderIcons('alphaDown', iconSize.sm)}
         </SortBtn>
         <SortBtn
-          onClick={() => sortByDate()}
+          onClick={toggleDateSortBtn}
           aria-label="Sort contacts by date of create"
           className={clsx({ active: sortOption === 'ByDate' })}
         >
-          {renderIcons('dateUp', iconSize.sm)}
+          {reverseSort
+            ? renderIcons('dateUp', iconSize.sm)
+            : renderIcons('dateDown', iconSize.sm)}
         </SortBtn>
       </SortButtons>
       <ContactsList>

@@ -37,7 +37,6 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
     e.preventDefault();
 
     if (checkGroupExistence(groupName)) return;
-    console.log(groupName);
     const groupId = nanoid();
     dispatch(addNewGroup({ name: groupName, id: groupId }));
     onClose();
@@ -90,9 +89,6 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           />
-          {/* <button className="add-group-btn" type="submit">
-            {renderIcons('confirm', 30)}
-          </button> */}
         </div>
       </form>
     </Modal>
