@@ -11,19 +11,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from 'hooks';
 import * as authOperations from 'redux/auth/authOperations';
 import { selectIsLoading } from 'redux/auth/selectors';
-const Home = lazy(() => import('pages/Home/Home.jsx'));
-const Favorites = lazy(() => import('pages/Favorites/Favorites.jsx'));
-const Groups = lazy(() => import('pages/Groups/Groups.jsx'));
-const RecycleBin = lazy(() => import('pages/RecycleBin/RecycleBin.jsx'));
-const Contacts = lazy(() => import('pages/Contacts/Contacts.jsx'));
-const SignUp = lazy(() => import('pages/SignUp/SignUp.jsx'));
-const LogIn = lazy(() => import('pages/LogIn/LogIn.jsx'));
+const Home = lazy(() => import('../pages/Home/Home.jsx'));
+const Favorites = lazy(() => import('../pages/Favorites/Favorites.jsx'));
+const Groups = lazy(() => import('../pages/Groups/Groups.jsx'));
+const RecycleBin = lazy(() => import('../pages/RecycleBin/RecycleBin.jsx'));
+const Contacts = lazy(() => import('../pages/Contacts/Contacts.jsx'));
+const SignUp = lazy(() => import('../pages/SignUp/SignUp.jsx'));
+const LogIn = lazy(() => import('../pages/LogIn/LogIn.jsx'));
 const AddNewContact = lazy(() =>
-  import('pages/AddNewContact/AddNewContact.jsx')
+  import('../pages/AddNewContact/AddNewContact.jsx')
 );
-const EditContact = lazy(() => import('pages/EditContact/EditContact.jsx'));
+const EditContact = lazy(() => import('../pages/EditContact/EditContact.jsx'));
 const ManageGroupMember = lazy(() =>
-  import('pages/ManageGroupMember/ManageGroupMember.jsx')
+  import('../pages/ManageGroupMember/ManageGroupMember.jsx')
 );
 
 export const App = () => {
