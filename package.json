@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-08-phonebook",
+  "name": "phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://MarynaShavlak.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://MarynaShavlak.github.io/phonebook/",
   "dependencies": {
     "@mui/icons-material": "^5.11.11",
     "@mui/styled-engine-sc": "^5.11.11",
