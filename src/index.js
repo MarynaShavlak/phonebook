@@ -10,7 +10,9 @@ import { store, persistor } from 'redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/phonebook/">
+    <BrowserRouter
+    // basename="/phonebook/"
+    >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ConfigProvider

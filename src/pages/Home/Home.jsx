@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import {
   HomeTitle,
@@ -8,10 +9,9 @@ import {
   AppDescription,
   BenefitsListTitle,
   BenefitsList,
-  BenefitsItem,
+  Item,
+  DescWrap,
   IconWrap,
-  BenefitTitle,
-  BenefitDescription,
   StartButton,
   LogIn,
   LogInLink,
@@ -84,62 +84,94 @@ const Home = () => {
           </HomeWrapper>
           <BenefitsListTitle>Our benefits</BenefitsListTitle>
           <BenefitsList>
-            <BenefitsItem>
-              <IconWrap>{renderIcons('create', 40)}</IconWrap>
-              <BenefitTitle>Easily create and edit contacts</BenefitTitle>
-              <BenefitDescription>
-                With Phone Genie, you can create and edit contacts with just a
-                few clicks, making it easy to keep your contacts up-to-date.
-              </BenefitDescription>
-            </BenefitsItem>
-
-            <BenefitsItem>
-              <IconWrap>{renderIcons('sort', 50)}</IconWrap>
-              <BenefitTitle>Efficiently sort contacts</BenefitTitle>
-              <BenefitDescription>
-                Sort your contacts by alphabet or date of creation to easily
-                find the contact you need.
-              </BenefitDescription>
-            </BenefitsItem>
-
-            <BenefitsItem>
-              <IconWrap>{renderIcons(OPERATION_TYPES.DELETE, 40)}</IconWrap>
-              <BenefitTitle>Recycle bin feature</BenefitTitle>
-              <BenefitDescription>
-                Never worry about accidentally deleting a contact again. Instead
-                of permanently losing a contact, simply move it to the recycle
-                bin for safekeeping. And if you ever need to restore that
-                contact.
-              </BenefitDescription>
-            </BenefitsItem>
-
-            <BenefitsItem>
-              <IconWrap>{renderIcons('quickSearch', 40)}</IconWrap>
-              <BenefitTitle>Quick search</BenefitTitle>
-              <BenefitDescription>
-                No more scrolling through endless lists of contacts - simply
-                type in the name or phone number you're looking for and let
-                Phone Genie do the rest.
-              </BenefitDescription>
-            </BenefitsItem>
-
-            <BenefitsItem>
-              <IconWrap>{renderIcons('favorite', 40)}</IconWrap>
-              <BenefitTitle>Favorites list</BenefitTitle>
-              <BenefitDescription>
-                Easily mark your most frequently used contacts as favorites for
-                quick and easy access. You can streamline your communication and
-                stay connected with those who matter most.
-              </BenefitDescription>
-            </BenefitsItem>
-            <BenefitsItem>
-              <IconWrap>{renderIcons('group', 40)}</IconWrap>
-              <BenefitTitle>Personalized contact groups</BenefitTitle>
-              <BenefitDescription>
-                Organize your contacts into personalized groups, such as
-                friends, family, and work, for even more efficient management.
-              </BenefitDescription>
-            </BenefitsItem>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    With Phone Genie, you can create and edit contacts with just
+                    a few clicks, making it easy to keep your contacts
+                    up-to-date.{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons('create', 40)}</p>
+                <h2>Easily create and edit contacts</h2>
+              </IconWrap>
+            </Item>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    Sort your contacts by alphabet or date of creation to easily
+                    find the contact you need.{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons('alphaDown', 40)}</p>
+                <h2>Efficiently sort contacts</h2>
+              </IconWrap>
+            </Item>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    Protect contacts by moving them to recycle bin to prevent
+                    accidental deletion and allow easy restoration.{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons(OPERATION_TYPES.DELETE, 40)}</p>
+                <h2>Recycle bin feature</h2>
+              </IconWrap>
+            </Item>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    Efficiently search for contacts using either their name or
+                    phone number with just a few clicks{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons('quickSearch', 40)}</p>
+                <h2>Quick search</h2>
+              </IconWrap>
+            </Item>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    Streamline your communication and stay connected with your
+                    important contacts by marking them as favorites for quick
+                    and easy access.{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons('favorite', 40)}</p>
+                <h2>Favorites list</h2>
+              </IconWrap>
+            </Item>
+            <Item className="card">
+              <DescWrap>
+                <div>
+                  <p>
+                    {' '}
+                    Organize your contacts into personalized groups, such as
+                    friends, family, and work, for even more efficient
+                    management.{' '}
+                  </p>
+                </div>
+              </DescWrap>
+              <IconWrap>
+                <p>{renderIcons('group', 40)}</p>
+                <h2>Personalized contact groups</h2>
+              </IconWrap>
+            </Item>
           </BenefitsList>
         </>
       </Section>

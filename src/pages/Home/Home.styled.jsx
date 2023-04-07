@@ -41,52 +41,6 @@ export const AppDescription = styled.div`
   }
 `;
 
-export const BenefitsListTitle = styled.h2`
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 24px;
-  line-height: 1.14;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #ef4287;
-`;
-export const BenefitsList = styled.ul`
-  display: flex;
-  column-gap: 20px;
-  margin-top: 50px;
-`;
-export const BenefitsItem = styled.li`
-  flex-basis: calc((100% - 5 * 20px) / 6);
-`;
-
-export const IconWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  background-color: #f8f3ff;
-  svg {
-    fill: #ef4287;
-  }
-`;
-
-export const BenefitTitle = styled.h3`
-  height: 30px;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.14;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-`;
-export const BenefitDescription = styled.p`
-  font-size: 14px;
-  line-height: 1.71;
-  letter-spacing: 0.03em;
-`;
-
 export const StartButton = styled.button`
   display: flex;
   justify-content: center;
@@ -112,37 +66,102 @@ export const LogInLink = styled(NavLink)`
 export const LogIn = styled.span``;
 // #ef4287, #f2c94c, #bb6bd9, #9b51e0, #f787b4, #f8f3ff
 
-// export const BenefitTitle = styled.h3`
-//   height: 30px;
-//   text-align: center;
-//   margin-bottom: 10px;
-//   font-size: 14px;
-//   line-height: 1.14;
-//   letter-spacing: 0.03em;
-//   text-transform: uppercase;
-//   transform: translateY(100%);
-//   transition: transform 0.3s ease-in-out;
-// `;
-// export const BenefitDescription = styled.p`
-//   font-size: 14px;
-//   line-height: 1.71;
-//   letter-spacing: 0.03em;
-//   transform: translateY(100%);
-//   transition: transform 0.3s ease-in-out;
-// `;
-// export const IconWrap = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 120px;
-//   margin-bottom: 30px;
-//   border-radius: 5px;
-//   background-color: #f8f3ff;
-//   svg {
-//     fill: #ef4287;
-//   }
-//   &:hover ~ ${BenefitTitle}, &:hover ~ ${BenefitDescription} {
-//     transform: translateY(-100%);
-//     transition: transform 0.3s ease-in-out;
-//   }
-// `;
+export const BenefitsListTitle = styled.h2`
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-size: 24px;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ef4287;
+`;
+export const BenefitsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+`;
+
+export const IconWrap = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(45deg, #fab7d2, #f787b4);
+  border-radius: 15px;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px 0 0 15px;
+  }
+  h2 {
+    font-size: 16px;
+  }
+  svg {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+`;
+
+export const DescWrap = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  div {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0 0 1em 0;
+    font-weight: 500;
+  }
+  h2 {
+    font-size: 16px;
+    color: #ef4287;
+  }
+  p {
+    text-align: justify;
+    font-size: 14px;
+  }
+`;
+
+export const Item = styled.li`
+  position: relative;
+  flex-basis: calc((100% - 2 * 20px) / 3);
+  height: 150px;
+  width: 277.5px;
+  background: #fff;
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+
+  &:hover {
+    ${IconWrap} {
+      height: 60px;
+      border-radius: 0 0 15px 15px;
+      background: linear-gradient(45deg, #ef4287, #bb6bd9);
+      svg {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+      h2 {
+        color: white;
+      }
+    }
+  }
+`;
