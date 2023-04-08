@@ -2,7 +2,7 @@ import { RiContactsBook2Fill } from 'react-icons/ri';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
 import { BsTelephoneFill } from 'react-icons/bs';
-import { FaEdit } from 'react-icons/fa';
+import { RiEdit2Fill } from 'react-icons/ri';
 import { RiLock2Fill } from 'react-icons/ri';
 import { MdMail } from 'react-icons/md';
 import { MdPersonAddAlt1 } from 'react-icons/md';
@@ -58,7 +58,7 @@ export function renderIcons(param, size) {
     case 'man':
       return <BsPersonFill size={size} className="contact-form__icon" />;
     case 'edit':
-      return <FaEdit size={size} className="contact-form__icon" />;
+      return <RiEdit2Fill size={size} className="contact-form__icon" />;
     case 'restore':
       return (
         <MdSettingsBackupRestore size={size} className="contact-form__icon" />

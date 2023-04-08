@@ -55,21 +55,20 @@ export function Filter({ name }) {
 
   return (
     <FilterBlock>
-      <label className="filter__field">
-        <span className="filter__label">{`Find contacts by ${name}`}</span>
+      <label>
+        <span>{`Search by ${name}`}</span>
         <input
           ref={input}
-          className="filter__input"
           type="text"
           name={name}
-          placeholder={`Enter ${name} to search contact...`}
+          placeholder={`Type ${name}...`}
           value={setFilterValue(name)}
           onChange={onChangeFilter}
         />
       </label>
       {inputFilterValue && (
         <Info>
-          Quantity of found contacts : <span>{filteredContacts.length}</span>
+          Contacts found: <span>{filteredContacts.length}</span>
         </Info>
       )}
     </FilterBlock>

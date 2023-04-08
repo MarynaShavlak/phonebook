@@ -1,36 +1,46 @@
 import styled from 'styled-components';
 
 export const FilterBlock = styled.div`
-  .filter__field {
+  label {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
   }
 
-  .filter__label {
-    font-size: 25px;
+  span {
+    font-size: 14px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
     font-weight: 700;
   }
 
-  .filter__input {
-    height: 70px;
+  input {
     width: 100%;
-    padding-left: 30px;
-    font-size: 24px;
+    padding-left: 10px;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
     font-weight: 600;
     color: #f66fa5;
-    border: 5px solid #fab7d2;
+    border: 3px solid #fab7d2;
     border-radius: 10px;
     &:focus {
       outline: none;
-      border: 5px solid #f787b4;
+      border: 3px solid #f787b4;
     }
   }
 `;
 
 export const Info = styled.p`
-  font-size: 25px;
-  margin-top: 15px;
+  font-size: 12px;
+  margin-top: 5px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 14px;
+  }
   font-style: italic;
   span {
     font-weight: 700;

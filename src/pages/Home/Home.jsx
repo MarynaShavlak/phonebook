@@ -86,8 +86,8 @@ const Home = () => {
               <DescWrap>
                 <div>
                   <p>
-                    You can create and edit contacts with just a few clicks,
-                    making it easy to keep your contacts up-to-date.{' '}
+                    You can create and edit contacts, making it easy to keep
+                    your contacts up-to-date.
                   </p>
                 </div>
               </DescWrap>
@@ -101,7 +101,7 @@ const Home = () => {
                 <div>
                   <p>
                     Sort your contacts by alphabet or date of creation to easily
-                    find the contact you need.{' '}
+                    find the contact you need.
                   </p>
                 </div>
               </DescWrap>
@@ -114,8 +114,8 @@ const Home = () => {
               <DescWrap>
                 <div>
                   <p>
-                    Protect contacts by moving them to recycle bin to prevent
-                    accidental deletion and allow easy restoration.{' '}
+                    Move contacts to the recycle bin for protection against
+                    accidental deletion and easy restoration.
                   </p>
                 </div>
               </DescWrap>
@@ -129,7 +129,7 @@ const Home = () => {
                 <div>
                   <p>
                     Efficiently search for contacts using either their name or
-                    phone number with just a few clicks.{' '}
+                    phone number.
                   </p>
                 </div>
               </DescWrap>
@@ -143,7 +143,7 @@ const Home = () => {
                 <div>
                   <p>
                     Stay connected with important contacts by marking them as
-                    favorites for easy and quick access.{' '}
+                    favorites for easy and quick access.
                   </p>
                 </div>
               </DescWrap>
@@ -155,11 +155,7 @@ const Home = () => {
             <Item className="card">
               <DescWrap>
                 <div>
-                  <p>
-                    {' '}
-                    Organize your contacts into personalized groups for even
-                    more efficient management.{' '}
-                  </p>
+                  <p>Group contacts for efficient management.</p>
                 </div>
               </DescWrap>
               <IconWrap>

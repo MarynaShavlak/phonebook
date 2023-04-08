@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
-  width: 480px;
+  /* width: 480px; */
 
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 768px;

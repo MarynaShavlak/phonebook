@@ -113,7 +113,13 @@ export const Contact = ({ contact }) => {
           toEdit: isHovered.edit,
         })}
       >
-        <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
+        <Avatar
+          size="30"
+          textSizeRatio={2}
+          name={contact.name}
+          unstyled={false}
+          round="50%"
+        />
         <HighlightContactDetails
           contact={contact}
           filterByName={filterByName}
@@ -134,7 +140,7 @@ export const Contact = ({ contact }) => {
                     onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
                     onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
                   >
-                    {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
+                    {renderIcons(OPERATION_TYPES.EDIT, 25)}Edit
                   </DropdownButton>
                 </Link>
               </>
@@ -150,8 +156,7 @@ export const Contact = ({ contact }) => {
                   onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
                   onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
                 >
-                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}Remove to
-                  recycle bin
+                  {renderIcons(OPERATION_TYPES.REMOVE, 25)}Remove to recycle bin
                 </DropdownButton>
               </>
             ),
@@ -166,7 +171,7 @@ export const Contact = ({ contact }) => {
                   onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
                   onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
                 >
-                  {renderIcons('group', iconSize.sm)}Add to group
+                  {renderIcons('group', 25)}Add to group
                 </DropdownButton>
               </>
             ),

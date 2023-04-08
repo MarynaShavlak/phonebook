@@ -101,6 +101,7 @@ export const BenefitsList = styled.ul`
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     display: flex;
     flex-wrap: wrap;
+
     gap: 20px;
   }
 `;
@@ -157,8 +158,10 @@ export const DescWrap = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px;
-
+  padding: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    padding: 20px;
+  }
   div {
     font-size: 1.2em;
     margin: 0;
@@ -171,36 +174,40 @@ export const DescWrap = styled.div`
   }
   p {
     text-align: justify;
-    font-size: 14px;
+    font-size: 12px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 14px;
+    }
   }
 `;
 
 export const Item = styled.li`
   position: relative;
-
-  @media screen and (max-width: 767px) {
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
-  }
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    flex-basis: calc((100% - 2 * 20px) / 3);
-  }
-  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    flex-basis: calc((100% - 3 * 20px) / 4);
-  }
-  height: 150px;
-  width: 277.5px;
+  height: 100px;
+  width: 320px;
   background: #fff;
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  @media screen and (max-width: 767px) {
+    :not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    width: 232px;
+    height: 140px;
+  }
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    width: 277.5px;
+  }
 
   &:hover {
     ${IconWrap} {
       flex-direction: row;
       row-gap: 0px;
       column-gap: 10px;
-      height: 60px;
+      height: 50px;
       border-radius: 0 0 10px 10px;
       background: linear-gradient(45deg, #ef4287, #bb6bd9);
       svg {

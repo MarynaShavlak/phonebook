@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Info, ContentWrapper, AddNewContactBtn } from './Contacts.styled';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import {
+  FilterList,
+  InfoWrap,
+  Info,
+  ContentWrapper,
+  AddNewContactBtn,
+} from './Contacts.styled';
 import { Button } from 'components/OperationButton/OperationButton.styled';
 import {
   ErrorMessage,
@@ -27,6 +35,7 @@ import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 
 const Contacts = () => {
+  const isTablet = useMediaQuery('(min-width:768px)');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,18 +59,27 @@ const Contacts = () => {
         <ContentWrapper>
           {allContacts.length !== 0 && (
             <>
-              <AddNewContactBtn
-                aria-label="Add new contact"
-                onClick={() => navigate('/create')}
-              >
-                {renderIcons('add', iconSize.md)}
-              </AddNewContactBtn>
-              <Info>
-                You have <span>{getContactsQuantity(allContacts)}</span> in your
-                phone book
-              </Info>
-              <Filter name="name" />
-              <Filter name="number" />
+              <InfoWrap>
+                <Info>
+                  Total quantity:{' '}
+                  <span>{getContactsQuantity(allContacts)}</span>
+                </Info>
+                <AddNewContactBtn
+                  aria-label="Add new contact"
+                  onClick={() => navigate('/create')}
+                >
+                  {renderIcons('add', 30)}
+                </AddNewContactBtn>
+              </InfoWrap>
+
+              <FilterList>
+                <li>
+                  <Filter name="name" />
+                </li>
+                <li>
+                  <Filter name="number" />
+                </li>
+              </FilterList>
             </>
           )}
 

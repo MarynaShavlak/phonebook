@@ -14,7 +14,7 @@ export const CheckboxWithStarIcon = ({ checked = false, onChange }) => {
       checkedIcon={<StarIcon />}
       onChange={onChange}
       sx={{
-        '& .MuiSvgIcon-root': { fontSize: 40 },
+        '& .MuiSvgIcon-root': { fontSize: 25 },
         color: '#ef4287',
 
         '&.Mui-checked': {

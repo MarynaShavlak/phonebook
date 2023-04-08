@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import Downshift from 'downshift';
 import Avatar from 'react-avatar';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { renderIcons } from 'utils/renderIcons';
 import { iconSize } from 'constants';
 import {
+  AvatarWrap,
   UserMenuWrapper,
   DropdownMenu,
   DropdownMenuItem,
@@ -18,6 +21,7 @@ import { userLogOut } from 'redux/auth/authOperations';
 
 export const UserMenu = () => {
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
+  const isTablet = useMediaQuery('(min-width:768px)');
 
   const dispatch = useDispatch();
   const { user } = useAuth();
@@ -35,25 +39,28 @@ export const UserMenu = () => {
 
   return (
     <UserMenuWrapper>
-      <p>
-        Welcome, <span>{user.name}!</span>{' '}
-      </p>
+      {isTablet && (
+        <p>
+          Welcome, <span>{user.name}!</span>{' '}
+        </p>
+      )}
+
       <Downshift
         isOpen={isDropdownMenuOpen}
         onOuterClick={() => setIsDropdownMenuOpen(false)}
       >
         {({ getItemProps, getMenuProps, isOpen }) => (
           <div>
-            <div onClick={handleDropdownMenu}>
+            <AvatarWrap onClick={handleDropdownMenu}>
               <Avatar
-                size="40"
+                size={30}
                 name={user.name}
                 unstyled={false}
                 round="50%"
                 cursor="pointer"
               />
               {renderIcons('dropDown', iconSize.xs)}
-            </div>
+            </AvatarWrap>
 
             {isOpen && (
               <DropdownMenu {...getMenuProps()}>

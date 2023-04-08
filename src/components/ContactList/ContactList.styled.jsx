@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const ContactsList = styled.ul`
-  /* padding: 0;
-  margin: 0;
-  list-style: none; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 30px;
+  font-size: 16px;
+  row-gap: 10px;
 `;
 
 export const ContactItem = styled.li`
@@ -37,7 +35,7 @@ export const SortBtn = styled.button`
   color: black;
   border-color: transparent;
 
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),

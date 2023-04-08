@@ -7,7 +7,11 @@ export const ContactEl = styled.div`
   display: flex;
   column-gap: 10px;
   align-items: center;
-  font-size: 24px;
+  font-size: 14px;
+  background-color: yellow;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 16px;
+  }
   flex-grow: 1;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 

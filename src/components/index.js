@@ -18,7 +18,6 @@ export { Filter } from 'components/Filter';
 export { Form } from 'components/Form';
 export { IconButton } from 'components/IconButton';
 export { Navigation } from 'components/Navigation';
-export { AuthNav } from 'components/AuthNav';
 export { UserMenu } from 'components/UserMenu';
 export { Loader } from 'components/Loader';
 export { Notification } from 'components/Notification';
