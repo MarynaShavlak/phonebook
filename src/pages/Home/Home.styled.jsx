@@ -2,14 +2,27 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const HomeTitle = styled.h1`
-  font-size: 30px;
-  text-align: center;
+  display: inline-block;
   margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    font-size: 30px;
+  }
 `;
 
 export const HomeLogo = styled.img`
-  width: 600px;
-  /* width: 800px; */
+  width: 240px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    width: 350px;
+  }
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    width: 600px;
+  }
+  /* height: 530px; */
 `;
 
 export const HomeWrapper = styled.div`
@@ -25,15 +38,21 @@ export const HomeInfo = styled.div`
 export const AppDescription = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
-  /* width: 600px; */
-  /* background-color: #f8f3ff; */
-  padding: 20px;
+  row-gap: 10px;
+
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    row-gap: 15px;
+  }
   p {
+    font-size: 12px;
     text-align: justify;
     line-height: 1.2;
     letter-spacing: 0.03em;
     font-weight: 500;
+
+    @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+      font-size: 14px;
+    }
   }
   span {
     color: #ef4287;
@@ -48,12 +67,13 @@ export const StartButton = styled.button`
   background-color: #f787b4;
   color: white;
   border: 5px solid transparent;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 20px;
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #fc458e;
   }
@@ -63,23 +83,26 @@ export const LogInLink = styled(NavLink)`
   color: #fc458e;
   font-weight: 700;
 `;
-export const LogIn = styled.span``;
-// #ef4287, #f2c94c, #bb6bd9, #9b51e0, #f787b4, #f8f3ff
 
 export const BenefitsListTitle = styled.h2`
   text-align: center;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  font-size: 24px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 20px;
   line-height: 1.14;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #ef4287;
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    font-size: 24px;
+  }
 `;
 export const BenefitsList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 `;
 
 export const IconWrap = styled.div`
@@ -89,11 +112,15 @@ export const IconWrap = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  row-gap: 10px;
   justify-content: center;
   align-items: center;
+
+  padding: 20px;
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   background: linear-gradient(45deg, #fab7d2, #f787b4);
-  border-radius: 15px;
+  border-radius: 10px;
   &::before {
     content: '';
     position: absolute;
@@ -102,15 +129,23 @@ export const IconWrap = styled.div`
     width: 50%;
     height: 100%;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px 0 0 15px;
+    border-radius: 10px 0 0 10px;
   }
   h2 {
-    font-size: 16px;
+    font-size: 14px;
+    text-align: center;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
   }
   svg {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -142,25 +177,44 @@ export const DescWrap = styled.div`
 
 export const Item = styled.li`
   position: relative;
-  flex-basis: calc((100% - 2 * 20px) / 3);
+
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    flex-basis: calc((100% - 2 * 20px) / 3);
+  }
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    flex-basis: calc((100% - 3 * 20px) / 4);
+  }
   height: 150px;
   width: 277.5px;
   background: #fff;
-  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 
   &:hover {
     ${IconWrap} {
+      flex-direction: row;
+      row-gap: 0px;
+      column-gap: 10px;
       height: 60px;
-      border-radius: 0 0 15px 15px;
+      border-radius: 0 0 10px 10px;
       background: linear-gradient(45deg, #ef4287, #bb6bd9);
       svg {
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
         fill: white;
       }
       h2 {
         color: white;
+        font-size: 12px;
+        text-align: left;
+        @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+          font-size: 14px;
+        }
       }
     }
   }
