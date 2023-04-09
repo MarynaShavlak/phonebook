@@ -29,9 +29,10 @@ import { MdSort } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
 import { BsPersonFill } from 'react-icons/bs';
 import { RiCloseLine } from 'react-icons/ri';
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MdGroupAdd } from 'react-icons/md';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { ImInfo } from 'react-icons/im';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -104,11 +105,13 @@ export function renderIcons(param, size) {
     case 'close':
       return <RiCloseLine size={size} className="contact-form__icon" />;
     case 'back':
-      return <IoMdArrowRoundBack size={size} className="contact-form__icon" />;
+      return <IoIosArrowRoundBack size={size} className="contact-form__icon" />;
     case 'addGroup':
       return <MdGroupAdd size={size} className="contact-form__icon" />;
     case 'dots':
       return <BsThreeDotsVertical size={size} className="contact-form__icon" />;
+    case 'info':
+      return <ImInfo size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }

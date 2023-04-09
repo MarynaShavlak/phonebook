@@ -1,22 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormStyled, FormItem, FormList, FormTitle } from './Form.styled';
+import { FormStyled, FormItem, FormList } from './Form.styled';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
 import { OperationButton } from 'components';
 
 export function Form({ name, number, operationType, onSubmit, onChange }) {
   return (
     <FormStyled onSubmit={onSubmit}>
       <FormList>
-        <FormTitle>{operationType}</FormTitle>
         <FormItem>
-          <label className="contact-form__field">
-            <span className="contact-form__label">Name</span>
-            <span className="contact-from__wrapper">
-              {renderIcons('man', iconSize.sm)}
+          <label>
+            <span>Name</span>
+            <span>
+              {renderIcons('man', 20)}
               <input
-                className="contact-form__input"
                 type="text"
                 name="name"
                 value={name}
@@ -29,12 +26,11 @@ export function Form({ name, number, operationType, onSubmit, onChange }) {
           </label>
         </FormItem>
         <FormItem>
-          <label className="contact-form__field">
-            <span className="contact-form__label">Number</span>
-            <span className="contact-from__wrapper">
-              {renderIcons('number', iconSize.sm)}
+          <label>
+            <span>Number</span>
+            <span>
+              {renderIcons('number', 20)}
               <input
-                className="contact-form__input"
                 type="tel"
                 name="number"
                 value={number}

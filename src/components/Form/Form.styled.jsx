@@ -1,20 +1,12 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const FormStyled = styled.form`
   padding: 10px;
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 20px;
 `;
-export const FormTitle = styled.h2`
-  text-align: center;
-  font-size: 24px;
-  font-weight: 900;
-  color: black;
-  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
-    1px 1px 1px rgba(0, 0, 0, 0.5);
-`;
-
 export const FormList = styled.ul`
   padding: 0;
   margin: 0;
@@ -22,17 +14,17 @@ export const FormList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 30px;
+  row-gap: 25px;
 `;
 
 export const FormItem = styled.li`
-  .contact-form__field {
+  label {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
   }
 
-  .contact-from__wrapper {
+  label > span:nth-of-type(2) {
     position: relative;
   }
   .contact-form__icon {
@@ -41,23 +33,48 @@ export const FormItem = styled.li`
     left: 20px;
     transform: translateY(-50%);
   }
-  .contact-form__label {
-    font-size: 25px;
+
+  span:first-child {
+    font-size: 14px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
     font-weight: 700;
   }
 
-  .contact-form__input {
-    height: 70px;
+  input {
     width: 100%;
-    padding-left: 70px;
-    font-size: 24px;
+    padding-left: 50px;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
     font-weight: 600;
     color: #f66fa5;
-    border: 5px solid #fab7d2;
+    border: 3px solid #fab7d2;
     border-radius: 10px;
     &:focus {
       outline: none;
-      border: 5px solid #f787b4;
+      border: 3px solid #f787b4;
+    }
+  }
+`;
+
+export const BackButton = styled(NavLink)`
+  button {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover {
+      color: #f787b4;
     }
   }
 `;

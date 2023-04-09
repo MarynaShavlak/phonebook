@@ -1,10 +1,10 @@
 import React from 'react';
-import { ContactForm, IconButton } from 'components';
+import { ContactForm } from 'components';
 import { Section } from 'components';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
+import { BackButton } from 'components/Form/Form.styled';
 
 const AddNewContact = () => {
   const location = useLocation();
@@ -13,11 +13,11 @@ const AddNewContact = () => {
     <main>
       <Section>
         <ContentWrapper>
-          <Link to={backLinkHref}>
-            <IconButton aria-label="Back to previous page">
-              {renderIcons('back', iconSize.sm)}
-            </IconButton>
-          </Link>
+          <BackButton to={backLinkHref}>
+            <button type="button" aria-label="Back to previous page">
+              {renderIcons('back', 50)}
+            </button>
+          </BackButton>
           <ContactForm />
         </ContentWrapper>
       </Section>

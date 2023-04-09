@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
-import { Section, Form, IconButton, Loader } from 'components';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Section, Form, Loader } from 'components';
 import { selectContacts } from 'redux/contacts/selectors';
 import {
   fetchContacts,
   updateContact,
 } from 'redux/contacts/contactsOperations';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
-import {
-  EditFormInfo,
-  EditFormInstrc,
-  EditFormText,
-  ContactInfo,
-  ContactCategory,
-} from './EditContact.styled';
+import { EditFormInfo, EditFormInstrc } from './EditContact.styled';
 import {
   renderIcons,
   Notifications,
   isExistByNumber,
   isExistByName,
 } from 'utils';
-import { iconSize } from 'constants';
+import { BackButton } from 'components/Form/Form.styled';
 
 const EditContact = () => {
   const location = useLocation();
@@ -98,35 +92,36 @@ const EditContact = () => {
     <main>
       <Section>
         <ContentWrapper>
-          <Link to={backLinkHref}>
-            <IconButton aria-label="Back to previous page">
-              {renderIcons('back', iconSize.sm)}
-            </IconButton>
-          </Link>
+          <BackButton to={backLinkHref}>
+            <button type="button" aria-label="Back to previous page">
+              {renderIcons('back', 50)}
+            </button>
+          </BackButton>
+
           <>
             <EditFormInfo>
-              <p>You try to edit contact with</p>
-              <ContactInfo>
-                <ContactCategory>Name:</ContactCategory>
+              <p>You try to edit contact with:</p>
+              <p>
+                <span>Name:</span>
                 <span>
                   <b>{contact.name}</b>
                 </span>
-              </ContactInfo>
-              <ContactInfo>
-                <ContactCategory>Number:</ContactCategory>
+              </p>
+              <p>
+                <span>Number:</span>
                 <span>
                   <b>{contact.number}</b>
                 </span>
-              </ContactInfo>
+              </p>
             </EditFormInfo>
             <EditFormInstrc>
-              <EditFormText>
-                It is allowed change only <b> name</b> OR <b>number</b>
-              </EditFormText>
-              <EditFormText>
-                If you want to change <b> both name AND number</b>, please
-                delete this contact and create new one with correct info
-              </EditFormText>
+              <p>{renderIcons('info', 25)}</p>
+
+              <p>
+                Modify only one field for a contact - either the <b>name </b>or{' '}
+                <b>number</b>. If you need to change both, delete the existing
+                contact and create a new one.
+              </p>
             </EditFormInstrc>
             <Form
               name={name}
