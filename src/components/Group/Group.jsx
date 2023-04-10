@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { renderIcons, Notifications, makeSlug } from 'utils';
 import { useModal } from 'hooks';
-import { GROUP_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
+import { GROUP_ACTIONS, OPERATION_TYPES } from 'constants';
 
 import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
