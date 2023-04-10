@@ -54,8 +54,8 @@ export function ContactList() {
           className={clsx({ active: sortOption === 'ByAlphabet' })}
         >
           {reverseSort
-            ? renderIcons('alphaUp', 25)
-            : renderIcons('alphaDown', 25)}
+            ? renderIcons('alphaUp', 20)
+            : renderIcons('alphaDown', 20)}
         </SortBtn>
         <SortBtn
           onClick={toggleDateSortBtn}
@@ -63,8 +63,8 @@ export function ContactList() {
           className={clsx({ active: sortOption === 'ByDate' })}
         >
           {reverseSort
-            ? renderIcons('dateUp', 25)
-            : renderIcons('dateDown', 25)}
+            ? renderIcons('dateUp', 20)
+            : renderIcons('dateDown', 20)}
         </SortBtn>
       </SortButtons>
       <ContactsList>

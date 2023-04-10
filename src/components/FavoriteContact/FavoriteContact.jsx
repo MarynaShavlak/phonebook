@@ -17,7 +17,13 @@ export const FavoriteContact = ({ contact }) => {
   return (
     <>
       <ContactEl>
-        <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
+        <Avatar
+          size="30"
+          textSizeRatio={2}
+          name={contact.name}
+          unstyled={false}
+          round="50%"
+        />
         <Name>{contact.name}:</Name>
         <Number>{contact.number}</Number>
       </ContactEl>

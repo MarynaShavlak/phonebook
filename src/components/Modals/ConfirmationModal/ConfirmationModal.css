@@ -17,12 +17,6 @@
   position: relative;
 }
 
-.action-buttons {
-  display: flex;
-  column-gap: 30px;
-  justify-content: center;
-  margin-top: 40px;
-}
 
 .close-modal-btn {
   position: absolute;
@@ -45,8 +39,3 @@
   color: #ef4287;
 }
 
-.confirmation__message {
-  font-size: 24px;
-  text-align: center;
-  line-height: 1.67;
-}

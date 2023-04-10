@@ -8,7 +8,6 @@ export const ContactEl = styled.div`
   column-gap: 10px;
   align-items: center;
   font-size: 14px;
-  background-color: yellow;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 16px;
   }
@@ -40,7 +39,12 @@ export const Number = styled.p``;
 
 export const Time = styled.p`
   display: flex;
-  column-gap: 10px;
+  column-gap: 5px;
+  padding-left: 40px;
   align-items: center;
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  font-size: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 12px;
+  }
 `;

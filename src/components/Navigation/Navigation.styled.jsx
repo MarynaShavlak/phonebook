@@ -19,8 +19,9 @@ export const NavigationLink = styled(NavLink)`
   height: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+
   font-size: 12px;
   font-weight: 800;
   color: black;
@@ -37,9 +38,9 @@ export const NavigationLink = styled(NavLink)`
   }
 
   svg {
-    width: 25px;
-    height: 25px;
-    @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    width: 15px;
+    height: 15px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       width: 20px;
       height: 20px;
     }

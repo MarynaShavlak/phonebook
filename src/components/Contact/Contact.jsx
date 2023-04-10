@@ -13,7 +13,7 @@ import {
   DropdownMenu,
 } from 'components';
 import { renderIcons, getCurrentTime, Notifications } from 'utils';
-import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
+import { CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
 import {
   addContactToRecycleBin,
   selectRecycleBinContacts,

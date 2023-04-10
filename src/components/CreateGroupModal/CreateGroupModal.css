@@ -14,20 +14,19 @@
   position: relative;
 }
 
-.action-buttons {
-  display: flex;
-  column-gap: 30px;
-  justify-content: center;
-  margin-top: 40px;
-}
 .confirmation__message {
-  font-size: 24px;
+  font-size: 12px;
   font-weight: 700;
   text-align: center;
-  line-height: 1.67;
+  line-height: 1.5;
   margin-bottom: 20px;
+ }
 
-}
+ @media screen and (min-width: 768px) {
+   .confirmation__message {
+     font-size: 14px;
+   }
+ }
 
 .close-modal-btn {
   position: absolute;
@@ -40,7 +39,6 @@
   background-color: transparent;
   color: black;
   border: 1px solid transparent;
-      /* border-radius: 50%; */
   cursor: pointer;
   transition:  color 300ms cubic-bezier(0.4, 0, 0.2, 1);
      

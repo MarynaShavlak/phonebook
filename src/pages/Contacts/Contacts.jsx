@@ -32,10 +32,8 @@ import {
 } from 'redux/filters/selectors';
 import { getContactsQuantity } from 'utils/getContactsQuantity';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
 
 const Contacts = () => {
-  const isTablet = useMediaQuery('(min-width:768px)');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,6 +63,7 @@ const Contacts = () => {
                   <span>{getContactsQuantity(allContacts)}</span>
                 </Info>
                 <AddNewContactBtn
+                  type="button"
                   aria-label="Add new contact"
                   onClick={() => navigate('/create')}
                 >

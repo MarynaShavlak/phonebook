@@ -13,7 +13,7 @@ import { OPERATION_TYPES } from 'constants';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
-  const isLargeScreen = useMediaQuery('(min-width:1200px)');
+  const isDesktop = useMediaQuery('(min-width:1200px)');
   const isTablet = useMediaQuery('(min-width:768px)');
   return (
     <Menu>
@@ -28,7 +28,7 @@ export const Navigation = () => {
         <li>
           <NavigationLink to="/">
             {renderIcons('home', 20)}
-            {isLargeScreen && <span>Home</span>}
+            {isDesktop && <span>Home</span>}
           </NavigationLink>
         </li>
         {isLoggedIn && (
@@ -37,25 +37,25 @@ export const Navigation = () => {
             <li>
               <NavigationLink to="/contacts">
                 {renderIcons('contact', 20)}
-                {isLargeScreen && <span>Contacts</span>}
+                {isDesktop && <span>Contacts</span>}
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/favorites">
                 {renderIcons('favorite', 20)}
-                {isLargeScreen && <span>Favorites</span>}
+                {isDesktop && <span>Favorites</span>}
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/groups">
                 {renderIcons('group', 20)}
-                {isLargeScreen && <span>Groups</span>}
+                {isDesktop && <span>Groups</span>}
               </NavigationLink>
             </li>
             <li>
               <NavigationLink to="/recyclebin">
                 {renderIcons(OPERATION_TYPES.DELETE, 20)}
-                {isLargeScreen && <span>Recycle Bin</span>}
+                {isDesktop && <span>Recycle Bin</span>}
               </NavigationLink>
             </li>
           </>

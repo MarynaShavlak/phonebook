@@ -59,12 +59,12 @@ export const Group = ({ group }) => {
     <>
       <GroupWrapper>
         <GroupEl>
-          <GroupAvatar>{renderIcons('group', 24)}</GroupAvatar>
+          <GroupAvatar>{renderIcons('group', 20)}</GroupAvatar>
           <Content onClick={toggleGroupContent}>
             <Element>
               {group.name}&nbsp; ({contactsQuantityInGroup})
             </Element>
-            <DropButton type="button">{renderIcons('dropDown', 40)}</DropButton>
+            <DropButton type="button">{renderIcons('dropDown', 20)}</DropButton>
           </Content>
         </GroupEl>
 
@@ -80,7 +80,8 @@ export const Group = ({ group }) => {
                 </IconButton>
                 <ContactEl>
                   <Avatar
-                    size="30"
+                    size="20"
+                    textSizeRatio={2}
                     name={contact.name}
                     unstyled={false}
                     round="50%"
@@ -103,7 +104,7 @@ export const Group = ({ group }) => {
                   ariaLabel={GROUP_ACTIONS.EDIT}
                   onClick={toggleEditModal}
                 >
-                  {renderIcons(OPERATION_TYPES.EDIT, iconSize.sm)}Edit
+                  {renderIcons(OPERATION_TYPES.EDIT, 25)}Edit
                 </DropdownButton>
               </>
             ),
@@ -116,7 +117,7 @@ export const Group = ({ group }) => {
                   ariaLabel={GROUP_ACTIONS.DELETE}
                   onClick={toggleDeleteModal}
                 >
-                  {renderIcons(OPERATION_TYPES.REMOVE, iconSize.sm)}Delete
+                  {renderIcons(OPERATION_TYPES.REMOVE, 25)}Delete
                 </DropdownButton>
               </>
             ),
@@ -127,8 +128,7 @@ export const Group = ({ group }) => {
               <>
                 <Link to={`/manage-group-member/${makeSlug(`${group.name}`)}`}>
                   <DropdownButton ariaLabel={GROUP_ACTIONS.ADD}>
-                    {renderIcons(OPERATION_TYPES.ADD, iconSize.sm)}Manage
-                    contacts
+                    {renderIcons(OPERATION_TYPES.ADD, 25)}Manage contacts
                   </DropdownButton>
                 </Link>
               </>

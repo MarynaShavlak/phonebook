@@ -3,19 +3,26 @@ import styled from 'styled-components';
 export const GroupsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const GroupButton = styled.button`
   display: flex;
   justify-content: center;
-  padding: 10px 30px;
+  padding: 5px;
   background-color: #fde7f0;
   color: black;
   border: 5px solid transparent;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 10px;
+
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 12px;
+  }
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
@@ -32,8 +39,14 @@ export const GroupButton = styled.button`
 `;
 
 export const ModalText = styled.p`
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 14px;
+  }
+
+  margin-bottom: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    margin-bottom: 20px;
+  }
 `;

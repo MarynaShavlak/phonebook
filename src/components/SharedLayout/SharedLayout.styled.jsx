@@ -6,10 +6,10 @@ export const Container = styled.div`
   padding-right: 15px;
   /* width: 480px; */
 
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+  /* @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 768px;
   }
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     width: 1200px;
-  }
+  } */
 `;

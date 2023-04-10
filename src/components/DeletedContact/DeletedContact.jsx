@@ -3,17 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import { clsx } from 'clsx';
-import { IconButton, OperationModal } from 'components';
+import { OperationModal, DropdownMenu } from 'components';
+import { InfoBlock } from './DeletedContact.styled';
 import {
   ContactEl,
   Name,
   Number,
-  ControlButtons,
   Time,
 } from 'components/Contact/Contact.styled';
+import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
+
 import { renderIcons, Notifications } from 'utils';
 import { useHoverEffects, useModal } from 'hooks';
-import { CONTACT_ACTIONS, OPERATION_TYPES, iconSize } from 'constants';
+import { CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
 import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
 import { addContact } from 'redux/contacts/contactsOperations';
 
@@ -77,39 +79,66 @@ export const DeletedContact = ({ contact }) => {
           action={CONTACT_ACTIONS.DELETE}
         />
       )}
-
-      <ContactEl
-        className={clsx({
-          toRestore: isHovered.restore,
-          toDelete: isHovered.delete,
-        })}
-      >
-        <Avatar size="60" name={contact.name} unstyled={false} round="50%" />
-        <Name>{contact.name}:</Name>
-        <Number>{contact.number}</Number>
-      </ContactEl>
-      <Time>
-        deleted at <b>{contact.removalContactTime}</b>
-      </Time>
-
-      <ControlButtons>
-        <IconButton
-          ariaLabel={CONTACT_ACTIONS.RESTORE}
-          onClick={toggleRestoreModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.RESTORE)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.RESTORE)}
+      <InfoBlock>
+        <ContactEl
+          className={clsx({
+            toRestore: isHovered.restore,
+            toDelete: isHovered.delete,
+          })}
         >
-          {renderIcons(OPERATION_TYPES.RESTORE, iconSize.sm)}
-        </IconButton>
-        <IconButton
-          ariaLabel={CONTACT_ACTIONS.DELETE}
-          onClick={toggleDeleteModal}
-          onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-          onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-        >
-          {renderIcons(OPERATION_TYPES.DELETE, iconSize.sm)}
-        </IconButton>
-      </ControlButtons>
+          <Avatar
+            size="30"
+            textSizeRatio={2}
+            name={contact.name}
+            unstyled={false}
+            round="50%"
+          />
+          <Name>{contact.name}:</Name>
+          <Number>{contact.number}</Number>
+        </ContactEl>
+        <Time>
+          removed at <b>{contact.removalContactTime}</b>
+        </Time>
+      </InfoBlock>
+
+      <DropdownMenu
+        elements={[
+          {
+            label: OPERATION_TYPES.RESTORE,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+                  onClick={toggleRestoreModal}
+                  onMouseEnter={() =>
+                    toggleHoverEffect(OPERATION_TYPES.RESTORE)
+                  }
+                  onMouseLeave={() =>
+                    toggleHoverEffect(OPERATION_TYPES.RESTORE)
+                  }
+                >
+                  {renderIcons(OPERATION_TYPES.RESTORE, 25)}Restore{' '}
+                </DropdownButton>
+              </>
+            ),
+          },
+          {
+            label: OPERATION_TYPES.ADD,
+            icon: (
+              <>
+                <DropdownButton
+                  ariaLabel={CONTACT_ACTIONS.DELETE}
+                  onClick={toggleDeleteModal}
+                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
+                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
+                >
+                  {renderIcons(OPERATION_TYPES.DELETE, 25)}Delete
+                </DropdownButton>
+              </>
+            ),
+          },
+        ]}
+      />
     </>
   );
 };

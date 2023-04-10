@@ -23,6 +23,8 @@ export const ContentWrapper = styled(Container)`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  padding: 0;
+  width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 700px;
   }

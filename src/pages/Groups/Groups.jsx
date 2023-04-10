@@ -4,7 +4,7 @@ import { selectGroups } from 'redux/groups';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
 import { Button } from 'components/OperationButton/OperationButton.styled';
 import { Section, Notification, CreateGroupModal, Group } from 'components';
-import { ContentWrapper, Info } from 'pages/Contacts/Contacts.styled';
+import { ContentWrapper, Info, InfoWrap } from 'pages/Contacts/Contacts.styled';
 import { GroupsList, GroupItem, AddNewGroupBtn } from './Groups.styled';
 import { renderIcons, getGroupsQuantity } from 'utils';
 
@@ -35,16 +35,18 @@ const Groups = () => {
                   onClose={toggleCreateGroupModal}
                 />
               )}
-              <AddNewGroupBtn
-                aria-label="Add new contact"
-                onClick={toggleCreateGroupModal}
-              >
-                {renderIcons('addGroup', 40)}
-              </AddNewGroupBtn>
-              <Info>
-                You have <span>{getGroupsQuantity(groups)}</span> in your phone
-                book
-              </Info>
+              <InfoWrap>
+                <Info>
+                  Total quantity: <span>{getGroupsQuantity(groups)}</span>
+                </Info>
+                <AddNewGroupBtn
+                  type="button"
+                  aria-label="Add new contact"
+                  onClick={toggleCreateGroupModal}
+                >
+                  {renderIcons('addGroup', 30)}
+                </AddNewGroupBtn>
+              </InfoWrap>
               <GroupsList>
                 {groups.map(group => (
                   <GroupItem key={group.id}>
