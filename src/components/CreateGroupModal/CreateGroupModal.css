@@ -56,21 +56,27 @@
 
 
 .group-form__input {
-  height: 70px;
-    width: 100%;
-    padding-left: 20px;
-    font-size: 20px;
+  width: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-weight: 600;
     color: #f66fa5;
-    border: 5px solid #fab7d2;
+    border: 3px solid #fab7d2;
     border-radius: 10px;
-    flex-grow: 1;
-  
-    
 }
+
+    @media screen and (min-width: 768px) {
+      .group-form__input {
+        font-size: 16px;
+      }
+      
+    }
+
 .group-form__input:focus {
   outline: none;
-  border: 5px solid #f787b4;
+  border: 3px solid #f787b4;
 }
 
 .add-group-btn {

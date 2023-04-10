@@ -17,7 +17,6 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     background: 'white',
-    width: '700px',
     padding: '30px 20px',
     border: 'none',
     transform: 'translate(-50%, -50%)',

@@ -32,7 +32,9 @@ export const GroupButton = styled.button`
 `;
 
 export const Text = styled.p`
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-size: 14px;
+
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 16px;
+  }
 `;

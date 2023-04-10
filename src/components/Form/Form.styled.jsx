@@ -77,4 +77,13 @@ export const BackButton = styled(NavLink)`
       color: #f787b4;
     }
   }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 50px;
+      height: 50px;
+    }
+  }
 `;

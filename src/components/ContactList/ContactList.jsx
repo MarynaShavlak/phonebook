@@ -10,7 +10,6 @@ import {
 } from './ContactList.styled';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { renderIcons } from 'utils';
-import { iconSize } from 'constants';
 import { useSort } from 'hooks';
 
 export function ContactList() {

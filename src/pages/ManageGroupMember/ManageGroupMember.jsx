@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGroups } from 'redux/groups';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Select from 'react-select';
-import { Section, IconButton } from 'components';
+import { Section } from 'components';
 import { selectContacts } from 'redux/contacts';
 import { deleteContactFromGroup, addContactToGroup } from 'redux/groups';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
@@ -13,8 +13,8 @@ import {
   GroupButton,
 } from 'components/AddContactToGroupModal/AddContactToGroupModal.styled';
 import { Text } from './ManageGroupMember.styled';
+import { BackButton } from 'components/Form/Form.styled';
 import { renderIcons, convertHyphenatedString } from 'utils/';
-import { iconSize } from 'constants';
 
 const ManageGroupMember = () => {
   const dispatch = useDispatch();
@@ -96,11 +96,11 @@ const ManageGroupMember = () => {
     <main>
       <Section>
         <ContentWrapper>
-          <Link to="/groups">
-            <IconButton aria-label="Back to previous page">
-              {renderIcons('back', iconSize.sm)}
-            </IconButton>
-          </Link>{' '}
+          <BackButton to="/groups">
+            <button type="button" aria-label="Back to previous page">
+              {renderIcons('back', 50)}
+            </button>
+          </BackButton>
           <>
             {!!initialContactsInGroup.length && (
               <Text>

@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   HomeTitle,
-  HomeLogo,
   HomeInfo,
   HomeWrapper,
   AppDescription,
@@ -16,7 +15,6 @@ import {
   LogInLink,
 } from './Home.styled';
 import { Section } from 'components';
-import Logo from './images/home.png';
 import { renderIcons } from 'utils/renderIcons';
 import { useAuth } from 'hooks';
 import { OPERATION_TYPES } from 'constants';
@@ -71,14 +69,6 @@ const Home = () => {
                 </>
               )}
             </HomeInfo>
-
-            {/* <HomeLogo
-              src={Logo}
-              alt="home-logo"
-              // width="600px"
-              // height="520px"
-              loading="lazy"
-            /> */}
           </HomeWrapper>
           <BenefitsListTitle>Our benefits</BenefitsListTitle>
           <BenefitsList>

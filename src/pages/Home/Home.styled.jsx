@@ -22,7 +22,6 @@ export const HomeLogo = styled.img`
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     width: 600px;
   }
-  /* height: 530px; */
 `;
 
 export const HomeWrapper = styled.div`
@@ -39,7 +38,6 @@ export const AppDescription = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     row-gap: 15px;
   }
@@ -101,7 +99,7 @@ export const BenefitsList = styled.ul`
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     display: flex;
     flex-wrap: wrap;
-
+    justify-content: center;
     gap: 20px;
   }
 `;
@@ -184,7 +182,7 @@ export const DescWrap = styled.div`
 export const Item = styled.li`
   position: relative;
   height: 100px;
-  width: 320px;
+  width: 290px;
   background: #fff;
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
   border-radius: 10px;

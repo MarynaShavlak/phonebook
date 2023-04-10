@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import {
   FilterList,
@@ -104,7 +103,7 @@ const Contacts = () => {
             <>
               <Notification message="Add your first contact today and discover the amazing possibilities of Phone Genie!" />
               <Button type="button" onClick={() => navigate('/create')}>
-                Add contact to phone book
+                Add contact
               </Button>
             </>
           )}

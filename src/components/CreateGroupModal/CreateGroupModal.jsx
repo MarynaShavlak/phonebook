@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import './CreateGroupModal.css';
 import Modal from 'react-modal';
 import { renderIcons, Notifications, removeExtraWhitespace } from 'utils';
-import { addNewGroup } from 'redux/groups/groupsSlice';
-import { selectGroups } from 'redux/groups/selectors';
+import { addNewGroup, selectGroups } from 'redux/groups';
+import { ModalActionButtons } from 'components';
 
 Modal.setAppElement('#root');
 
@@ -21,7 +21,6 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     background: 'white',
-    width: '700px',
     padding: '30px 20px',
     border: 'none',
     transform: 'translate(-50%, -50%)',
@@ -30,17 +29,28 @@ const customStyles = {
 
 export const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const dispatch = useDispatch();
   const groups = useSelector(selectGroups);
 
-  const addContactGroup = e => {
-    e.preventDefault();
-
+  const addContactGroup = () => {
     if (checkGroupExistence(groupName)) return;
     const groupId = nanoid();
     dispatch(addNewGroup({ name: groupName, id: groupId }));
     onClose();
     Notifications.showGroupSuccess(groupName);
+  };
+  const onSubmit = e => {
+    e.preventDefault();
+
+    addContactGroup();
   };
 
   const handleInputChange = e => {
@@ -62,10 +72,17 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
     <Modal
       isOpen={isOpen}
       contentLabel="Modal window to create contact group"
-      style={customStyles}
       closeTimeoutMS={300}
       shouldCloseOnOverlayClick={true}
       onRequestClose={onClose}
+      style={{
+        overlay: customStyles.overlay,
+        content: {
+          ...customStyles.content,
+          width: width >= 768 ? '500px' : '80%',
+          maxWidth: '100%',
+        },
+      }}
     >
       <button
         aria-label="Close modal"
@@ -77,7 +94,7 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
       <p className="confirmation__message">
         <span>Create new group of contacts</span>{' '}
       </p>
-      <form onSubmit={addContactGroup}>
+      <form onSubmit={onSubmit}>
         <div className="group-form__wrapper">
           <input
             className="group-form__input"
@@ -90,6 +107,12 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
           />
         </div>
       </form>
+      <ModalActionButtons
+        confirmAriaLabel={`Confirm to create new group`}
+        cancelAriaLabel={`Cancel to create new group`}
+        onCancel={onClose}
+        onConfirm={addContactGroup}
+      />
     </Modal>
   );
 };
