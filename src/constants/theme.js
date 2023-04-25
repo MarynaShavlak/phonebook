@@ -3,7 +3,7 @@ export const theme = Object.freeze({
     white: '#ffffff',
   },
   devices: {
-    mobile: '320px',
+    mobile: '375px',
     tablet: '768px',
     desktop: '1200px',
   },

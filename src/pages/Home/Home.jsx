@@ -1,162 +1,153 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 import {
+  HomeMain,
   HomeTitle,
   HomeInfo,
   HomeWrapper,
   AppDescription,
-  BenefitsListTitle,
   BenefitsList,
   Item,
-  DescWrap,
   IconWrap,
   StartButton,
   LogInLink,
+  Header,
+  Benefit,
 } from './Home.styled';
 import { Section } from 'components';
 import { renderIcons } from 'utils/renderIcons';
-import { useAuth } from 'hooks';
-import { OPERATION_TYPES } from 'constants';
+import Logo from 'components/Navigation/images/phone-genie-logo.png';
+import HomeImage from './images/home.svg';
 
 const Home = () => {
-  const { isLoggedIn } = useAuth();
   return (
-    <main>
-      <Section>
-        <>
+    <>
+      <Header>
+        <div>
+          <img src={Logo} alt="logo" />
+        </div>
+
+        <HomeTitle>Let Phone Genie Grant Your Every Connection Wish!</HomeTitle>
+
+        <div>
+          <Link to="/register">
+            <StartButton>GET STARTED</StartButton>
+          </Link>
+          <p>
+            Have an account? <LogInLink to="/login">Log In</LogInLink>
+          </p>
+        </div>
+      </Header>
+      <HomeMain>
+        <Section>
           {' '}
-          <HomeTitle>
-            Let Phone Genie Grant Your Every Connection Wish!
-          </HomeTitle>
           <HomeWrapper>
             <HomeInfo>
+              <div>
+                <img src={HomeImage} alt="logo" />
+              </div>
               <AppDescription>
                 <p>
-                  Welcome to <span>Phone Genie</span> - the ultimate contact
-                  management solution! Our powerful and user-friendly interface
-                  makes it easy to create and organize your contacts with just a
-                  few clicks.
+                  <span>Phone Genie</span> - the ultimate contact management
+                  solution.
                 </p>{' '}
                 <p>
-                  Say goodbye to the hassle of searching through endless lists
-                  of contacts and hello to the convenience of having all your
-                  contacts in one place. <span>Phone Genie</span> has got you
-                  covered whether you're a busy professional, a social
-                  butterfly, or just looking for a way to stay organized.
+                  With a powerful and user-friendly interface, it's easy to
+                  create and organize your contacts.
                 </p>
                 <p>
-                  With <span>Phone Genie</span>, you'll have everything you need
-                  right at your fingertips, giving you the power to manage your
-                  contacts with ease and efficiency.
+                  Say goodbye to endless lists of contacts and hello to
+                  convenience.
                 </p>
                 <p>
-                  So why wait? Let <span>Phone Genie</span> grant your every
-                  connection wish and take control of your contact management
-                  today! Experience the ultimate solution for your contact needs
-                  with <span>Phone Genie</span>. Try it now!
+                  Whether you're a busy professional or a social butterfly,{' '}
+                  <span>Phone Genie</span> has got you covered.
+                </p>
+                <p>
+                  Try it now and take control of your contact management today!
                 </p>
               </AppDescription>
-              {!isLoggedIn && (
-                <>
-                  <Link to="/register">
-                    <StartButton>GET STARTED</StartButton>
-                  </Link>
-
-                  <span>
-                    Have an account? <LogInLink to="/login">Log In</LogInLink>
-                  </span>
-                </>
-              )}
             </HomeInfo>
           </HomeWrapper>
-          <BenefitsListTitle>Our benefits</BenefitsListTitle>
+        </Section>
+        <Section>
           <BenefitsList>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>
-                    You can create and edit contacts, making it easy to keep
-                    your contacts up-to-date.
-                  </p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons('edit', 20)}
+              <div>1</div>
+              <IconWrap>{renderIcons('pencil', 15)}</IconWrap>
+              <Benefit>
                 <h2>Easily create and edit contacts</h2>
-              </IconWrap>
+                <p>
+                  Phone Genie provides the functionality to create and modify
+                  contacts, facilitating the maintenance of an up-to-date
+                  directory of your contacts.
+                </p>
+              </Benefit>
             </Item>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>
-                    Sort your contacts by alphabet or date of creation to easily
-                    find the contact you need.
-                  </p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons('alphaDown', 20)}
+              <div>2</div>
+              <IconWrap>{renderIcons('alphaDown', 15)}</IconWrap>
+              <Benefit>
                 <h2>Efficiently sort contacts</h2>
-              </IconWrap>
+                <p>
+                  Phone Genie efficiently manages contacts with a versatile
+                  sorting feature, allowing convenient alphabetical or
+                  date-based sorting.
+                </p>
+              </Benefit>
             </Item>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>
-                    Move contacts to the recycle bin for protection against
-                    accidental deletion and easy restoration.
-                  </p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons(OPERATION_TYPES.DELETE, 20)}
+              <div>3</div>
+              <IconWrap>{renderIcons('delete', 15)}</IconWrap>
+              <Benefit>
                 <h2>Recycle bin feature</h2>
-              </IconWrap>
+                <p>
+                  Phone Genie offers the capability to move contacts to a
+                  recycle bin, which serves as a protective measure against
+                  unintentional deletion and allows for effortless recovery.
+                </p>
+              </Benefit>
             </Item>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>
-                    Efficiently search for contacts using either their name or
-                    phone number.
-                  </p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons('quickSearch', 20)}
+              <div>4</div>
+              <IconWrap>{renderIcons('quickSearch', 15)}</IconWrap>
+              <Benefit>
                 <h2>Quick search</h2>
-              </IconWrap>
+                <p>
+                  Phone Genie offers a proficient feature that enables users to
+                  perform a comprehensive search for their contacts with utmost
+                  ease and efficiency.
+                </p>
+              </Benefit>
             </Item>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>
-                    Stay connected with important contacts by marking them as
-                    favorites for easy and quick access.
-                  </p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons('favorite', 20)}
+              <div>5</div>
+              <IconWrap>{renderIcons('favorite', 15)}</IconWrap>
+              <Benefit>
                 <h2>Favorites list</h2>
-              </IconWrap>
+                <p>
+                  Phone Genie lets users easily stay in touch with important
+                  contacts by marking them as favorites, allowing for quick and
+                  efficient communication.
+                </p>
+              </Benefit>
             </Item>
             <Item className="card">
-              <DescWrap>
-                <div>
-                  <p>Group contacts for efficient management.</p>
-                </div>
-              </DescWrap>
-              <IconWrap>
-                {renderIcons('group', 20)}
-                <h2>Personalized contact groups</h2>
-              </IconWrap>
+              <div>6</div>
+              <IconWrap>{renderIcons('group', 15)}</IconWrap>
+              <Benefit>
+                <h2>Contact groups</h2>
+                <p>
+                  Phone Genie provides users with the ability to group their
+                  contacts for optimal organization and management of contact
+                  information.
+                </p>
+              </Benefit>
             </Item>
           </BenefitsList>
-        </>
-      </Section>
-    </main>
+        </Section>
+      </HomeMain>
+    </>
   );
 };
 

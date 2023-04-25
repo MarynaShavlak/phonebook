@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { renderIcons } from 'utils/renderIcons';
@@ -52,7 +52,12 @@ const schema = yup.object().shape({
 });
 
 export const SignUpForm = () => {
+  const [clickedLabel, setClickedLabel] = useState(null);
   const dispatch = useDispatch();
+
+  const handleLabelClick = fieldName => {
+    setClickedLabel(fieldName);
+  };
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     setSubmitting(false);
     const newUser = {
@@ -64,6 +69,7 @@ export const SignUpForm = () => {
     dispatch(authOperations.userSignUp(newUser));
     resetForm();
   };
+
   return (
     <FormWrapper>
       <FormTitle>Sign Up Form</FormTitle>
@@ -81,7 +87,13 @@ export const SignUpForm = () => {
 
                   <InfoInput type="text" name="name" placeholder=" " />
 
-                  <InfoLabel htmlFor="name" className="user-form__info-label">
+                  <InfoLabel
+                    htmlFor="name"
+                    className={`user-form__info-label ${
+                      clickedLabel === 'name' ? 'clicked' : ''
+                    }`}
+                    onClick={() => handleLabelClick('name')}
+                  >
                     Username
                   </InfoLabel>
                 </InfoField>
@@ -92,7 +104,13 @@ export const SignUpForm = () => {
                   {renderIcons('email', iconSize.xs)}
 
                   <InfoInput type="email" name="email" placeholder=" " />
-                  <InfoLabel htmlFor="email" className="user-form__info-label">
+                  <InfoLabel
+                    htmlFor="email"
+                    className={`user-form__info-label ${
+                      clickedLabel === 'email' ? 'clicked' : ''
+                    }`}
+                    onClick={() => handleLabelClick('email')}
+                  >
                     Email
                   </InfoLabel>
                 </InfoField>
@@ -110,7 +128,10 @@ export const SignUpForm = () => {
                   />
                   <InfoLabel
                     htmlFor="password"
-                    className="user-form__info-label"
+                    className={`user-form__info-label ${
+                      clickedLabel === 'password' ? 'clicked' : ''
+                    }`}
+                    onClick={() => handleLabelClick('password')}
                   >
                     Password
                   </InfoLabel>
@@ -129,7 +150,10 @@ export const SignUpForm = () => {
                   />
                   <InfoLabel
                     htmlFor="confirm"
-                    className="user-form__info-label"
+                    className={`user-form__info-label ${
+                      clickedLabel === 'confirm' ? 'clicked' : ''
+                    }`}
+                    onClick={() => handleLabelClick('confirm')}
                   >
                     Confirm Password
                   </InfoLabel>

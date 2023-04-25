@@ -33,6 +33,7 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MdGroupAdd } from 'react-icons/md';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { ImInfo } from 'react-icons/im';
+import { BsPencilFill } from 'react-icons/bs';
 
 export function renderIcons(param, size) {
   switch (param) {
@@ -112,6 +113,8 @@ export function renderIcons(param, size) {
       return <BsThreeDotsVertical size={size} className="contact-form__icon" />;
     case 'info':
       return <ImInfo size={size} className="contact-form__icon" />;
+    case 'pencil':
+      return <BsPencilFill size={size} className="contact-form__icon" />;
     default:
       return <span>icon</span>;
   }

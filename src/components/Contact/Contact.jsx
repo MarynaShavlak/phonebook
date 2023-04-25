@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
-import { clsx } from 'clsx';
-import { useHoverEffects, useModal } from 'hooks';
+import { useModal } from 'hooks';
 import {
   OperationModal,
   AddContactToGroupModal,
@@ -43,10 +42,6 @@ export const Contact = ({ contact }) => {
     OPERATION_TYPES.REMOVE
   );
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
-  const { isHovered, toggleHoverEffect } = useHoverEffects([
-    OPERATION_TYPES.REMOVE,
-    OPERATION_TYPES.EDIT,
-  ]);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -107,12 +102,7 @@ export const Contact = ({ contact }) => {
         />
       )}
 
-      <ContactEl
-        className={clsx({
-          toRemove: isHovered.remove,
-          toEdit: isHovered.edit,
-        })}
-      >
+      <ContactEl>
         <Avatar
           size="30"
           textSizeRatio={2}
@@ -124,7 +114,6 @@ export const Contact = ({ contact }) => {
           contact={contact}
           filterByName={filterByName}
           filterByNumber={filterByNumber}
-          isHovered={isHovered}
         />
       </ContactEl>
       <CheckboxWithStarIcon checked={isFavorite} onChange={toggleFavorite} />
@@ -135,11 +124,7 @@ export const Contact = ({ contact }) => {
             icon: (
               <>
                 <Link to={`/edit-contact/${contact.id}`}>
-                  <DropdownButton
-                    ariaLabel={CONTACT_ACTIONS.EDIT}
-                    onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-                    onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.EDIT)}
-                  >
+                  <DropdownButton ariaLabel={CONTACT_ACTIONS.EDIT}>
                     {renderIcons(OPERATION_TYPES.EDIT, 25)}Edit
                   </DropdownButton>
                 </Link>
@@ -153,8 +138,6 @@ export const Contact = ({ contact }) => {
                 <DropdownButton
                   ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
                   onClick={toggleRemoveModal}
-                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
-                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.REMOVE)}
                 >
                   {renderIcons(OPERATION_TYPES.REMOVE, 25)}Remove to recycle bin
                 </DropdownButton>
@@ -168,8 +151,6 @@ export const Contact = ({ contact }) => {
                 <DropdownButton
                   ariaLabel={CONTACT_ACTIONS.ADD_TO_GROUP}
                   onClick={toggleAddModal}
-                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
-                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.ADD)}
                 >
                   {renderIcons('group', 25)}Add to group
                 </DropdownButton>

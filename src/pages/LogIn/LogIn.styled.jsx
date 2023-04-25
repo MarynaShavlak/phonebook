@@ -2,16 +2,20 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 
-export const Wrapper = styled(ContentWrapper)`
+export const Content = styled(ContentWrapper)`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
   row-gap: 20px;
-  width: 290px;
+  padding-left: 15px;
+  padding-right: 15px;
+  /* width: 290px; */
+  @media screen and (min-width: ${props => props.theme.devices.mobile}) {
+    width: 345px;
+  }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 700px;
-    flex-direction: row;
-    row-gap: 0px;
-    column-gap: 20px;
   }
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     width: 800px;
@@ -42,10 +46,40 @@ export const Info = styled.div`
 `;
 
 export const RedirectLink = styled.p`
-  margin: 0 auto;
   font-weight: 400;
 `;
 export const SignUpLink = styled(NavLink)`
   color: #fc458e;
   font-weight: 700;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: #fff3f7;
+`;
+
+export const ImageWrap = styled.div`
+  position: relative;
+  align-self: start;
+  width: 520px;
+
+  p {
+    position: absolute;
+    top: 75px;
+    right: 35px;
+    width: 250px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    span {
+      color: #ef4287;
+      font-weight: 700;
+    }
+  }
 `;

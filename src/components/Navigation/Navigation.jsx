@@ -16,51 +16,46 @@ export const Navigation = () => {
   const isDesktop = useMediaQuery('(min-width:1200px)');
   const isTablet = useMediaQuery('(min-width:768px)');
   return (
-    <Menu>
+    <>
       {isTablet && (
         <Link to="/">
           {' '}
           <PhoneLogo src={Logo} alt="logo" />
         </Link>
       )}
-
-      <NavigationList>
-        <li>
-          <NavigationLink to="/">
-            {renderIcons('home', 20)}
-            {isDesktop && <span>Home</span>}
-          </NavigationLink>
-        </li>
-        {isLoggedIn && (
-          <>
-            {' '}
-            <li>
-              <NavigationLink to="/contacts">
-                {renderIcons('contact', 20)}
-                {isDesktop && <span>Contacts</span>}
-              </NavigationLink>
-            </li>
-            <li>
-              <NavigationLink to="/favorites">
-                {renderIcons('favorite', 20)}
-                {isDesktop && <span>Favorites</span>}
-              </NavigationLink>
-            </li>
-            <li>
-              <NavigationLink to="/groups">
-                {renderIcons('group', 20)}
-                {isDesktop && <span>Groups</span>}
-              </NavigationLink>
-            </li>
-            <li>
-              <NavigationLink to="/recyclebin">
-                {renderIcons(OPERATION_TYPES.DELETE, 20)}
-                {isDesktop && <span>Recycle Bin</span>}
-              </NavigationLink>
-            </li>
-          </>
-        )}
-      </NavigationList>
-    </Menu>
+      <Menu>
+        <NavigationList>
+          {isLoggedIn && (
+            <>
+              {' '}
+              <li>
+                <NavigationLink to="/contacts">
+                  {renderIcons('contact', 30)}
+                  {isDesktop && <span>Contacts</span>}
+                </NavigationLink>
+              </li>
+              <li>
+                <NavigationLink to="/favorites">
+                  {renderIcons('favorite', 30)}
+                  {isDesktop && <span>Favorites</span>}
+                </NavigationLink>
+              </li>
+              <li>
+                <NavigationLink to="/groups">
+                  {renderIcons('group', 30)}
+                  {isDesktop && <span>Groups</span>}
+                </NavigationLink>
+              </li>
+              <li>
+                <NavigationLink to="/recyclebin">
+                  {renderIcons(OPERATION_TYPES.DELETE, 30)}
+                  {isDesktop && <span>Recycle Bin</span>}
+                </NavigationLink>
+              </li>
+            </>
+          )}
+        </NavigationList>
+      </Menu>
+    </>
   );
 };

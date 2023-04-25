@@ -6,7 +6,10 @@ export const ContactsList = styled.ul`
   justify-content: center;
   font-size: 16px;
   row-gap: 10px;
-  width: 290px;
+  min-width: 290px;
+  @media screen and (min-width: ${props => props.theme.devices.mobile}) {
+    width: 345px;
+  }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 700px;
   }

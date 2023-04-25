@@ -7,28 +7,17 @@ export const HighlightContactDetails = ({
   filterByName,
   filterByNumber,
   defaultHighlighterClass = 'marked',
-  isHovered,
 }) => {
-  const dynamicHighlighterClasses = clsx({
-    toDelete: isHovered?.delete,
-    toEdit: isHovered?.edit,
-  });
   return (
     <>
       <Highlighter
-        highlightClassName={clsx(
-          defaultHighlighterClass,
-          dynamicHighlighterClasses
-        )}
+        highlightClassName={clsx(defaultHighlighterClass)}
         searchWords={[`${filterByName}`]}
         autoEscape={true}
         textToHighlight={`${contact.name}:`}
       />
       <Highlighter
-        highlightClassName={clsx(
-          defaultHighlighterClass,
-          dynamicHighlighterClasses
-        )}
+        highlightClassName={clsx(defaultHighlighterClass)}
         searchWords={[`${filterByNumber}`]}
         autoEscape={true}
         textToHighlight={` ${contact.number}`}
@@ -45,8 +34,4 @@ HighlightContactDetails.propTypes = {
   filterByName: PropTypes.string.isRequired,
   filterByNumber: PropTypes.string.isRequired,
   defaultHighlighterClass: PropTypes.string,
-  isHovered: PropTypes.shape({
-    delete: PropTypes.bool,
-    edit: PropTypes.bool,
-  }),
 };

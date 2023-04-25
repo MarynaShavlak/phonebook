@@ -10,6 +10,10 @@ export const Menu = styled.nav`
 export const NavigationList = styled.ul`
   display: flex;
   justify-content: center;
+  column-gap: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    column-gap: 10px;
+  }
 `;
 
 export const NavigationLink = styled(NavLink)`
@@ -38,8 +42,8 @@ export const NavigationLink = styled(NavLink)`
   }
 
   svg {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       width: 20px;
       height: 20px;
@@ -58,7 +62,4 @@ export const PhoneLogo = styled.img`
   /* margin-right: 10px; */
   height: 100%;
   height: 40px;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    height: 60px;
-  }
 `;

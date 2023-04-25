@@ -1,38 +1,89 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const HomeTitle = styled.h1`
-  display: inline-block;
-  margin-bottom: 20px;
-  font-size: 26px;
-  font-weight: 900;
-  text-align: center;
-  text-transform: uppercase;
-
-  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    font-size: 30px;
+export const HomeMain = styled.main`
+  padding-top: 30px;
+  section:first-child {
+    margin-bottom: 30px;
   }
 `;
 
-export const HomeLogo = styled.img`
-  width: 240px;
+export const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  row-gap: 30px;
+  background-color: #fff3f7;
+  height: 800px;
+  padding-left: 15px;
+  padding-right: 15px;
+
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    width: 350px;
+    height: 800px;
   }
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    width: 600px;
+    height: 100vh;
+  }
+  div:first-child {
+    padding-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 260px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 350px;
+    }
+    @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+      width: 600px;
+    }
+  }
+
+  p {
+    margin-top: 20px;
+    text-align: center;
+  }
+`;
+
+export const HomeTitle = styled.h1`
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ef4287;
+
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 44px;
   }
 `;
 
 export const HomeWrapper = styled.div`
   display: flex;
   column-gap: 20px;
+  margin-bottom: 30px;
 `;
+
 export const HomeInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 20px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    flex-direction: row;
+    column-gap: 20px;
+    row-gap: 0;
+  }
+
+  div:first-child {
+    min-width: 260px;
+    width: 290px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 500px;
+    }
+    @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+      width: 600px;
+    }
+  }
 `;
 export const AppDescription = styled.div`
   display: flex;
@@ -41,15 +92,16 @@ export const AppDescription = styled.div`
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     row-gap: 15px;
   }
+
   p {
-    font-size: 12px;
+    font-size: 14px;
     text-align: justify;
     line-height: 1.2;
     letter-spacing: 0.03em;
     font-weight: 500;
 
-    @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-      font-size: 14px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
     }
   }
   span {
@@ -62,18 +114,26 @@ export const StartButton = styled.button`
   display: flex;
   justify-content: center;
   padding: 10px 30px;
-  background-color: #f787b4;
-  color: white;
+
+  box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
+  background-color: white;
+  color: black;
   border: 5px solid transparent;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
     background-color: #fc458e;
+    color: white;
+  }
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 20px;
   }
 `;
 
@@ -82,68 +142,17 @@ export const LogInLink = styled(NavLink)`
   font-weight: 700;
 `;
 
-export const BenefitsListTitle = styled.h2`
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  font-size: 20px;
-  line-height: 1.14;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #ef4287;
-  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    font-size: 24px;
-  }
-`;
 export const BenefitsList = styled.ul`
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-`;
-
-export const IconWrap = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
-  justify-content: center;
-  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 30px;
+  margin-bottom: 80px;
 
-  padding: 20px;
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(45deg, #fab7d2, #f787b4);
-  border-radius: 10px;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px 0 0 10px;
-  }
-  h2 {
-    font-size: 14px;
-    text-align: center;
+  li:nth-child(2n) {
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
-    }
-  }
-  svg {
-    width: 20px;
-    height: 20px;
-
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      width: 30px;
-      height: 30px;
+      margin-left: 80px;
     }
   }
 `;
@@ -179,48 +188,81 @@ export const DescWrap = styled.div`
   }
 `;
 
+export const Benefit = styled.div``;
+
 export const Item = styled.li`
   position: relative;
-  height: 100px;
-  width: 290px;
-  background: #fff;
-  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  @media screen and (max-width: 767px) {
-    :not(:last-child) {
-      margin-bottom: 20px;
-    }
-  }
-
+  width: 250px;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    width: 232px;
-    height: 140px;
+    width: 600px;
   }
-  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    width: 277.5px;
+  border-radius: 8px;
+
+  padding: 20px 10px;
+  border: 1px solid #fab7d2;
+  box-shadow: 5px 5px 8px 1px #fab7d2;
+  div:first-child {
+    position: absolute;
+    top: -15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ef4287;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
   }
 
-  &:hover {
-    ${IconWrap} {
-      flex-direction: row;
-      row-gap: 0px;
-      column-gap: 10px;
-      height: 50px;
-      border-radius: 0 0 10px 10px;
-      background: linear-gradient(45deg, #ef4287, #bb6bd9);
-      svg {
-        width: 20px;
-        height: 20px;
-        fill: white;
-      }
-      h2 {
-        color: white;
-        font-size: 12px;
-        text-align: left;
-        @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-          font-size: 14px;
-        }
-      }
+  h2 {
+    margin-bottom: 10px;
+    color: #ef4287;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 18px;
     }
+  }
+  p {
+    font-size: 12px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 14px;
+    }
+  }
+
+  svg {
+    position: absolute;
   }
 `;
+
+export const IconWrap = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f787b4;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  svg {
+    fill: white;
+    width: 15px;
+    height: 15px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  right: -1px;
+  top: 0px;
+  width: 30px;
+  height: 30px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    width: 45px;
+    height: 45px;
+  }
+`;
+
+// #ef4287, #f2c94c, #bb6bd9, #9b51e0, #f787b4,

@@ -9,7 +9,10 @@ export const FormWrapper = styled.div`
   margin: auto 0;
   border-radius: 10px;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
-  width: 290px;
+  /* width: 290px; */
+  @media screen and (min-width: ${props => props.theme.devices.mobile}) {
+    width: 345px;
+  }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 400px;
   }
@@ -27,7 +30,7 @@ export const StyledForm = styled(Form)`
   border-bottom-right-radius: 10px;
   padding: 30px 20px;
   padding-top: 30px;
-  background-color: #fde7f0;
+  background-color: white;
 
   .privacy-container {
     margin-top: 20px;
@@ -55,7 +58,10 @@ export const FormTitle = styled.h2`
 export const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 35px;
+  li {
+    position: relative;
+  }
 `;
 
 export const InfoField = styled.span`
@@ -80,6 +86,12 @@ export const InfoField = styled.span`
     color: black;
     font-weight: 700;
   }
+
+  .user-form__info-label.clicked {
+    transform: translate(-50px, -40px);
+    color: black;
+    font-weight: 700;
+  }
 `;
 
 export const InfoInput = styled(Field)`
@@ -90,9 +102,11 @@ export const InfoInput = styled(Field)`
   padding-top: 10px;
   padding-bottom: 10px;
   border: 2px solid #757575;
+  background-color: transparent;
   border-radius: 10px;
   font-size: 18px;
   font-weight: 500;
+  z-index: 2;
   transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:not(:placeholder-shown) + .user-form__info-label {
     transform: translate(-50px, -40px);
@@ -107,8 +121,9 @@ export const InfoInput = styled(Field)`
   }
 `;
 export const InfoError = styled.p`
+  position: absolute;
   width: 100%;
-  margin-top: 5px;
+  bottom: -15px;
   font-size: 12px;
   font-style: italic;
   color: red;
@@ -116,6 +131,7 @@ export const InfoError = styled.p`
 
 export const InfoLabel = styled.label`
   position: absolute;
+  cursor: pointer;
   top: 50%;
   left: 50px;
   transform: translateY(-50%);

@@ -5,23 +5,27 @@ import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 import { useLocation } from 'react-router-dom';
 import { renderIcons } from 'utils/renderIcons';
 import { BackButton } from 'components/Form/Form.styled';
+import { AppBar } from 'components/AppBar/AppBar';
 
 const AddNewContact = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/contacts';
   return (
-    <main>
-      <Section>
-        <ContentWrapper>
-          <BackButton to={backLinkHref}>
-            <button type="button" aria-label="Back to previous page">
-              {renderIcons('back', 50)}
-            </button>
-          </BackButton>
-          <ContactForm />
-        </ContentWrapper>
-      </Section>
-    </main>
+    <>
+      <AppBar />
+      <main>
+        <Section>
+          <ContentWrapper>
+            <BackButton to={backLinkHref}>
+              <button type="button" aria-label="Back to previous page">
+                {renderIcons('back', 50)}
+              </button>
+            </BackButton>
+            <ContactForm />
+          </ContentWrapper>
+        </Section>
+      </main>
+    </>
   );
 };
 

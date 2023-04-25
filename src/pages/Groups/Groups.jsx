@@ -7,6 +7,8 @@ import { Section, Notification, CreateGroupModal, Group } from 'components';
 import { ContentWrapper, Info, InfoWrap } from 'pages/Contacts/Contacts.styled';
 import { GroupsList, GroupItem, AddNewGroupBtn } from './Groups.styled';
 import { renderIcons, getGroupsQuantity } from 'utils';
+import { AppBar } from 'components/AppBar/AppBar';
+import { HomeMain } from 'pages/Home/Home.styled';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
@@ -23,56 +25,59 @@ const Groups = () => {
   };
 
   return (
-    <main>
-      <Section>
-        <ContentWrapper>
-          {groups.length !== 0 ? (
-            <>
-              {' '}
-              {isCreateGroupModalOpen && (
-                <CreateGroupModal
-                  isOpen={isCreateGroupModalOpen}
-                  onClose={toggleCreateGroupModal}
-                />
-              )}
-              <InfoWrap>
-                <Info>
-                  Total quantity: <span>{getGroupsQuantity(groups)}</span>
-                </Info>
-                <AddNewGroupBtn
-                  type="button"
-                  aria-label="Add new contact"
-                  onClick={toggleCreateGroupModal}
-                >
-                  {renderIcons('addGroup', 30)}
-                </AddNewGroupBtn>
-              </InfoWrap>
-              <GroupsList>
-                {groups.map(group => (
-                  <GroupItem key={group.id}>
-                    <Group group={group} />
-                  </GroupItem>
-                ))}
-              </GroupsList>
-            </>
-          ) : (
-            <>
-              {' '}
-              <Notification message="You have not created any groups yet" />
-              {isCreateGroupModalOpen && (
-                <CreateGroupModal
-                  isOpen={isCreateGroupModalOpen}
-                  onClose={toggleCreateGroupModal}
-                />
-              )}
-              <Button type="button" onClick={toggleCreateGroupModal}>
-                Create group
-              </Button>
-            </>
-          )}
-        </ContentWrapper>
-      </Section>
-    </main>
+    <>
+      <AppBar />
+      <HomeMain>
+        <Section>
+          <ContentWrapper>
+            {groups.length !== 0 ? (
+              <>
+                {' '}
+                {isCreateGroupModalOpen && (
+                  <CreateGroupModal
+                    isOpen={isCreateGroupModalOpen}
+                    onClose={toggleCreateGroupModal}
+                  />
+                )}
+                <InfoWrap>
+                  <Info>
+                    Total quantity: <span>{getGroupsQuantity(groups)}</span>
+                  </Info>
+                  <AddNewGroupBtn
+                    type="button"
+                    aria-label="Add new contact"
+                    onClick={toggleCreateGroupModal}
+                  >
+                    {renderIcons('addGroup', 30)}
+                  </AddNewGroupBtn>
+                </InfoWrap>
+                <GroupsList>
+                  {groups.map(group => (
+                    <GroupItem key={group.id}>
+                      <Group group={group} />
+                    </GroupItem>
+                  ))}
+                </GroupsList>
+              </>
+            ) : (
+              <>
+                {' '}
+                <Notification message="You have not created any groups yet" />
+                {isCreateGroupModalOpen && (
+                  <CreateGroupModal
+                    isOpen={isCreateGroupModalOpen}
+                    onClose={toggleCreateGroupModal}
+                  />
+                )}
+                <Button type="button" onClick={toggleCreateGroupModal}>
+                  Create group
+                </Button>
+              </>
+            )}
+          </ContentWrapper>
+        </Section>
+      </HomeMain>
+    </>
   );
 };
 

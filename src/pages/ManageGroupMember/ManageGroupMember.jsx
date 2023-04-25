@@ -15,6 +15,7 @@ import {
 import { Text } from './ManageGroupMember.styled';
 import { BackButton } from 'components/Form/Form.styled';
 import { renderIcons, convertHyphenatedString } from 'utils/';
+import { AppBar } from 'components/AppBar/AppBar';
 
 const ManageGroupMember = () => {
   const dispatch = useDispatch();
@@ -93,50 +94,53 @@ const ManageGroupMember = () => {
   }));
 
   return (
-    <main>
-      <Section>
-        <ContentWrapper>
-          <BackButton to="/groups">
-            <button type="button" aria-label="Back to previous page">
-              {renderIcons('back', 50)}
-            </button>
-          </BackButton>
-          <>
-            {!!initialContactsInGroup.length && (
-              <Text>
-                The following contacts have already been added to the group :{' '}
-                <b>{contactsNames.join(', ')}</b>
-              </Text>
-            )}
+    <>
+      <AppBar />
+      <main>
+        <Section>
+          <ContentWrapper>
+            <BackButton to="/groups">
+              <button type="button" aria-label="Back to previous page">
+                {renderIcons('back', 50)}
+              </button>
+            </BackButton>
+            <>
+              {!!initialContactsInGroup.length && (
+                <Text>
+                  The following contacts have already been added to the group :{' '}
+                  <b>{contactsNames.join(', ')}</b>
+                </Text>
+              )}
 
-            <Text>
-              Chose contacts to add to the group <b>"{originalGroupName}"</b>
-            </Text>
-            <Select
-              options={options}
-              onChange={option => choseContactToAddInGroup(option.value)}
-            />
-            {!!contactsToAdd.length && (
-              <GroupsList>
-                {contactsToAdd.map(contact => (
-                  <li key={contact.id}>
-                    <GroupButton
-                      type="button"
-                      className={
-                        contactsToAdd.includes(contact) ? 'selected' : ''
-                      }
-                      onClick={() => handleContactClick(contact)}
-                    >
-                      {contact.name}: {contact.number}
-                    </GroupButton>
-                  </li>
-                ))}
-              </GroupsList>
-            )}
-          </>
-        </ContentWrapper>
-      </Section>
-    </main>
+              <Text>
+                Chose contacts to add to the group <b>"{originalGroupName}"</b>
+              </Text>
+              <Select
+                options={options}
+                onChange={option => choseContactToAddInGroup(option.value)}
+              />
+              {!!contactsToAdd.length && (
+                <GroupsList>
+                  {contactsToAdd.map(contact => (
+                    <li key={contact.id}>
+                      <GroupButton
+                        type="button"
+                        className={
+                          contactsToAdd.includes(contact) ? 'selected' : ''
+                        }
+                        onClick={() => handleContactClick(contact)}
+                      >
+                        {contact.name}: {contact.number}
+                      </GroupButton>
+                    </li>
+                  ))}
+                </GroupsList>
+              )}
+            </>
+          </ContentWrapper>
+        </Section>
+      </main>
+    </>
   );
 };
 

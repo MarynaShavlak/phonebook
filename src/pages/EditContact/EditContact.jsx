@@ -16,6 +16,7 @@ import {
   isExistByName,
 } from 'utils';
 import { BackButton } from 'components/Form/Form.styled';
+import { AppBar } from 'components/AppBar/AppBar';
 
 const EditContact = () => {
   const location = useLocation();
@@ -89,51 +90,54 @@ const EditContact = () => {
   }
 
   return contact ? (
-    <main>
-      <Section>
-        <ContentWrapper>
-          <BackButton to={backLinkHref}>
-            <button type="button" aria-label="Back to previous page">
-              {renderIcons('back', 50)}
-            </button>
-          </BackButton>
+    <>
+      <AppBar />
+      <main>
+        <Section>
+          <ContentWrapper>
+            <BackButton to={backLinkHref}>
+              <button type="button" aria-label="Back to previous page">
+                {renderIcons('back', 50)}
+              </button>
+            </BackButton>
 
-          <>
-            <EditFormInfo>
-              <p>You try to edit contact with:</p>
-              <p>
-                <span>Name:</span>
-                <span>
-                  <b>{contact.name}</b>
-                </span>
-              </p>
-              <p>
-                <span>Number:</span>
-                <span>
-                  <b>{contact.number}</b>
-                </span>
-              </p>
-            </EditFormInfo>
-            <EditFormInstrc>
-              <p>{renderIcons('info', 25)}</p>
+            <>
+              <EditFormInfo>
+                <p>You try to edit contact with:</p>
+                <p>
+                  <span>Name:</span>
+                  <span>
+                    <b>{contact.name}</b>
+                  </span>
+                </p>
+                <p>
+                  <span>Number:</span>
+                  <span>
+                    <b>{contact.number}</b>
+                  </span>
+                </p>
+              </EditFormInfo>
+              <EditFormInstrc>
+                <p>{renderIcons('info', 25)}</p>
 
-              <p>
-                Modify only one field for a contact - either the <b>name </b>or{' '}
-                <b>number</b>. If you need to change both, delete the existing
-                contact and create a new one.
-              </p>
-            </EditFormInstrc>
-            <Form
-              name={name}
-              number={number}
-              operationType="Edit contact"
-              onSubmit={handleSubmit}
-              onChange={handleChange}
-            />
-          </>
-        </ContentWrapper>
-      </Section>
-    </main>
+                <p>
+                  Modify only one field for a contact - either the <b>name </b>
+                  or <b>number</b>. If you need to change both, delete the
+                  existing contact and create a new one.
+                </p>
+              </EditFormInstrc>
+              <Form
+                name={name}
+                number={number}
+                operationType="Edit contact"
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+              />
+            </>
+          </ContentWrapper>
+        </Section>
+      </main>
+    </>
   ) : (
     <Loader />
   );
