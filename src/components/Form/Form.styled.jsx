@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import PhoneInput from 'react-phone-number-input';
 
-export const FormStyled = styled.form`
+export const Form = styled.form`
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -18,47 +19,35 @@ export const FormList = styled.ul`
 `;
 
 export const FormItem = styled.li`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
   label {
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
-  }
-
-  label > span:nth-of-type(2) {
-    position: relative;
-  }
-  .contact-form__icon {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-  }
-
-  span:first-child {
     font-size: 14px;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       font-size: 16px;
     }
     font-weight: 700;
   }
+`;
 
-  input {
-    width: 100%;
-    padding-left: 50px;
-    font-size: 14px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
-    }
-    font-weight: 600;
-    color: #f66fa5;
-    border: 3px solid #fab7d2;
-    border-radius: 10px;
-    &:focus {
-      outline: none;
-      border: 3px solid #f787b4;
-    }
+export const Name = styled.input`
+  width: 100%;
+  padding-left: 20px;
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 16px;
+  }
+  font-weight: 600;
+  color: #f66fa5;
+  border: 3px solid #fab7d2;
+  border-radius: 10px;
+  &:focus {
+    outline: none;
+    border: 3px solid #f787b4;
   }
 `;
 
@@ -86,4 +75,89 @@ export const BackButton = styled(NavLink)`
       height: 50px;
     }
   }
+`;
+
+export const Phone = styled(PhoneInput)`
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 3px solid #fab7d2;
+  border-radius: 10px;
+
+  &.PhoneInput--focus {
+    outline: none;
+    border: 3px solid #f787b4;
+  }
+
+  .PhoneInputCountryIcon {
+    height: 20px;
+    width: auto;
+  }
+  .PhoneInputCountryIcon--border {
+    box-shadow: none;
+    border: 1px solid black;
+  }
+
+  .PhoneInputCountrySelect:focus + .PhoneInputCountryIcon--border {
+    box-shadow: none;
+  }
+
+  .PhoneInputCountrySelectArrow {
+    color: black;
+  }
+
+  .PhoneInputCountrySelect:focus
+    + .PhoneInputCountryIcon
+    + .PhoneInputCountrySelectArrow {
+    opacity: 1;
+    color: #f66fa5;
+  }
+  .PhoneInputInput {
+    border: none;
+    outline: none;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: 16px;
+    }
+    color: #f66fa5;
+  }
+
+  .PhoneInputCountrySelect {
+    font-size: 12px;
+    border: none;
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      border-radius: 12px;
+      margin-left: 10px;
+      background: #fde7f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fde7f0;
+      border-radius: 12px;
+      margin-left: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f66fa5;
+    }
+    option {
+      color: black;
+      background-color: #fde7f0;
+    }
+  }
+`;
+
+export const Error = styled.p`
+  position: absolute;
+  bottom: -15px;
+  width: 100%;
+  margin: 0;
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: red;
 `;

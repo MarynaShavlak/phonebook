@@ -109,3 +109,7 @@ export function showDeleteFromGroup({ groupName, contact }) {
   const message = `The contact with name "${contact.name}" and number "${contact.number}" has been deleted from group "${groupName}" `;
   return showMessage('info', message);
 }
+
+export function showErrorMessage(message) {
+  return showMessage('error', message);
+}
