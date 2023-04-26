@@ -5,7 +5,7 @@ export const Button = styled.button`
   column-gap: 10px;
   align-self: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   background-color: #fde7f0;
   color: black;
   border: none;

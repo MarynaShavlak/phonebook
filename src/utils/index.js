@@ -7,5 +7,10 @@ export { getModalMessage } from './getModalMessage';
 export { makeSlug } from './makeSlug';
 export { removeExtraWhitespace } from './removeExtraWhitespace';
 export { convertHyphenatedString } from './convertHyphenatedString';
-export { isExistByName, isExistByNumber } from './checkContactExistence';
+export {
+  isExistByName,
+  isExistByNumber,
+  checkForDuplicateContact,
+} from './checkContactExistence';
+export { CONTACT_NAME_VALIDATION_SCHEMA } from './validation';
 export * as Notifications from './notifications';
