@@ -2,6 +2,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input';
 
+const inputMixin = `
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+   border: 3px solid #fab7d2;
+  border-radius: 10px;
+`;
 export const Form = styled.form`
   padding: 10px;
   display: flex;
@@ -17,7 +25,6 @@ export const FormList = styled.ul`
   justify-content: center;
   row-gap: 25px;
 `;
-
 export const FormItem = styled.li`
   position: relative;
   display: flex;
@@ -25,66 +32,28 @@ export const FormItem = styled.li`
   row-gap: 8px;
   label {
     font-size: 14px;
+    font-weight: 700;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       font-size: 16px;
     }
-    font-weight: 700;
   }
 `;
-
 export const Name = styled.input`
-  width: 100%;
-  padding-left: 20px;
-  font-size: 14px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
-  }
+  ${inputMixin}
   font-weight: 600;
   line-height: 1.5;
   color: #f66fa5;
-  border: 3px solid #fab7d2;
-  border-radius: 10px;
+  font-size: 14px;
   &:focus {
     outline: none;
     border: 3px solid #f787b4;
   }
-`;
-
-export const BackButton = styled(NavLink)`
-  button {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    background-color: transparent;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    &:hover {
-      color: #f787b4;
-    }
-  }
-
-  svg {
-    width: 30px;
-    height: 30px;
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      width: 50px;
-      height: 50px;
-    }
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 16px;
   }
 `;
-
 export const Phone = styled(PhoneInput)`
-  width: 100%;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border: 3px solid #fab7d2;
-  border-radius: 10px;
+  ${inputMixin}
 
   &.PhoneInput--focus {
     outline: none;
@@ -152,7 +121,31 @@ export const Phone = styled(PhoneInput)`
     }
   }
 `;
+export const BackButton = styled(NavLink)`
+  button {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    background-color: transparent;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover {
+      color: #f787b4;
+    }
+  }
 
+  svg {
+    width: 30px;
+    height: 30px;
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+`;
 export const Error = styled.p`
   position: absolute;
   bottom: -25px;

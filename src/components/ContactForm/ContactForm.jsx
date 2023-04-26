@@ -23,7 +23,9 @@ import { OperationButton } from 'components';
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [errors, setErrors] = useState({ name: null, phone: null });
+  const [nameError, setNameError] = useState(null);
+  const [numberError, setNumberError] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export const ContactForm = () => {
     const { value } = e.target;
     const errorMessage = await validateName(value);
     setName(value);
-    setErrors(prevErrors => ({ ...prevErrors, name: errorMessage }));
+    setNameError(errorMessage);
   };
 
   const validateName = async name => {
@@ -48,32 +50,28 @@ export const ContactForm = () => {
     }
   };
 
-  const handleNumberChange = number => {
-    if (number === undefined) {
+  const handleNumberChange = value => {
+    if (value === undefined) {
       setNumber('');
-    } else if (!isValidPhoneNumber(number)) {
-      setErrors(prevErrors => ({
-        ...prevErrors,
-        phone: 'Invalid phone number. Check number length',
-      }));
+    } else if (!isValidPhoneNumber(value)) {
+      setNumberError('Invalid phone number. Check number length');
     } else {
-      setErrors(prevErrors => ({ ...prevErrors, phone: null }));
+      setNumberError(null);
     }
-    setNumber(number);
+    setNumber(value);
   };
 
   const handleAddContact = async e => {
     e.preventDefault();
     const normalizedContactName = removeExtraWhitespace(name);
+    if (!normalizedContactName.length && !isValidPhoneNumber(number)) {
+      return Notifications.showAddContactError();
+    }
     if (!normalizedContactName.length) {
-      return Notifications.showErrorMessage(
-        'Name is required to have at least 2 letters'
-      );
+      return Notifications.showNewContactNameError();
     }
     if (!isValidPhoneNumber(number)) {
-      return Notifications.showErrorMessage(
-        'Sorry, it looks like the phone number you entered is incorrect. Please, check length and format for your country. '
-      );
+      return Notifications.showNewContactNumberError();
     }
 
     const createdContact = { name: normalizedContactName, number };
@@ -90,9 +88,7 @@ export const ContactForm = () => {
     const result = await dispatch(addContact(createdContact));
 
     if (result.error) {
-      return Notifications.showErrorMessage(
-        'Oohps, something has gone wrong. Try again, please.'
-      );
+      return Notifications.showErrorMessage();
     }
     Notifications.showContactSuccess('add', createdContact);
     reset();
@@ -113,8 +109,9 @@ export const ContactForm = () => {
             name="name"
             value={name}
             onChange={handleNameChange}
+            placeholder="Enter name"
           />
-          {errors.name && <Error>{errors.name}</Error>}
+          {nameError && <Error>{nameError}</Error>}
         </FormItem>
         <FormItem>
           <label>Number</label>
@@ -126,7 +123,7 @@ export const ContactForm = () => {
             value={number}
             onChange={handleNumberChange}
           />
-          {errors.phone && <Error>{errors.phone}</Error>}
+          {numberError && <Error>{numberError}</Error>}
         </FormItem>
       </FormList>
       <OperationButton>Add new contact</OperationButton>

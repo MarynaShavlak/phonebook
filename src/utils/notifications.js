@@ -110,6 +110,24 @@ export function showDeleteFromGroup({ groupName, contact }) {
   return showMessage('info', message);
 }
 
-export function showErrorMessage(message) {
-  return showMessage('error', message);
+export function showErrorMessage() {
+  return showMessage(
+    'error',
+    'Oohps, something has gone wrong. Try again, please.'
+  );
+}
+export function showAddContactError() {
+  return showMessage(
+    'error',
+    'Please ensure that you provide the accurate name and contact number.'
+  );
+}
+export function showNewContactNameError() {
+  return showMessage('error', 'Name is required to have at least 2 letters');
+}
+export function showNewContactNumberError() {
+  return showMessage(
+    'error',
+    'Sorry, it looks like the phone number you entered is incorrect. Please, check length and format for your country.'
+  );
 }
