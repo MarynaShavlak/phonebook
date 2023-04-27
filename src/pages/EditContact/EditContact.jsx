@@ -9,25 +9,31 @@ import { EditFormInfo, EditFormInstrc } from './EditContact.styled';
 import { renderIcons } from 'utils';
 import { BackButton } from 'components/Form/Form.styled';
 import { AppBar } from 'components/AppBar/AppBar';
+import { showEditContactSuccess } from 'utils/notifications';
+import { useNavigate } from 'react-router-dom';
 
 const EditContact = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { contactId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  const getContactById = ({ contactId, contacts }) => {
+    return contacts.find(contact => contact.id === contactId);
+  };
   const contacts = useSelector(selectContacts);
   const contact = getContactById({ contactId, contacts });
 
   const backLinkHref = location.state?.from ?? '/contacts';
 
-  function getContactById({ contactId, contacts }) {
-    return contacts.find(contact => contact.id === contactId);
-  }
-
+  const successEditContact = ({ contact, updatedContact }) => {
+    showEditContactSuccess(contact, updatedContact);
+    navigate('/contacts');
+  };
   return contact ? (
     <>
       <AppBar />
@@ -65,7 +71,11 @@ const EditContact = () => {
                   existing contact and create a new one.
                 </p>
               </EditFormInstrc>
-              <ContactForm action="Edit contact" contact={contact} />
+              <ContactForm
+                action="Edit contact"
+                contact={contact}
+                onSubmit={successEditContact}
+              />
             </>
           </ContentWrapper>
         </Section>

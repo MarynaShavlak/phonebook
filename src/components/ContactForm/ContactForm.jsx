@@ -10,8 +10,6 @@ import {
 } from 'redux/contacts/contactsOperations';
 import {
   Notifications,
-  // removeExtraWhitespace,
-  // checkForDuplicateContact,
   CONTACT_NAME_VALIDATION_SCHEMA,
   validateContactData,
   checkContactUpdateSpecialCases,
@@ -27,12 +25,11 @@ import {
 } from './ContactForm.styled';
 import { OperationButton } from 'components';
 import { useNavigate } from 'react-router-dom';
-// import { showContactExistWarn } from 'utils/notifications';
 
 const add = 'add';
 const update = 'update';
 
-export const ContactForm = ({ contact, action, onEdit }) => {
+export const ContactForm = ({ contact, action, onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [nameError, setNameError] = useState(null);
@@ -91,7 +88,6 @@ export const ContactForm = ({ contact, action, onEdit }) => {
     action,
     contact = { name: '', number: '' },
   }) => {
-    console.log('action: ', action);
     e.preventDefault();
     const isContactDataValid = await validateContactData({ name, number });
     if (!isContactDataValid) return;
@@ -121,57 +117,12 @@ export const ContactForm = ({ contact, action, onEdit }) => {
       return Notifications.showErrorMessage();
     }
     if (action === 'update') {
-      Notifications.showEditContactSuccess(contact, createdContact);
-      navigate('/contacts');
+      onSubmit({ contact, updatedContact: createdContact });
     } else {
-      Notifications.showContactSuccess('add', createdContact);
+      onSubmit(createdContact);
       reset();
     }
   };
-
-  // const handleAddContact = async e => {
-  //   e.preventDefault();
-  //   const isContactDataValid = await validateContactData({ name, number });
-  //   if (!isContactDataValid) return;
-
-  //   const createdContact = getExclusiveContact({ name, number, contacts });
-  //   if (!createdContact) return;
-  //   const result = await dispatch(addContact(createdContact));
-  //   if (result.error) {
-  //     return Notifications.showErrorMessage();
-  //   }
-  //   Notifications.showContactSuccess('add', createdContact);
-  //   reset();
-  // };
-
-  // const handleEditContact = async e => {
-  //   e.preventDefault();
-  //   const isContactDataValid = await validateContactData({ name, number });
-  //   if (!isContactDataValid) return;
-
-  //   const specialCase = checkContactUpdateSpecialCases({
-  //     contact,
-  //     name,
-  //     number,
-  //   });
-  //   if (specialCase === 'both') return;
-  //   if (specialCase === 'none') return navigate('/contacts');
-  //   const createdContact = getExclusiveContact({
-  //     name,
-  //     number,
-  //     contacts,
-  //     contact,
-  //   });
-
-  //   if (!createdContact) return;
-  //   const editedContact = { ...contact, ...createdContact };
-  //   const result = await dispatch(updateContact(editedContact));
-  //   if (result.error) {
-  //     return Notifications.showErrorMessage();
-  //   }
-  //   Notifications.showEditContactSuccess(contact, createdContact);
-  //   navigate('/contacts');
-  // };
 
   const handleAddContact = async e => {
     await handleContact({ e, action: add });
