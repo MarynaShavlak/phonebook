@@ -21,6 +21,7 @@ export const isExistByName = ({
 
   return checkContactExistence(filteredContacts, normalizedContactName, 'name');
 };
+
 export const isExistByNumber = ({
   newNumber,
   contacts,
@@ -36,11 +37,9 @@ export const isExistByNumber = ({
 
 export const checkForDuplicateContact = ({
   newContact,
-
   contacts,
   contact = { name: '', number: '' },
 }) => {
-  console.log('newContact: ', newContact);
   const isNameExist = isExistByName({
     newName: newContact.name,
     contacts,

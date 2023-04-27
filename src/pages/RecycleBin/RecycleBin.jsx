@@ -1,28 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   ContactsList,
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
-import { DeletedContact, Section, Notification } from 'components';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
-import { AppBar } from 'components/AppBar/AppBar';
-import { HomeMain } from 'pages/Home/Home.styled';
+import { DeletedContact, AppBar } from 'components';
+import { Section, Notification } from 'shared';
+import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { selectRecycleBinContacts } from 'redux/recycleBin/selectors';
+import { selectContacts, fetchContacts } from 'redux/contacts';
 
 const RecycleBin = () => {
-  const contacts = useSelector(selectRecycleBinContacts);
+  const deletedContacts = useSelector(selectRecycleBinContacts);
+  const contacts = useSelector(selectContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!contacts.length) {
+      dispatch(fetchContacts());
+    }
+  }, [contacts, dispatch]);
+
   return (
     <>
       <AppBar />
-      <HomeMain>
+      <Main>
         <Section>
           <ContentWrapper>
-            {contacts.length !== 0 ? (
+            {deletedContacts.length !== 0 ? (
               <ContactsList>
-                {contacts.map(contact => (
+                {deletedContacts.map(contact => (
                   <ContactItem key={contact.id}>
-                    <DeletedContact contact={contact} />
+                    <DeletedContact
+                      deletedContact={contact}
+                      allContacts={contacts}
+                    />
                   </ContactItem>
                 ))}
               </ContactsList>
@@ -31,7 +43,7 @@ const RecycleBin = () => {
             )}
           </ContentWrapper>
         </Section>
-      </HomeMain>
+      </Main>
     </>
   );
 };

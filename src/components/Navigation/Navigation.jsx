@@ -9,7 +9,7 @@ import { renderIcons } from 'utils';
 import { useAuth } from 'hooks';
 import Logo from './images/phone-genie-logo.png';
 import { Link } from 'react-router-dom';
-import { OPERATION_TYPES } from 'constants';
+import { OPERATION } from 'constants';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -48,7 +48,7 @@ export const Navigation = () => {
               </li>
               <li>
                 <NavigationLink to="/recyclebin">
-                  {renderIcons(OPERATION_TYPES.DELETE, 30)}
+                  {renderIcons(OPERATION.DELETE, 30)}
                   {isDesktop && <span>Recycle Bin</span>}
                 </NavigationLink>
               </li>

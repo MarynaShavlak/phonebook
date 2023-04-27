@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
-import { renderIcons, Notifications, makeSlug } from 'utils';
+import {
+  renderIcons,
+  Notifications,
+  makeSlug,
+  renderDropdownButton,
+} from 'utils';
 import { useModal } from 'hooks';
-import { GROUP_ACTIONS, OPERATION_TYPES } from 'constants';
+import { GROUP_ACTIONS, OPERATION } from 'constants';
 
 import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
@@ -19,15 +24,12 @@ import {
   IconButton,
   ContactEl,
 } from './Group.styled';
-import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
 import { deleteGroup, renameGroup, deleteContactFromGroup } from 'redux/groups';
 
 export const Group = ({ group }) => {
   const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
-  const { isEditModalOpen, toggleEditModal } = useModal(OPERATION_TYPES.EDIT);
-  const { isDeleteModalOpen, toggleDeleteModal } = useModal(
-    OPERATION_TYPES.DELETE
-  );
+  const { isEditModalOpen, toggleEditModal } = useModal(OPERATION.EDIT);
+  const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const dispatch = useDispatch();
 
   const onEditGroup = ({ oldGroupName, newGroupName }) => {
@@ -97,39 +99,27 @@ export const Group = ({ group }) => {
       <DropdownMenu
         elements={[
           {
-            label: OPERATION_TYPES.EDIT,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={GROUP_ACTIONS.EDIT}
-                  onClick={toggleEditModal}
-                >
-                  {renderIcons(OPERATION_TYPES.EDIT, 25)}Edit
-                </DropdownButton>
-              </>
+            label: OPERATION.EDIT,
+            icon: renderDropdownButton(
+              GROUP_ACTIONS.EDIT,
+              OPERATION.EDIT,
+              toggleEditModal
             ),
           },
           {
-            label: OPERATION_TYPES.REMOVE,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={GROUP_ACTIONS.DELETE}
-                  onClick={toggleDeleteModal}
-                >
-                  {renderIcons(OPERATION_TYPES.REMOVE, 25)}Delete
-                </DropdownButton>
-              </>
+            label: OPERATION.REMOVE,
+            icon: renderDropdownButton(
+              GROUP_ACTIONS.DELETE,
+              OPERATION.REMOVE,
+              toggleDeleteModal
             ),
           },
           {
-            label: OPERATION_TYPES.ADD,
+            label: OPERATION.ADD,
             icon: (
               <>
                 <Link to={`/manage-group-member/${makeSlug(`${group.name}`)}`}>
-                  <DropdownButton ariaLabel={GROUP_ACTIONS.ADD}>
-                    {renderIcons(OPERATION_TYPES.ADD, 25)}Manage contacts
-                  </DropdownButton>
+                  {renderDropdownButton(GROUP_ACTIONS.MANAGE, OPERATION.ADD)}
                 </Link>
               </>
             ),

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input';
 
 const inputMixin = `
@@ -121,31 +120,7 @@ export const Phone = styled(PhoneInput)`
     }
   }
 `;
-export const BackButton = styled(NavLink)`
-  button {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    background-color: transparent;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    &:hover {
-      color: #f787b4;
-    }
-  }
 
-  svg {
-    width: 30px;
-    height: 30px;
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      width: 50px;
-      height: 50px;
-    }
-  }
-`;
 export const Error = styled.p`
   position: absolute;
   bottom: -25px;

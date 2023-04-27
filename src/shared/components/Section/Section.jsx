@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Content } from './Section.styled';
+import { Content } from 'shared/commonStyledComponents.jsx';
 
 export function Section({ children }) {
   return (

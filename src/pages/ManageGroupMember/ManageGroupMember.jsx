@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGroups } from 'redux/groups';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
-import { Section } from 'components';
-import { selectContacts } from 'redux/contacts';
-import { deleteContactFromGroup, addContactToGroup } from 'redux/groups';
-import { fetchContacts } from 'redux/contacts/contactsOperations';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
+import { AppBar } from 'components';
+import { Section } from 'shared';
+import {
+  selectGroups,
+  deleteContactFromGroup,
+  addContactToGroup,
+} from 'redux/groups';
+import { selectContacts, fetchContacts } from 'redux/contacts';
+import {
+  ContentWrapper,
+  BackButton,
+  Text,
+} from 'shared/commonStyledComponents.jsx';
 import {
   GroupsList,
   GroupButton,
 } from 'components/AddContactToGroupModal/AddContactToGroupModal.styled';
-import { Text } from './ManageGroupMember.styled';
-import { BackButton } from 'components/Form/Form.styled';
-import { renderIcons, convertHyphenatedString } from 'utils/';
-import { AppBar } from 'components/AppBar/AppBar';
+import { renderIcons, convertHyphenatedString } from 'utils';
 
 const ManageGroupMember = () => {
   const dispatch = useDispatch();

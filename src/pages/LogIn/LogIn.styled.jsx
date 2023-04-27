@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
+import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 
 export const Content = styled(ContentWrapper)`
   display: flex;

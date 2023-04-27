@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Avatar from 'react-avatar';
-import { CheckboxWithStarIcon } from 'components';
+import { FavoriteButton } from 'components';
 import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites/favoritesSlice';
-import { Notifications } from 'utils';
+import { CONTACT_ACTIONS } from 'constants';
+import { showContactSuccess } from 'utils/notifications';
 
 export const FavoriteContact = ({ contact }) => {
   const dispatch = useDispatch();
   const removeFromFavorites = () => {
-    Notifications.showContactSuccess('removeFromFavorites', contact);
+    showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact);
     dispatch(removeContactFromFavorites(contact.id));
   };
 
@@ -28,7 +29,7 @@ export const FavoriteContact = ({ contact }) => {
         <Number>{contact.number}</Number>
       </ContactEl>
 
-      <CheckboxWithStarIcon onChange={removeFromFavorites} checked />
+      <FavoriteButton onChange={removeFromFavorites} checked />
     </>
   );
 };

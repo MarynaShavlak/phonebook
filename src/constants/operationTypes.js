@@ -1,4 +1,4 @@
-export const OPERATION_TYPES = {
+export const OPERATION = {
   EDIT: 'edit',
   DELETE: 'delete',
   RESTORE: 'restore',

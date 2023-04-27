@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  HomeMain,
   HomeTitle,
   HomeInfo,
   HomeWrapper,
@@ -14,8 +13,9 @@ import {
   Header,
   Benefit,
 } from './Home.styled';
-import { Section } from 'components';
-import { renderIcons } from 'utils/renderIcons';
+import { Main } from 'shared/commonStyledComponents.jsx';
+import { Section } from 'shared';
+import { renderIcons } from 'utils';
 import Logo from 'components/Navigation/images/phone-genie-logo.png';
 import HomeImage from './images/home.svg';
 
@@ -38,9 +38,8 @@ const Home = () => {
           </p>
         </div>
       </Header>
-      <HomeMain>
+      <Main>
         <Section>
-          {' '}
           <HomeWrapper>
             <HomeInfo>
               <div>
@@ -146,7 +145,7 @@ const Home = () => {
             </Item>
           </BenefitsList>
         </Section>
-      </HomeMain>
+      </Main>
     </>
   );
 };

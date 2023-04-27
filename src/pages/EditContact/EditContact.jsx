@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
-import { Section, ContactForm, Loader } from 'components';
-import { selectContacts } from 'redux/contacts/selectors';
-import { fetchContacts } from 'redux/contacts/contactsOperations';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Loader, AppBar } from 'components';
+import { Section, ContactForm } from 'shared';
+import { ContentWrapper, BackButton } from 'shared/commonStyledComponents.jsx';
 import { EditFormInfo, EditFormInstrc } from './EditContact.styled';
+import { selectContacts, fetchContacts } from 'redux/contacts';
 import { renderIcons } from 'utils';
-import { BackButton } from 'components/Form/Form.styled';
-import { AppBar } from 'components/AppBar/AppBar';
 import { showEditContactSuccess } from 'utils/notifications';
-import { useNavigate } from 'react-router-dom';
+import { CONTACT_ACTIONS } from 'constants';
 
 const EditContact = () => {
   const location = useLocation();
@@ -27,7 +25,6 @@ const EditContact = () => {
   };
   const contacts = useSelector(selectContacts);
   const contact = getContactById({ contactId, contacts });
-
   const backLinkHref = location.state?.from ?? '/contacts';
 
   const successEditContact = ({ contact, updatedContact }) => {
@@ -72,7 +69,7 @@ const EditContact = () => {
                 </p>
               </EditFormInstrc>
               <ContactForm
-                action="Edit contact"
+                action={CONTACT_ACTIONS.EDIT}
                 contact={contact}
                 onSubmit={successEditContact}
               />

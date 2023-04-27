@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,12 +7,11 @@ import { useModal } from 'hooks';
 import {
   OperationModal,
   AddContactToGroupModal,
-  CheckboxWithStarIcon,
+  FavoriteButton,
   HighlightContactDetails,
   DropdownMenu,
 } from 'components';
-import { renderIcons, getCurrentTime, Notifications } from 'utils';
-import { CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
+
 import {
   addContactToRecycleBin,
   selectRecycleBinContacts,
@@ -24,84 +23,88 @@ import {
   removeContactFromFavorites,
 } from 'redux/favorites';
 import { selectGroups, deleteContactFromGroup } from 'redux/groups';
-import { deleteContact } from 'redux/contacts/contactsOperations';
+import { deleteContact } from 'redux/contacts';
 import { ContactEl } from './Contact.styled';
-import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
+import {
+  getCurrentTime,
+  findGroupsForContact,
+  renderDropdownButton,
+} from 'utils';
+import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import {
+  showContactSuccess,
+  showRecyclebinWarn,
+  showErrorMessage,
+} from 'utils/notifications';
 
 export const Contact = ({ contact }) => {
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
-  const contacts = useSelector(selectRecycleBinContacts);
+  const deletedContacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)
   );
-  const { isRemoveModalOpen, toggleRemoveModal } = useModal(
-    OPERATION_TYPES.REMOVE
-  );
-  const { isAddModalOpen, toggleAddModal } = useModal(OPERATION_TYPES.ADD);
+  const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
+  const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
     return isFavorite
-      ? (Notifications.showContactSuccess('removeFromFavorites', contact),
+      ? (showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact),
         dispatch(removeContactFromFavorites(contact.id)))
       : (dispatch(addContactToFavorites(contact)),
-        Notifications.showContactSuccess('addToFavorites', contact));
+        showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact));
   };
 
-  const removeContactToRecycleBin = () => {
-    dispatch(deleteContact(contact.id));
-    const isContactExist = contacts.some(el => el.id === contact.id);
-    if (isContactExist) {
-      Notifications.showRecyclebinWarn(contact);
-      return;
+  const deleteContactAndCheckError = async contactId => {
+    const deleteResult = await dispatch(deleteContact(contactId));
+    if (deleteResult.error) {
+      showErrorMessage();
+      toggleRemoveModal();
+      return false;
     }
-    Notifications.showContactSuccess(OPERATION_TYPES.REMOVE, contact);
-    const removalContactTime = getCurrentTime();
-    dispatch(addContactToRecycleBin({ ...contact, removalContactTime }));
+    return true;
+  };
 
+  const checkIfInRecycleBin = (contact, deletedContacts) => {
+    return deletedContacts.some(el => el.id === contact.id);
+  };
+
+  const addContactToRecycleBinWithRemovalTime = contact => {
+    const removalTime = getCurrentTime();
+    dispatch(addContactToRecycleBin({ ...contact, removalTime }));
+  };
+
+  const removeContactFromFavoritesIfNeeded = (contact, isFavorite) => {
     if (isFavorite) {
       dispatch(removeContactFromFavorites(contact.id));
     }
+  };
 
-    const groupNames = findGroupsForContact({ contact, groups });
-
+  const removeContactFromGroups = (contact, groups) => {
+    const groupNames = findGroupsForContact(contact, groups);
     groupNames.forEach(groupName => {
       dispatch(deleteContactFromGroup({ group: groupName, contact }));
     });
   };
 
-  const findGroupsForContact = useMemo(() => {
-    return ({ contact, groups }) => {
-      return groups
-        .filter(group => group.contacts.some(c => c.id === contact.id))
-        .flatMap(group => group.name);
-    };
-  }, []);
+  const moveContactToRecycleBin = async () => {
+    if (!(await deleteContactAndCheckError(contact.id))) return;
+    if (checkIfInRecycleBin(contact, deletedContacts)) {
+      showRecyclebinWarn(contact);
+      return;
+    }
+    addContactToRecycleBinWithRemovalTime(contact);
+    removeContactFromFavoritesIfNeeded(contact, isFavorite);
+    removeContactFromGroups(contact, groups);
+    showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
+  };
 
   return (
     <>
-      {isRemoveModalOpen && (
-        <OperationModal
-          isOpen={isRemoveModalOpen}
-          onClose={toggleRemoveModal}
-          data={contact}
-          onConfirm={removeContactToRecycleBin}
-          action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
-        />
-      )}
-      {isAddModalOpen && (
-        <AddContactToGroupModal
-          isOpen={isAddModalOpen}
-          onClose={toggleAddModal}
-          contact={contact}
-          action={CONTACT_ACTIONS.ADD_TO_GROUP}
-        />
-      )}
-
       <ContactEl>
         <Avatar
           size="30"
@@ -116,49 +119,52 @@ export const Contact = ({ contact }) => {
           filterByNumber={filterByNumber}
         />
       </ContactEl>
-      <CheckboxWithStarIcon checked={isFavorite} onChange={toggleFavorite} />
+      <FavoriteButton checked={isFavorite} onChange={toggleFavorite} />
       <DropdownMenu
         elements={[
           {
-            label: OPERATION_TYPES.EDIT,
+            label: OPERATION.EDIT,
             icon: (
-              <>
-                <Link to={`/edit-contact/${contact.id}`}>
-                  <DropdownButton ariaLabel={CONTACT_ACTIONS.EDIT}>
-                    {renderIcons(OPERATION_TYPES.EDIT, 25)}Edit
-                  </DropdownButton>
-                </Link>
-              </>
+              <Link to={`/edit-contact/${contact.id}`}>
+                {renderDropdownButton(CONTACT_ACTIONS.EDIT, OPERATION.EDIT)}
+              </Link>
             ),
           },
           {
-            label: OPERATION_TYPES.REMOVE,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
-                  onClick={toggleRemoveModal}
-                >
-                  {renderIcons(OPERATION_TYPES.REMOVE, 25)}Remove to recycle bin
-                </DropdownButton>
-              </>
+            label: OPERATION.REMOVE,
+            icon: renderDropdownButton(
+              CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
+              OPERATION.REMOVE,
+              toggleRemoveModal
             ),
           },
           {
-            label: OPERATION_TYPES.ADD,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={CONTACT_ACTIONS.ADD_TO_GROUP}
-                  onClick={toggleAddModal}
-                >
-                  {renderIcons('group', 25)}Add to group
-                </DropdownButton>
-              </>
+            label: OPERATION.ADD,
+            icon: renderDropdownButton(
+              CONTACT_ACTIONS.ADD_TO_GROUP,
+              OPERATION.ADD,
+              toggleAddModal
             ),
           },
         ]}
       />
+      {isRemoveModalOpen && (
+        <OperationModal
+          isOpen={isRemoveModalOpen}
+          onClose={toggleRemoveModal}
+          data={contact}
+          onConfirm={moveContactToRecycleBin}
+          action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+        />
+      )}
+      {isAddModalOpen && (
+        <AddContactToGroupModal
+          isOpen={isAddModalOpen}
+          onClose={toggleAddModal}
+          contact={contact}
+          action={CONTACT_ACTIONS.ADD_TO_GROUP}
+        />
+      )}
     </>
   );
 };

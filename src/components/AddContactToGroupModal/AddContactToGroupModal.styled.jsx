@@ -13,16 +13,10 @@ export const GroupsList = styled.ul`
 export const GroupButton = styled.button`
   display: flex;
   justify-content: center;
-  padding: 5px;
   background-color: #fde7f0;
   color: black;
   border: 5px solid transparent;
   border-radius: 10px;
-  font-size: 10px;
-
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 12px;
-  }
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
@@ -35,6 +29,13 @@ export const GroupButton = styled.button`
   }
   &.selected {
     background-color: #bb6bd9;
+  }
+
+  padding: 5px;
+  font-size: 10px;
+
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 12px;
   }
 `;
 

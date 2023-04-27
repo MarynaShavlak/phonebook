@@ -1,62 +1,84 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
-import { clsx } from 'clsx';
 import { OperationModal, DropdownMenu } from 'components';
-import { InfoBlock } from './DeletedContact.styled';
 import {
   ContactEl,
   Name,
   Number,
   Time,
 } from 'components/Contact/Contact.styled';
-import { DropdownButton } from 'components/DropdownMenu/DropdownMenu.styled';
+import { removeContactFromRecycleBin } from 'redux/recycleBin';
+import { addContact } from 'redux/contacts';
+import { checkForDuplicateContact, renderDropdownButton } from 'utils';
+import {
+  showContactSuccess,
+  showContactExistWarn,
+  showRecyclebinInfo,
+  showErrorMessage,
+} from 'utils/notifications';
+import { useModal } from 'hooks';
+import { CONTACT_ACTIONS, OPERATION } from 'constants';
 
-import { renderIcons, Notifications } from 'utils';
-import { useHoverEffects, useModal } from 'hooks';
-import { CONTACT_ACTIONS, OPERATION_TYPES } from 'constants';
-import { removeContactFromRecycleBin } from 'redux/recycleBin/recycleBinSlice';
-import { addContact } from 'redux/contacts/contactsOperations';
-
-import { selectContacts } from 'redux/contacts/selectors';
-
-export const DeletedContact = ({ contact }) => {
-  const contacts = useSelector(selectContacts);
-  const { isRestoreModalOpen, toggleRestoreModal } = useModal(
-    OPERATION_TYPES.RESTORE
-  );
-  const { isDeleteModalOpen, toggleDeleteModal } = useModal(
-    OPERATION_TYPES.DELETE
-  );
-  const { isHovered, toggleHoverEffect } = useHoverEffects([
-    OPERATION_TYPES.RESTORE,
-    OPERATION_TYPES.DELETE,
-  ]);
+export const DeletedContact = ({ deletedContact, allContacts }) => {
   const dispatch = useDispatch();
+  const { isRestoreModalOpen, toggleRestoreModal } = useModal(
+    OPERATION.RESTORE
+  );
+  const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
 
-  const deleteContact = () => {
-    dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showRecyclebinInfo(contact);
+  const handleDelete = () => {
+    dispatch(removeContactFromRecycleBin(deletedContact.id));
+    showRecyclebinInfo(deletedContact);
+    toggleRestoreModal();
   };
 
-  const checkContactInBook = contact => {
-    const isNumberExist = contacts.some(el => el.number === contact.number);
-    const isNameExist = contacts.some(el => el.name === contact.name);
-
-    if (isNameExist || isNumberExist) {
-      Notifications.showContactExistWarn(isNameExist, isNumberExist, contact);
+  const checkAndWarnForDuplicateContact = ({ newContact, contacts }) => {
+    const { isDuplicate, isNameExist, isNumberExist } =
+      checkForDuplicateContact({
+        newContact,
+        contacts,
+      });
+    if (isDuplicate) {
+      showContactExistWarn({
+        isNameExist,
+        isNumberExist,
+        contact: newContact,
+      });
       return true;
     }
-
     return false;
   };
 
-  const restoreContact = () => {
-    if (checkContactInBook(contact)) return;
-    dispatch(addContact(contact));
-    dispatch(removeContactFromRecycleBin(contact.id));
-    Notifications.showContactSuccess(OPERATION_TYPES.RESTORE, contact);
+  const restoreDeletedContact = async deletedContact => {
+    try {
+      const restoreResult = await dispatch(addContact(deletedContact));
+      const deleteResult = await dispatch(
+        removeContactFromRecycleBin(deletedContact.id)
+      );
+      if (restoreResult.error || deleteResult.error) {
+        showErrorMessage();
+      } else {
+        showContactSuccess(CONTACT_ACTIONS.RESTORE, deletedContact);
+      }
+    } catch (error) {
+      showErrorMessage();
+    }
+  };
+
+  const handleRestore = async () => {
+    if (
+      checkAndWarnForDuplicateContact({
+        newContact: deletedContact,
+        contacts: allContacts,
+      })
+    ) {
+      toggleRestoreModal();
+      return;
+    }
+
+    await restoreDeletedContact(deletedContact);
   };
 
   return (
@@ -65,8 +87,8 @@ export const DeletedContact = ({ contact }) => {
         <OperationModal
           isOpen={isRestoreModalOpen}
           onClose={toggleRestoreModal}
-          data={contact}
-          onConfirm={restoreContact}
+          data={deletedContact}
+          onConfirm={handleRestore}
           action={CONTACT_ACTIONS.RESTORE}
         />
       )}
@@ -74,67 +96,44 @@ export const DeletedContact = ({ contact }) => {
         <OperationModal
           isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
-          data={contact}
-          onConfirm={deleteContact}
+          data={deletedContact}
+          onConfirm={handleDelete}
           action={CONTACT_ACTIONS.DELETE}
         />
       )}
-      <InfoBlock>
-        <ContactEl
-          className={clsx({
-            toRestore: isHovered.restore,
-            toDelete: isHovered.delete,
-          })}
-        >
+      <div>
+        <ContactEl>
           <Avatar
             size="30"
             textSizeRatio={2}
-            name={contact.name}
+            name={deletedContact.name}
             unstyled={false}
             round="50%"
           />
-          <Name>{contact.name}:</Name>
-          <Number>{contact.number}</Number>
+          <Name>{deletedContact.name}:</Name>
+          <Number>{deletedContact.number}</Number>
         </ContactEl>
         <Time>
-          removed at <b>{contact.removalContactTime}</b>
+          removed at <b>{deletedContact.removalTime}</b>
         </Time>
-      </InfoBlock>
+      </div>
 
       <DropdownMenu
         elements={[
           {
-            label: OPERATION_TYPES.RESTORE,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
-                  onClick={toggleRestoreModal}
-                  onMouseEnter={() =>
-                    toggleHoverEffect(OPERATION_TYPES.RESTORE)
-                  }
-                  onMouseLeave={() =>
-                    toggleHoverEffect(OPERATION_TYPES.RESTORE)
-                  }
-                >
-                  {renderIcons(OPERATION_TYPES.RESTORE, 25)}Restore{' '}
-                </DropdownButton>
-              </>
+            label: OPERATION.RESTORE,
+            icon: renderDropdownButton(
+              CONTACT_ACTIONS.RESTORE,
+              OPERATION.RESTORE,
+              toggleRestoreModal
             ),
           },
           {
-            label: OPERATION_TYPES.ADD,
-            icon: (
-              <>
-                <DropdownButton
-                  ariaLabel={CONTACT_ACTIONS.DELETE}
-                  onClick={toggleDeleteModal}
-                  onMouseEnter={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-                  onMouseLeave={() => toggleHoverEffect(OPERATION_TYPES.DELETE)}
-                >
-                  {renderIcons(OPERATION_TYPES.DELETE, 25)}Delete
-                </DropdownButton>
-              </>
+            label: OPERATION.DELETE,
+            icon: renderDropdownButton(
+              CONTACT_ACTIONS.DELETE,
+              OPERATION.DELETE,
+              toggleDeleteModal
             ),
           },
         ]}
@@ -144,10 +143,17 @@ export const DeletedContact = ({ contact }) => {
 };
 
 DeletedContact.propTypes = {
-  contact: PropTypes.shape({
+  deletedContact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    removalContactTime: PropTypes.string.isRequired,
+    removalTime: PropTypes.string.isRequired,
   }).isRequired,
+  allContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };

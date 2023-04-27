@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const HomeMain = styled.main`
-  padding-top: 30px;
-  section:first-child {
-    margin-bottom: 30px;
-  }
-`;
-
 export const Header = styled.header`
   display: flex;
   flex-direction: column;

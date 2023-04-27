@@ -1,4 +1,4 @@
-export { getContactsQuantity } from './getContactsQuantity';
+export { getContactsQuantity } from './contact/getContactsQuantity';
 export { getGroupsQuantity } from './getGroupsQuantity';
 export { renderIcons } from './renderIcons';
 export { getCurrentTime } from './getCurrentTime';
@@ -11,11 +11,14 @@ export {
   isExistByName,
   isExistByNumber,
   checkForDuplicateContact,
-} from './checkContactExistence';
+} from './contact/checkContactExistence';
 export {
   CONTACT_NAME_VALIDATION_SCHEMA,
   validateContactData,
-} from './validation';
+  validateName,
+} from './contact/validation';
 export * as Notifications from './notifications';
-export { checkContactUpdateSpecialCases } from './checkContactUpdate';
-export { getExclusiveContact } from './getExclusiveContact';
+export { checkContactUpdateSpecialCases } from './contact/checkContactUpdate';
+export { getExclusiveContact } from './contact/getExclusiveContact';
+export { findGroupsForContact } from './contact/findGroupsForContact';
+export { renderDropdownButton } from './renderDropdownButton';

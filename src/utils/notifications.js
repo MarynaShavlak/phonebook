@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { CONTACT_ACTIONS } from 'constants';
 
 function showMessage(type, message) {
   switch (type) {
@@ -30,10 +31,10 @@ export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
 export function showContactSuccess(operation, contact) {
   const messages = {
     add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
-    remove: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
-    restore: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
-    addToFavorites: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
-    removeFromFavorites: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
+    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
+    [CONTACT_ACTIONS.RESTORE]: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
+    [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
+    [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
   };
   const message =
     messages[operation] ||

@@ -1,12 +1,7 @@
 import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {
-  SharedLayout,
-  PrivateRoute,
-  RestrictedRoute,
-  Loader,
-} from 'components';
-
+import { PrivateRoute, RestrictedRoute, Loader } from 'components';
+import { SharedLayout } from 'shared';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from 'hooks';
 import * as authOperations from 'redux/auth/authOperations';

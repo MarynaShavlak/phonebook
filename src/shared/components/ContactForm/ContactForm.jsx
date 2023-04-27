@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'react-phone-number-input';
-import { selectContacts } from 'redux/contacts/selectors';
-import {
-  fetchContacts,
-  addContact,
-  updateContact,
-} from 'redux/contacts/contactsOperations';
-import {
-  Notifications,
-  CONTACT_NAME_VALIDATION_SCHEMA,
-  validateContactData,
-  checkContactUpdateSpecialCases,
-  getExclusiveContact,
-} from 'utils';
+import { OperationButton } from 'shared';
 import {
   Form,
   FormItem,
@@ -23,11 +13,20 @@ import {
   Name,
   Error,
 } from './ContactForm.styled';
-import { OperationButton } from 'components';
-import { useNavigate } from 'react-router-dom';
-
-const add = 'add';
-const update = 'update';
+import {
+  selectContacts,
+  fetchContacts,
+  addContact,
+  updateContact,
+} from 'redux/contacts';
+import {
+  validateContactData,
+  validateName,
+  checkContactUpdateSpecialCases,
+  getExclusiveContact,
+} from 'utils';
+import { showErrorMessage } from 'utils/notifications';
+import { OPERATION, CONTACT_ACTIONS } from 'constants';
 
 export const ContactForm = ({ contact, action, onSubmit }) => {
   const [name, setName] = useState('');
@@ -35,8 +34,8 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   const [nameError, setNameError] = useState(null);
   const [numberError, setNumberError] = useState(null);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   useEffect(() => {
     if (contact) {
@@ -51,25 +50,16 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   }, [contact]);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const contacts = useSelector(selectContacts);
+    if (!contacts.length) {
+      dispatch(fetchContacts());
+    }
+  }, [contacts, dispatch]);
 
   const handleNameChange = async e => {
     const { value } = e.target;
     const errorMessage = await validateName(value);
     setName(value);
     setNameError(errorMessage);
-  };
-
-  const validateName = async name => {
-    try {
-      await CONTACT_NAME_VALIDATION_SCHEMA.validate({ name });
-      return null;
-    } catch (error) {
-      return error.message;
-    }
   };
 
   const handleNumberChange = value => {
@@ -91,7 +81,7 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
     e.preventDefault();
     const isContactDataValid = await validateContactData({ name, number });
     if (!isContactDataValid) return;
-    if (action === 'update') {
+    if (action === OPERATION.EDIT) {
       const specialCase = checkContactUpdateSpecialCases({
         contact,
         name,
@@ -110,13 +100,13 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
     if (!createdContact) return;
     const editedContact = { ...contact, ...createdContact };
     const result =
-      action === 'update'
+      action === OPERATION.EDIT
         ? await dispatch(updateContact(editedContact))
         : await dispatch(addContact(createdContact));
     if (result.error) {
-      return Notifications.showErrorMessage();
+      return showErrorMessage();
     }
-    if (action === 'update') {
+    if (action === OPERATION.EDIT) {
       onSubmit({ contact, updatedContact: createdContact });
     } else {
       onSubmit(createdContact);
@@ -125,11 +115,11 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   };
 
   const handleAddContact = async e => {
-    await handleContact({ e, action: add });
+    await handleContact({ e, action: OPERATION.ADD });
   };
 
   const handleEditContact = async e => {
-    await handleContact({ e, action: update, contact });
+    await handleContact({ e, action: OPERATION.EDIT, contact });
   };
 
   const reset = () => {
@@ -140,7 +130,7 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   return (
     <Form
       onSubmit={
-        action === 'Add new contact' ? handleAddContact : handleEditContact
+        action === CONTACT_ACTIONS.ADD ? handleAddContact : handleEditContact
       }
     >
       <FormList>
@@ -151,7 +141,6 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
             name="name"
             value={name}
             onChange={handleNameChange}
-            placeholder="Enter name"
           />
           {nameError && <Error>{nameError}</Error>}
         </FormItem>
@@ -160,7 +149,6 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
           <Phone
             international
             countryCallingCodeEditable={false}
-            placeholder="Enter phone number"
             defaultCountry="UA"
             value={number}
             onChange={handleNumberChange}
@@ -171,4 +159,13 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
       <OperationButton>{action}</OperationButton>
     </Form>
   );
+};
+
+ContactForm.propTypes = {
+  contact: PropTypes.shape({
+    name: PropTypes.string,
+    number: PropTypes.string,
+  }),
+  action: PropTypes.oneOf(['Add new contact', 'Edit contact']),
+  onSubmit: PropTypes.func.isRequired,
 };

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { AppBar, CreateGroupModal, Group } from 'components';
+import { Section, Notification } from 'shared';
+import { GroupsList, GroupItem, AddNewGroupBtn } from './Groups.styled';
+import {
+  ContentWrapper,
+  Main,
+  Button,
+  InfoWrap,
+  Info,
+} from 'shared/commonStyledComponents.jsx';
 import { selectGroups } from 'redux/groups';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
-import { Button } from 'components/OperationButton/OperationButton.styled';
-import { Section, Notification, CreateGroupModal, Group } from 'components';
-import { ContentWrapper, Info, InfoWrap } from 'pages/Contacts/Contacts.styled';
-import { GroupsList, GroupItem, AddNewGroupBtn } from './Groups.styled';
 import { renderIcons, getGroupsQuantity } from 'utils';
-import { AppBar } from 'components/AppBar/AppBar';
-import { HomeMain } from 'pages/Home/Home.styled';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
@@ -27,7 +31,7 @@ const Groups = () => {
   return (
     <>
       <AppBar />
-      <HomeMain>
+      <Main>
         <Section>
           <ContentWrapper>
             {groups.length !== 0 ? (
@@ -76,7 +80,7 @@ const Groups = () => {
             )}
           </ContentWrapper>
         </Section>
-      </HomeMain>
+      </Main>
     </>
   );
 };

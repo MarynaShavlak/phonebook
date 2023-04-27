@@ -1,19 +1,18 @@
 import React from 'react';
-import { ContactForm } from 'components';
-import { Section } from 'components';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
 import { useLocation } from 'react-router-dom';
-import { renderIcons } from 'utils/renderIcons';
-import { BackButton } from 'components/Form/Form.styled';
-import { AppBar } from 'components/AppBar/AppBar';
+import { AppBar } from 'components';
+import { Section, ContactForm } from 'shared';
+import { ContentWrapper, BackButton } from 'shared/commonStyledComponents.jsx';
+import { renderIcons } from 'utils';
 import { showContactSuccess } from 'utils/notifications';
+import { CONTACT_ACTIONS, OPERATION } from 'constants';
 
 const AddNewContact = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/contacts';
 
   const successAddContact = contact => {
-    showContactSuccess('add', contact);
+    showContactSuccess(OPERATION.ADD, contact);
   };
 
   return (
@@ -28,7 +27,7 @@ const AddNewContact = () => {
               </button>
             </BackButton>
             <ContactForm
-              action="Add new contact"
+              action={CONTACT_ACTIONS.ADD}
               onSubmit={successAddContact}
             />
           </ContentWrapper>

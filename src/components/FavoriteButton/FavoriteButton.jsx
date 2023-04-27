@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-export const CheckboxWithStarIcon = ({ checked = false, onChange }) => {
+export const FavoriteButton = ({ checked = false, onChange }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox ' } };
   return (
     <Checkbox
@@ -26,7 +26,7 @@ export const CheckboxWithStarIcon = ({ checked = false, onChange }) => {
   );
 };
 
-CheckboxWithStarIcon.propTypes = {
+FavoriteButton.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };

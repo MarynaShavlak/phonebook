@@ -1,46 +1,38 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import { FilterList, AddNewContactBtn } from './Contacts.styled';
 import {
-  FilterList,
+  ContentWrapper,
+  Main,
+  Button,
   InfoWrap,
   Info,
-  ContentWrapper,
-  AddNewContactBtn,
-} from './Contacts.styled';
-import { Button } from 'components/OperationButton/OperationButton.styled';
-import {
-  ErrorMessage,
-  Section,
-  ContactList,
-  Filter,
-  Loader,
-  Notification,
-} from 'components';
-import * as contactsOperations from 'redux/contacts/contactsOperations';
+} from 'shared/commonStyledComponents.jsx';
+import { ContactList, Filter, Loader, AppBar } from 'components';
+import { Section, ErrorMessage, Notification } from 'shared';
 import {
   selectContacts,
   selectIsLoading,
   selectError,
   selectFilteredContacts,
-} from 'redux/contacts/selectors';
-import {
-  selectFilterByName,
-  selectFilterByNumber,
-} from 'redux/filters/selectors';
-import { getContactsQuantity } from 'utils/getContactsQuantity';
-import { renderIcons } from 'utils/renderIcons';
-import { AppBar } from 'components/AppBar/AppBar';
-import { HomeMain } from 'pages/Home/Home.styled';
+  // fetchContacts,
+} from 'redux/contacts';
+
+import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
+import { getContactsQuantity, renderIcons } from 'utils';
+
 const Contacts = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  // const contacts = useSelector(selectContacts);
 
-  useEffect(() => {
-    dispatch(contactsOperations.fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!contacts.length) {
+  //     dispatch(fetchContacts());
+  //   }
+  // }, [contacts, dispatch]);
 
   const filteredContacts = useSelector(selectFilteredContacts);
   const allContacts = useSelector(selectContacts);
@@ -54,7 +46,7 @@ const Contacts = () => {
   return (
     <>
       <AppBar />
-      <HomeMain>
+      <Main>
         <Section>
           <ContentWrapper>
             {allContacts.length !== 0 && (
@@ -112,7 +104,7 @@ const Contacts = () => {
             )}
           </ContentWrapper>
         </Section>
-      </HomeMain>
+      </Main>
     </>
   );
 };

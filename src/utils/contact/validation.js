@@ -34,3 +34,12 @@ export const validateContactData = async ({ name, number }) => {
   }
   return true;
 };
+
+export const validateName = async name => {
+  try {
+    await CONTACT_NAME_VALIDATION_SCHEMA.validate({ name });
+    return null;
+  } catch (error) {
+    return error.message;
+  }
+};

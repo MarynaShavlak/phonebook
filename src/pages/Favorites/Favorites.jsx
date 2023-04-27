@@ -5,17 +5,16 @@ import {
   ContactsList,
   ContactItem,
 } from 'components/ContactList/ContactList.styled';
-import { FavoriteContact, Section, Notification } from 'components';
-import { ContentWrapper } from 'pages/Contacts/Contacts.styled';
-import { AppBar } from 'components/AppBar/AppBar';
-import { HomeMain } from 'pages/Home/Home.styled';
+import { FavoriteContact, AppBar } from 'components';
+import { Section, Notification } from 'shared';
+import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 
 const Favorites = () => {
   const contacts = useSelector(selectFavoritesContacts);
   return (
     <>
       <AppBar />{' '}
-      <HomeMain>
+      <Main>
         <Section>
           <ContentWrapper>
             {contacts.length !== 0 ? (
@@ -31,7 +30,7 @@ const Favorites = () => {
             )}
           </ContentWrapper>
         </Section>
-      </HomeMain>
+      </Main>
     </>
   );
 };
