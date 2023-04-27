@@ -42,7 +42,7 @@ export function showContactSuccess(operation, contact) {
   return showMessage('success', message);
 }
 
-export function showNoChangesMessage() {
+export function showNoUpdateMessage() {
   return showMessage(
     'info',
     `There are no changes. You didn't change either contact name or phone number`
@@ -116,14 +116,14 @@ export function showErrorMessage() {
     'Oohps, something has gone wrong. Try again, please.'
   );
 }
-export function showAddContactError() {
+export function showContactValidationError() {
   return showMessage(
     'error',
     'Please ensure that you provide the accurate name and contact number.'
   );
 }
-export function showNewContactNameError() {
-  return showMessage('error', 'Name is required to have at least 2 letters');
+export function showNewContactNameError(message) {
+  return showMessage('error', message);
 }
 export function showNewContactNumberError() {
   return showMessage(

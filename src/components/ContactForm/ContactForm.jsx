@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import { selectContacts } from 'redux/contacts/selectors';
-import { fetchContacts, addContact } from 'redux/contacts/contactsOperations';
+import {
+  fetchContacts,
+  addContact,
+  updateContact,
+} from 'redux/contacts/contactsOperations';
 import {
   Notifications,
-  removeExtraWhitespace,
-  checkForDuplicateContact,
+  // removeExtraWhitespace,
+  // checkForDuplicateContact,
   CONTACT_NAME_VALIDATION_SCHEMA,
+  validateContactData,
+  checkContactUpdateSpecialCases,
+  getExclusiveContact,
 } from 'utils';
 import {
   Form,
@@ -19,14 +26,32 @@ import {
   Error,
 } from './ContactForm.styled';
 import { OperationButton } from 'components';
+import { useNavigate } from 'react-router-dom';
+// import { showContactExistWarn } from 'utils/notifications';
 
-export const ContactForm = () => {
+const add = 'add';
+const update = 'update';
+
+export const ContactForm = ({ contact, action, onEdit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [nameError, setNameError] = useState(null);
   const [numberError, setNumberError] = useState(null);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (contact) {
+      setName(contact.name);
+    }
+  }, [contact]);
+
+  useEffect(() => {
+    if (contact) {
+      setNumber(contact.number);
+    }
+  }, [contact]);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -61,37 +86,99 @@ export const ContactForm = () => {
     setNumber(value);
   };
 
-  const handleAddContact = async e => {
+  const handleContact = async ({
+    e,
+    action,
+    contact = { name: '', number: '' },
+  }) => {
+    console.log('action: ', action);
     e.preventDefault();
-    const normalizedContactName = removeExtraWhitespace(name);
-    if (!normalizedContactName.length && !isValidPhoneNumber(number)) {
-      return Notifications.showAddContactError();
-    }
-    if (!normalizedContactName.length) {
-      return Notifications.showNewContactNameError();
-    }
-    if (!isValidPhoneNumber(number)) {
-      return Notifications.showNewContactNumberError();
-    }
-
-    const createdContact = { name: normalizedContactName, number };
-    const { isDuplicate, isNameExist, isNumberExist } =
-      checkForDuplicateContact(createdContact, contacts);
-
-    if (isDuplicate) {
-      return Notifications.showContactExistWarn({
-        isNameExist,
-        isNumberExist,
-        contact: createdContact,
+    const isContactDataValid = await validateContactData({ name, number });
+    if (!isContactDataValid) return;
+    if (action === 'update') {
+      const specialCase = checkContactUpdateSpecialCases({
+        contact,
+        name,
+        number,
       });
+      if (specialCase === 'both') return;
+      if (specialCase === 'none') return navigate('/contacts');
     }
-    const result = await dispatch(addContact(createdContact));
+    const createdContact = getExclusiveContact({
+      name,
+      number,
+      contacts,
+      contact,
+    });
 
+    if (!createdContact) return;
+    const editedContact = { ...contact, ...createdContact };
+    const result =
+      action === 'update'
+        ? await dispatch(updateContact(editedContact))
+        : await dispatch(addContact(createdContact));
     if (result.error) {
       return Notifications.showErrorMessage();
     }
-    Notifications.showContactSuccess('add', createdContact);
-    reset();
+    if (action === 'update') {
+      Notifications.showEditContactSuccess(contact, createdContact);
+      navigate('/contacts');
+    } else {
+      Notifications.showContactSuccess('add', createdContact);
+      reset();
+    }
+  };
+
+  // const handleAddContact = async e => {
+  //   e.preventDefault();
+  //   const isContactDataValid = await validateContactData({ name, number });
+  //   if (!isContactDataValid) return;
+
+  //   const createdContact = getExclusiveContact({ name, number, contacts });
+  //   if (!createdContact) return;
+  //   const result = await dispatch(addContact(createdContact));
+  //   if (result.error) {
+  //     return Notifications.showErrorMessage();
+  //   }
+  //   Notifications.showContactSuccess('add', createdContact);
+  //   reset();
+  // };
+
+  // const handleEditContact = async e => {
+  //   e.preventDefault();
+  //   const isContactDataValid = await validateContactData({ name, number });
+  //   if (!isContactDataValid) return;
+
+  //   const specialCase = checkContactUpdateSpecialCases({
+  //     contact,
+  //     name,
+  //     number,
+  //   });
+  //   if (specialCase === 'both') return;
+  //   if (specialCase === 'none') return navigate('/contacts');
+  //   const createdContact = getExclusiveContact({
+  //     name,
+  //     number,
+  //     contacts,
+  //     contact,
+  //   });
+
+  //   if (!createdContact) return;
+  //   const editedContact = { ...contact, ...createdContact };
+  //   const result = await dispatch(updateContact(editedContact));
+  //   if (result.error) {
+  //     return Notifications.showErrorMessage();
+  //   }
+  //   Notifications.showEditContactSuccess(contact, createdContact);
+  //   navigate('/contacts');
+  // };
+
+  const handleAddContact = async e => {
+    await handleContact({ e, action: add });
+  };
+
+  const handleEditContact = async e => {
+    await handleContact({ e, action: update, contact });
   };
 
   const reset = () => {
@@ -100,7 +187,11 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form onSubmit={handleAddContact}>
+    <Form
+      onSubmit={
+        action === 'Add new contact' ? handleAddContact : handleEditContact
+      }
+    >
       <FormList>
         <FormItem>
           <label>Name</label>
@@ -126,7 +217,7 @@ export const ContactForm = () => {
           {numberError && <Error>{numberError}</Error>}
         </FormItem>
       </FormList>
-      <OperationButton>Add new contact</OperationButton>
+      <OperationButton>{action}</OperationButton>
     </Form>
   );
 };

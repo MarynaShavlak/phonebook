@@ -10,6 +10,7 @@ import { AppBar } from 'components/AppBar/AppBar';
 const AddNewContact = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/contacts';
+
   return (
     <>
       <AppBar />
@@ -21,7 +22,7 @@ const AddNewContact = () => {
                 {renderIcons('back', 50)}
               </button>
             </BackButton>
-            <ContactForm />
+            <ContactForm action="Add new contact" />
           </ContentWrapper>
         </Section>
       </main>

@@ -34,14 +34,22 @@ export const isExistByNumber = ({
   return checkContactExistence(filteredContacts, newNumber, 'number');
 };
 
-export const checkForDuplicateContact = (createdContact, contacts) => {
+export const checkForDuplicateContact = ({
+  newContact,
+
+  contacts,
+  contact = { name: '', number: '' },
+}) => {
+  console.log('newContact: ', newContact);
   const isNameExist = isExistByName({
-    newName: createdContact.name,
+    newName: newContact.name,
     contacts,
+    contact,
   });
   const isNumberExist = isExistByNumber({
-    newNumber: createdContact.number,
+    newNumber: newContact.number,
     contacts,
+    contact,
   });
 
   return {

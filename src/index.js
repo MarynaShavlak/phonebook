@@ -12,23 +12,23 @@ import { theme } from './constants';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter
-    // basename="/phonebook/"
-    >
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ThemeProvider theme={theme}>
-            <ConfigProvider
-              colors={['#ef4287', '#f2c94c', '#bb6bd9', '#9b51e0', '#f787b4']}
-            >
-              <App />
-            </ConfigProvider>
-          </ThemeProvider>
+  // <React.StrictMode>
+  <BrowserRouter
+  // basename="/phonebook/"
+  >
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <ConfigProvider
+            colors={['#ef4287', '#f2c94c', '#bb6bd9', '#9b51e0', '#f787b4']}
+          >
+            <App />
+          </ConfigProvider>
+        </ThemeProvider>
 
-          <GlobalStyle />
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+        <GlobalStyle />
+      </PersistGate>
+    </Provider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

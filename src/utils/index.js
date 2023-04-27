@@ -12,5 +12,10 @@ export {
   isExistByNumber,
   checkForDuplicateContact,
 } from './checkContactExistence';
-export { CONTACT_NAME_VALIDATION_SCHEMA } from './validation';
+export {
+  CONTACT_NAME_VALIDATION_SCHEMA,
+  validateContactData,
+} from './validation';
 export * as Notifications from './notifications';
+export { checkContactUpdateSpecialCases } from './checkContactUpdate';
+export { getExclusiveContact } from './getExclusiveContact';
