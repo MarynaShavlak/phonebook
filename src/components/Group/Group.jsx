@@ -10,8 +10,7 @@ import {
   renderDropdownButton,
 } from 'utils';
 import { useModal } from 'hooks';
-import { GROUP_ACTIONS, OPERATION } from 'constants';
-
+import { GROUP_ACTIONS, OPERATION, ICON_NAMES, iconSize } from 'constants';
 import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
@@ -61,12 +60,16 @@ export const Group = ({ group }) => {
     <>
       <GroupWrapper>
         <GroupEl>
-          <GroupAvatar>{renderIcons('group', 20)}</GroupAvatar>
+          <GroupAvatar>
+            {renderIcons(ICON_NAMES.GROUP, iconSize.xs)}
+          </GroupAvatar>
           <Content onClick={toggleGroupContent}>
             <Element>
               {group.name}&nbsp; ({contactsQuantityInGroup})
             </Element>
-            <DropButton type="button">{renderIcons('dropDown', 20)}</DropButton>
+            <DropButton type="button">
+              {renderIcons(ICON_NAMES.DROP_DOWN, iconSize.xs)}
+            </DropButton>
           </Content>
         </GroupEl>
 
@@ -78,7 +81,7 @@ export const Group = ({ group }) => {
                   type="button"
                   onClick={() => onDeleteContact(contact)}
                 >
-                  {renderIcons('delete', 18)}
+                  {renderIcons(ICON_NAMES.DELETE, iconSize.xxs)}
                 </IconButton>
                 <ContactEl>
                   <Avatar

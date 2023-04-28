@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
+import { iconSize, ICON_NAMES } from 'constants';
 import {
   FormWrapper,
   StyledForm,
@@ -50,7 +50,7 @@ export const LogInForm = () => {
             <InfoList>
               <li>
                 <InfoField>
-                  {renderIcons('email', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.EMAIL, iconSize.xs)}
 
                   <InfoInput type="email" name="email" placeholder=" " />
                   <InfoLabel htmlFor="email" className="user-form__info-label">
@@ -61,7 +61,7 @@ export const LogInForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons('lock', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.LOCK, iconSize.xs)}
 
                   <InfoInput type="password" name="password" placeholder=" " />
                   <InfoLabel

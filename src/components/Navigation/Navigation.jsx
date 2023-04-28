@@ -9,7 +9,7 @@ import { renderIcons } from 'utils';
 import { useAuth } from 'hooks';
 import Logo from './images/phone-genie-logo.png';
 import { Link } from 'react-router-dom';
-import { OPERATION } from 'constants';
+import { OPERATION, ICON_NAMES, iconSize } from 'constants';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -30,25 +30,25 @@ export const Navigation = () => {
               {' '}
               <li>
                 <NavigationLink to="/contacts">
-                  {renderIcons('contact', 30)}
+                  {renderIcons(ICON_NAMES.CONTACT, iconSize.sm)}
                   {isDesktop && <span>Contacts</span>}
                 </NavigationLink>
               </li>
               <li>
                 <NavigationLink to="/favorites">
-                  {renderIcons('favorite', 30)}
+                  {renderIcons(ICON_NAMES.FAVORITE, iconSize.sm)}
                   {isDesktop && <span>Favorites</span>}
                 </NavigationLink>
               </li>
               <li>
                 <NavigationLink to="/groups">
-                  {renderIcons('group', 30)}
+                  {renderIcons(ICON_NAMES.GROUP, iconSize.sm)}
                   {isDesktop && <span>Groups</span>}
                 </NavigationLink>
               </li>
               <li>
                 <NavigationLink to="/recyclebin">
-                  {renderIcons(OPERATION.DELETE, 30)}
+                  {renderIcons(OPERATION.DELETE, iconSize.sm)}
                   {isDesktop && <span>Recycle Bin</span>}
                 </NavigationLink>
               </li>

@@ -5,7 +5,7 @@ import { Section, ContactForm } from 'shared';
 import { ContentWrapper, BackButton } from 'shared/commonStyledComponents.jsx';
 import { renderIcons } from 'utils';
 import { showContactSuccess } from 'utils/notifications';
-import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import { CONTACT_ACTIONS, OPERATION, ICON_NAMES, iconSize } from 'constants';
 
 const AddNewContact = () => {
   const location = useLocation();
@@ -23,7 +23,7 @@ const AddNewContact = () => {
           <ContentWrapper>
             <BackButton to={backLinkHref}>
               <button type="button" aria-label="Back to previous page">
-                {renderIcons('back', 50)}
+                {renderIcons(ICON_NAMES.BACK_ARROW, iconSize.md)}
               </button>
             </BackButton>
             <ContactForm

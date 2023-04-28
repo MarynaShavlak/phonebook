@@ -4,6 +4,8 @@ import './ConfirmationModal.css';
 import Modal from 'react-modal';
 import { ModalActionButtons } from 'components';
 import { renderIcons } from 'utils';
+import { iconSize, ICON_NAMES } from 'constants';
+
 Modal.setAppElement('#root');
 
 const customStyles = {
@@ -59,7 +61,7 @@ export const ConfirmationModal = ({
         onClick={() => onClose()}
         className="close-modal-btn"
       >
-        {renderIcons('close', 20)}
+        {renderIcons(ICON_NAMES.CLOSE, iconSize.xs)}
       </button>
       {children}
 

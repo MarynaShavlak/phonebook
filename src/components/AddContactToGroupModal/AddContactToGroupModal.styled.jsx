@@ -4,10 +4,6 @@ export const GroupsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 10px;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    margin-bottom: 20px;
-  }
 `;
 
 export const GroupButton = styled.button`
@@ -36,18 +32,5 @@ export const GroupButton = styled.button`
 
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 12px;
-  }
-`;
-
-export const ModalText = styled.p`
-  font-size: 12px;
-  line-height: 1.5;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
-  }
-
-  margin-bottom: 10px;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    margin-bottom: 20px;
   }
 `;

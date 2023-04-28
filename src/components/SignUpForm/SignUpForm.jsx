@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize } from 'constants';
+import { iconSize, ICON_NAMES } from 'constants';
 import {
   FormWrapper,
   StyledForm,
@@ -83,7 +83,7 @@ export const SignUpForm = () => {
             <InfoList>
               <li>
                 <InfoField>
-                  {renderIcons('person', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.PERSON, iconSize.xs)}
 
                   <InfoInput type="text" name="name" placeholder=" " />
 
@@ -101,7 +101,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons('email', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.EMAIL, iconSize.xs)}
 
                   <InfoInput type="email" name="email" placeholder=" " />
                   <InfoLabel
@@ -118,7 +118,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons('lock', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.LOCK, iconSize.xs)}
 
                   <InfoInput
                     type="password"
@@ -140,7 +140,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons('lock', iconSize.xs)}
+                  {renderIcons(ICON_NAMES.LOCK, iconSize.xs)}
 
                   <InfoInput
                     type="password"

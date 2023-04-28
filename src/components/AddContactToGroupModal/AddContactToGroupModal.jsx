@@ -8,23 +8,28 @@ import {
   addContactToGroup,
   deleteContactFromGroup,
 } from 'redux/groups';
-import {
-  GroupsList,
-  GroupButton,
-  ModalText,
-} from './AddContactToGroupModal.styled';
-import { Notifications } from 'utils';
+import { GroupsList, GroupButton } from './AddContactToGroupModal.styled';
+import { findGroupsForContact, findContactGroupsChanges } from 'utils';
+import { showAddToGroups } from 'utils/notifications';
+import { ModalText, ModalContent } from 'shared/commonStyledComponents';
 
 export const AddContactToGroupModal = ({
   contact,
   isOpen,
   onClose,
-  // onConfirm,
   action,
 }) => {
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
+  const groupNamesByContact = findGroupsForContact(contact, groups);
   const dispatch = useDispatch();
+  const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
+  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
+
+  useEffect(() => {
+    setInitialSelectedGroups(selectedGroups);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleGroupClick = groupName => {
     const isSelected = selectedGroups.includes(groupName);
@@ -38,61 +43,23 @@ export const AddContactToGroupModal = ({
     }
   };
 
-  const addContactToGroupList = () => {
-    const message = compareGroups(initialSelectedGroups, selectedGroups);
-    Notifications.showAddToGroups(message);
+  const handleAdddContactToGroupList = () => {
+    const message = findContactGroupsChanges(
+      initialSelectedGroups,
+      selectedGroups
+    );
+    showAddToGroups(message);
     onClose();
   };
-
-  const compareGroups = (initialState, finalState) => {
-    const removedGroups = initialState.filter(
-      group => !finalState.includes(group)
-    );
-    const addedGroups = finalState.filter(
-      group => !initialState.includes(group)
-    );
-
-    const message =
-      (removedGroups.length > 0
-        ? `Contact was deleted from group${
-            removedGroups.length > 1 ? 's' : ''
-          } "${removedGroups.join('", "')}". `
-        : '') +
-      (addedGroups.length > 0
-        ? `Contact was added to group${
-            addedGroups.length > 1 ? 's' : ''
-          } "${addedGroups.join('", "')}".`
-        : '');
-
-    return message;
-  };
-
-  const getGroupNamesByContact = (groups, contact) => {
-    return groups
-      .filter(group => {
-        return group.contacts.some(
-          c => c.id === contact.id && c.name === contact.name
-        );
-      })
-      .map(group => group.name);
-  };
-  const groupNamesByContact = getGroupNamesByContact(groups, contact);
-  const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
-  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
-
-  useEffect(() => {
-    setInitialSelectedGroups(selectedGroups);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <ConfirmationModal
       isOpen={isOpen}
       onClose={onClose}
       action={action}
-      onConfirm={addContactToGroupList}
+      onConfirm={handleAdddContactToGroupList}
     >
-      <>
+      <ModalContent>
         <ModalText>
           Сhoose groups to add contact with name <b>{contact.name}</b> and
           number <b>{contact.number}</b>:
@@ -117,7 +84,7 @@ export const AddContactToGroupModal = ({
         ) : (
           <ModalText>Contact has not been added to any groups yet</ModalText>
         )}
-      </>
+      </ModalContent>
     </ConfirmationModal>
   );
 };

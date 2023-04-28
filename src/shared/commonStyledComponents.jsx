@@ -19,6 +19,7 @@ export const Content = styled(Container)`
   flex-direction: column;
   align-items: center;
 `;
+
 export const ContentWrapper = styled(Container)`
   position: relative;
   display: flex;
@@ -119,5 +120,20 @@ export const Text = styled.p`
 
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 16px;
+  }
+`;
+
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 10px;
+`;
+
+export const ModalText = styled.p`
+  font-size: 12px;
+  line-height: 1.5;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: 14px;
   }
 `;

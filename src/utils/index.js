@@ -21,4 +21,5 @@ export * as Notifications from './notifications';
 export { checkContactUpdateSpecialCases } from './contact/checkContactUpdate';
 export { getExclusiveContact } from './contact/getExclusiveContact';
 export { findGroupsForContact } from './contact/findGroupsForContact';
+export { findContactGroupsChanges } from './contact/findContactGroupsChanges';
 export { renderDropdownButton } from './renderDropdownButton';
