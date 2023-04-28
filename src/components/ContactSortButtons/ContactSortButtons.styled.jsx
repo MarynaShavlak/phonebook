@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SortButtons = styled.div`
+export const SortButtonList = styled.div`
   display: flex;
   justify-content: end;
   background-color: #fde7f0;

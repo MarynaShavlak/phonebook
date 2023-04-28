@@ -19,7 +19,7 @@ import {
   Element,
   GroupEl,
   GroupWrapper,
-  ContactsList,
+  List,
   DropButton,
   IconButton,
   ContactEl,
@@ -71,7 +71,7 @@ export const Group = ({ group }) => {
         </GroupEl>
 
         {isGroupContentVisible && (
-          <ContactsList>
+          <List>
             {contactsInGroup.map((contact, index) => (
               <li key={index}>
                 <IconButton
@@ -93,7 +93,7 @@ export const Group = ({ group }) => {
                 </ContactEl>
               </li>
             ))}
-          </ContactsList>
+          </List>
         )}
       </GroupWrapper>
       <DropdownMenu

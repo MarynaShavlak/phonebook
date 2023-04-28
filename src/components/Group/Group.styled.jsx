@@ -72,7 +72,7 @@ export const GroupAvatar = styled.div`
   font-weight: 800;
 `;
 
-export const ContactsList = styled.ul`
+export const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;

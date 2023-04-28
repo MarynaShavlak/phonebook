@@ -1,57 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Contact, ContactSorter } from 'components';
-import { ContactsList, ContactItem } from './ContactList.styled';
+import { Contact, ContactSortButtons } from 'components';
+import { List, ContactItem } from './ContactList.styled';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { useSort } from 'hooks';
+import { SORT_OPTIONS, LOCAL_STORAGE_KEYS } from 'constants';
+
+const { SORT_OPTION_KEY, REVERSE_SORT_KEY } = LOCAL_STORAGE_KEYS;
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
 
-  const [sortOption, setSortOption] = useState(
-    localStorage.getItem('sortOption') || 'ByAlphabet'
-  );
-  const [reverseSort, setReverseSort] = useState(
-    localStorage.getItem('reverseSort') === 'true' ? true : false
+  const {
+    sortOption,
+    reverseSort,
+    handleSortByAlphabet,
+    handleSortByDate,
+    sortContacts,
+  } = useSort(
+    localStorage.getItem(SORT_OPTION_KEY) || SORT_OPTIONS.ALPHABETICALLY,
+    localStorage.getItem(REVERSE_SORT_KEY) === 'true'
   );
 
   useEffect(() => {
-    localStorage.setItem('sortOption', sortOption);
-    localStorage.setItem('reverseSort', reverseSort);
+    localStorage.setItem(SORT_OPTION_KEY, sortOption);
+    localStorage.setItem(REVERSE_SORT_KEY, reverseSort);
   }, [sortOption, reverseSort]);
 
-  const { handleSortByAlphabet, handleSortByDate, sortContacts } = useSort(
-    sortOption,
-    reverseSort
-  );
-  const contactsToDisplay = sortContacts(contacts);
-
-  const toggleAlhabetSortBtn = () => {
-    setSortOption('ByAlphabet');
-    setReverseSort(!reverseSort);
-    handleSortByAlphabet();
-  };
-  const toggleDateSortBtn = () => {
-    setSortOption('ByDate');
-    setReverseSort(!reverseSort);
-    handleSortByDate();
-  };
+  const sortedContacts = sortContacts(contacts);
 
   return (
     <>
-      <ContactSorter
+      <ContactSortButtons
         sortOption={sortOption}
         reverseSort={reverseSort}
-        handleSortByAlphabet={toggleAlhabetSortBtn}
-        handleSortByDate={toggleDateSortBtn}
+        handleSortByAlphabet={handleSortByAlphabet}
+        handleSortByDate={handleSortByDate}
       />
-      <ContactsList>
-        {contactsToDisplay.map(contact => (
+      <List>
+        {sortedContacts.map(contact => (
           <ContactItem key={contact.id}>
             <Contact contact={contact} />
           </ContactItem>
         ))}
-      </ContactsList>
+      </List>
     </>
   );
 };

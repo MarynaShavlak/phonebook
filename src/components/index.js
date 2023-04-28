@@ -30,4 +30,4 @@ export { DropdownMenu } from 'components/DropdownMenu';
 export { PrivateRoute } from 'components/PrivateRoute/PrivateRoute.jsx';
 export { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute.jsx';
 export { FavoriteButton } from 'components/FavoriteButton';
-export { ContactSorter } from 'components/ContactSorter';
+export { ContactSortButtons } from 'components/ContactSortButtons';

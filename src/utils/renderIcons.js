@@ -1,3 +1,4 @@
+import React from 'react';
 import { RiContactsBook2Fill } from 'react-icons/ri';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { RiContactsFill } from 'react-icons/ri';
@@ -34,88 +35,59 @@ import { MdGroupAdd } from 'react-icons/md';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { ImInfo } from 'react-icons/im';
 import { BsPencilFill } from 'react-icons/bs';
+import { ICON_NAMES } from 'constants';
 
-export function renderIcons(param, size) {
-  switch (param) {
-    case 'contact':
-      return <RiContactsBook2Fill size={size} />;
-    case 'add':
-      return <MdPersonAddAlt1 size={size} />;
-    case 'delete':
-      return <RiDeleteBin6Fill size={size} />;
-    case 'remove':
-      return <RiDeleteBin2Fill size={size} />;
-    case 'person':
-      return <RiContactsFill size={size} className="user-form__icon" />;
-    case 'lock':
-      return <RiLock2Fill size={size} className="user-form__icon" />;
-    case 'check':
-      return <FiCheck size={size} className="user-form__icon" />;
-    case 'unCheck':
-      return <FaRegCircle size={size} className="unCheck__icon" />;
-    case 'email':
-      return <MdMail size={size} className="user-form__icon" />;
-    case 'number':
-      return <BsTelephoneFill size={size} className="contact-form__icon" />;
-    case 'man':
-      return <BsPersonFill size={size} className="contact-form__icon" />;
-    case 'edit':
-      return <RiEdit2Fill size={size} className="contact-form__icon" />;
-    case 'restore':
-      return (
-        <MdSettingsBackupRestore size={size} className="contact-form__icon" />
-      );
-    case 'cancel':
-      return <ImCancelCircle size={size} className="contact-form__icon" />;
-    case 'confirm':
-      return <GiConfirmed size={size} className="contact-form__icon" />;
-    case 'error':
-      return <FaRegSadCry size={size} className="contact-form__icon" />;
-    case 'favorite':
-      return <BsFillStarFill size={size} className="contact-form__icon" />;
-    case 'group':
-      return <RiGroupFill size={size} className="contact-form__icon" />;
-    case 'home':
-      return <AiFillHome size={size} className="contact-form__icon" />;
-    case 'alphaDown':
-      return <FaSortAlphaDown size={size} className="contact-form__icon" />;
-    case 'alphaUp':
-      return <FaSortAlphaDownAlt size={size} className="contact-form__icon" />;
-    case 'dateDown':
-      return (
-        <FaSortNumericDownAlt size={size} className="contact-form__icon" />
-      );
-    case 'dateUp':
-      return <FaSortNumericDown size={size} className="contact-form__icon" />;
-    case 'logOut':
-      return <FiLogOut size={size} className="contact-form__icon" />;
-    case 'settings':
-      return <FiSettings size={size} className="contact-form__icon" />;
-    case 'profile':
-      return <BsPerson size={size} className="contact-form__icon" />;
-    case 'dropDown':
-      return (
-        <MdOutlineArrowDropDown size={size} className="contact-form__icon" />
-      );
-    case 'quickSearch':
-      return <MdPersonSearch size={size} className="contact-form__icon" />;
-    case 'sort':
-      return <MdSort size={size} className="contact-form__icon" />;
-    case 'create':
-      return <IoIosCreate size={size} className="contact-form__icon" />;
-    case 'close':
-      return <RiCloseLine size={size} className="contact-form__icon" />;
-    case 'back':
-      return <IoIosArrowRoundBack size={size} className="contact-form__icon" />;
-    case 'addGroup':
-      return <MdGroupAdd size={size} className="contact-form__icon" />;
-    case 'dots':
-      return <BsThreeDotsVertical size={size} className="contact-form__icon" />;
-    case 'info':
-      return <ImInfo size={size} className="contact-form__icon" />;
-    case 'pencil':
-      return <BsPencilFill size={size} className="contact-form__icon" />;
-    default:
-      return <span>icon</span>;
+const icons = {
+  [ICON_NAMES.ADD]: <MdPersonAddAlt1 />,
+  [ICON_NAMES.ALPHA_DOWN]: <FaSortAlphaDown className="contact-form__icon" />,
+  [ICON_NAMES.ALPHA_UP]: <FaSortAlphaDownAlt className="contact-form__icon" />,
+  [ICON_NAMES.BACK_ARROW]: (
+    <IoIosArrowRoundBack className="contact-form__icon" />
+  ),
+  [ICON_NAMES.CANCEL]: <ImCancelCircle className="contact-form__icon" />,
+  [ICON_NAMES.CHECK]: <FiCheck className="user-form__icon" />,
+  [ICON_NAMES.CLOSE]: <RiCloseLine className="contact-form__icon" />,
+  [ICON_NAMES.CONFIRM]: <GiConfirmed className="contact-form__icon" />,
+  [ICON_NAMES.CONTACT]: <RiContactsBook2Fill />,
+  [ICON_NAMES.CREATE]: <IoIosCreate className="contact-form__icon" />,
+  [ICON_NAMES.DATE_DOWN]: (
+    <FaSortNumericDownAlt className="contact-form__icon" />
+  ),
+  [ICON_NAMES.DATE_UP]: <FaSortNumericDown className="contact-form__icon" />,
+  [ICON_NAMES.DELETE]: <RiDeleteBin6Fill />,
+  [ICON_NAMES.DOTS]: <BsThreeDotsVertical className="contact-form__icon" />,
+  [ICON_NAMES.DROP_DOWN]: (
+    <MdOutlineArrowDropDown className="contact-form__icon" />
+  ),
+  [ICON_NAMES.EDIT]: <RiEdit2Fill className="contact-form__icon" />,
+  [ICON_NAMES.EMAIL]: <MdMail className="user-form__icon" />,
+  [ICON_NAMES.ERROR]: <FaRegSadCry className="contact-form__icon" />,
+  [ICON_NAMES.FAVORITE]: <BsFillStarFill className="contact-form__icon" />,
+  [ICON_NAMES.GROUP]: <RiGroupFill className="contact-form__icon" />,
+  [ICON_NAMES.GROUP_ADD]: <MdGroupAdd className="contact-form__icon" />,
+  [ICON_NAMES.HOME]: <AiFillHome className="contact-form__icon" />,
+  [ICON_NAMES.INFO]: <ImInfo className="contact-form__icon" />,
+  [ICON_NAMES.LOG_OUT]: <FiLogOut className="contact-form__icon" />,
+  [ICON_NAMES.LOCK]: <RiLock2Fill className="user-form__icon" />,
+  [ICON_NAMES.MAN]: <BsPersonFill className="contact-form__icon" />,
+  [ICON_NAMES.NUMBER]: <BsTelephoneFill className="contact-form__icon" />,
+  [ICON_NAMES.PENCIL]: <BsPencilFill className="contact-form__icon" />,
+  [ICON_NAMES.PERSON]: <RiContactsFill className="user-form__icon" />,
+  [ICON_NAMES.PROFILE]: <BsPerson className="contact-form__icon" />,
+  [ICON_NAMES.QUICK_SEARCH]: <MdPersonSearch className="contact-form__icon" />,
+  [ICON_NAMES.REMOVE]: <RiDeleteBin2Fill />,
+  [ICON_NAMES.RESTORE]: (
+    <MdSettingsBackupRestore className="contact-form__icon" />
+  ),
+  [ICON_NAMES.SETTINGS]: <FiSettings className="contact-form__icon" />,
+  [ICON_NAMES.SORT]: <MdSort className="contact-form__icon" />,
+  [ICON_NAMES.UNCHECK]: <FaRegCircle className="unCheck__icon" />,
+};
+
+export const renderIcons = (name, size) => {
+  const icon = icons[name];
+  if (icon) {
+    return React.cloneElement(icon, { size });
   }
-}
+  return <span>icon</span>;
+};

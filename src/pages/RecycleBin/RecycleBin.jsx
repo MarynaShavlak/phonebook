@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  ContactsList,
-  ContactItem,
-} from 'components/ContactList/ContactList.styled';
+import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { DeletedContact, AppBar } from 'components';
 import { Section, Notification } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
@@ -28,7 +25,7 @@ const RecycleBin = () => {
         <Section>
           <ContentWrapper>
             {deletedContacts.length !== 0 ? (
-              <ContactsList>
+              <List>
                 {deletedContacts.map(contact => (
                   <ContactItem key={contact.id}>
                     <DeletedContact
@@ -37,7 +34,7 @@ const RecycleBin = () => {
                     />
                   </ContactItem>
                 ))}
-              </ContactsList>
+              </List>
             ) : (
               <Notification message="There are no contacts in recycle bin now" />
             )}
