@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Avatar from 'react-avatar';
 import { FavoriteButton } from 'components';
 import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
-import { removeContactFromFavorites } from 'redux/favorites/favoritesSlice';
+import { removeContactFromFavorites } from 'redux/favorites';
 import { CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess } from 'utils/notifications';
 

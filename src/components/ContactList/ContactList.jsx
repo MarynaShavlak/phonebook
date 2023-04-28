@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Contact } from 'components';
-import { clsx } from 'clsx';
-import {
-  ContactsList,
-  ContactItem,
-  SortButtons,
-  SortBtn,
-} from './ContactList.styled';
+import { Contact, ContactSorter } from 'components';
+import { ContactsList, ContactItem } from './ContactList.styled';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
-import { renderIcons } from 'utils';
 import { useSort } from 'hooks';
 
-export function ContactList() {
+export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
 
   const [sortOption, setSortOption] = useState(
@@ -46,26 +39,12 @@ export function ContactList() {
 
   return (
     <>
-      <SortButtons>
-        <SortBtn
-          onClick={toggleAlhabetSortBtn}
-          aria-label="Sort contacts by alphabet"
-          className={clsx({ active: sortOption === 'ByAlphabet' })}
-        >
-          {reverseSort
-            ? renderIcons('alphaUp', 20)
-            : renderIcons('alphaDown', 20)}
-        </SortBtn>
-        <SortBtn
-          onClick={toggleDateSortBtn}
-          aria-label="Sort contacts by date of create"
-          className={clsx({ active: sortOption === 'ByDate' })}
-        >
-          {reverseSort
-            ? renderIcons('dateUp', 20)
-            : renderIcons('dateDown', 20)}
-        </SortBtn>
-      </SortButtons>
+      <ContactSorter
+        sortOption={sortOption}
+        reverseSort={reverseSort}
+        handleSortByAlphabet={toggleAlhabetSortBtn}
+        handleSortByDate={toggleDateSortBtn}
+      />
       <ContactsList>
         {contactsToDisplay.map(contact => (
           <ContactItem key={contact.id}>
@@ -75,4 +54,4 @@ export function ContactList() {
       </ContactsList>
     </>
   );
-}
+};

@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FilterList, AddNewContactBtn } from './Contacts.styled';
 import {
@@ -16,23 +16,23 @@ import {
   selectIsLoading,
   selectError,
   selectFilteredContacts,
-  // fetchContacts,
+  fetchContacts,
 } from 'redux/contacts';
 
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { getContactsQuantity, renderIcons } from 'utils';
 
 const Contacts = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  // const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectContacts);
 
-  // useEffect(() => {
-  //   if (!contacts.length) {
-  //     dispatch(fetchContacts());
-  //   }
-  // }, [contacts, dispatch]);
+  useEffect(() => {
+    if (!contacts) {
+      dispatch(fetchContacts());
+    }
+  }, [contacts, dispatch]);
 
   const filteredContacts = useSelector(selectFilteredContacts);
   const allContacts = useSelector(selectContacts);
