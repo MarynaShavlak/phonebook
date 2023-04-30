@@ -35,7 +35,7 @@ export const DropdownMenu = styled.ul`
   right: 0;
   z-index: 999;
   margin-top: 10px;
-  background-color: #fde7f0;
+  background-color: ${props => props.theme.colors.mainLight};
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
 
   /* box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1); */

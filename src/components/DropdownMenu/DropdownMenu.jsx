@@ -21,7 +21,7 @@ export const DropdownMenu = ({ elements }) => {
       {({ getItemProps, getMenuProps, isOpen }) => (
         <div>
           <div onClick={handleDropdownMenu}>
-            <DropdownToggleBtn ariaLabel="List of operations">
+            <DropdownToggleBtn type="button" ariaLabel="List of operations">
               {renderIcons(ICON_NAMES.DOTS, ICON_SIZES.MEDIUM)}
             </DropdownToggleBtn>
           </div>

@@ -6,7 +6,7 @@ import { ConfirmationModal, DropdownMenu } from 'components';
 import { ContactEl, Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import { addContact } from 'redux/contacts';
-import { checkForDuplicateContact, renderDropdownButton } from 'utils';
+import { checkForDuplicateContact, renderDropdownElement } from 'utils';
 import {
   showContactSuccess,
   showContactExistWarn,
@@ -117,7 +117,7 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
         elements={[
           {
             label: OPERATION.RESTORE,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               CONTACT_ACTIONS.RESTORE,
               OPERATION.RESTORE,
               toggleRestoreModal
@@ -125,7 +125,7 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
           },
           {
             label: OPERATION.DELETE,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               CONTACT_ACTIONS.DELETE,
               OPERATION.DELETE,
               toggleDeleteModal

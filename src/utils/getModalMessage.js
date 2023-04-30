@@ -37,24 +37,23 @@ export const getModalMessage = ({ action, data }) => {
       case CONTACT_ACTIONS.RESTORE:
         return (
           <>
-            <p>
-              Are you sure you want to restore contact with name&nbsp;
-              <b>{name}</b>&nbsp; and number&nbsp;
-              <b>{number}</b>&nbsp; in your contacts list?
-            </p>
+            <ModalText>
+              Do you confirm that you wish to add contact &nbsp;<b>{name}</b>(
+              <b>{number}</b>)&nbsp; back to your list ?
+            </ModalText>
           </>
         );
       case CONTACT_ACTIONS.DELETE:
         return (
           <>
-            <p>
-              Are you sure you want to delete contact with name&nbsp;
-              <b>{name}</b>&nbsp; and number&nbsp;
-              <b>{number}</b>&nbsp; from recycle bin?
-            </p>
-            <p className="confirmation__message">
-              It will be impossible to restore this {name}
-            </p>
+            <ModalText>
+              Are you sure you want to delete contact contact &nbsp;
+              <b>{name}</b>(<b>{number}</b>)&nbsp; from recycle bin?
+            </ModalText>
+            <ModalWarning>
+              Please be aware that once this action is taken, the contact cannot
+              be restored.
+            </ModalWarning>
           </>
         );
       default:

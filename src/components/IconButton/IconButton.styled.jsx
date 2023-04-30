@@ -7,7 +7,7 @@ export const IconButtonStyled = styled.button`
   align-self: center;
   align-items: center;
   padding: 10px 10px;
-  background-color: #fde7f0;
+  background-color: ${props => props.theme.colors.mainLight};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
@@ -18,7 +18,7 @@ export const IconButtonStyled = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: #f787b4;
-    color: white;
+    background-color: ${props => props.theme.colors.lightAccent};
+    color: ${props => props.theme.colors.white};
   }
 `;

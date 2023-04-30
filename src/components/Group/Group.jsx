@@ -7,7 +7,7 @@ import {
   renderIcons,
   Notifications,
   makeSlug,
-  renderDropdownButton,
+  renderDropdownElement,
 } from 'utils';
 import { useModal } from 'hooks';
 import { GROUP_ACTIONS, OPERATION, ICON_NAMES, ICON_SIZES } from 'constants';
@@ -99,7 +99,7 @@ export const Group = ({ group }) => {
         elements={[
           {
             label: OPERATION.EDIT,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               GROUP_ACTIONS.EDIT,
               OPERATION.EDIT,
               toggleEditModal
@@ -107,7 +107,7 @@ export const Group = ({ group }) => {
           },
           {
             label: OPERATION.REMOVE,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               GROUP_ACTIONS.DELETE,
               OPERATION.REMOVE,
               toggleDeleteModal
@@ -118,7 +118,7 @@ export const Group = ({ group }) => {
             icon: (
               <>
                 <Link to={`/manage-group-member/${makeSlug(`${group.name}`)}`}>
-                  {renderDropdownButton(GROUP_ACTIONS.MANAGE, OPERATION.ADD)}
+                  {renderDropdownElement(GROUP_ACTIONS.MANAGE, OPERATION.ADD)}
                 </Link>
               </>
             ),

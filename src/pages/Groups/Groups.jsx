@@ -18,7 +18,6 @@ import { ICON_NAMES, ICON_SIZES } from 'constants';
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const dispatch = useDispatch();
-
   const groups = useSelector(selectGroups);
 
   useEffect(() => {

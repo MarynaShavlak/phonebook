@@ -61,7 +61,7 @@ const Contacts = () => {
                     aria-label="Add new contact"
                     onClick={() => navigate('/create')}
                   >
-                    {renderIcons(ICON_NAMES.ADD, ICON_SIZES.MEDIUMm)}
+                    {renderIcons(ICON_NAMES.ADD, ICON_SIZES.MEDIUM)}
                   </AddNewContactBtn>
                 </InfoWrap>
 

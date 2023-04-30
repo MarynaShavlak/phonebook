@@ -28,7 +28,7 @@ import { ContactEl } from './Contact.styled';
 import {
   getCurrentTime,
   findGroupsForContact,
-  renderDropdownButton,
+  renderDropdownElement,
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION } from 'constants';
 import {
@@ -126,13 +126,13 @@ export const Contact = ({ contact }) => {
             label: OPERATION.EDIT,
             icon: (
               <Link to={`/edit-contact/${contact.id}`}>
-                {renderDropdownButton(CONTACT_ACTIONS.EDIT, OPERATION.EDIT)}
+                {renderDropdownElement(CONTACT_ACTIONS.EDIT, OPERATION.EDIT)}
               </Link>
             ),
           },
           {
             label: OPERATION.REMOVE,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
               OPERATION.REMOVE,
               toggleRemoveModal
@@ -140,7 +140,7 @@ export const Contact = ({ contact }) => {
           },
           {
             label: OPERATION.ADD,
-            icon: renderDropdownButton(
+            icon: renderDropdownElement(
               CONTACT_ACTIONS.ADD_TO_GROUP,
               OPERATION.ADD,
               toggleAddModal
@@ -162,7 +162,7 @@ export const Contact = ({ contact }) => {
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
           contact={contact}
-          action={CONTACT_ACTIONS.ADD_TO_GROUP}
+          // action={CONTACT_ACTIONS.ADD_TO_GROUP}
         />
       )}
     </>

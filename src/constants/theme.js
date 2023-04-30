@@ -11,6 +11,8 @@ export const theme = Object.freeze({
     brightAccent: '#ef4287',
     error: '#e60000',
     inputText: '#f66fa5',
+    transparent: 'transparent',
+    selectedGroup: '#bb6bd9',
   },
   devices: {
     mobile: '375px',

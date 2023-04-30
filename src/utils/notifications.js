@@ -17,7 +17,7 @@ function showMessage(type, message) {
 
 export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
   if (isNameExist && isNumberExist) {
-    const message = `Oops, a contact with name ${contact.name} and number ${contact.number} already exists in your phonebook.`;
+    const message = `Oops, a contact  ${contact.name} (${contact.number}) already exists in your phonebook.`;
     return showMessage('warning', message);
   } else if (isNameExist) {
     const message = `Oops, a contact with name ${contact.name} already exists in your phonebook. Please enter a different name.`;
@@ -30,11 +30,11 @@ export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
 
 export function showContactSuccess(operation, contact) {
   const messages = {
-    add: `You've just added contact with name ${contact.name} and number ${contact.number}  to your contacts list`,
-    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your contacts list to recycle bin`,
-    [CONTACT_ACTIONS.RESTORE]: `You've just restored contact with name ${contact.name} and number ${contact.number}  in your contacts list`,
-    [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact with name ${contact.name} and number ${contact.number}  to your favorites `,
-    [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact with name ${contact.name} and number ${contact.number}  from your favorites `,
+    add: `You've just added contact ${contact.name} (${contact.number}) to your contacts list`,
+    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `You've just removed contact ${contact.name} (${contact.number}) from your contacts list to recycle bin`,
+    [CONTACT_ACTIONS.RESTORE]: `You've just restored contact ${contact.name} (${contact.number}) in your contacts list`,
+    [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact ${contact.name} (${contact.number}) to your favorites `,
+    [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact ${contact.name} (${contact.number}) from your favorites `,
   };
   const message =
     messages[operation] ||
@@ -71,17 +71,17 @@ export function showEditContactSuccess(prevContact, updatedContact) {
 }
 
 export function showRecyclebinWarn(contact) {
-  const message = `Contact with same name ${contact.name} and number ${contact.number} in already exist in recycle bin. We left only ONE `;
+  const message = `Contact with same name ${contact.name} and number ${contact.number} in already exist in recycle bin. `;
   return showMessage('warning', message);
 }
 
 export function showRecyclebinInfo(contact) {
-  const message = `You've just deleted contact with name ${contact.name} and number ${contact.number} from recycle bin`;
+  const message = `You've just deleted contact ${contact.name} (${contact.number}) from recycle bin`;
   return showMessage('info', message);
 }
 
 export function showGroupSuccess(groupName) {
-  const message = `You've just add group with name "${groupName}" `;
+  const message = `You've just added group with name "${groupName}" `;
   return showMessage('success', message);
 }
 export function showGroupRenameSuccess({ oldGroupName, newGroupName }) {
@@ -110,7 +110,7 @@ export function showAddToGroups(message) {
   return showMessage('info', message);
 }
 export function showDeleteFromGroup({ groupName, contact }) {
-  const message = `The contact with name "${contact.name}" and number "${contact.number}" has been deleted from group "${groupName}" `;
+  const message = `The contact ${contact.name} (${contact.number}) has been deleted from group "${groupName}" `;
   return showMessage('info', message);
 }
 

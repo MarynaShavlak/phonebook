@@ -66,12 +66,14 @@ export const CustomModal = ({
         {renderIcons(ICON_NAMES.CLOSE, ICON_SIZES.MEDIUM)}
       </CloseModalBtn>
       {children}
-      <ModalActionButtons
-        confirmAriaLabel={`Confirm ${action}`}
-        cancelAriaLabel={`Cancel ${action}`}
-        onCancel={onClose}
-        onConfirm={onConfirm}
-      />
+      {action !== '' && (
+        <ModalActionButtons
+          confirmAriaLabel={`Confirm ${action}`}
+          cancelAriaLabel={`Cancel ${action}`}
+          onCancel={onClose}
+          onConfirm={onConfirm}
+        />
+      )}
     </Modal>
   );
 };

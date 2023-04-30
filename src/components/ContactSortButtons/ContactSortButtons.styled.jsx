@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SortButtonList = styled.div`
   display: flex;
   justify-content: end;
-  background-color: #fde7f0;
+  background-color: ${props => props.theme.colors.mainLight};
   border-bottom: 1px solid #f787b4;
   border-top: 1px solid #f787b4;
 `;

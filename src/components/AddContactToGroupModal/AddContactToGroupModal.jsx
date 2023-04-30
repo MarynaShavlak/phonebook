@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { ConfirmationModal } from 'components';
+import { useNavigate } from 'react-router-dom';
+import { CustomModal } from 'shared';
 import {
   selectGroupNames,
   selectGroups,
@@ -11,7 +12,13 @@ import {
 import { GroupsList, GroupButton } from './AddContactToGroupModal.styled';
 import { findGroupsForContact, findContactGroupsChanges } from 'utils';
 import { showAddToGroups } from 'utils/notifications';
-import { ModalText, ModalContent } from 'shared/commonStyledComponents';
+import {
+  ModalText,
+  ModalContent,
+  ModalHeader,
+  Button,
+} from 'shared/commonStyledComponents';
+import { CONTACT_ACTIONS } from 'constants';
 
 export const AddContactToGroupModal = ({
   contact,
@@ -21,8 +28,10 @@ export const AddContactToGroupModal = ({
 }) => {
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
+  console.log('groups: ', groups);
   const groupNamesByContact = findGroupsForContact(contact, groups);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
   const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
 
@@ -31,7 +40,7 @@ export const AddContactToGroupModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleGroupClick = groupName => {
+  const handleGroupSelection = groupName => {
     const isSelected = selectedGroups.includes(groupName);
 
     if (isSelected) {
@@ -53,39 +62,51 @@ export const AddContactToGroupModal = ({
   };
 
   return (
-    <ConfirmationModal
+    <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      action={action}
+      action={!groups.length ? '' : CONTACT_ACTIONS.ADD_TO_GROUP}
       onConfirm={handleAdddContactToGroupList}
     >
-      <ModalContent>
-        <ModalText>
-          Сhoose groups to add contact with name <b>{contact.name}</b> and
-          number <b>{contact.number}</b>:
-        </ModalText>
-        <GroupsList>
-          {groupNames.map((group, index) => (
-            <li key={index}>
-              <GroupButton
-                type="button"
-                className={selectedGroups.includes(group) ? 'selected' : ''}
-                onClick={() => handleGroupClick(group)}
-              >
-                {group}
-              </GroupButton>
-            </li>
-          ))}
-        </GroupsList>
-        {selectedGroups.length ? (
+      {!groups.length ? (
+        <ModalContent>
+          <ModalHeader>You have not created any groups yet</ModalHeader>
+          <Button type="button" onClick={() => navigate('/groups')}>
+            Create group
+          </Button>
+        </ModalContent>
+      ) : (
+        <ModalContent>
           <ModalText>
-            Contact is added to groups: <b>{selectedGroups.join(', ')}</b>
+            Choose groups for <b>{contact.name}</b>&nbsp;(
+            <b>{contact.number}</b>):
           </ModalText>
-        ) : (
-          <ModalText>Contact has not been added to any groups yet</ModalText>
-        )}
-      </ModalContent>
-    </ConfirmationModal>
+          <GroupsList>
+            {groupNames.map((group, index) => (
+              <li key={index}>
+                <GroupButton
+                  type="button"
+                  className={selectedGroups.includes(group) ? 'selected' : ''}
+                  onClick={() => handleGroupSelection(group)}
+                >
+                  {group}
+                </GroupButton>
+              </li>
+            ))}
+          </GroupsList>
+          {selectedGroups.length ? (
+            <ModalText>
+              Contact has been included in groups:{' '}
+              <b>{selectedGroups.join(', ')}</b>
+            </ModalText>
+          ) : (
+            <ModalText>
+              No groups have been assigned to the contact yet.
+            </ModalText>
+          )}
+        </ModalContent>
+      )}
+    </CustomModal>
   );
 };
 
