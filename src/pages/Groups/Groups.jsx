@@ -13,7 +13,7 @@ import {
 import { selectGroups } from 'redux/groups';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
 import { renderIcons, getGroupsQuantity } from 'utils';
-import { ICON_NAMES, iconSize } from 'constants';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
@@ -53,7 +53,7 @@ const Groups = () => {
                     aria-label="Add new contact"
                     onClick={toggleCreateGroupModal}
                   >
-                    {renderIcons(ICON_NAMES.GROUP_ADD, iconSize.sm)}
+                    {renderIcons(ICON_NAMES.GROUP_ADD, ICON_SIZES.MEDIUM)}
                   </AddNewGroupBtn>
                 </InfoWrap>
                 <GroupsList>

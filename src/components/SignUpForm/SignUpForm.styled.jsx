@@ -83,13 +83,13 @@ export const InfoField = styled.span`
 
   &:focus-within > .user-form__info-label {
     transform: translate(-50px, -40px);
-    color: black;
+    color: ${props => props.theme.colors.black};
     font-weight: 700;
   }
 
   .user-form__info-label.clicked {
     transform: translate(-50px, -40px);
-    color: black;
+    color: ${props => props.theme.colors.black};
     font-weight: 700;
   }
 `;
@@ -151,7 +151,7 @@ export const SignUpButton = styled.button`
   padding: 10px 30px;
   background-color: #f787b4;
 
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 16px;

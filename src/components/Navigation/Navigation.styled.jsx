@@ -28,7 +28,7 @@ export const NavigationLink = styled(NavLink)`
 
   font-size: 12px;
   font-weight: 800;
-  color: black;
+  color: ${props => props.theme.colors.black};
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &.active {

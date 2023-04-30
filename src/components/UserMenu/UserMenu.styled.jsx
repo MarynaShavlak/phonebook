@@ -68,7 +68,7 @@ export const LogoutButton = styled.button`
   align-items: center;
   width: 100%;
   background-color: transparent;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 14px;

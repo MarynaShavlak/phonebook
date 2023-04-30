@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
 import { SortBtn } from '../ContactSortButtons.styled';
 import { renderIcons } from 'utils';
-import { iconSize } from 'constants';
+import { ICON_SIZES } from 'constants';
 
 export const SortButton = ({
   onClick,
@@ -14,7 +14,7 @@ export const SortButton = ({
   iconDown,
 }) => (
   <SortBtn onClick={onClick} aria-label={label} className={clsx({ active })}>
-    {renderIcons(reverseSort ? iconUp : iconDown, iconSize.xs)}
+    {renderIcons(reverseSort ? iconUp : iconDown, ICON_SIZES.MEDIUM_SMALL)}
   </SortBtn>
 );
 

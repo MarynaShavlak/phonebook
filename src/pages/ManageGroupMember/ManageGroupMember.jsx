@@ -20,6 +20,7 @@ import {
   GroupButton,
 } from 'components/AddContactToGroupModal/AddContactToGroupModal.styled';
 import { renderIcons, convertHyphenatedString } from 'utils';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 
 const ManageGroupMember = () => {
   const dispatch = useDispatch();
@@ -105,7 +106,7 @@ const ManageGroupMember = () => {
           <ContentWrapper>
             <BackButton to="/groups">
               <button type="button" aria-label="Back to previous page">
-                {renderIcons('back', 50)}
+                {renderIcons(ICON_NAMES.BACK_ARROW, ICON_SIZES.LARGE)}
               </button>
             </BackButton>
             <>

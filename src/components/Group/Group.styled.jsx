@@ -51,9 +51,9 @@ export const Element = styled.div`
   flex-grow: 1;
   column-gap: 10px;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
+    font-size: 18px;
   }
   font-weight: 500;
 `;
@@ -65,7 +65,7 @@ export const GroupAvatar = styled.div`
   padding: 5px;
   margin-right: 10px;
   background-color: #ef4287;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 50%;
 
@@ -76,9 +76,8 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 10px;
-
-  padding-left: 40px;
+  row-gap: 15px;
+  padding-left: 20px;
   li {
     position: relative;
 
@@ -93,9 +92,9 @@ export const ContactEl = styled.div`
   flex-grow: 1;
   column-gap: 5px;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
+    font-size: 16px;
   }
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:not(:hover) {

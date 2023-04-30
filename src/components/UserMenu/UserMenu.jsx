@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { renderIcons } from 'utils';
-import { ICON_NAMES, iconSize } from 'constants';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 import {
   AvatarWrap,
   UserMenuWrapper,
@@ -59,7 +59,7 @@ export const UserMenu = () => {
                 round="50%"
                 cursor="pointer"
               />
-              {renderIcons(ICON_NAMES.DROP_DOWN, iconSize.xs)}
+              {renderIcons(ICON_NAMES.DROP_DOWN, ICON_SIZES.MEDIUM_SMALL)}
             </AvatarWrap>
 
             {isOpen && (
@@ -73,7 +73,8 @@ export const UserMenu = () => {
                   {...getItemProps({ item: 'logout' })}
                 >
                   <LogoutButton type="button" onClick={() => onLogout()}>
-                    {renderIcons(ICON_NAMES.LOG_OUT, iconSize.xs)}Logout
+                    {renderIcons(ICON_NAMES.LOG_OUT, ICON_SIZES.MEDIUM_SMALL)}
+                    Logout
                   </LogoutButton>
                 </DropdownMenuItem>
               </DropdownMenu>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize, ICON_NAMES } from 'constants';
+import { ICON_SIZES, ICON_NAMES } from 'constants';
 import {
   FormWrapper,
   StyledForm,
@@ -83,7 +83,7 @@ export const SignUpForm = () => {
             <InfoList>
               <li>
                 <InfoField>
-                  {renderIcons(ICON_NAMES.PERSON, iconSize.xs)}
+                  {renderIcons(ICON_NAMES.PERSON, ICON_SIZES.MEDIUM_SMALL)}
 
                   <InfoInput type="text" name="name" placeholder=" " />
 
@@ -101,7 +101,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons(ICON_NAMES.EMAIL, iconSize.xs)}
+                  {renderIcons(ICON_NAMES.EMAIL, ICON_SIZES.MEDIUM_SMALL)}
 
                   <InfoInput type="email" name="email" placeholder=" " />
                   <InfoLabel
@@ -118,7 +118,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons(ICON_NAMES.LOCK, iconSize.xs)}
+                  {renderIcons(ICON_NAMES.LOCK, ICON_SIZES.MEDIUM_SMALL)}
 
                   <InfoInput
                     type="password"
@@ -140,7 +140,7 @@ export const SignUpForm = () => {
               </li>
               <li>
                 <InfoField>
-                  {renderIcons(ICON_NAMES.LOCK, iconSize.xs)}
+                  {renderIcons(ICON_NAMES.LOCK, ICON_SIZES.MEDIUM_SMALL)}
 
                   <InfoInput
                     type="password"
@@ -177,7 +177,7 @@ export const SignUpForm = () => {
                     alignSelf: 'stretch',
                   }}
                 >
-                  {renderIcons('check', iconSize.xs)}
+                  {renderIcons('check', ICON_SIZES.MEDIUM_SMALL)}
                 </div>
               }
               borderColor="#fc458e"

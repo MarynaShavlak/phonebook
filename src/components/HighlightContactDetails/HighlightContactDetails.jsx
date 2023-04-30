@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Highlighter from 'react-highlight-words';
 import { clsx } from 'clsx';
+import { TelLink } from 'shared/commonStyledComponents';
 
 export const HighlightContactDetails = ({
   contact,
@@ -16,12 +17,14 @@ export const HighlightContactDetails = ({
         autoEscape={true}
         textToHighlight={`${contact.name}:`}
       />
-      <Highlighter
-        highlightClassName={clsx(defaultHighlighterClass)}
-        searchWords={[`${filterByNumber}`]}
-        autoEscape={true}
-        textToHighlight={` ${contact.number}`}
-      />
+      <TelLink href={`tel: ${contact.number}`}>
+        <Highlighter
+          highlightClassName={clsx(defaultHighlighterClass)}
+          searchWords={[`${filterByNumber}`]}
+          autoEscape={true}
+          textToHighlight={` ${contact.number}`}
+        />
+      </TelLink>
     </>
   );
 };

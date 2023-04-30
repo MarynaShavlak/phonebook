@@ -8,7 +8,7 @@ export const IconButtonStyled = styled.button`
   align-items: center;
   padding: 10px 10px;
   background-color: #fde7f0;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 20px;

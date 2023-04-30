@@ -55,7 +55,7 @@ export const DropdownButton = styled.button`
   width: 100%;
   padding: 5px;
   background-color: transparent;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: none;
   border-radius: 10px;
   font-size: 12px;

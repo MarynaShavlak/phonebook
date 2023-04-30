@@ -18,7 +18,7 @@ import { Section } from 'shared';
 import { renderIcons } from 'utils';
 import Logo from 'components/Navigation/images/phone-genie-logo.png';
 import HomeImage from './images/home.svg';
-import { ICON_NAMES, iconSize } from 'constants';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 
 const Home = () => {
   return (
@@ -74,7 +74,9 @@ const Home = () => {
           <BenefitsList>
             <Item className="card">
               <div>1</div>
-              <IconWrap>{renderIcons('pencil', iconSize.xxs)}</IconWrap>
+              <IconWrap>
+                {renderIcons('pencil', ICON_SIZES.MEDIUMMALL)}
+              </IconWrap>
               <Benefit>
                 <h2>Easily create and edit contacts</h2>
                 <p>
@@ -87,7 +89,7 @@ const Home = () => {
             <Item className="card">
               <div>2</div>
               <IconWrap>
-                {renderIcons(ICON_NAMES.ALPHA_DOWN, iconSize.xxs)}
+                {renderIcons(ICON_NAMES.ALPHA_DOWN, ICON_SIZES.MEDIUMMALL)}
               </IconWrap>
               <Benefit>
                 <h2>Efficiently sort contacts</h2>
@@ -101,7 +103,7 @@ const Home = () => {
             <Item className="card">
               <div>3</div>
               <IconWrap>
-                {renderIcons(ICON_NAMES.DELETE, iconSize.xxs)}
+                {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUMMALL)}
               </IconWrap>
               <Benefit>
                 <h2>Recycle bin feature</h2>
@@ -115,7 +117,7 @@ const Home = () => {
             <Item className="card">
               <div>4</div>
               <IconWrap>
-                {renderIcons(ICON_NAMES.QUICK_SEARCH, iconSize.xxs)}
+                {renderIcons(ICON_NAMES.QUICK_SEARCH, ICON_SIZES.MEDIUMMALL)}
               </IconWrap>
               <Benefit>
                 <h2>Quick search</h2>
@@ -129,7 +131,7 @@ const Home = () => {
             <Item className="card">
               <div>5</div>
               <IconWrap>
-                {renderIcons(ICON_NAMES.FAVORITE, iconSize.xxs)}
+                {renderIcons(ICON_NAMES.FAVORITE, ICON_SIZES.MEDIUMMALL)}
               </IconWrap>
               <Benefit>
                 <h2>Favorites list</h2>
@@ -142,7 +144,9 @@ const Home = () => {
             </Item>
             <Item className="card">
               <div>6</div>
-              <IconWrap>{renderIcons(ICON_NAMES.GROUP, iconSize.xxs)}</IconWrap>
+              <IconWrap>
+                {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUMMALL)}
+              </IconWrap>
               <Benefit>
                 <h2>Contact groups</h2>
                 <p>

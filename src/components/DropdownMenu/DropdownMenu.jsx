@@ -6,7 +6,7 @@ import {
   DropdownToggleBtn,
 } from './DropdownMenu.styled';
 import { renderIcons } from 'utils';
-import { ICON_NAMES, iconSize } from 'constants';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 
 export const DropdownMenu = ({ elements }) => {
   const [isDropdownMenuOpen, setIsDropdownMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ export const DropdownMenu = ({ elements }) => {
         <div>
           <div onClick={handleDropdownMenu}>
             <DropdownToggleBtn ariaLabel="List of operations">
-              {renderIcons(ICON_NAMES.DOTS, iconSize.s)}
+              {renderIcons(ICON_NAMES.DOTS, ICON_SIZES.MEDIUM)}
             </DropdownToggleBtn>
           </div>
 

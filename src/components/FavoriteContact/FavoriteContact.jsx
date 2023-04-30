@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Avatar from 'react-avatar';
 import { FavoriteButton } from 'components';
-import { ContactEl, Name, Number } from 'components/Contact/Contact.styled';
+import { ContactEl } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites';
 import { CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess } from 'utils/notifications';
+import { TelLink } from 'shared/commonStyledComponents';
 
 export const FavoriteContact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -25,8 +26,10 @@ export const FavoriteContact = ({ contact }) => {
           unstyled={false}
           round="50%"
         />
-        <Name>{contact.name}:</Name>
-        <Number>{contact.number}</Number>
+        <p>{contact.name}:</p>
+        <TelLink href={`tel: ${contact.number}`}>
+          <p>{contact.number}</p>
+        </TelLink>
       </ContactEl>
 
       <FavoriteButton onChange={removeFromFavorites} checked />

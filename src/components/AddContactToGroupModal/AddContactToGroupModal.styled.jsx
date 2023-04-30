@@ -10,7 +10,7 @@ export const GroupButton = styled.button`
   display: flex;
   justify-content: center;
   background-color: #fde7f0;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
   font-weight: 800;

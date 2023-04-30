@@ -20,7 +20,7 @@ import {
 } from 'redux/contacts';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { getContactsQuantity, renderIcons } from 'utils';
-import { ICON_NAMES, iconSize } from 'constants';
+import { ICON_NAMES, ICON_SIZES } from 'constants';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ const Contacts = () => {
                     aria-label="Add new contact"
                     onClick={() => navigate('/create')}
                   >
-                    {renderIcons(ICON_NAMES.ADD, iconSize.sm)}
+                    {renderIcons(ICON_NAMES.ADD, ICON_SIZES.MEDIUMm)}
                   </AddNewContactBtn>
                 </InfoWrap>
 

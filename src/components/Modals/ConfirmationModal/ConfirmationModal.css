@@ -27,6 +27,7 @@
   align-self: center;
   align-items: center;
   background-color: transparent;
+  /* color: ${props => props.theme.colors.black}; */
   color: black;
   border: 1px solid transparent;
   cursor: pointer;

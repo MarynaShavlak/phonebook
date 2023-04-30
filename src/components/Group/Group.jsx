@@ -10,7 +10,7 @@ import {
   renderDropdownButton,
 } from 'utils';
 import { useModal } from 'hooks';
-import { GROUP_ACTIONS, OPERATION, ICON_NAMES, iconSize } from 'constants';
+import { GROUP_ACTIONS, OPERATION, ICON_NAMES, ICON_SIZES } from 'constants';
 import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
@@ -23,7 +23,8 @@ import {
   IconButton,
   ContactEl,
 } from './Group.styled';
-import { deleteGroup, renameGroup, deleteContactFromGroup } from 'redux/groups';
+import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
+import { TelLink } from 'shared/commonStyledComponents';
 
 export const Group = ({ group }) => {
   const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
@@ -31,13 +32,13 @@ export const Group = ({ group }) => {
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const dispatch = useDispatch();
 
-  const onEditGroup = ({ oldGroupName, newGroupName }) => {
-    dispatch(renameGroup({ oldGroupName, newGroupName }));
-    Notifications.showGroupRenameSuccess({
-      oldGroupName,
-      newGroupName,
-    });
-  };
+  // const onEditGroup = ({ oldGroupName, newGroupName }) => {
+  //   dispatch(renameGroup({ oldGroupName, newGroupName }));
+  //   Notifications.showGroupRenameSuccess({
+  //     oldGroupName,
+  //     newGroupName,
+  //   });
+  // };
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
     Notifications.showGroupInfo(group.name);
@@ -61,14 +62,14 @@ export const Group = ({ group }) => {
       <GroupWrapper>
         <GroupEl>
           <GroupAvatar>
-            {renderIcons(ICON_NAMES.GROUP, iconSize.xs)}
+            {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
           </GroupAvatar>
           <Content onClick={toggleGroupContent}>
             <Element>
               {group.name}&nbsp; ({contactsQuantityInGroup})
             </Element>
             <DropButton type="button">
-              {renderIcons(ICON_NAMES.DROP_DOWN, iconSize.xs)}
+              {renderIcons(ICON_NAMES.DROP_DOWN, ICON_SIZES.MEDIUM_SMALL)}
             </DropButton>
           </Content>
         </GroupEl>
@@ -81,18 +82,20 @@ export const Group = ({ group }) => {
                   type="button"
                   onClick={() => onDeleteContact(contact)}
                 >
-                  {renderIcons(ICON_NAMES.DELETE, iconSize.xxs)}
+                  {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
                 </IconButton>
                 <ContactEl>
                   <Avatar
-                    size="20"
+                    size="25"
                     textSizeRatio={2}
                     name={contact.name}
                     unstyled={false}
                     round="50%"
                   />
                   <p>{contact.name}:</p>
-                  <p>{contact.number}</p>
+                  <TelLink href={`tel: ${contact.number}`}>
+                    <p>{contact.number}</p>
+                  </TelLink>
                 </ContactEl>
               </li>
             ))}
@@ -134,7 +137,6 @@ export const Group = ({ group }) => {
           isOpen={isEditModalOpen}
           onClose={toggleEditModal}
           data={group}
-          onConfirm={onEditGroup}
           action={GROUP_ACTIONS.EDIT}
         />
       )}

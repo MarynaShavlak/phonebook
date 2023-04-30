@@ -6,7 +6,7 @@ const inputMixin = `
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-   border: 3px solid #fab7d2;
+   
   border-radius: 10px;
 `;
 export const Form = styled.form`
@@ -39,13 +39,15 @@ export const FormItem = styled.li`
 `;
 export const Name = styled.input`
   ${inputMixin}
+
+  border: 3px solid ${props => props.theme.colors.inputBorder};
   font-weight: 600;
   line-height: 1.5;
-  color: #f66fa5;
+  color: ${props => props.theme.colors.inputText};
   font-size: 14px;
   &:focus {
     outline: none;
-    border: 3px solid #f787b4;
+    border: 3px solid ${props => props.theme.colors.lightAccent};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 16px;
@@ -53,10 +55,10 @@ export const Name = styled.input`
 `;
 export const Phone = styled(PhoneInput)`
   ${inputMixin}
-
+  border: 3px solid ${props => props.theme.colors.inputBorder};
   &.PhoneInput--focus {
     outline: none;
-    border: 3px solid #f787b4;
+    border: 3px solid ${props => props.theme.colors.lightAccent};
   }
 
   .PhoneInputCountryIcon {
@@ -65,7 +67,7 @@ export const Phone = styled(PhoneInput)`
   }
   .PhoneInputCountryIcon--border {
     box-shadow: none;
-    border: 1px solid black;
+    border: 1px solid ${props => props.theme.colors.black};
   }
 
   .PhoneInputCountrySelect:focus + .PhoneInputCountryIcon--border {
@@ -73,14 +75,14 @@ export const Phone = styled(PhoneInput)`
   }
 
   .PhoneInputCountrySelectArrow {
-    color: black;
+    color: ${props => props.theme.colors.black};
   }
 
   .PhoneInputCountrySelect:focus
     + .PhoneInputCountryIcon
     + .PhoneInputCountrySelectArrow {
     opacity: 1;
-    color: #f66fa5;
+    color: ${props => props.theme.colors.inputText};
   }
   .PhoneInputInput {
     border: none;
@@ -92,7 +94,7 @@ export const Phone = styled(PhoneInput)`
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       font-size: 16px;
     }
-    color: #f66fa5;
+    color: ${props => props.theme.colors.inputText};
   }
 
   .PhoneInputCountrySelect {
@@ -104,19 +106,19 @@ export const Phone = styled(PhoneInput)`
     ::-webkit-scrollbar-track {
       border-radius: 12px;
       margin-left: 10px;
-      background: #fde7f0;
+      background: ${props => props.theme.colors.mainLight};
     }
     ::-webkit-scrollbar-thumb {
-      background: #fde7f0;
+      background: ${props => props.theme.colors.mainLight};
       border-radius: 12px;
       margin-left: 10px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #f66fa5;
+      background: ${props => props.theme.colors.inputText};
     }
     option {
-      color: black;
-      background-color: #fde7f0;
+      color: ${props => props.theme.colors.black};
+      background-color: ${props => props.theme.colors.mainLight};
     }
   }
 `;
@@ -132,5 +134,5 @@ export const Error = styled.p`
   margin-top: 5px;
   font-size: 10px;
   font-weight: 700;
-  color: red;
+  color: ${props => props.theme.colors.error};
 `;

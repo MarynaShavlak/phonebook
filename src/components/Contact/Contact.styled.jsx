@@ -13,7 +13,7 @@ export const ContactEl = styled.div`
   }
   flex-grow: 1;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
+  color: ${props => props.theme.colors.black};
   .marked {
     background-color: #f66fa5;
     font-weight: 700;
@@ -21,10 +21,10 @@ export const ContactEl = styled.div`
   }
 `;
 
-export const Name = styled.p`
-  font-style: italic;
-`;
-export const Number = styled.p``;
+// export const Name = styled.p`
+//   font-style: italic;
+// `;
+// export const Number = styled.p``;
 
 export const Time = styled.p`
   display: flex;

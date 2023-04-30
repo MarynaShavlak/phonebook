@@ -110,7 +110,7 @@ export const StartButton = styled.button`
 
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   background-color: white;
-  color: black;
+  color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
   font-size: 16px;

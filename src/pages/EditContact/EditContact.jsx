@@ -8,7 +8,7 @@ import { EditFormInfo, EditFormInstrc } from './EditContact.styled';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { renderIcons } from 'utils';
 import { showEditContactSuccess } from 'utils/notifications';
-import { CONTACT_ACTIONS, ICON_NAMES, iconSize } from 'constants';
+import { CONTACT_ACTIONS, ICON_NAMES, ICON_SIZES } from 'constants';
 
 const EditContact = () => {
   const location = useLocation();
@@ -39,7 +39,7 @@ const EditContact = () => {
           <ContentWrapper>
             <BackButton to={backLinkHref}>
               <button type="button" aria-label="Back to previous page">
-                {renderIcons(ICON_NAMES.BACK_ARROW, iconSize.md)}
+                {renderIcons(ICON_NAMES.BACK_ARROW, ICON_SIZES.LARGE)}
               </button>
             </BackButton>
 
@@ -60,7 +60,7 @@ const EditContact = () => {
                 </p>
               </EditFormInfo>
               <EditFormInstrc>
-                <p>{renderIcons(ICON_NAMES.INFO, iconSize.s)}</p>
+                <p>{renderIcons(ICON_NAMES.INFO, ICON_SIZES.MEDIUM)}</p>
 
                 <p>
                   Modify only one field for a contact - either the <b>name </b>

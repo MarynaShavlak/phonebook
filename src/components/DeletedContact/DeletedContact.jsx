@@ -3,12 +3,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 import { OperationModal, DropdownMenu } from 'components';
-import {
-  ContactEl,
-  Name,
-  Number,
-  Time,
-} from 'components/Contact/Contact.styled';
+import { ContactEl, Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import { addContact } from 'redux/contacts';
 import { checkForDuplicateContact, renderDropdownButton } from 'utils';
@@ -110,8 +105,8 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
             unstyled={false}
             round="50%"
           />
-          <Name>{deletedContact.name}:</Name>
-          <Number>{deletedContact.number}</Number>
+          <p>{deletedContact.name}:</p>
+          <p>{deletedContact.number}</p>
         </ContactEl>
         <Time>
           removed at <b>{deletedContact.removalTime}</b>

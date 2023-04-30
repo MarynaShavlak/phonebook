@@ -132,3 +132,14 @@ export function showNewContactNumberError() {
     'Sorry, it looks like the phone number you entered is incorrect. Please, check length and format for your country.'
   );
 }
+
+export function showGroupValidationError() {
+  return showMessage(
+    'error',
+    'Please ensure that you provide the accurate group name.'
+  );
+}
+
+export function showNewGroupNameError(message) {
+  return showMessage('error', message);
+}

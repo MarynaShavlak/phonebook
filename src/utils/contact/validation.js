@@ -1,9 +1,16 @@
 import * as Yup from 'yup';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
-import { Notifications, removeExtraWhitespace } from 'utils';
+import { removeExtraWhitespace } from 'utils';
+import {
+  showContactValidationError,
+  showNewContactNameError,
+  showNewContactNumberError,
+  showGroupValidationError,
+  showNewGroupNameError,
+} from 'utils/notifications';
 
-export const CONTACT_NAME_VALIDATION_SCHEMA = Yup.object().shape({
+export const NAME_VALIDATION_SCHEMA = Yup.object().shape({
   name: Yup.string()
     .required('Name is required')
     .min(2, 'Name must be at least 2 characters')
@@ -18,18 +25,34 @@ export const CONTACT_NAME_VALIDATION_SCHEMA = Yup.object().shape({
 export const validateContactData = async ({ name, number }) => {
   const normalizedContactName = removeExtraWhitespace(name);
   if (!normalizedContactName.length && !isValidPhoneNumber(number)) {
-    Notifications.showContactValidationError();
+    showContactValidationError();
     return;
   }
 
   try {
-    await CONTACT_NAME_VALIDATION_SCHEMA.validate({ name });
+    await NAME_VALIDATION_SCHEMA.validate({ name });
   } catch (error) {
-    Notifications.showNewContactNameError(error.message);
+    showNewContactNameError(error.message);
     return;
   }
   if (!isValidPhoneNumber(number)) {
-    Notifications.showNewContactNumberError();
+    showNewContactNumberError();
+    return;
+  }
+  return true;
+};
+
+export const validateGroupData = async name => {
+  const normalizedContactName = removeExtraWhitespace(name);
+  if (!normalizedContactName.length) {
+    showGroupValidationError();
+    return;
+  }
+
+  try {
+    await NAME_VALIDATION_SCHEMA.validate({ name });
+  } catch (error) {
+    showNewGroupNameError(error.message);
     return;
   }
   return true;
@@ -37,7 +60,7 @@ export const validateContactData = async ({ name, number }) => {
 
 export const validateName = async name => {
   try {
-    await CONTACT_NAME_VALIDATION_SCHEMA.validate({ name });
+    await NAME_VALIDATION_SCHEMA.validate({ name });
     return null;
   } catch (error) {
     return error.message;

@@ -1,12 +1,12 @@
 import { Error } from './ErrorMessage.styled';
 import { renderIcons } from 'utils/renderIcons';
-import { iconSize, ICON_NAMES } from 'constants';
+import { ICON_SIZES, ICON_NAMES } from 'constants';
 
 export function ErrorMessage() {
   return (
     <Error>
       {' '}
-      {renderIcons(ICON_NAMES.ERROR, iconSize.lg)}
+      {renderIcons(ICON_NAMES.ERROR, ICON_SIZES.EXTRA_LARGE)}
       <p>Ooops, something went wrong... Please, reload page..</p>
     </Error>
   );
