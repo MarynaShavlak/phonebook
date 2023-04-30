@@ -98,6 +98,24 @@ const ManageGroupMember = () => {
     value: contact,
   }));
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: `2px solid #fab7d2`,
+      borderСщдщк: `#fab7d2`,
+      borderRadius: '10px',
+      '&:hover': {
+        borderColor: '#ef4287',
+      },
+      boxShadow: null,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#fde7f0' : null,
+      color: state.isSelected ? '#100f10' : null,
+    }),
+  };
+
   return (
     <>
       <AppBar />
@@ -123,6 +141,7 @@ const ManageGroupMember = () => {
               <Select
                 options={options}
                 onChange={option => choseContactToAddInGroup(option.value)}
+                styles={customStyles}
               />
               {!!contactsToAdd.length && (
                 <GroupsList>
