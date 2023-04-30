@@ -49,6 +49,9 @@ export function showNoUpdateMessage() {
     `There are no changes. You didn't change either contact name or phone number`
   );
 }
+export function showNoUpdateGroupMessage() {
+  return showMessage('info', `No changes. You didn't rename the group`);
+}
 
 export function showEditContactFailure() {
   return showMessage(
@@ -73,7 +76,7 @@ export function showRecyclebinWarn(contact) {
 }
 
 export function showRecyclebinInfo(contact) {
-  const message = `You've just delete contact with name ${contact.name} and number ${contact.number} from recycle bin`;
+  const message = `You've just deleted contact with name ${contact.name} and number ${contact.number} from recycle bin`;
   return showMessage('info', message);
 }
 
@@ -87,7 +90,7 @@ export function showGroupRenameSuccess({ oldGroupName, newGroupName }) {
 }
 
 export function showGroupInfo(groupName) {
-  const message = `You've just delete group with name "${groupName}" `;
+  const message = `You've just deleted group with name "${groupName}" `;
   return showMessage('info', message);
 }
 

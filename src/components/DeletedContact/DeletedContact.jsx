@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
-import { OperationModal, DropdownMenu } from 'components';
+import { ConfirmationModal, DropdownMenu } from 'components';
 import { ContactEl, Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import { addContact } from 'redux/contacts';
@@ -79,7 +79,7 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
   return (
     <>
       {isRestoreModalOpen && (
-        <OperationModal
+        <ConfirmationModal
           isOpen={isRestoreModalOpen}
           onClose={toggleRestoreModal}
           data={deletedContact}
@@ -88,7 +88,7 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
         />
       )}
       {isDeleteModalOpen && (
-        <OperationModal
+        <ConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
           data={deletedContact}

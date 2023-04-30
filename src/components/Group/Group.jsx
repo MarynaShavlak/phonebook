@@ -11,7 +11,7 @@ import {
 } from 'utils';
 import { useModal } from 'hooks';
 import { GROUP_ACTIONS, OPERATION, ICON_NAMES, ICON_SIZES } from 'constants';
-import { OperationModal, EditGroupModal, DropdownMenu } from 'components';
+import { ConfirmationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
   GroupAvatar,
@@ -32,13 +32,6 @@ export const Group = ({ group }) => {
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const dispatch = useDispatch();
 
-  // const onEditGroup = ({ oldGroupName, newGroupName }) => {
-  //   dispatch(renameGroup({ oldGroupName, newGroupName }));
-  //   Notifications.showGroupRenameSuccess({
-  //     oldGroupName,
-  //     newGroupName,
-  //   });
-  // };
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
     Notifications.showGroupInfo(group.name);
@@ -137,11 +130,10 @@ export const Group = ({ group }) => {
           isOpen={isEditModalOpen}
           onClose={toggleEditModal}
           data={group}
-          action={GROUP_ACTIONS.EDIT}
         />
       )}
       {isDeleteModalOpen && (
-        <OperationModal
+        <ConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={toggleDeleteModal}
           data={group}

@@ -1,4 +1,5 @@
 import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
+import { ModalText, ModalWarning } from 'shared/commonStyledComponents';
 
 export const getModalMessage = ({ action, data }) => {
   const { name, number, contacts } = data;
@@ -7,12 +8,14 @@ export const getModalMessage = ({ action, data }) => {
     if (action === GROUP_ACTIONS.DELETE) {
       return (
         <>
-          <p>
-            Are you sure you want to delete group with name <b>{name}</b>?
-          </p>
-          <p className="confirmation__message">
-            It will be impossible to restore this group
-          </p>
+          <ModalText>
+            Are you absolutely certain that you wish to delete the <b>{name}</b>{' '}
+            group?
+          </ModalText>
+          <ModalWarning>
+            Please be aware that once this action is taken, the group cannot be
+            restored.
+          </ModalWarning>
         </>
       );
     }
@@ -21,14 +24,14 @@ export const getModalMessage = ({ action, data }) => {
       case CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN:
         return (
           <>
-            <p>
-              Are you sure you want to remove contact with name&nbsp;
-              <b>{name}</b>&nbsp; and number&nbsp;
-              <b>{number}</b>&nbsp; to recycle bin?
-            </p>
-            <p className="confirmation__message">
-              It will be possible to restore this contact from recycle bin.
-            </p>
+            <ModalText>
+              Are you certain that you wish to move the contact &nbsp;
+              <b>{name}</b>&nbsp;(<b>{number}</b>&nbsp;) to the recycle bin?
+            </ModalText>
+            <ModalWarning>
+              Please note that it will be possible to restore this contact from
+              the recycle bin.
+            </ModalWarning>
           </>
         );
       case CONTACT_ACTIONS.RESTORE:

@@ -5,7 +5,7 @@ export const DropdownList = styled.ul`
   position: absolute;
   right: 45px;
   top: 0px;
-  z-index: 2;
+  z-index: 1;
   background-color: #fde7f0;
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
   border-radius: 5px;

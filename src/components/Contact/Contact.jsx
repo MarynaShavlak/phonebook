@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { useModal } from 'hooks';
 import {
-  OperationModal,
+  ConfirmationModal,
   AddContactToGroupModal,
   FavoriteButton,
   HighlightContactDetails,
@@ -149,7 +149,7 @@ export const Contact = ({ contact }) => {
         ]}
       />
       {isRemoveModalOpen && (
-        <OperationModal
+        <ConfirmationModal
           isOpen={isRemoveModalOpen}
           onClose={toggleRemoveModal}
           data={contact}

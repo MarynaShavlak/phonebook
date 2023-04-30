@@ -19,10 +19,12 @@ export const CustomModal = ({
 
   const customStyles = {
     overlay: {
+      zIndex: 3,
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
       transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
     content: {
+      zIndex: 3,
       position: 'relative',
       top: '50%',
       left: '50%',

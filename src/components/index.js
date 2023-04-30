@@ -4,7 +4,7 @@ export { AppBar } from 'components/AppBar';
 // export { SharedLayout } from 'shared/components/SharedLayout';
 export { ModalActionButtons } from 'components/Modals/ModalActionButtons';
 export { ConfirmationModal } from 'components/Modals/ConfirmationModal';
-export { OperationModal } from 'components/Modals/OperationModal';
+
 export { CreateGroupModal } from 'components/CreateGroupModal';
 export { Contact } from 'components/Contact';
 export { Group } from 'components/Group';

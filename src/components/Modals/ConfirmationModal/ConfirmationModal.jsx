@@ -1,83 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import './ConfirmationModal.css';
-import Modal from 'react-modal';
-import { ModalActionButtons } from 'components';
-import { renderIcons } from 'utils';
-import { ICON_SIZES, ICON_NAMES } from 'constants';
+import { getModalMessage } from 'utils';
+import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
+import { CustomModal } from 'shared';
 
-Modal.setAppElement('#root');
-
-const customStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    background: 'white',
-    padding: '30px 20px',
-    border: 'none',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-export const ConfirmationModal = ({
-  isOpen,
-  onClose,
-  action,
-  onConfirm,
-  children,
-}) => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
+export const ConfirmationModal = ({ data, action, ...otherProps }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      contentLabel={`Modal window to confirm to ${action}`}
-      closeTimeoutMS={300}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={onClose}
-      style={{
-        overlay: customStyles.overlay,
-        content: {
-          ...customStyles.content,
-          width: width >= 768 ? '700px' : '80%',
-          maxWidth: '100%',
-        },
-      }}
-    >
-      <button
-        aria-label="Close modal"
-        onClick={() => onClose()}
-        className="close-modal-btn"
-      >
-        {renderIcons(ICON_NAMES.CLOSE, ICON_SIZES.MEDIUM_SMALL)}
-      </button>
-      {children}
-
-      <ModalActionButtons
-        confirmAriaLabel={`Confirm ${action}`}
-        cancelAriaLabel={`Cancel ${action}`}
-        onCancel={onClose}
-        onConfirm={onConfirm}
-      />
-    </Modal>
+    <CustomModal action={action} {...otherProps}>
+      <div className="confirmation__message">
+        {getModalMessage({ action, data })}
+      </div>
+    </CustomModal>
   );
 };
 
 ConfirmationModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  action: PropTypes.string.isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }),
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+          number: PropTypes.string,
+        })
+      ),
+    }),
+  ]).isRequired,
+  action: PropTypes.oneOf([
+    CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
+    CONTACT_ACTIONS.RESTORE,
+    CONTACT_ACTIONS.DELETE,
+    GROUP_ACTIONS.DELETE,
+    GROUP_ACTIONS.EDIT,
+    GROUP_ACTIONS.ADD,
+  ]).isRequired,
+
+  onConfirm: PropTypes.func,
 };

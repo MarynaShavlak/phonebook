@@ -133,9 +133,13 @@ export const ModalContent = styled.div`
 export const ModalText = styled.p`
   font-size: 12px;
   line-height: 1.5;
+  color: ${props => props.theme.colors.black};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 14px;
   }
+`;
+export const ModalWarning = styled(ModalText)`
+  margin-top: 5px;
 `;
 
 export const ModalHeader = styled(ModalText)`

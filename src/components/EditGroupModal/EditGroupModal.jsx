@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-// import { ConfirmationModal } from 'components';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectGroups, renameGroup } from 'redux/groups';
 import { CustomModal } from 'shared';
 import { Name } from 'shared/components/ContactForm/ContactForm.styled';
@@ -13,23 +11,23 @@ import {
 } from 'shared/commonStyledComponents';
 import {
   validateName,
-  validateGroupData,
-  checkGroupNameExistence,
+  removeExtraWhitespace,
+  validateAndCheckGroupName,
 } from 'utils';
-import { showGroupRenameSuccess, showErrorMessage } from 'utils/notifications';
+import {
+  showGroupRenameSuccess,
+  showErrorMessage,
+  showNoUpdateGroupMessage,
+} from 'utils/notifications';
+import { GROUP_ACTIONS } from 'constants';
 
-export const EditGroupModal = ({
-  data,
-  isOpen,
-  onClose,
-
-  ...otherProps
-}) => {
+export const EditGroupModal = ({ data, isOpen, onClose }) => {
   const { name } = data;
   const [groupName, setGroupName] = useState(name);
   const [groupNameError, setGroupNameError] = useState(null);
   const dispatch = useDispatch();
-  const groups = useSelector(selectGroups);
+  const allGroups = useSelector(selectGroups);
+  const anotherGroups = allGroups.filter(group => group.name !== name);
 
   const handleNameChange = async e => {
     const { value } = e.target;
@@ -37,40 +35,36 @@ export const EditGroupModal = ({
     setGroupName(value);
     setGroupNameError(errorMessage);
   };
+
   const handleEditGroupName = async () => {
-    const isGroupDataValid = await validateGroupData(groupName);
-    if (!isGroupDataValid) return;
-    if (checkGroupNameExistence(groupName, groups)) return;
+    const isValid = await validateAndCheckGroupName(groupName, anotherGroups);
+    if (!isValid) return;
+    const newGroupName = removeExtraWhitespace(groupName);
     const result = await dispatch(
-      renameGroup({ oldGroupName: name, newGroupName: groupName })
+      renameGroup({ oldGroupName: name, newGroupName: newGroupName })
     );
     if (result.error) {
       return showErrorMessage();
     }
 
-    showGroupRenameSuccess({
-      oldGroupName: name,
-      newGroupName: groupName,
-    });
+    if (newGroupName === name) {
+      showNoUpdateGroupMessage();
+    } else {
+      showGroupRenameSuccess({
+        oldGroupName: name,
+        newGroupName: groupName,
+      });
+    }
+
     onClose();
   };
-
-  // const checkGroupExistence = groupName => {
-  //   const isGroupExist = groups.some(
-  //     el => el.name.toLowerCase() === groupName.toLowerCase()
-  //   );
-  //   if (isGroupExist) {
-  //     Notifications.showGroupWarn(groupName);
-  //   }
-  //   return isGroupExist;
-  // };
 
   return (
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
       onConfirm={handleEditGroupName}
-      action="edit group name"
+      action={GROUP_ACTIONS.EDIT}
     >
       <>
         <ModalHeader>Edit group name</ModalHeader>
@@ -85,26 +79,12 @@ export const EditGroupModal = ({
         </ModalInputWrapper>
       </>
     </CustomModal>
-
-    // <ConfirmationModal onClose={onClose} onConfirm={editGroup} {...otherProps}>
-    //   <p className="confirmation__message">Enter new group name</p>
-
-    //   <div className="group-form__wrapper">
-    //     <input
-    //       className="group-form__input"
-    //       type="text"
-    //       value={groupName}
-    //       onChange={handleInputChange}
-    //       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-    //       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-    //     />
-    //   </div>
-    // </ConfirmationModal>
   );
 };
 
 EditGroupModal.propTypes = {
   onClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
