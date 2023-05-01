@@ -3,7 +3,7 @@ import { EditRules, ContactInfo } from './ContactEditInfoBlock.styled';
 import { renderIcons } from 'utils';
 import { ICON_NAMES, ICON_SIZES } from 'constants';
 
-export const ContactEditInfoBlock = ({ name, number }) => {
+export const ContactEditInfoBlock = ({ contact }) => {
   return (
     <>
       <ContactInfo>
@@ -11,13 +11,13 @@ export const ContactEditInfoBlock = ({ name, number }) => {
         <p>
           <span>Name:</span>
           <span>
-            <b>{name}</b>
+            <b>{contact.name}</b>
           </span>
         </p>
         <p>
           <span>Number:</span>
           <span>
-            <b>{number}</b>
+            <b>{contact.number}</b>
           </span>
         </p>
       </ContactInfo>

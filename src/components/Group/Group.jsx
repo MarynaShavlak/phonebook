@@ -10,7 +10,13 @@ import {
   renderDropdownElement,
 } from 'utils';
 import { useModal } from 'hooks';
-import { GROUP_ACTIONS, OPERATION, ICON_NAMES, ICON_SIZES } from 'constants';
+import {
+  GROUP_ACTIONS,
+  OPERATION,
+  ICON_NAMES,
+  ICON_SIZES,
+  ROUTES,
+} from 'constants';
 import { ConfirmationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
@@ -117,7 +123,14 @@ export const Group = ({ group }) => {
             label: OPERATION.ADD,
             icon: (
               <>
-                <Link to={`/manage-group-member/${makeSlug(`${group.name}`)}`}>
+                <Link
+                  to={`${
+                    ROUTES.ROOT +
+                    ROUTES.MANAGE_GROUP_MEMBERS +
+                    ROUTES.ROOT +
+                    makeSlug(`${group.name}`)
+                  }`}
+                >
                   {renderDropdownElement(GROUP_ACTIONS.MANAGE, OPERATION.ADD)}
                 </Link>
               </>

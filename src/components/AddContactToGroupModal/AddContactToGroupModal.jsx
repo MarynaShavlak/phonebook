@@ -17,7 +17,7 @@ import {
   ModalHeader,
   Button,
 } from 'shared/commonStyledComponents';
-import { CONTACT_ACTIONS, ITEM_CATEGORIES } from 'constants';
+import { CONTACT_ACTIONS, ITEM_CATEGORIES, ROUTES } from 'constants';
 import { renderSelectedGroupsText } from './helpers';
 
 export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
@@ -66,7 +66,10 @@ export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
         {!groups.length ? (
           <>
             <ModalHeader>You have not created any groups yet</ModalHeader>
-            <Button type="button" onClick={() => navigate('/groups')}>
+            <Button
+              type="button"
+              onClick={() => navigate(`${ROUTES.ROOT + ROUTES.GROUPS}`)}
+            >
               Create group
             </Button>
           </>

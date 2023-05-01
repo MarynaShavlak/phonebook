@@ -30,7 +30,7 @@ import {
   findGroupsForContact,
   renderDropdownElement,
 } from 'utils';
-import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import {
   showContactSuccess,
   showRecyclebinWarn,
@@ -125,7 +125,11 @@ export const Contact = ({ contact }) => {
           {
             label: OPERATION.EDIT,
             icon: (
-              <Link to={`/edit-contact/${contact.id}`}>
+              <Link
+                to={`${
+                  ROUTES.ROOT + ROUTES.EDIT_CONTACT + ROUTES.ROOT + contact.id
+                }`}
+              >
                 {renderDropdownElement(CONTACT_ACTIONS.EDIT, OPERATION.EDIT)}
               </Link>
             ),

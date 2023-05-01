@@ -5,10 +5,12 @@ import { Section, ContactForm, BackButton } from 'shared';
 import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 import { showContactSuccess } from 'utils/notifications';
 import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import { ROUTES } from 'constants';
 
 const AddNewContact = () => {
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/contacts';
+  const backLinkHref =
+    location.state?.from ?? `${ROUTES.ROOT + ROUTES.CONTACTS}`;
 
   const successAddContact = contact => {
     showContactSuccess(OPERATION.ADD, contact);

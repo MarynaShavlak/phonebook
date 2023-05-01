@@ -1,5 +1,6 @@
 import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ROUTES } from 'constants';
 import { PrivateRoute, RestrictedRoute, Loader } from 'components';
 import { SharedLayout } from 'shared';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,58 +40,85 @@ export const App = () => {
     <Loader />
   ) : (
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
+      <Route path={ROUTES.ROOT} element={<SharedLayout />}>
         <Route index element={<Home />} />
         <Route
-          path="contacts"
-          element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
-        />
-        <Route
-          path="/create"
+          path={ROUTES.CONTACTS}
           element={
-            <PrivateRoute redirectTo="/" component={<AddNewContact />} />
+            <PrivateRoute redirectTo={ROUTES.ROOT} component={<Contacts />} />
           }
         />
         <Route
-          path="edit-contact/:contactId"
-          element={
-            <PrivateRoute redirectTo="/login" component={<EditContact />} />
-          }
-        />
-        <Route
-          path="favorites"
-          element={<PrivateRoute redirectTo="/" component={<Favorites />} />}
-        />
-        <Route
-          path="groups"
-          element={<PrivateRoute redirectTo="/" component={<Groups />} />}
-        />
-        <Route
-          path="manage-group-member/:groupName"
+          path={ROUTES.CREATE}
           element={
             <PrivateRoute
-              redirectTo="/login"
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+              component={<AddNewContact />}
+            />
+          }
+        />
+        <Route
+          path={ROUTES.EDIT_CONTACT + '/:contactId'}
+          element={
+            <PrivateRoute
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+              component={<EditContact />}
+            />
+          }
+        />
+        <Route
+          path={ROUTES.FAVORITES}
+          element={
+            <PrivateRoute
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+              component={<Favorites />}
+            />
+          }
+        />
+        <Route
+          path={ROUTES.GROUPS}
+          element={
+            <PrivateRoute
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+              component={<Groups />}
+            />
+          }
+        />
+        <Route
+          path={ROUTES.MANAGE_GROUP_MEMBERS + '/:groupName'}
+          element={
+            <PrivateRoute
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
               component={<ManageGroupMember />}
             />
           }
         />
 
         <Route
-          path="recyclebin"
+          path={ROUTES.RECYCLEBIN}
           element={
-            <PrivateRoute redirectTo="/login" component={<RecycleBin />} />
+            <PrivateRoute
+              redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+              component={<RecycleBin />}
+            />
           }
         />
         <Route
-          path="login"
+          path={ROUTES.LOGIN}
           element={
-            <RestrictedRoute redirectTo="/contacts" component={<LogIn />} />
+            <RestrictedRoute
+              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+              component={<LogIn />}
+            />
           }
         />
         <Route
-          path="register"
+          path={ROUTES.REGISTER}
           element={
-            <RestrictedRoute redirectTo="/contacts" component={<SignUp />} />
+            <RestrictedRoute
+              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+              component={<SignUp />}
+            />
           }
         />
         <Route path="*" element={<Home />} />

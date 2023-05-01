@@ -6,7 +6,7 @@ import { Section, ContactForm, BackButton } from 'shared';
 import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { showEditContactSuccess } from 'utils/notifications';
-import { CONTACT_ACTIONS } from 'constants';
+import { CONTACT_ACTIONS, ROUTES } from 'constants';
 
 const EditContact = () => {
   const location = useLocation();
@@ -23,11 +23,12 @@ const EditContact = () => {
   };
   const contacts = useSelector(selectContacts);
   const contact = getContactById({ contactId, contacts });
-  const backLinkHref = location.state?.from ?? '/contacts';
+  const backLinkHref =
+    location.state?.from ?? `${ROUTES.ROOT + ROUTES.CONTACTS}`;
 
   const successEditContact = ({ contact, updatedContact }) => {
     showEditContactSuccess(contact, updatedContact);
-    navigate('/contacts');
+    navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
   };
   return contact ? (
     <>

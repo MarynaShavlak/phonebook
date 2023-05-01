@@ -9,7 +9,7 @@ import { renderIcons } from 'utils';
 import { useAuth } from 'hooks';
 import Logo from './images/phone-genie-logo.png';
 import { Link } from 'react-router-dom';
-import { ICON_NAMES, ICON_SIZES } from 'constants';
+import { ICON_NAMES, ICON_SIZES, ROUTES } from 'constants';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -18,7 +18,7 @@ export const Navigation = () => {
   return (
     <>
       {isTablet && (
-        <Link to="/">
+        <Link to={ROUTES.ROOT}>
           {' '}
           <PhoneLogo src={Logo} alt="logo" />
         </Link>
@@ -29,25 +29,25 @@ export const Navigation = () => {
             <>
               {' '}
               <li>
-                <NavigationLink to="/contacts">
+                <NavigationLink to={ROUTES.ROOT + ROUTES.CONTACTS}>
                   {renderIcons(ICON_NAMES.CONTACT, ICON_SIZES.MEDIUM)}
                   {isDesktop && <span>Contacts</span>}
                 </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/favorites">
+                <NavigationLink to={ROUTES.ROOT + ROUTES.FAVORITES}>
                   {renderIcons(ICON_NAMES.FAVORITE, ICON_SIZES.MEDIUM)}
                   {isDesktop && <span>Favorites</span>}
                 </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/groups">
+                <NavigationLink to={ROUTES.ROOT + ROUTES.GROUPS}>
                   {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM)}
                   {isDesktop && <span>Groups</span>}
                 </NavigationLink>
               </li>
               <li>
-                <NavigationLink to="/recyclebin">
+                <NavigationLink to={ROUTES.ROOT + ROUTES.RECYCLEBIN}>
                   {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM)}
                   {isDesktop && <span>Recycle Bin</span>}
                 </NavigationLink>

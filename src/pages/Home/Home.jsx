@@ -5,14 +5,14 @@ import {
   HomeInfo,
   HomeWrapper,
   StartButton,
-  LogInLink,
   Header,
 } from './Home.styled';
 import { AppBenefits, AppDescription } from 'components';
 import { Main } from 'shared/commonStyledComponents.jsx';
-import { Section } from 'shared';
+import { Section, AuthenticationPrompt } from 'shared';
 import Logo from 'components/Navigation/images/phone-genie-logo.png';
 import HomeImage from './images/home.svg';
+import { ROUTES } from 'constants';
 
 const Home = () => {
   return (
@@ -23,12 +23,10 @@ const Home = () => {
         </div>
         <HomeTitle>Let Phone Genie Grant Your Every Connection Wish!</HomeTitle>
         <div>
-          <Link to="/register">
+          <Link to={ROUTES.REGISTER}>
             <StartButton>GET STARTED</StartButton>
           </Link>
-          <p>
-            Have an account? <LogInLink to="/login">Log In</LogInLink>
-          </p>
+          <AuthenticationPrompt path={ROUTES.ROOT + ROUTES.LOGIN} />
         </div>
       </Header>
       <Main>

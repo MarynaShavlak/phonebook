@@ -7,3 +7,4 @@ export { SORT_OPTIONS } from './sortOptions';
 export { ICON_NAMES } from './iconNames';
 export { ICON_SIZES } from './iconSizes';
 export { ITEM_CATEGORIES } from './itemCategories';
+export { ROUTES } from './routes';

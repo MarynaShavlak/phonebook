@@ -4,14 +4,6 @@ export const Container = styled.div`
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
-  /* width: 480px; */
-
-  /* @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    width: 768px;
-  }
-  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    width: 1200px;
-  } */
 `;
 export const Content = styled(Container)`
   display: flex;
@@ -19,13 +11,16 @@ export const Content = styled(Container)`
   align-items: center;
 `;
 
-export const ContentWrapper = styled(Container)`
+export const PageWrapper = styled(Content)`
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: ${props => props.theme.colors.body};
+`;
+
+const commonContentWrapperStyles = `
   position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
-  padding: 0;
-  min-width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
     width: 345px;
   }
@@ -35,6 +30,19 @@ export const ContentWrapper = styled(Container)`
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     width: 800px;
   }
+`;
+
+export const ContentWrapper = styled(Container)`
+  ${commonContentWrapperStyles};
+  row-gap: 10px;
+  padding: 0;
+  min-width: 290px;
+`;
+
+export const SpecificContentWrapper = styled(Container)`
+  ${commonContentWrapperStyles};
+  align-items: center;
+  row-gap: 20px;
 `;
 
 export const Main = styled.main`
@@ -99,7 +107,6 @@ export const Text = styled.p`
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-
   row-gap: 10px;
 `;
 
@@ -170,5 +177,26 @@ export const AddNewBtn = styled.button`
   &:hover {
     background-color: ${props => props.theme.colors.brightAccent};
     color: ${props => props.theme.colors.white};
+  }
+`;
+
+export const ImageWrap = styled.div`
+  position: relative;
+  align-self: start;
+  width: 520px;
+
+  p {
+    position: absolute;
+    top: 75px;
+    right: 35px;
+    width: 250px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    span {
+      color: ${props => props.theme.colors.brightAccent};
+      font-weight: 700;
+    }
   }
 `;

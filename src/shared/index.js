@@ -10,3 +10,4 @@ export { FilterList } from './components/FilterList';
 export { Filter } from './components/Filter';
 export { ListHeader } from './components/ListHeader';
 export { BackButton } from './components/BackButton';
+export { AuthenticationPrompt } from './components/AuthenticationPrompt';

@@ -21,6 +21,7 @@ import {
   renderExistedContactsText,
   renderContactsToAddInGroupList,
 } from './helpers';
+import { ROUTES } from 'constants';
 
 const ManageGroupMember = () => {
   const dispatch = useDispatch();
@@ -112,7 +113,10 @@ const ManageGroupMember = () => {
       <main>
         <Section>
           <ContentWrapper>
-            <BackButton pathTo="/groups" onClick={handleBackButtonClick} />
+            <BackButton
+              pathTo={ROUTES.ROOT + ROUTES.GROUPS}
+              onClick={handleBackButtonClick}
+            />
             <>
               {renderExistedContactsText(existedContactsInGroup)}
               <Text>

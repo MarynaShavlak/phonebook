@@ -1,22 +1,20 @@
 import React from 'react';
 import { SignUpForm } from 'components';
+import { AuthenticationPrompt } from 'shared';
 import {
-  SignUpLink,
-  RedirectLink,
-  Content,
-  Wrapper,
-} from 'pages/LogIn/LogIn.styled';
+  PageWrapper,
+  SpecificContentWrapper,
+} from 'shared/commonStyledComponents';
+import { ROUTES } from 'constants';
 
 const SignUp = () => {
   return (
-    <Wrapper>
-      <Content>
+    <PageWrapper>
+      <SpecificContentWrapper>
         <SignUpForm />
-        <RedirectLink>
-          Have an account? <SignUpLink to="/login">Log In </SignUpLink>
-        </RedirectLink>
-      </Content>
-    </Wrapper>
+        <AuthenticationPrompt path={ROUTES.ROOT + ROUTES.LOGIN} />
+      </SpecificContentWrapper>
+    </PageWrapper>
   );
 };
 

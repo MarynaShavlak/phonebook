@@ -15,6 +15,6 @@ export const BackButton = ({ pathTo, onClick }) => {
 };
 
 BackButton.propTypes = {
-  path: PropTypes.string,
+  pathTo: PropTypes.string,
   onClick: PropTypes.func,
 };

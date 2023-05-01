@@ -26,7 +26,7 @@ import {
   getExclusiveContact,
 } from 'utils';
 import { showErrorMessage } from 'utils/notifications';
-import { OPERATION, CONTACT_ACTIONS } from 'constants';
+import { OPERATION, CONTACT_ACTIONS, ROUTES } from 'constants';
 
 export const ContactForm = ({ contact, action, onSubmit }) => {
   const [name, setName] = useState('');
@@ -88,7 +88,8 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
         number,
       });
       if (specialCase === 'both') return;
-      if (specialCase === 'none') return navigate('/contacts');
+      if (specialCase === 'none')
+        return navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
     }
     const createdContact = getExclusiveContact({
       name,

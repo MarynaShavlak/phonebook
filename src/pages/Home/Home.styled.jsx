@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
 export const Header = styled.header`
   display: flex;
@@ -104,11 +103,6 @@ export const StartButton = styled.button`
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 20px;
   }
-`;
-
-export const LogInLink = styled(NavLink)`
-  color: #fc458e;
-  font-weight: 700;
 `;
 
 export const DescWrap = styled.div`
