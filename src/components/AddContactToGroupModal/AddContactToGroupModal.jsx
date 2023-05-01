@@ -9,7 +9,6 @@ import {
   addContactToGroup,
   deleteContactFromGroup,
 } from 'redux/groups';
-import { GroupsList, GroupButton } from './AddContactToGroupModal.styled';
 import { findGroupsForContact, findContactGroupsChanges } from 'utils';
 import { showAddToGroups } from 'utils/notifications';
 import {
@@ -17,6 +16,8 @@ import {
   ModalContent,
   ModalHeader,
   Button,
+  LabelList,
+  LabelButton,
 } from 'shared/commonStyledComponents';
 import { CONTACT_ACTIONS } from 'constants';
 
@@ -40,7 +41,7 @@ export const AddContactToGroupModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleGroupSelection = groupName => {
+  const handleGroupSelect = groupName => {
     const isSelected = selectedGroups.includes(groupName);
 
     if (isSelected) {
@@ -81,19 +82,19 @@ export const AddContactToGroupModal = ({
             Choose groups for <b>{contact.name}</b>&nbsp;(
             <b>{contact.number}</b>):
           </ModalText>
-          <GroupsList>
+          <LabelList>
             {groupNames.map((group, index) => (
               <li key={index}>
-                <GroupButton
+                <LabelButton
                   type="button"
                   className={selectedGroups.includes(group) ? 'selected' : ''}
-                  onClick={() => handleGroupSelection(group)}
+                  onClick={() => handleGroupSelect(group)}
                 >
                   {group}
-                </GroupButton>
+                </LabelButton>
               </li>
             ))}
-          </GroupsList>
+          </LabelList>
           {selectedGroups.length ? (
             <ModalText>
               Contact has been included in groups:{' '}

@@ -26,3 +26,6 @@ export { findContactGroupsChanges } from './contact/findContactGroupsChanges';
 export { renderDropdownElement } from './renderDropdownElement';
 export { checkGroupNameExistence } from './group/checkGroupNameExistence';
 export { validateAndCheckGroupName } from './group/validateAndCheckGroupName';
+export { getContactsByGroupName } from './group/getContactsByGroupName';
+export { getOriginalGroupName } from './group/getOriginalGroupName';
+export { getAvailableToSelectContacts } from './group/getAvailableToSelectContacts';

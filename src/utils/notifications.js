@@ -146,3 +146,11 @@ export function showGroupValidationError() {
 export function showNewGroupNameError(message) {
   return showMessage('error', message);
 }
+
+export function showGroupManageContactsSuccess(groupName, contactsInGroup) {
+  const names = contactsInGroup.map(contact => contact.name).join(', ');
+  const message = !!contactsInGroup.length
+    ? `Now the group "${groupName}" includes the following contacts: ${names}`
+    : `There are no contacts in the group "${groupName}" now`;
+  return showMessage('success', message);
+}
