@@ -1,11 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { AppBar } from 'components';
-import { Section, ContactForm } from 'shared';
-import { ContentWrapper, BackButton } from 'shared/commonStyledComponents.jsx';
-import { renderIcons } from 'utils';
+import { Section, ContactForm, BackButton } from 'shared';
+import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 import { showContactSuccess } from 'utils/notifications';
-import { CONTACT_ACTIONS, OPERATION, ICON_NAMES, ICON_SIZES } from 'constants';
+import { CONTACT_ACTIONS, OPERATION } from 'constants';
 
 const AddNewContact = () => {
   const location = useLocation();
@@ -21,11 +20,7 @@ const AddNewContact = () => {
       <main>
         <Section>
           <ContentWrapper>
-            <BackButton to={backLinkHref}>
-              <button type="button" aria-label="Back to previous page">
-                {renderIcons(ICON_NAMES.BACK_ARROW, ICON_SIZES.LARGE)}
-              </button>
-            </BackButton>
+            <BackButton pathTo={backLinkHref} />
             <ContactForm
               action={CONTACT_ACTIONS.ADD}
               onSubmit={successAddContact}

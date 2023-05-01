@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppBar, CreateGroupModal, Group } from 'components';
-import { Section, Notification } from 'shared';
-import { GroupsList, GroupItem, AddNewGroupBtn } from './Groups.styled';
+import { Section, Notification, ListHeader } from 'shared';
+import { GroupsList, GroupItem } from './Groups.styled';
 import {
   ContentWrapper,
   Main,
   Button,
-  InfoWrap,
-  Info,
 } from 'shared/commonStyledComponents.jsx';
 import { selectGroups } from 'redux/groups';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
-import { renderIcons, getGroupsQuantity } from 'utils';
-import { ICON_NAMES, ICON_SIZES } from 'constants';
+import { ITEM_CATEGORIES } from 'constants';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
@@ -34,7 +31,7 @@ const Groups = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            {groups.length !== 0 ? (
+            {!!groups.length ? (
               <>
                 {' '}
                 {isCreateGroupModalOpen && (
@@ -43,18 +40,11 @@ const Groups = () => {
                     onClose={toggleCreateGroupModal}
                   />
                 )}
-                <InfoWrap>
-                  <Info>
-                    Total quantity: <span>{getGroupsQuantity(groups)}</span>
-                  </Info>
-                  <AddNewGroupBtn
-                    type="button"
-                    aria-label="Add new contact"
-                    onClick={toggleCreateGroupModal}
-                  >
-                    {renderIcons(ICON_NAMES.GROUP_ADD, ICON_SIZES.MEDIUM)}
-                  </AddNewGroupBtn>
-                </InfoWrap>
+                <ListHeader
+                  category={ITEM_CATEGORIES.GROUP}
+                  items={groups}
+                  handleAddNew={toggleCreateGroupModal}
+                />
                 <GroupsList>
                   {groups.map(group => (
                     <GroupItem key={group.id}>
@@ -67,15 +57,15 @@ const Groups = () => {
               <>
                 {' '}
                 <Notification message="You have not created any groups yet" />
+                <Button type="button" onClick={toggleCreateGroupModal}>
+                  Create group
+                </Button>
                 {isCreateGroupModalOpen && (
                   <CreateGroupModal
                     isOpen={isCreateGroupModalOpen}
                     onClose={toggleCreateGroupModal}
                   />
                 )}
-                <Button type="button" onClick={toggleCreateGroupModal}>
-                  Create group
-                </Button>
               </>
             )}
           </ContentWrapper>

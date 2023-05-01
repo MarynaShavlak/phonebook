@@ -1,4 +1,5 @@
-import { LabelList, LabelButton } from 'shared/commonStyledComponents.jsx';
+import { LabelList } from 'shared';
+import { ITEM_CATEGORIES } from 'constants';
 
 export const renderContactsToAddInGroupList = (
   contactsToAddInGroup,
@@ -9,18 +10,10 @@ export const renderContactsToAddInGroupList = (
   }
 
   return (
-    <LabelList>
-      {contactsToAddInGroup.map(contact => (
-        <li key={contact.id}>
-          <LabelButton
-            type="button"
-            className={contactsToAddInGroup.includes(contact) ? 'selected' : ''}
-            onClick={() => handleContactSelect(contact)}
-          >
-            {contact.name}: {contact.number}
-          </LabelButton>
-        </li>
-      ))}
-    </LabelList>
+    <LabelList
+      items={contactsToAddInGroup}
+      handleItem={handleContactSelect}
+      category={ITEM_CATEGORIES.CONTACT}
+    />
   );
 };

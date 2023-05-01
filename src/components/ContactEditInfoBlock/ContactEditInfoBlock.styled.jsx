@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const EditFormInfo = styled.div`
+export const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   padding: 10px;
-  background-color: #fab7d2;
+  background-color: ${props => props.theme.colors.inputBorder};
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -22,7 +22,7 @@ export const EditFormInfo = styled.div`
   }
 `;
 
-export const EditFormInstrc = styled.div`
+export const EditRules = styled.div`
   display: flex;
   p {
     padding-left: 10px;

@@ -13,6 +13,7 @@ export const theme = Object.freeze({
     inputText: '#f66fa5',
     transparent: 'transparent',
     selectedGroup: '#bb6bd9',
+    body: '#fff3f7',
   },
   devices: {
     mobile: '375px',

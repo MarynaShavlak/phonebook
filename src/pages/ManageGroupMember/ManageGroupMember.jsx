@@ -3,26 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { AppBar } from 'components';
-import { Section } from 'shared';
+import { Section, BackButton } from 'shared';
 import {
   selectGroups,
   deleteContactFromGroup,
   addContactToGroup,
 } from 'redux/groups';
 import { selectContacts, fetchContacts } from 'redux/contacts';
+import { ContentWrapper, Text } from 'shared/commonStyledComponents.jsx';
 import {
-  ContentWrapper,
-  BackButton,
-  Text,
-} from 'shared/commonStyledComponents.jsx';
-import {
-  renderIcons,
   getContactsByGroupName,
   getOriginalGroupName,
   getAvailableToSelectContacts,
 } from 'utils';
 import { showGroupManageContactsSuccess } from 'utils/notifications';
-import { ICON_NAMES, ICON_SIZES } from 'constants';
 import {
   renderExistedContactsText,
   renderContactsToAddInGroupList,
@@ -118,11 +112,7 @@ const ManageGroupMember = () => {
       <main>
         <Section>
           <ContentWrapper>
-            <BackButton to="/groups" onClick={handleBackButtonClick}>
-              <button type="button" aria-label="Back to previous page">
-                {renderIcons(ICON_NAMES.BACK_ARROW, ICON_SIZES.LARGE)}
-              </button>
-            </BackButton>
+            <BackButton pathTo="/groups" onClick={handleBackButtonClick} />
             <>
               {renderExistedContactsText(existedContactsInGroup)}
               <Text>

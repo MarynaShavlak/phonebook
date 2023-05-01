@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -42,32 +41,6 @@ export const Main = styled.main`
   padding-top: 30px;
   section:first-child {
     margin-bottom: 30px;
-  }
-`;
-
-export const BackButton = styled(NavLink)`
-  button {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    background-color: transparent;
-    color: ${props => props.theme.colors.black};
-    border: none;
-    cursor: pointer;
-    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    &:hover {
-      color: ${props => props.theme.colors.lightAccent};
-    }
-  }
-
-  svg {
-    width: 30px;
-    height: 30px;
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      width: 50px;
-      height: 50px;
-    }
   }
 `;
 
@@ -185,37 +158,17 @@ export const TelLink = styled.a`
   color: ${props => props.theme.colors.black};
 `;
 
-export const LabelList = styled.ul`
+export const AddNewBtn = styled.button`
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-export const LabelButton = styled.button`
-  display: flex;
-  justify-content: center;
-  padding: 5px;
-  background-color: ${props => props.theme.colors.mainLight};
-  color: ${props => props.theme.colors.black};
-  border: 5px solid transparent;
-  border-radius: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
+  align-items: center;
+  padding: 10px;
+  background-color: ${props => props.theme.colors.lightAccent};
+  border: none;
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: ${props => props.theme.colors.selectedGroup};
+    background-color: ${props => props.theme.colors.brightAccent};
     color: ${props => props.theme.colors.white};
-    box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
-  }
-  &.selected {
-    background-color: ${props => props.theme.colors.selectedGroup};
-  }
-
-  font-size: 10px;
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 12px;
   }
 `;

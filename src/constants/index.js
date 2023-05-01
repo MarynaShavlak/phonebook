@@ -6,3 +6,4 @@ export { LOCAL_STORAGE_KEYS } from './localStorageKeys';
 export { SORT_OPTIONS } from './sortOptions';
 export { ICON_NAMES } from './iconNames';
 export { ICON_SIZES } from './iconSizes';
+export { ITEM_CATEGORIES } from './itemCategories';

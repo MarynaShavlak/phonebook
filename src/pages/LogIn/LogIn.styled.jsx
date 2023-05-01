@@ -40,7 +40,7 @@ export const Info = styled.div`
     }
   }
   span {
-    color: #ef4287;
+    color: ${props => props.theme.colors.brightAccent};
     font-weight: 700;
   }
 `;
@@ -49,7 +49,7 @@ export const RedirectLink = styled.p`
   font-weight: 400;
 `;
 export const SignUpLink = styled(NavLink)`
-  color: #fc458e;
+  color: ${props => props.theme.colors.brightAccent};
   font-weight: 700;
 `;
 
@@ -60,7 +60,7 @@ export const Wrapper = styled.div`
 
   padding-top: 80px;
   min-height: 100vh;
-  background-color: #fff3f7;
+  background-color: ${props => props.theme.colors.body};
 `;
 
 export const ImageWrap = styled.div`
@@ -78,7 +78,7 @@ export const ImageWrap = styled.div`
     font-weight: 700;
 
     span {
-      color: #ef4287;
+      color: ${props => props.theme.colors.brightAccent};
       font-weight: 700;
     }
   }

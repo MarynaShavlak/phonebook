@@ -14,7 +14,7 @@ const Favorites = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            {contacts.length !== 0 ? (
+            {!!contacts.length ? (
               <List>
                 {contacts.map(contact => (
                   <ContactItem key={contact.id}>

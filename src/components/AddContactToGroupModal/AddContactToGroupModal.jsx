@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CustomModal } from 'shared';
+import { CustomModal, LabelList } from 'shared';
 import {
   selectGroupNames,
   selectGroups,
@@ -16,20 +16,13 @@ import {
   ModalContent,
   ModalHeader,
   Button,
-  LabelList,
-  LabelButton,
 } from 'shared/commonStyledComponents';
-import { CONTACT_ACTIONS } from 'constants';
+import { CONTACT_ACTIONS, ITEM_CATEGORIES } from 'constants';
+import { renderSelectedGroupsText } from './helpers';
 
-export const AddContactToGroupModal = ({
-  contact,
-  isOpen,
-  onClose,
-  action,
-}) => {
+export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
-  console.log('groups: ', groups);
   const groupNamesByContact = findGroupsForContact(contact, groups);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,44 +62,31 @@ export const AddContactToGroupModal = ({
       action={!groups.length ? '' : CONTACT_ACTIONS.ADD_TO_GROUP}
       onConfirm={handleAdddContactToGroupList}
     >
-      {!groups.length ? (
-        <ModalContent>
-          <ModalHeader>You have not created any groups yet</ModalHeader>
-          <Button type="button" onClick={() => navigate('/groups')}>
-            Create group
-          </Button>
-        </ModalContent>
-      ) : (
-        <ModalContent>
-          <ModalText>
-            Choose groups for <b>{contact.name}</b>&nbsp;(
-            <b>{contact.number}</b>):
-          </ModalText>
-          <LabelList>
-            {groupNames.map((group, index) => (
-              <li key={index}>
-                <LabelButton
-                  type="button"
-                  className={selectedGroups.includes(group) ? 'selected' : ''}
-                  onClick={() => handleGroupSelect(group)}
-                >
-                  {group}
-                </LabelButton>
-              </li>
-            ))}
-          </LabelList>
-          {selectedGroups.length ? (
+      <ModalContent>
+        {!groups.length ? (
+          <>
+            <ModalHeader>You have not created any groups yet</ModalHeader>
+            <Button type="button" onClick={() => navigate('/groups')}>
+              Create group
+            </Button>
+          </>
+        ) : (
+          <>
             <ModalText>
-              Contact has been included in groups:{' '}
-              <b>{selectedGroups.join(', ')}</b>
+              Choose groups for <b>{contact.name}</b>&nbsp;(
+              <b>{contact.number}</b>):
             </ModalText>
-          ) : (
-            <ModalText>
-              No groups have been assigned to the contact yet.
-            </ModalText>
-          )}
-        </ModalContent>
-      )}
+
+            <LabelList
+              items={groupNames}
+              handleItem={handleGroupSelect}
+              selectedItems={selectedGroups}
+              category={ITEM_CATEGORIES.GROUP}
+            />
+            {renderSelectedGroupsText(selectedGroups)}
+          </>
+        )}
+      </ModalContent>
     </CustomModal>
   );
 };

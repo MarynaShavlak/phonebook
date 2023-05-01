@@ -1,5 +1,4 @@
-export { getContactsQuantity } from './contact/getContactsQuantity';
-export { getGroupsQuantity } from './getGroupsQuantity';
+export { getTotalQuantityString } from './getTotalQuantityString';
 export { renderIcons } from './renderIcons';
 export { getCurrentTime } from './getCurrentTime';
 export { getRandomColors } from './getRandomColors';

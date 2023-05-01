@@ -24,7 +24,7 @@ const RecycleBin = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            {deletedContacts.length !== 0 ? (
+            {!!deletedContacts.length ? (
               <List>
                 {deletedContacts.map(contact => (
                   <ContactItem key={contact.id}>
