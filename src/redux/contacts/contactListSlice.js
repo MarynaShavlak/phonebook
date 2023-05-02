@@ -9,7 +9,7 @@ import {
 import { userLogOut } from '../auth/authOperations';
 
 const initialState = {
-  items: [],
+  items: null,
   isLoading: false,
   error: null,
 };

@@ -21,6 +21,14 @@ const commonContentWrapperStyles = `
   position: relative;
   display: flex;
   flex-direction: column;
+
+`;
+
+export const ContentWrapper = styled(Container)`
+  ${commonContentWrapperStyles};
+  row-gap: 10px;
+  padding: 0;
+  min-width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
     width: 345px;
   }
@@ -32,17 +40,19 @@ const commonContentWrapperStyles = `
   }
 `;
 
-export const ContentWrapper = styled(Container)`
-  ${commonContentWrapperStyles};
-  row-gap: 10px;
-  padding: 0;
-  min-width: 290px;
-`;
-
 export const SpecificContentWrapper = styled(Container)`
   ${commonContentWrapperStyles};
   align-items: center;
   row-gap: 20px;
+  @media screen and (min-width: ${props => props.theme.devices.mobile}) {
+    width: 345px;
+  }
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    width: 700px;
+  }
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    width: 800px;
+  }
 `;
 
 export const Main = styled.main`

@@ -12,8 +12,9 @@ export const selectFilteredContacts = createSelector(
 
   (contacts, filterByName, filterByNumber) => {
     const normalizeFilter = filterByName.toLowerCase();
+    if (!contacts) return [];
     return contacts
-      .filter(({ name }) => name.toLowerCase().includes(normalizeFilter))
-      .filter(({ number }) => number.includes(filterByNumber));
+      ?.filter(({ name }) => name.toLowerCase().includes(normalizeFilter))
+      ?.filter(({ number }) => number.includes(filterByNumber));
   }
 );

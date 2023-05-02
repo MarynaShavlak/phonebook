@@ -7,16 +7,16 @@ import { Section, Notification } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 
 const Favorites = () => {
-  const contacts = useSelector(selectFavoritesContacts);
+  const favoriteContacts = useSelector(selectFavoritesContacts);
   return (
     <>
       <AppBar />{' '}
       <Main>
         <Section>
           <ContentWrapper>
-            {!!contacts.length ? (
+            {!!favoriteContacts.length ? (
               <List>
-                {contacts.map(contact => (
+                {favoriteContacts.map(contact => (
                   <ContactItem key={contact.id}>
                     <FavoriteContact contact={contact} />
                   </ContactItem>

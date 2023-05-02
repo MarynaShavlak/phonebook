@@ -19,6 +19,29 @@ const favoritesSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
+    updateFavoriteContact(state, action) {
+      const newContacts = state.favorites.map(el => {
+        if (el.name === action.payload.name) {
+          const newEl = {
+            id: el.id,
+            name: el.name,
+            number: action.payload.number,
+          };
+          return newEl;
+        }
+        if (el.number === action.payload.number) {
+          const newEl = {
+            id: el.id,
+            name: action.payload.name,
+            number: el.number,
+          };
+          return newEl;
+        }
+        return el;
+      });
+      state.favorites = newContacts;
+    },
+
     clearFavourites(state) {
       state.favorites = [];
     },
@@ -34,6 +57,7 @@ const persistConfig = {
 export const {
   addContactToFavorites,
   removeContactFromFavorites,
+  updateFavoriteContact,
   clearFavourites,
 } = favoritesSlice.actions;
 

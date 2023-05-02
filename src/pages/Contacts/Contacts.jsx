@@ -28,22 +28,22 @@ const Contacts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const contacts = useSelector(selectContacts);
-
-  useEffect(() => {
-    if (!contacts) {
-      dispatch(fetchContacts());
-    }
-  }, [contacts, dispatch]);
-
   const filteredContacts = useSelector(selectFilteredContacts);
   const allContacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
+
+  useEffect(() => {
+    if (!allContacts) {
+      dispatch(fetchContacts());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   const isFiltered =
-    (!!filterByName || !!filterByNumber) && !!allContacts.length;
+    (!!filterByName || !!filterByNumber) && !!allContacts?.length;
 
   return (
     <>
@@ -51,7 +51,7 @@ const Contacts = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            {!!allContacts.length && (
+            {!!allContacts?.length && (
               <>
                 <ListHeader
                   category={ITEM_CATEGORIES.CONTACT}
@@ -65,7 +65,7 @@ const Contacts = () => {
               <Loader />
             ) : error && isLoading === false ? (
               <ErrorMessage />
-            ) : filteredContacts.length ? (
+            ) : filteredContacts?.length ? (
               <>
                 <ContactList state={{ from: location }} />
               </>

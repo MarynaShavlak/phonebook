@@ -9,14 +9,16 @@ import { selectContacts, fetchContacts } from 'redux/contacts';
 
 const RecycleBin = () => {
   const deletedContacts = useSelector(selectRecycleBinContacts);
-  const contacts = useSelector(selectContacts);
+  const allContacts = useSelector(selectContacts);
+  console.log('allContacts: ', allContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!contacts.length) {
+    if (!allContacts) {
       dispatch(fetchContacts());
     }
-  }, [contacts, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <>
@@ -30,7 +32,7 @@ const RecycleBin = () => {
                   <ContactItem key={contact.id}>
                     <DeletedContact
                       deletedContact={contact}
-                      allContacts={contacts}
+                      allContacts={allContacts}
                     />
                   </ContactItem>
                 ))}

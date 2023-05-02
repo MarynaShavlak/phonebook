@@ -30,7 +30,10 @@ const ManageGroupMember = () => {
   const groups = useSelector(selectGroups);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    if (!allContacts) {
+      dispatch(fetchContacts());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const choseContactToAddInGroup = contact => {
@@ -83,7 +86,7 @@ const ManageGroupMember = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const options = contactsAvailableToSelect.map(contact => ({
+  const options = contactsAvailableToSelect?.map(contact => ({
     label: `${contact.name}: ${contact.number} `,
     value: contact,
   }));

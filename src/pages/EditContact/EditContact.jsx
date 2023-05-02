@@ -6,6 +6,7 @@ import { Section, ContactForm, BackButton } from 'shared';
 import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { showEditContactSuccess } from 'utils/notifications';
+import { getContactById } from 'utils';
 import { CONTACT_ACTIONS, ROUTES } from 'constants';
 
 const EditContact = () => {
@@ -13,16 +14,16 @@ const EditContact = () => {
   const dispatch = useDispatch();
   const { contactId } = useParams();
   const navigate = useNavigate();
+  const allContacts = useSelector(selectContacts);
+  const contact = getContactById({ contactId, contacts: allContacts });
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    if (!allContacts) {
+      dispatch(fetchContacts());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const getContactById = ({ contactId, contacts }) => {
-    return contacts.find(contact => contact.id === contactId);
-  };
-  const contacts = useSelector(selectContacts);
-  const contact = getContactById({ contactId, contacts });
   const backLinkHref =
     location.state?.from ?? `${ROUTES.ROOT + ROUTES.CONTACTS}`;
 

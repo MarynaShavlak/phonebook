@@ -51,6 +51,26 @@ const groupsSlice = createSlice({
     clearGroups(state) {
       state.groups = [];
     },
+    updateContactInGroups: (state, action) => {
+      const newGroups = state.groups.map(group => {
+        const updatedContacts = group.contacts.map(c => {
+          if (c.id === action.payload.id) {
+            return {
+              ...c,
+              name: action.payload.name,
+              number: action.payload.number,
+            };
+          }
+          return c;
+        });
+
+        return {
+          ...group,
+          contacts: updatedContacts,
+        };
+      });
+      state.groups = newGroups;
+    },
   },
 });
 
@@ -61,6 +81,7 @@ export const {
   deleteGroup,
   renameGroup,
   clearGroups,
+  updateContactInGroups,
 } = groupsSlice.actions;
 
 export const groupsReducer = persistReducer(persistConfig, groupsSlice.reducer);

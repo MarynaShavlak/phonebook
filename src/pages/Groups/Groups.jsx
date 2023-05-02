@@ -9,16 +9,20 @@ import {
   Button,
 } from 'shared/commonStyledComponents.jsx';
 import { selectGroups } from 'redux/groups';
-import { fetchContacts } from 'redux/contacts/contactsOperations';
+import { selectContacts, fetchContacts } from 'redux/contacts';
 import { ITEM_CATEGORIES } from 'constants';
 
 const Groups = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const dispatch = useDispatch();
   const groups = useSelector(selectGroups);
+  const allContacts = useSelector(selectContacts);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    if (!allContacts) {
+      dispatch(fetchContacts());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const toggleCreateGroupModal = () => {

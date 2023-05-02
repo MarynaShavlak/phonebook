@@ -20,6 +20,13 @@ import {
   updateContact,
 } from 'redux/contacts';
 import {
+  selectFavoritesContacts,
+  updateFavoriteContact,
+} from 'redux/favorites';
+import { selectGroups, updateContactInGroups } from 'redux/groups';
+import { isContactInFavorites, findGroupsForContact } from 'utils';
+
+import {
   validateContactData,
   validateName,
   checkContactUpdateSpecialCases,
@@ -35,25 +42,22 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   const [numberError, setNumberError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  const allContacts = useSelector(selectContacts);
+  const favoriteContacts = useSelector(selectFavoritesContacts);
+  const groups = useSelector(selectGroups);
 
   useEffect(() => {
     if (contact) {
       setName(contact.name);
-    }
-  }, [contact]);
-
-  useEffect(() => {
-    if (contact) {
       setNumber(contact.number);
     }
   }, [contact]);
 
   useEffect(() => {
-    if (!contacts.length) {
+    if (!allContacts) {
       dispatch(fetchContacts());
     }
-  }, [contacts, dispatch]);
+  }, [allContacts, dispatch]);
 
   const handleNameChange = async e => {
     const { value } = e.target;
@@ -94,25 +98,51 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
     const createdContact = getExclusiveContact({
       name,
       number,
-      contacts,
+      contacts: allContacts,
       contact,
     });
 
     if (!createdContact) return;
     const editedContact = { ...contact, ...createdContact };
-    const result =
-      action === OPERATION.EDIT
-        ? await dispatch(updateContact(editedContact))
-        : await dispatch(addContact(createdContact));
-    if (result.error) {
-      return showErrorMessage();
-    }
+    let result;
     if (action === OPERATION.EDIT) {
+      result = await updateContactData(editedContact);
+      await handleFavoriteContactUpdate(editedContact);
+      await handleGroupsUpdate(editedContact);
       onSubmit({ contact, updatedContact: createdContact });
     } else {
+      result = await addContactData(createdContact);
       onSubmit(createdContact);
       reset();
     }
+
+    if (result.error) {
+      return showErrorMessage();
+    }
+  };
+
+  const updateContactData = async editedContact => {
+    const result = await dispatch(updateContact(editedContact));
+    return result;
+  };
+
+  const handleFavoriteContactUpdate = async editedContact => {
+    const isInFavorites = isContactInFavorites(contact, favoriteContacts);
+    if (isInFavorites) {
+      await dispatch(updateFavoriteContact(editedContact));
+    }
+  };
+
+  const handleGroupsUpdate = async editedContact => {
+    const contactGroups = findGroupsForContact(editedContact, groups);
+    if (contactGroups.length) {
+      await dispatch(updateContactInGroups(editedContact));
+    }
+  };
+
+  const addContactData = async createdContact => {
+    const result = await dispatch(addContact(createdContact));
+    return result;
   };
 
   const handleAddContact = async e => {
