@@ -19,18 +19,12 @@ import {
   addContact,
   updateContact,
 } from 'redux/contacts';
-import {
-  selectFavoritesContacts,
-  updateFavoriteContact,
-} from 'redux/favorites';
-import { selectGroups, updateContactInGroups } from 'redux/groups';
-import { isContactInFavorites, findGroupsForContact } from 'utils';
 
 import {
   validateContactData,
   validateName,
   checkContactUpdateSpecialCases,
-  getExclusiveContact,
+  getContactNewData,
 } from 'utils';
 import { showErrorMessage } from 'utils/notifications';
 import { OPERATION, CONTACT_ACTIONS, ROUTES } from 'constants';
@@ -43,8 +37,6 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allContacts = useSelector(selectContacts);
-  const favoriteContacts = useSelector(selectFavoritesContacts);
-  const groups = useSelector(selectGroups);
 
   useEffect(() => {
     if (contact) {
@@ -77,80 +69,53 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
     setNumber(value);
   };
 
-  const handleContact = async ({
+  const handleContactFormSubmit = async ({
     e,
     action,
     contact = { name: '', number: '' },
   }) => {
     e.preventDefault();
-    const isContactDataValid = await validateContactData({ name, number });
-    if (!isContactDataValid) return;
-    if (action === OPERATION.EDIT) {
-      const specialCase = checkContactUpdateSpecialCases({
-        contact,
-        name,
-        number,
-      });
+    try {
+      const isContactDataValid = await validateContactData({ name, number });
+      if (!isContactDataValid) return;
+      const specialCase =
+        action === OPERATION.EDIT &&
+        checkContactUpdateSpecialCases({ contact, name, number });
+
       if (specialCase === 'both') return;
       if (specialCase === 'none')
         return navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
+
+      const { createdContactData, updatedContact } = getContactNewData({
+        name,
+        number,
+        allContacts,
+        contact,
+      });
+      if (!createdContactData) return;
+
+      let result;
+      if (action === OPERATION.EDIT) {
+        result = await dispatch(updateContact(updatedContact));
+        onSubmit(contact, updatedContact);
+      } else {
+        result = await dispatch(addContact(createdContactData));
+        onSubmit(createdContactData);
+        reset();
+      }
+
+      if (result.error) return showErrorMessage();
+    } catch (error) {
+      showErrorMessage();
     }
-    const createdContact = getExclusiveContact({
-      name,
-      number,
-      contacts: allContacts,
-      contact,
-    });
-
-    if (!createdContact) return;
-    const editedContact = { ...contact, ...createdContact };
-    let result;
-    if (action === OPERATION.EDIT) {
-      result = await updateContactData(editedContact);
-      await handleFavoriteContactUpdate(editedContact);
-      await handleGroupsUpdate(editedContact);
-      onSubmit({ contact, updatedContact: createdContact });
-    } else {
-      result = await addContactData(createdContact);
-      onSubmit(createdContact);
-      reset();
-    }
-
-    if (result.error) {
-      return showErrorMessage();
-    }
-  };
-
-  const updateContactData = async editedContact => {
-    const result = await dispatch(updateContact(editedContact));
-    return result;
-  };
-
-  const handleFavoriteContactUpdate = async editedContact => {
-    const isInFavorites = isContactInFavorites(contact, favoriteContacts);
-    if (isInFavorites) {
-      await dispatch(updateFavoriteContact(editedContact));
-    }
-  };
-
-  const handleGroupsUpdate = async editedContact => {
-    const contactGroups = findGroupsForContact(editedContact, groups);
-    if (contactGroups.length) {
-      await dispatch(updateContactInGroups(editedContact));
-    }
-  };
-
-  const addContactData = async createdContact => {
-    const result = await dispatch(addContact(createdContact));
-    return result;
   };
 
   const handleAddContact = async e => {
-    await handleContact({ e, action: OPERATION.ADD });
+    await handleContactFormSubmit({ e, action: OPERATION.ADD });
   };
 
   const handleEditContact = async e => {
-    await handleContact({ e, action: OPERATION.EDIT, contact });
+    await handleContactFormSubmit({ e, action: OPERATION.EDIT, contact });
   };
 
   const reset = () => {

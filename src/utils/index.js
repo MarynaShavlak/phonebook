@@ -24,6 +24,7 @@ export { findGroupsForContact } from './contact/findGroupsForContact';
 export { getContactById } from './contact/getContactById';
 export { isContactInFavorites } from './contact/isContactInFavorites';
 export { findContactGroupsChanges } from './contact/findContactGroupsChanges';
+export { getContactNewData } from './contact/getContactNewData';
 export { renderDropdownElement } from './renderDropdownElement';
 export { checkGroupNameExistence } from './group/checkGroupNameExistence';
 export { validateAndCheckGroupName } from './group/validateAndCheckGroupName';

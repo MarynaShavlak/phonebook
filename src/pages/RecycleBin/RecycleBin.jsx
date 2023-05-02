@@ -10,7 +10,6 @@ import { selectContacts, fetchContacts } from 'redux/contacts';
 const RecycleBin = () => {
   const deletedContacts = useSelector(selectRecycleBinContacts);
   const allContacts = useSelector(selectContacts);
-  console.log('allContacts: ', allContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {

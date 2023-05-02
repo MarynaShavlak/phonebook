@@ -8,6 +8,12 @@ import { selectContacts, fetchContacts } from 'redux/contacts';
 import { showEditContactSuccess } from 'utils/notifications';
 import { getContactById } from 'utils';
 import { CONTACT_ACTIONS, ROUTES } from 'constants';
+import {
+  selectFavoritesContacts,
+  updateFavoriteContact,
+} from 'redux/favorites';
+import { selectGroups, updateContactInGroups } from 'redux/groups';
+import { isContactInFavorites, findGroupsForContact } from 'utils';
 
 const EditContact = () => {
   const location = useLocation();
@@ -15,6 +21,9 @@ const EditContact = () => {
   const { contactId } = useParams();
   const navigate = useNavigate();
   const allContacts = useSelector(selectContacts);
+  const favoriteContacts = useSelector(selectFavoritesContacts);
+  const groups = useSelector(selectGroups);
+
   const contact = getContactById({ contactId, contacts: allContacts });
 
   useEffect(() => {
@@ -27,10 +36,27 @@ const EditContact = () => {
   const backLinkHref =
     location.state?.from ?? `${ROUTES.ROOT + ROUTES.CONTACTS}`;
 
-  const successEditContact = ({ contact, updatedContact }) => {
+  const successEditContact = async (contact, updatedContact) => {
+    await handleFavoriteContactUpdate(updatedContact);
+    await handleGroupsUpdate(updatedContact);
     showEditContactSuccess(contact, updatedContact);
     navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
   };
+
+  const handleFavoriteContactUpdate = async editedContact => {
+    const isInFavorites = isContactInFavorites(contact, favoriteContacts);
+    if (isInFavorites) {
+      await dispatch(updateFavoriteContact(editedContact));
+    }
+  };
+
+  const handleGroupsUpdate = async editedContact => {
+    const contactGroups = findGroupsForContact(editedContact, groups);
+    if (contactGroups.length) {
+      await dispatch(updateContactInGroups(editedContact));
+    }
+  };
+
   return contact ? (
     <>
       <AppBar />

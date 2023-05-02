@@ -21,7 +21,7 @@ export const getExclusiveContact = ({
       isNumberExist,
       contact: exclusiveContact,
     });
-    return;
+    return null;
   }
 
   return exclusiveContact;
