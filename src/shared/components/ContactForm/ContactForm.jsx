@@ -78,14 +78,6 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
     try {
       const isContactDataValid = await validateContactData({ name, number });
       if (!isContactDataValid) return;
-      const specialCase =
-        action === OPERATION.EDIT &&
-        checkContactUpdateSpecialCases({ contact, name, number });
-
-      if (specialCase === 'both') return;
-      if (specialCase === 'none')
-        return navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
-
       const { createdContactData, updatedContact } = getContactNewData({
         name,
         number,
@@ -96,6 +88,14 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
 
       let result;
       if (action === OPERATION.EDIT) {
+        const specialCase = checkContactUpdateSpecialCases({
+          contact,
+          updatedContact,
+        });
+        if (specialCase === 'bothNameAndNumberChange') return;
+        if (specialCase === 'bothNameAndNumberChange') {
+          return navigate(`${ROUTES.ROOT + ROUTES.CONTACTS}`);
+        }
         result = await dispatch(updateContact(updatedContact));
         onSubmit(contact, updatedContact);
       } else {

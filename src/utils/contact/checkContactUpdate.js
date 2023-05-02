@@ -5,17 +5,18 @@ import {
 
 import { removeExtraWhitespace } from 'utils';
 
-export const checkContactUpdateSpecialCases = ({ contact, name, number }) => {
-  const isNameUpdated = contact.name !== removeExtraWhitespace(name);
-  const isNumberUpdated = contact.number !== number;
+export const checkContactUpdateSpecialCases = ({ contact, updatedContact }) => {
+  const isNameUpdated =
+    contact.name !== removeExtraWhitespace(updatedContact.name);
+  const isNumberUpdated = contact.number !== updatedContact.number;
   if (isNameUpdated && isNumberUpdated) {
     showEditContactFailure();
-    return 'both';
+    return 'bothNameAndNumberChange';
   }
 
   if (!isNameUpdated && !isNumberUpdated) {
     showNoUpdateMessage();
-    return 'none';
+    return 'bothNameAndNumberChange';
   }
   return false;
 };
