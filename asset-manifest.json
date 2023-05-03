@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/phonebook/static/css/main.451d17fc.css",
-    "main.js": "/phonebook/static/js/main.c25002a0.js",
-    "static/js/840.d82f435a.chunk.js": "/phonebook/static/js/840.d82f435a.chunk.js",
+    "main.js": "/phonebook/static/js/main.004294da.js",
+    "static/js/840.cac68c40.chunk.js": "/phonebook/static/js/840.cac68c40.chunk.js",
     "static/js/733.66e41eb3.chunk.js": "/phonebook/static/js/733.66e41eb3.chunk.js",
     "static/js/91.316840c3.chunk.js": "/phonebook/static/js/91.316840c3.chunk.js",
     "static/js/65.adcb31e0.chunk.js": "/phonebook/static/js/65.adcb31e0.chunk.js",
@@ -14,11 +14,11 @@
     "static/js/967.54650134.chunk.js": "/phonebook/static/js/967.54650134.chunk.js",
     "static/js/651.95862843.chunk.js": "/phonebook/static/js/651.95862843.chunk.js",
     "static/media/phone-genie-logo.png": "/phonebook/static/media/phone-genie-logo.2353cba209709910a1d6.png",
-    "static/media/home.svg": "/phonebook/static/media/home.ebc10c369e9d6ad0ac6b75ca4e6918f6.svg",
+    "static/media/home.svg": "/phonebook/static/media/home.14957cebf205cf5a07cd831615c3bdf8.svg",
     "index.html": "/phonebook/index.html",
     "main.451d17fc.css.map": "/phonebook/static/css/main.451d17fc.css.map",
-    "main.c25002a0.js.map": "/phonebook/static/js/main.c25002a0.js.map",
-    "840.d82f435a.chunk.js.map": "/phonebook/static/js/840.d82f435a.chunk.js.map",
+    "main.004294da.js.map": "/phonebook/static/js/main.004294da.js.map",
+    "840.cac68c40.chunk.js.map": "/phonebook/static/js/840.cac68c40.chunk.js.map",
     "733.66e41eb3.chunk.js.map": "/phonebook/static/js/733.66e41eb3.chunk.js.map",
     "91.316840c3.chunk.js.map": "/phonebook/static/js/91.316840c3.chunk.js.map",
     "65.adcb31e0.chunk.js.map": "/phonebook/static/js/65.adcb31e0.chunk.js.map",
@@ -32,6 +32,6 @@
   },
   "entrypoints": [
     "static/css/main.451d17fc.css",
-    "static/js/main.c25002a0.js"
+    "static/js/main.004294da.js"
   ]
 }
