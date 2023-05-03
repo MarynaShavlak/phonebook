@@ -4,7 +4,7 @@ import { AppBar } from 'components';
 import { Section, ContactForm, BackButton } from 'shared';
 import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
 import { showContactSuccess } from 'utils/notifications';
-import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import { CONTACT_ACTIONS } from 'constants';
 import { ROUTES } from 'constants';
 
 const AddNewContact = () => {
@@ -13,7 +13,7 @@ const AddNewContact = () => {
     location.state?.from ?? `${ROUTES.ROOT + ROUTES.CONTACTS}`;
 
   const successAddContact = contact => {
-    showContactSuccess(OPERATION.ADD, contact);
+    showContactSuccess(CONTACT_ACTIONS.ADD, contact);
   };
 
   return (
