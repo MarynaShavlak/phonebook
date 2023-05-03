@@ -33,7 +33,7 @@ export const NavigationLink = styled(NavLink)`
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &.active {
     color: ${props => props.theme.colors.black};
-    background-color: ${props => props.theme.colors.body};
+    background-color: ${props => props.theme.colors.main};
   }
 
   :hover:not(.active),

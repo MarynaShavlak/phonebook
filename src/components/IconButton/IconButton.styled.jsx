@@ -18,7 +18,7 @@ export const IconButtonStyled = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: ${props => props.theme.colors.lightAccent};
+    background-color: ${props => props.theme.colors.accent};
     color: ${props => props.theme.colors.white};
   }
 `;

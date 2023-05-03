@@ -16,7 +16,7 @@ export const DropdownList = styled.ul`
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover,
     &:focus {
-      background-color: ${props => props.theme.colors.lightAccent};
+      background-color: ${props => props.theme.colors.accent};
     }
   }
 `;

@@ -24,8 +24,8 @@ export const Item = styled.li`
   border-radius: 8px;
 
   padding: 20px 10px;
-  border: 1px solid ${props => props.theme.colors.body};
-  box-shadow: 5px 5px 8px 1px ${props => props.theme.colors.body};
+  border: 1px solid ${props => props.theme.colors.main};
+  box-shadow: 5px 5px 8px 1px ${props => props.theme.colors.main};
   div:first-child {
     position: absolute;
     top: -15px;
@@ -68,7 +68,7 @@ export const IconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.colors.body};
+  background-color: ${props => props.theme.colors.main};
   border-bottom-left-radius: 8px;
   border-top-right-radius: 8px;
   svg {

@@ -9,7 +9,7 @@ export const LabelButton = styled.button`
   display: flex;
   justify-content: center;
   padding: 5px;
-  background-color: ${props => props.theme.colors.body};
+  background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;

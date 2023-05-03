@@ -14,7 +14,7 @@ export const Content = styled(Container)`
 export const PageWrapper = styled(Content)`
   padding-top: 80px;
   min-height: 100vh;
-  background-color: ${props => props.theme.colors.body};
+  background-color: ${props => props.theme.colors.main};
 `;
 
 const commonContentWrapperStyles = `
@@ -68,7 +68,7 @@ export const Button = styled.button`
   align-self: center;
   align-items: center;
   padding: 15px;
-  background-color: ${props => props.theme.colors.body};
+  background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.black};
 
   border: none;
@@ -85,7 +85,7 @@ export const Button = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: ${props => props.theme.colors.lightAccent};
+    background-color: ${props => props.theme.colors.accent};
   }
 `;
 export const Info = styled.p`

@@ -6,7 +6,7 @@ export const Header = styled.header`
   align-items: center;
 
   row-gap: 30px;
-  background-color: ${props => props.theme.colors.body};
+  background-color: ${props => props.theme.colors.main};
   height: 800px;
   padding-left: 15px;
   padding-right: 15px;
@@ -36,34 +36,24 @@ export const Header = styled.header`
   }
 `;
 
-export const HomeTitle = styled.svg`
-  /* display: inline-block;
-  font-size: 32px;
-  font-weight: 900;
-  text-align: center;
+export const HomeTitle = styled.h1`
   text-transform: uppercase;
-  /* color: ${props => props.theme.colors.black}; */
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  animation: neon 1s ease infinite;
 
-  text {
-    stroke: #100f10;
-    font-size: 50px;
-    font-weight: 700;
-    stroke-width: 2;
-
-    animation: textAnimate 3s infinite alternate;
-  }
-
-  @keyframes textAnimate {
-    0% {
-      stroke-dasharray: 0 50%;
-      stroke-dashoffset: 20%;
-      fill: #ff6666;
-    }
-
+  @keyframes neon {
+    0%,
     100% {
-      stroke-dasharray: 50% 0;
-      stroke-dashoffstet: -20%;
-      fill: hsla(189, 68%, 75%, 0%);
+      text-shadow: 0 0 10px #ef4287, 0 0 20px #ef4287, 0 0 20px #ef4287,
+        0 0 20px #ef4287, 0 0 2px #fdcc00, 2px 2px 2px #14866d;
+      color: #ffffff;
+    }
+    50% {
+      text-shadow: 0 0 2px #b71540, 0 0 5px #b71540, 0 0 5px #b71540,
+        0 0 5px #b71540, 0 0 2px #b71540, 4px 4px 2px #6e0e24;
+      color: #eda0d3;
     }
   }
 `;
@@ -116,7 +106,7 @@ export const StartButton = styled.button`
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    background-color: ${props => props.theme.colors.error};
+    background-color: ${props => props.theme.colors.hover};
     color: ${props => props.theme.colors.white};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {

@@ -19,7 +19,7 @@ export const Button = styled.button`
   width: 100%;
   justify-content: center;
   padding: 10px;
-  background-color: ${props => props.theme.colors.lightAccent};
+  background-color: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;

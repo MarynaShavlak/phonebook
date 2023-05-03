@@ -5,7 +5,7 @@ export const ContactInfo = styled.div`
   flex-direction: column;
   row-gap: 10px;
   padding: 10px;
-  background-color: ${props => props.theme.colors.inputBorder};
+  background-color: ${props => props.theme.colors.main};
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;

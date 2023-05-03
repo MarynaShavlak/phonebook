@@ -47,7 +47,7 @@ export const FormTitle = styled.h2`
   line-height: 1.5;
   text-align: center;
   letter-spacing: 0.03em;
-  background-color: ${props => props.theme.colors.lightAccent};
+  background-color: ${props => props.theme.colors.accent};
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -77,7 +77,7 @@ export const InfoField = styled.span`
     transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   &:focus-within > .user-form__icon {
-    fill: ${props => props.theme.colors.lightAccent};
+    fill: ${props => props.theme.colors.accent};
   }
 
   &:focus-within > .user-form__info-label {
@@ -115,7 +115,7 @@ export const InfoInput = styled(Field)`
   }
 
   &:focus {
-    border-color: ${props => props.theme.colors.lightAccent};
+    border-color: ${props => props.theme.colors.accent};
     outline: none;
   }
 `;
@@ -151,7 +151,7 @@ export const SignUpButton = styled.button`
   background-color: ${props => props.theme.colors.transparent};
 
   color: ${props => props.theme.colors.black};
-  border: 2px solid ${props => props.theme.colors.lightAccent};
+  border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 10px;
   font-size: 16px;
   font-weight: 800;
@@ -160,7 +160,7 @@ export const SignUpButton = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: ${props => props.theme.colors.lightAccent};
+    background-color: ${props => props.theme.colors.accent};
     /* color: ${props => props.theme.colors.white}; */
   }
 `;

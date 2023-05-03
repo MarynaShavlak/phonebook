@@ -27,11 +27,11 @@ export const FilterBlock = styled.div`
     }
     font-weight: 600;
     color: ${props => props.theme.colors.black};
-    border: 3px solid ${props => props.theme.colors.inputBorder};
+    border: 3px solid ${props => props.theme.colors.main};
     border-radius: 10px;
     &:focus {
       outline: none;
-      border: 3px solid ${props => props.theme.colors.lightAccent};
+      border: 3px solid ${props => props.theme.colors.accent};
     }
   }
 `;

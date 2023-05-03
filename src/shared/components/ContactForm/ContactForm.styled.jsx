@@ -40,14 +40,14 @@ export const FormItem = styled.li`
 export const Name = styled.input`
   ${inputMixin}
 
-  border: 3px solid ${props => props.theme.colors.inputBorder};
+  border: 3px solid ${props => props.theme.colors.main};
   font-weight: 600;
   line-height: 1.5;
   color: ${props => props.theme.colors.black};
   font-size: 14px;
   &:focus {
     outline: none;
-    border: 3px solid ${props => props.theme.colors.lightAccent};
+    border: 3px solid ${props => props.theme.colors.accent};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 16px;
@@ -55,10 +55,10 @@ export const Name = styled.input`
 `;
 export const Phone = styled(PhoneInput)`
   ${inputMixin}
-  border: 3px solid ${props => props.theme.colors.inputBorder};
+  border: 3px solid ${props => props.theme.colors.main};
   &.PhoneInput--focus {
     outline: none;
-    border: 3px solid ${props => props.theme.colors.lightAccent};
+    border: 3px solid ${props => props.theme.colors.accent};
   }
 
   .PhoneInputCountryIcon {
