@@ -18,7 +18,6 @@ export const UserMenuWrapper = styled.div`
     }
   }
   span {
-    /* color: #fc458e; */
     font-weight: 700;
   }
   .sb-avatar {
@@ -35,7 +34,7 @@ export const DropdownMenu = styled.ul`
   right: 0;
   z-index: 999;
   margin-top: 10px;
-  background-color: ${props => props.theme.colors.mainLight};
+  background-color: ${props => props.theme.colors.white};
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
 
   /* box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1); */
@@ -48,7 +47,7 @@ export const DropdownMenu = styled.ul`
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover,
     &:focus {
-      background-color: #f787b4;
+      background-color: ${props => props.theme.colors.lightAccent};
     }
   }
 `;
@@ -75,7 +74,7 @@ export const LogoutButton = styled.button`
   font-weight: 800;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    color: white;
-  }
+  /* &:hover {
+    color: ${props => props.theme.colors.white};
+  } */
 `;

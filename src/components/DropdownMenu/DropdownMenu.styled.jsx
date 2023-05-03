@@ -6,7 +6,7 @@ export const DropdownList = styled.ul`
   top: 0px;
   width: 180px;
   z-index: 1;
-  background-color: ${props => props.theme.colors.mainLight};
+  background-color: ${props => props.theme.colors.white};
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   overflow: hidden;
@@ -29,10 +29,10 @@ export const DropdownItem = styled.li`
   align-items: center;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:hover span,
+  /* &:hover span,
   &:hover svg {
     color: ${props => props.theme.colors.white};
-  }
+  } */
 `;
 export const DropdownToggleBtn = styled.button`
   display: flex;
@@ -47,7 +47,7 @@ export const DropdownToggleBtn = styled.button`
     fill: ${props => props.theme.colors.black};
     transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover {
-      fill: ${props => props.theme.colors.brightAccent};
+      fill: ${props => props.theme.colors.hover};
     }
   }
 `;

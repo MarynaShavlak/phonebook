@@ -68,8 +68,9 @@ export const Button = styled.button`
   align-self: center;
   align-items: center;
   padding: 15px;
-  background-color: ${props => props.theme.colors.mainLight};
+  background-color: ${props => props.theme.colors.body};
   color: ${props => props.theme.colors.black};
+
   border: none;
   border-radius: 10px;
   font-size: 12px;
@@ -85,11 +86,11 @@ export const Button = styled.button`
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: ${props => props.theme.colors.lightAccent};
-    color: ${props => props.theme.colors.white};
   }
 `;
 export const Info = styled.p`
   font-size: 16px;
+  color: ${props => props.theme.colors.black};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 18px;
   }
@@ -102,8 +103,8 @@ export const InfoWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${props => props.theme.colors.lightAccent};
-  border-top: 1px solid ${props => props.theme.colors.lightAccent};
+  border-bottom: 1px solid ${props => props.theme.colors.hover};
+  border-top: 1px solid ${props => props.theme.colors.hover};
 `;
 
 export const Text = styled.p`
@@ -167,7 +168,7 @@ export const CloseModalBtn = styled.button`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    color: ${props => props.theme.colors.brightAccent};
+    color: ${props => props.theme.colors.hover};
   }
 `;
 
@@ -179,13 +180,13 @@ export const AddNewBtn = styled.button`
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: ${props => props.theme.colors.lightAccent};
+  background-color: ${props => props.theme.colors.hover};
   border: none;
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: ${props => props.theme.colors.brightAccent};
+    /* background-color: ${props => props.theme.colors.brightAccent}; */
     color: ${props => props.theme.colors.white};
   }
 `;

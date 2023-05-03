@@ -30,8 +30,7 @@ export const StyledForm = styled(Form)`
   border-bottom-right-radius: 10px;
   padding: 30px 20px;
   padding-top: 30px;
-  background-color: white;
-
+  background-color: ${props => props.theme.colors.white};
   .privacy-container {
     margin-top: 20px;
   }
@@ -44,11 +43,11 @@ export const StyledForm = styled(Form)`
 export const FormTitle = styled.h2`
   font-size: 20px;
   font-weight: 900;
-  color: white;
+  color: ${props => props.theme.colors.black};
   line-height: 1.5;
   text-align: center;
   letter-spacing: 0.03em;
-  background-color: #f787b4;
+  background-color: ${props => props.theme.colors.lightAccent};
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -74,11 +73,11 @@ export const InfoField = styled.span`
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
-    fill: #757575;
+    fill: ${props => props.theme.colors.black};
     transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   &:focus-within > .user-form__icon {
-    fill: #fc458e;
+    fill: ${props => props.theme.colors.lightAccent};
   }
 
   &:focus-within > .user-form__info-label {
@@ -101,7 +100,7 @@ export const InfoInput = styled(Field)`
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 2px solid #757575;
+  border: 2px solid ${props => props.theme.colors.black};
   background-color: transparent;
   border-radius: 10px;
   font-size: 18px;
@@ -116,7 +115,7 @@ export const InfoInput = styled(Field)`
   }
 
   &:focus {
-    border-color: #fc458e;
+    border-color: ${props => props.theme.colors.lightAccent};
     outline: none;
   }
 `;
@@ -126,7 +125,7 @@ export const InfoError = styled.p`
   bottom: -15px;
   font-size: 12px;
   font-style: italic;
-  color: red;
+  color: ${props => props.theme.colors.error};
 `;
 
 export const InfoLabel = styled.label`
@@ -139,7 +138,7 @@ export const InfoLabel = styled.label`
   line-height: 1.17;
   letter-spacing: 0.03em;
   font-weight: 500;
-  color: #757575;
+  color: ${props => props.theme.colors.black};
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
@@ -149,10 +148,10 @@ export const SignUpButton = styled.button`
   margin-top: 20px;
   justify-content: center;
   padding: 10px 30px;
-  background-color: #f787b4;
+  background-color: ${props => props.theme.colors.transparent};
 
   color: ${props => props.theme.colors.black};
-  border: 5px solid transparent;
+  border: 2px solid ${props => props.theme.colors.lightAccent};
   border-radius: 10px;
   font-size: 16px;
   font-weight: 800;
@@ -161,7 +160,7 @@ export const SignUpButton = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: #fc458e;
-    color: white;
+    background-color: ${props => props.theme.colors.lightAccent};
+    /* color: ${props => props.theme.colors.white}; */
   }
 `;

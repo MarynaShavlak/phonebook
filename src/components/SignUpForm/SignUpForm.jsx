@@ -173,14 +173,14 @@ export const SignUpForm = () => {
                   style={{
                     display: 'flex',
                     flex: 1,
-                    backgroundColor: '#fc458e',
+                    backgroundColor: '#f7e643',
                     alignSelf: 'stretch',
                   }}
                 >
                   {renderIcons('check', ICON_SIZES.MEDIUM_SMALL)}
                 </div>
               }
-              borderColor="#fc458e"
+              borderColor="#f7e643"
               borderRadius={20}
               style={{ overflow: 'hidden' }}
               size={20}

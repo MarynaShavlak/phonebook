@@ -9,7 +9,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color:#abe4ff; */
   /* background-color: #fecdd5; */
+  /* background:#f2f2f2; */
+  /* background:#ffe1e5; */
+  /* background:#f5f5f5; */
+
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

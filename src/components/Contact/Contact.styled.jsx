@@ -15,7 +15,7 @@ export const ContactEl = styled.div`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   color: ${props => props.theme.colors.black};
   .marked {
-    background-color: #f66fa5;
+    background-color: ${props => props.theme.colors.hover};
     font-weight: 700;
     border-radius: 5px;
   }

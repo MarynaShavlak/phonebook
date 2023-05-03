@@ -32,13 +32,13 @@ export const NavigationLink = styled(NavLink)`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &.active {
-    color: white;
-    background-color: #fc458e;
+    color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.colors.body};
   }
 
   :hover:not(.active),
   :focus-visible:not(.active) {
-    color: #f787b4;
+    color: ${props => props.theme.colors.hover};
   }
 
   svg {

@@ -19,9 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
-          <ConfigProvider
-            colors={['#ef4287', '#f2c94c', '#bb6bd9', '#9b51e0', '#f787b4']}
-          >
+          <ConfigProvider colors={['#abe4ff', '#feafe5', '#f7e643']}>
             <App />
           </ConfigProvider>
         </ThemeProvider>

@@ -94,17 +94,17 @@ const ManageGroupMember = () => {
   const customStyles = {
     control: provided => ({
       ...provided,
-      border: `2px solid #fab7d2`,
-      borderColor: `#fab7d2`,
+      border: `2px solid #abe4ff`,
+      borderColor: `#abe4ff`,
       borderRadius: '10px',
       '&:hover': {
-        borderColor: '#ef4287',
+        borderColor: '#f7e643',
       },
       boxShadow: null,
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? '#fde7f0' : null,
+      backgroundColor: state.isFocused ? '#feafe5' : null,
       color: state.isSelected ? '#100f10' : null,
       fontSize: '12px',
     }),

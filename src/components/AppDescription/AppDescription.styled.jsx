@@ -20,7 +20,7 @@ export const DescBlock = styled.div`
     }
   }
   span {
-    color: ${props => props.theme.colors.brightAccent};
+    color: ${props => props.theme.colors.error};
     font-weight: 700;
   }
 `;

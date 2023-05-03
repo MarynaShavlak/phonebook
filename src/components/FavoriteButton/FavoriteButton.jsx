@@ -15,10 +15,10 @@ export const FavoriteButton = ({ checked = false, onChange }) => {
       onChange={onChange}
       sx={{
         '& .MuiSvgIcon-root': { fontSize: 30 },
-        color: '#ef4287',
+        color: '#feafe5',
 
         '&.Mui-checked': {
-          color: '#ef4287',
+          color: '#feafe5',
         },
         marginLeft: '20px',
       }}

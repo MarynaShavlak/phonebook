@@ -43,7 +43,7 @@ export const Name = styled.input`
   border: 3px solid ${props => props.theme.colors.inputBorder};
   font-weight: 600;
   line-height: 1.5;
-  color: ${props => props.theme.colors.inputText};
+  color: ${props => props.theme.colors.black};
   font-size: 14px;
   &:focus {
     outline: none;
@@ -82,7 +82,7 @@ export const Phone = styled(PhoneInput)`
     + .PhoneInputCountryIcon
     + .PhoneInputCountrySelectArrow {
     opacity: 1;
-    color: ${props => props.theme.colors.inputText};
+    color: ${props => props.theme.colors.black};
   }
   .PhoneInputInput {
     border: none;
@@ -94,7 +94,7 @@ export const Phone = styled(PhoneInput)`
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       font-size: 16px;
     }
-    color: ${props => props.theme.colors.inputText};
+    color: ${props => props.theme.colors.black};
   }
 
   .PhoneInputCountrySelect {
@@ -106,19 +106,19 @@ export const Phone = styled(PhoneInput)`
     ::-webkit-scrollbar-track {
       border-radius: 12px;
       margin-left: 10px;
-      background: ${props => props.theme.colors.mainLight};
+      background: ${props => props.theme.colors.white};
     }
     ::-webkit-scrollbar-thumb {
-      background: ${props => props.theme.colors.mainLight};
+      background: ${props => props.theme.colors.white};
       border-radius: 12px;
       margin-left: 10px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: ${props => props.theme.colors.inputText};
+      background: ${props => props.theme.colors.hover};
     }
     option {
       color: ${props => props.theme.colors.black};
-      background-color: ${props => props.theme.colors.mainLight};
+      background-color: ${props => props.theme.colors.white};
     }
   }
 `;

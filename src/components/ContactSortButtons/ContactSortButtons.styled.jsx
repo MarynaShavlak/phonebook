@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const SortButtonList = styled.div`
   display: flex;
   justify-content: end;
-  background-color: ${props => props.theme.colors.mainLight};
-  border-bottom: 1px solid #f787b4;
-  border-top: 1px solid #f787b4;
+  background-color: ${props => props.theme.colors.body};
 `;
 
 export const SortBtn = styled.button`
@@ -19,12 +17,12 @@ export const SortBtn = styled.button`
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background-color: #f787b4;
-    color: white;
+    /* background-color: ${props => props.theme.colors.lightAccent}; */
+    color: ${props => props.theme.colors.white};
   }
 
   &.active {
-    background-color: #fc458e;
-    color: white;
+    background-color: ${props => props.theme.colors.hover};
+    color: ${props => props.theme.colors.white};
   }
 `;

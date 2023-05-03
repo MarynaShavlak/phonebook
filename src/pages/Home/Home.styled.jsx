@@ -6,7 +6,7 @@ export const Header = styled.header`
   align-items: center;
 
   row-gap: 30px;
-  background-color: #fff3f7;
+  background-color: ${props => props.theme.colors.body};
   height: 800px;
   padding-left: 15px;
   padding-right: 15px;
@@ -36,16 +36,35 @@ export const Header = styled.header`
   }
 `;
 
-export const HomeTitle = styled.h1`
-  display: inline-block;
+export const HomeTitle = styled.svg`
+  /* display: inline-block;
   font-size: 32px;
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
-  color: #ef4287;
+  /* color: ${props => props.theme.colors.black}; */
 
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 44px;
+  text {
+    stroke: #100f10;
+    font-size: 50px;
+    font-weight: 700;
+    stroke-width: 2;
+
+    animation: textAnimate 3s infinite alternate;
+  }
+
+  @keyframes textAnimate {
+    0% {
+      stroke-dasharray: 0 50%;
+      stroke-dashoffset: 20%;
+      fill: #ff6666;
+    }
+
+    100% {
+      stroke-dasharray: 50% 0;
+      stroke-dashoffstet: -20%;
+      fill: hsla(189, 68%, 75%, 0%);
+    }
   }
 `;
 
@@ -84,7 +103,7 @@ export const StartButton = styled.button`
   padding: 10px 30px;
 
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
-  background-color: white;
+  background-color: ${props => props.theme.colors.white};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 10px;
@@ -97,8 +116,8 @@ export const StartButton = styled.button`
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    background-color: #fc458e;
-    color: white;
+    background-color: ${props => props.theme.colors.error};
+    color: ${props => props.theme.colors.white};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: 20px;
@@ -125,7 +144,7 @@ export const DescWrap = styled.div`
   }
   h2 {
     font-size: 16px;
-    color: #ef4287;
+    color: ${props => props.theme.colors.brightAccent};
   }
   p {
     text-align: justify;

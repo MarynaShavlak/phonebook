@@ -24,7 +24,7 @@ export const Content = styled.div`
     left: 0;
     right: 0;
     height: 3px;
-    background-color: #ef4287;
+    background-color: ${props => props.theme.colors.hover};
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -41,7 +41,7 @@ export const Content = styled.div`
   }
   &:hover {
     svg {
-      fill: #ef4287;
+      fill: ${props => props.theme.colors.hover};
     }
   }
 `;
@@ -64,7 +64,7 @@ export const GroupAvatar = styled.div`
   align-items: center;
   padding: 5px;
   margin-right: 10px;
-  background-color: #ef4287;
+  background-color: ${props => props.theme.colors.hover};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
   border-radius: 50%;
@@ -114,9 +114,9 @@ export const IconButton = styled.button`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    color: #ef4287;
+    color: ${props => props.theme.colors.hover};
     ~ ${ContactEl} {
-      color: #ef4287;
+      color: ${props => props.theme.colors.hover};
     }
   }
 `;
@@ -132,6 +132,6 @@ export const DropButton = styled.button`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    color: #ef4287;
+    color: ${props => props.theme.colors.hover};
   }
 `;

@@ -9,6 +9,7 @@ export const FilterBlock = styled.div`
 
   span {
     font-size: 14px;
+    color: ${props => props.theme.colors.black};
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
       font-size: 16px;
     }
@@ -25,12 +26,12 @@ export const FilterBlock = styled.div`
       font-size: 16px;
     }
     font-weight: 600;
-    color: #f66fa5;
-    border: 3px solid #fab7d2;
+    color: ${props => props.theme.colors.black};
+    border: 3px solid ${props => props.theme.colors.inputBorder};
     border-radius: 10px;
     &:focus {
       outline: none;
-      border: 3px solid #f787b4;
+      border: 3px solid ${props => props.theme.colors.lightAccent};
     }
   }
 `;

@@ -24,8 +24,8 @@ export const Item = styled.li`
   border-radius: 8px;
 
   padding: 20px 10px;
-  border: 1px solid ${props => props.theme.colors.inputBorder};
-  box-shadow: 5px 5px 8px 1px ${props => props.theme.colors.inputBorder};
+  border: 1px solid ${props => props.theme.colors.body};
+  box-shadow: 5px 5px 8px 1px ${props => props.theme.colors.body};
   div:first-child {
     position: absolute;
     top: -15px;
@@ -35,7 +35,7 @@ export const Item = styled.li`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: ${props => props.theme.colors.brightAccent};
+    background-color: ${props => props.theme.colors.error};
     color: ${props => props.theme.colors.white};
     font-weight: 900;
     font-size: 16px;
@@ -43,7 +43,7 @@ export const Item = styled.li`
 
   h2 {
     margin-bottom: 10px;
-    color: ${props => props.theme.colors.brightAccent};
+    color: ${props => props.theme.colors.error};
     font-size: 16px;
     font-weight: 800;
     text-align: center;
@@ -68,7 +68,7 @@ export const IconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.colors.lightAccent};
+  background-color: ${props => props.theme.colors.body};
   border-bottom-left-radius: 8px;
   border-top-right-radius: 8px;
   svg {
