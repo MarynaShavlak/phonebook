@@ -1,5 +1,10 @@
 import { toast } from 'react-toastify';
 import { CONTACT_ACTIONS } from 'constants';
+import { BiHappy } from 'react-icons/bi';
+import { RiEmotionUnhappyLine } from 'react-icons/ri';
+import { BiInfoCircle } from 'react-icons/bi';
+import { ImWarning } from 'react-icons/im';
+
 const { success, warning, error, info } = toast;
 
 const TOAST_TYPES = {
@@ -7,6 +12,12 @@ const TOAST_TYPES = {
   WARNING: 'warning',
   ERROR: 'error',
   INFO: 'info',
+};
+const TOAST_ICONS = {
+  success: <BiHappy />,
+  warning: <ImWarning />,
+  error: <RiEmotionUnhappyLine />,
+  info: <BiInfoCircle />,
 };
 
 const toastFuncs = {
@@ -17,8 +28,13 @@ const toastFuncs = {
 };
 
 function showMessage(type, message) {
+  const iconType = TOAST_ICONS[type];
   const toastFunc = toastFuncs[type] || toastFuncs.info;
-  return toastFunc(message);
+  return toastFunc(message, {
+    className: 'toast-message',
+    progressClassName: `${type}`,
+    icon: iconType,
+  });
 }
 
 function getMessage(operation, contact) {

@@ -10,7 +10,7 @@ import {
   addContactToGroup,
 } from 'redux/groups';
 import { selectContacts, fetchContacts } from 'redux/contacts';
-import { ContentWrapper, Text } from 'shared/commonStyledComponents.jsx';
+import { ContentWrapper, Text, Main } from 'shared/commonStyledComponents.jsx';
 import {
   getContactsByGroupName,
   getOriginalGroupName,
@@ -113,7 +113,7 @@ const ManageGroupMember = () => {
   return (
     <>
       <AppBar />
-      <main>
+      <Main>
         <Section>
           <ContentWrapper>
             <BackButton
@@ -138,7 +138,7 @@ const ManageGroupMember = () => {
             </>
           </ContentWrapper>
         </Section>
-      </main>
+      </Main>
     </>
   );
 };

@@ -15,15 +15,18 @@ export const NavigationList = styled.ul`
     background-color: ${props => props.theme.colors.white};
     border-radius: 50px;
     column-gap: 0;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
 `;
 export const PhoneLogo = styled.img`
   height: 100%;
-  height: 40px;
+  height: 50px;
+  @media screen and (min-width: ${props => props.theme.devices.desktop}) {
+    height: 60px;
+  }
 `;
 
 export const NavigationLink = styled(NavLink)`

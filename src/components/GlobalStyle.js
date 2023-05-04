@@ -9,6 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: overlay;
+  overflow-x: overlay;
+  
 
   /* background:#ebeef3; */
   /* background:#ffe1e5; */
@@ -47,5 +50,26 @@ a {
    text-decoration: none;
    
 }
+
+   ::-webkit-scrollbar {
+      width: 10px;
+      
+    }
+    ::-webkit-scrollbar-track {
+      border-radius: 12px;
+      margin-left: 10px;
+      background-color: #ffffff;
+      
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #dce3e5cc;
+      border-radius: 12px;
+      margin-left: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #feafe5;
+    }
+
+
 
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -56,7 +57,7 @@ export const SpecificContentWrapper = styled(Container)`
 `;
 
 export const Main = styled.main`
-  padding-top: 30px;
+  padding-top: 100px;
   section:first-child {
     margin-bottom: 30px;
   }
@@ -191,23 +192,60 @@ export const AddNewBtn = styled.button`
   }
 `;
 
-export const ImageWrap = styled.div`
-  position: relative;
-  align-self: start;
-  width: 520px;
+// export const ImageWrap = styled.div`
+//   position: relative;
+//   align-self: start;
+//   width: 520px;
 
-  p {
-    position: absolute;
-    top: 75px;
-    right: 35px;
-    width: 250px;
+//   p {
+//     position: absolute;
+//     top: 75px;
+//     right: 35px;
+//     width: 250px;
 
-    font-size: 12px;
-    font-weight: 700;
+//     font-size: 12px;
+//     font-weight: 700;
 
-    span {
-      color: ${props => props.theme.colors.brightAccent};
-      font-weight: 700;
+//     span {
+//       color: ${props => props.theme.colors.brightAccent};
+//       font-weight: 700;
+//     }
+//   }
+// `;
+
+export const StyledContainer = styled(ToastContainer)`
+  .Toastify__toast-icon {
+    svg {
+      font-size: 24px;
     }
+  }
+  .toast-message {
+    background: #ffffff;
+    color: #100f10;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #8a89bc;
+    border-radius: 50px;
+  }
+  .success {
+    background-color: #f7e643;
+  }
+  .info {
+    background-color: #abe4ff;
+  }
+  .error {
+    background-color: #ff6666;
+  }
+  .warning {
+    background-color: #ff6666;
+  }
+
+  .Toastify__close-button > svg {
+    fill: #100f10;
+  }
+
+  .Toastify__close-button:hover svg,
+  .Toastify__close-button:focus svg {
+    fill: #feafe5;
   }
 `;

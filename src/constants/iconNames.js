@@ -33,6 +33,7 @@ export const ICON_NAMES = {
   REMOVE: 'remove',
   RESTORE: 'restore',
   SETTINGS: 'settings',
+  SUCCESS: 'success',
   SORT: 'sort',
   UNCHECK: 'unCheck',
 };

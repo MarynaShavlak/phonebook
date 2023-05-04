@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Loader, AppBar, ContactEditInfoBlock } from 'components';
 import { Section, ContactForm, BackButton } from 'shared';
-import { ContentWrapper } from 'shared/commonStyledComponents.jsx';
+import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { showEditContactSuccess } from 'utils/notifications';
 import { getContactById } from 'utils';
@@ -60,7 +60,7 @@ const EditContact = () => {
   return contact ? (
     <>
       <AppBar />
-      <main>
+      <Main>
         <Section>
           <ContentWrapper>
             <BackButton pathTo={backLinkHref} />
@@ -72,7 +72,7 @@ const EditContact = () => {
             />
           </ContentWrapper>
         </Section>
-      </main>
+      </Main>
     </>
   ) : (
     <Loader />
