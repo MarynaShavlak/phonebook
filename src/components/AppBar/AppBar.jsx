@@ -1,6 +1,6 @@
 import { Navigation, UserMenu } from 'components';
 import { Header } from './AppBar.styled';
-import { StyledAppBar } from './AppBar.styled';
+import { StyledAppBar, NavWrapper } from './AppBar.styled';
 import { useAuth } from 'hooks';
 
 export const AppBar = () => {
@@ -9,8 +9,10 @@ export const AppBar = () => {
     <>
       <Header>
         <StyledAppBar>
-          <Navigation />
-          {isLoggedIn && <UserMenu />}
+          <NavWrapper>
+            <Navigation />
+            {isLoggedIn && <UserMenu />}
+          </NavWrapper>
         </StyledAppBar>
       </Header>
     </>

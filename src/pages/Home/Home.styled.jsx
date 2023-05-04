@@ -6,7 +6,8 @@ export const Header = styled.header`
   align-items: center;
 
   row-gap: 30px;
-  background-color: ${props => props.theme.colors.main};
+  /* background-color: ${props => props.theme.colors.main}; */
+  background: linear-gradient(to bottom right, #feafe5, #abe4ff);
   height: 800px;
   padding-left: 15px;
   padding-right: 15px;
@@ -106,7 +107,7 @@ export const StartButton = styled.button`
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    background-color: ${props => props.theme.colors.hover};
+    background-color: ${props => props.theme.colors.accent};
     color: ${props => props.theme.colors.white};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {

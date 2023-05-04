@@ -7,6 +7,7 @@ export const theme = Object.freeze({
     error: '#ff6666',
     transparent: 'transparent',
     secondaryText: '#8a89bc',
+    background: '#ebeef3',
     main: '#abe4ff',
     accent: '#f7e643',
     hover: '#feafe5',
