@@ -14,7 +14,7 @@ export const NAME_VALIDATION_SCHEMA = Yup.object().shape({
   name: Yup.string()
     .required('Name is required')
     .min(2, 'Name must be at least 2 characters')
-    .max(20, 'Name cannot exceed 20 characters')
+    .max(40, 'Name cannot exceed 40 characters')
     .trim()
     .matches(
       /^[a-zA-Zа-яА-ЯґҐєЄіІїЇ]+(([' -][a-zA-Zа-яА-ЯґҐєЄіІїЇ ])?[a-zA-Zа-яА-ЯґҐєЄіІїЇ]*)*$/,

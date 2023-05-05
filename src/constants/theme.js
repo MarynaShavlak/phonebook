@@ -17,4 +17,30 @@ export const theme = Object.freeze({
     tablet: '768px',
     desktop: '1200px',
   },
+  borderRadius: {
+    small: '5px',
+    standart: '10px',
+    medium: '20px',
+    large: '50px',
+    extra: '50%',
+  },
+  fontSize: {
+    xxs: '10px',
+    xs: '12px',
+    sm: '14px',
+    md: '16px',
+    lg: '18px',
+    xl: '20px',
+    xxl: '24px',
+    extra: '50px',
+  },
+
+  gapSize: {
+    extraSmall: '5px',
+    small: '8px',
+    standart: '10px',
+    medium: '15px',
+    large: '20px',
+    extra: '35px',
+  },
 });

@@ -6,14 +6,12 @@ const inputMixin = `
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-   
-  border-radius: 10px;
 `;
 export const Form = styled.form`
   padding: 10px;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: ${props => props.theme.gapSize.extra};
 `;
 export const FormList = styled.ul`
   padding: 0;
@@ -22,39 +20,42 @@ export const FormList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 25px;
+  row-gap: ${props => props.theme.gapSize.large};
 `;
 export const FormItem = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: ${props => props.theme.gapSize.small};
   label {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     font-weight: 700;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
   }
 `;
 export const Name = styled.input`
   ${inputMixin}
+  border-radius: ${props => props.theme.borderRadius.standart};
 
   border: 3px solid ${props => props.theme.colors.main};
   font-weight: 600;
   line-height: 1.5;
   color: ${props => props.theme.colors.black};
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize.sm};
   &:focus {
     outline: none;
     border: 3px solid ${props => props.theme.colors.accent};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
   }
 `;
 export const Phone = styled(PhoneInput)`
   ${inputMixin}
+  border-radius: ${props => props.theme.borderRadius.standart};
+
   border: 3px solid ${props => props.theme.colors.main};
   &.PhoneInput--focus {
     outline: none;
@@ -88,17 +89,17 @@ export const Phone = styled(PhoneInput)`
     border: none;
     outline: none;
     height: 100%;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     font-weight: 600;
     line-height: 1.5;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
     color: ${props => props.theme.colors.black};
   }
 
   .PhoneInputCountrySelect {
-    font-size: 12px;
+    font-size: ${props => props.theme.fontSize.xs};
     border: none;
     ::-webkit-scrollbar {
       width: 6px;
@@ -132,7 +133,7 @@ export const Error = styled.p`
   width: 100%;
   margin: 0;
   margin-top: 5px;
-  font-size: 10px;
+  font-size: ${props => props.theme.fontSize.xxs};
   font-weight: 700;
   color: ${props => props.theme.colors.error};
 `;

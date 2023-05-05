@@ -4,14 +4,14 @@ export const FilterBlock = styled.div`
   label {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap: ${props => props.theme.gapSize.small};
   }
 
   span {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     color: ${props => props.theme.colors.black};
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
     font-weight: 700;
   }
@@ -19,16 +19,16 @@ export const FilterBlock = styled.div`
   input {
     width: 100%;
     padding-left: 10px;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     padding-top: 10px;
     padding-bottom: 10px;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
     font-weight: 600;
     color: ${props => props.theme.colors.black};
     border: 3px solid ${props => props.theme.colors.main};
-    border-radius: 10px;
+    border-radius: ${props => props.theme.borderRadius.standart};
     &:focus {
       outline: none;
       border: 3px solid ${props => props.theme.colors.accent};
@@ -37,10 +37,10 @@ export const FilterBlock = styled.div`
 `;
 
 export const Info = styled.p`
-  font-size: 12px;
+  font-size: ${props => props.theme.fontSize.xs};
   margin-top: 5px;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
   }
   font-style: italic;
   span {

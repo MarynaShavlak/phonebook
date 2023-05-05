@@ -5,16 +5,16 @@ export const UserMenuWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   div {
     cursor: pointer;
   }
   p {
     display: flex;
     font-weight: 500;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
   }
   span {
@@ -38,7 +38,7 @@ export const DropdownMenu = styled.ul`
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
 
   /* box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1); */
-  border-radius: 5px;
+  border-radius: ${props => props.theme.borderRadius.small};
   overflow: hidden;
 
   .user-logout {
@@ -53,24 +53,24 @@ export const DropdownMenu = styled.ul`
 `;
 export const DropdownMenuItem = styled.li`
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: ${props => props.theme.fontSize.xs};
 
   .registation-info {
     font-style: italic;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
   }
 `;
 
 export const LogoutButton = styled.button`
   display: flex;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   align-items: center;
   width: 100%;
   background-color: transparent;
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.sm};
   font-weight: 800;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);

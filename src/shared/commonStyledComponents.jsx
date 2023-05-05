@@ -58,6 +58,9 @@ export const SpecificContentWrapper = styled(Container)`
 
 export const Main = styled.main`
   padding-top: 100px;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    padding-top: 120px;
+  }
   section:first-child {
     margin-bottom: 30px;
   }
@@ -73,14 +76,14 @@ export const Button = styled.button`
   color: ${props => props.theme.colors.black};
 
   border: none;
-  border-radius: 10px;
-  font-size: 12px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.xs};
   font-weight: 800;
   text-transform: uppercase;
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   cursor: pointer;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
   }
 
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -90,10 +93,10 @@ export const Button = styled.button`
   }
 `;
 export const Info = styled.p`
-  font-size: 16px;
+  font-size: ${props => props.theme.fontSize.md};
   color: ${props => props.theme.colors.black};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 18px;
+    font-size: ${props => props.theme.fontSize.lg};
   }
 
   span {
@@ -109,10 +112,10 @@ export const InfoWrap = styled.div`
 `;
 
 export const Text = styled.p`
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize.sm};
 
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
   }
 `;
 
@@ -123,11 +126,11 @@ export const ModalContent = styled.div`
 `;
 
 export const ModalText = styled.p`
-  font-size: 12px;
+  font-size: ${props => props.theme.fontSize.xs};
   line-height: 1.5;
   color: ${props => props.theme.colors.black};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
   }
 `;
 export const ModalWarning = styled(ModalText)`
@@ -149,7 +152,7 @@ export const ModalError = styled.p`
   left: 0;
   top: 50px;
 
-  font-size: 10px;
+  font-size: ${props => props.theme.fontSize.xxs};
   font-weight: 700;
   color: ${props => props.theme.colors.error};
 `;
@@ -203,7 +206,7 @@ export const AddNewBtn = styled.button`
 //     right: 35px;
 //     width: 250px;
 
-//     font-size: 12px;
+//     font-size: ${props => props.theme.fontSize.xs};
 //     font-weight: 700;
 
 //     span {
@@ -225,7 +228,7 @@ export const StyledContainer = styled(ToastContainer)`
     font-size: 14px;
     padding: 10px;
     border: 1px solid #8a89bc;
-    border-radius: 50px;
+    border-radius: 20px;
   }
   .success {
     background-color: #f7e643;

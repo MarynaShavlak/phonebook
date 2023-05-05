@@ -4,7 +4,7 @@ export const benefitsData = [
   {
     id: 1,
     icon: 'pencil',
-    title: 'Easily create and edit contacts',
+    title: 'Create and edit contacts effortlessly',
     description:
       'Phone Genie provides the functionality to create and modify contacts, facilitating the maintenance of an up-to-date directory of your contacts.',
   },

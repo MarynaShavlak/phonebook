@@ -7,7 +7,7 @@ export const FormWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto 0;
-  border-radius: 10px;
+  border-radius: ${props => props.theme.borderRadius.standart};
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   /* width: 290px; */
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
@@ -36,12 +36,12 @@ export const StyledForm = styled(Form)`
   }
   .privacy {
     font-style: italic;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     text-decoration: underline;
   }
 `;
 export const FormTitle = styled.h2`
-  font-size: 20px;
+  font-size: ${props => props.theme.fontSize.xl};
   font-weight: 900;
   color: ${props => props.theme.colors.black};
   line-height: 1.5;
@@ -57,7 +57,7 @@ export const FormTitle = styled.h2`
 export const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
-  row-gap: 35px;
+  row-gap: ${props => props.theme.gapSize.extra};
   li {
     position: relative;
   }
@@ -67,7 +67,7 @@ export const InfoField = styled.span`
   position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: ${props => props.theme.gapSize.large};
   .user-form__icon {
     position: absolute;
     top: 50%;
@@ -102,8 +102,8 @@ export const InfoInput = styled(Field)`
   padding-bottom: 10px;
   border: 2px solid ${props => props.theme.colors.black};
   background-color: transparent;
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.lg};
   font-weight: 500;
   z-index: 2;
   transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -123,7 +123,7 @@ export const InfoError = styled.p`
   position: absolute;
   width: 100%;
   bottom: -15px;
-  font-size: 12px;
+  font-size: ${props => props.theme.fontSize.xs};
   font-style: italic;
   color: ${props => props.theme.colors.error};
 `;
@@ -134,7 +134,7 @@ export const InfoLabel = styled.label`
   top: 50%;
   left: 50px;
   transform: translateY(-50%);
-  font-size: 12px;
+  font-size: ${props => props.theme.fontSize.xs};
   line-height: 1.17;
   letter-spacing: 0.03em;
   font-weight: 500;
@@ -152,8 +152,8 @@ export const SignUpButton = styled.button`
 
   color: ${props => props.theme.colors.black};
   border: 2px solid ${props => props.theme.colors.accent};
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.md};
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;

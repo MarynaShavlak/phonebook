@@ -8,7 +8,7 @@ export const GroupsList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 10px;
+  row-gap: ${props => props.theme.gapSize.standart};
 `;
 
 export const GroupItem = styled.li`

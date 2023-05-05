@@ -3,20 +3,20 @@ import styled from 'styled-components';
 export const DescBlock = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: ${props => props.theme.gapSize.standart};
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    row-gap: 15px;
+    row-gap: ${props => props.theme.gapSize.medium};
   }
 
   p {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
     text-align: justify;
     line-height: 1.2;
     letter-spacing: 0.03em;
     font-weight: 500;
 
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 16px;
+      font-size: ${props => props.theme.fontSize.md};
     }
   }
   span {

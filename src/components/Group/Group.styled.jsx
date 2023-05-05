@@ -4,7 +4,7 @@ export const GroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  row-gap: 10px;
+  row-gap: ${props => props.theme.gapSize.standart};
 `;
 export const GroupEl = styled.div`
   display: flex;
@@ -49,11 +49,11 @@ export const Content = styled.div`
 export const Element = styled.div`
   display: flex;
   flex-grow: 1;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   align-items: center;
-  font-size: 16px;
+  font-size: ${props => props.theme.fontSize.md};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 18px;
+    font-size: ${props => props.theme.fontSize.lg};
   }
   font-weight: 500;
 `;
@@ -67,7 +67,7 @@ export const GroupAvatar = styled.div`
   background-color: ${props => props.theme.colors.hover};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: 50%;
+  border-radius: ${props => props.theme.borderRadius.extra};
 
   font-weight: 800;
 `;
@@ -76,7 +76,7 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 15px;
+  row-gap: ${props => props.theme.gapSize.medium};
   padding-left: 20px;
   li {
     position: relative;
@@ -90,11 +90,11 @@ export const List = styled.ul`
 export const ContactEl = styled.div`
   display: flex;
   flex-grow: 1;
-  column-gap: 5px;
+  column-gap: ${props => props.theme.gapSize.extraSmall};
   align-items: center;
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize.sm};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
   }
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:not(:hover) {
@@ -122,7 +122,7 @@ export const IconButton = styled.button`
 `;
 export const DropButton = styled.button`
   display: flex;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   align-self: center;
   align-items: center;
   background-color: transparent;

@@ -1,7 +1,7 @@
 export function getCurrentTime() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.toLocaleString('default', { month: 'long' });
+  const month = now.toLocaleString('en-US', { month: 'long' });
   const day = now.getDate();
   const hours = now.getHours();
   const minutes = now.getMinutes();

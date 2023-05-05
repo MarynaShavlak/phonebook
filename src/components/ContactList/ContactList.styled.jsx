@@ -4,8 +4,8 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 16px;
-  row-gap: 10px;
+  font-size: ${props => props.theme.fontSize.md};
+  row-gap: ${props => props.theme.gapSize.standart};
   min-width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
     width: 345px;

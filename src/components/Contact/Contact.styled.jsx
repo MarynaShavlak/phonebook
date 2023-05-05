@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 export const ControlButtons = styled.div`
   display: flex;
-  column-gap: 20px;
+  column-gap: ${props => props.theme.gapSize.large};
 `;
 export const ContactEl = styled.div`
   display: flex;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   align-items: center;
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize.sm};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
   }
   flex-grow: 1;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -17,7 +17,7 @@ export const ContactEl = styled.div`
   .marked {
     background-color: ${props => props.theme.colors.hover};
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: ${props => props.theme.borderRadius.small};
   }
 `;
 
@@ -28,12 +28,12 @@ export const ContactEl = styled.div`
 
 export const Time = styled.p`
   display: flex;
-  column-gap: 5px;
+  column-gap: ${props => props.theme.gapSize.extraSmall};
   padding-left: 40px;
   align-items: center;
   /* margin-right: 20px; */
-  font-size: 10px;
+  font-size: ${props => props.theme.fontSize.xxs};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 12px;
+    font-size: ${props => props.theme.fontSize.xs};
   }
 `;

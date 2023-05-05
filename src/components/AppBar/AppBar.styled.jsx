@@ -23,9 +23,9 @@ export const NavWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  border-radius: 20px;
+  border-radius: ${props => props.theme.borderRadius.medium};
   @media screen and (max-width: 767px) {
-    column-gap: 20px;
+    column-gap: ${props => props.theme.gapSize.large};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     justify-content: space-between;

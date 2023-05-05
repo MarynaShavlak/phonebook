@@ -5,7 +5,7 @@ export const Header = styled.header`
   flex-direction: column;
   align-items: center;
 
-  row-gap: 30px;
+  row-gap: ${props => props.theme.gapSize.extra};
   /* background-color: ${props => props.theme.colors.main}; */
   background: linear-gradient(to bottom right, #feafe5, #abe4ff);
   height: 800px;
@@ -39,7 +39,7 @@ export const Header = styled.header`
 
 export const HomeTitle = styled.h1`
   text-transform: uppercase;
-  font-size: 50px;
+  font-size: ${props => props.theme.fontSize.extra};
   font-weight: 700;
   text-align: center;
   animation: neon 1s ease infinite;
@@ -61,7 +61,7 @@ export const HomeTitle = styled.h1`
 
 export const HomeWrapper = styled.div`
   display: flex;
-  column-gap: 20px;
+  column-gap: ${props => props.theme.gapSize.large};
   margin-bottom: 30px;
 `;
 
@@ -69,10 +69,10 @@ export const HomeInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 20px;
+  row-gap: ${props => props.theme.gapSize.large};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     flex-direction: row;
-    column-gap: 20px;
+    column-gap: ${props => props.theme.gapSize.large};
     row-gap: 0;
   }
 
@@ -97,8 +97,8 @@ export const StartButton = styled.button`
   background-color: ${props => props.theme.colors.white};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.md};
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
@@ -111,7 +111,7 @@ export const StartButton = styled.button`
     color: ${props => props.theme.colors.white};
   }
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 20px;
+    font-size: ${props => props.theme.fontSize.xl};
   }
 `;
 
@@ -134,14 +134,14 @@ export const DescWrap = styled.div`
     font-weight: 500;
   }
   h2 {
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
     color: ${props => props.theme.colors.brightAccent};
   }
   p {
     text-align: justify;
-    font-size: 12px;
+    font-size: ${props => props.theme.fontSize.xs};
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 14px;
+      font-size: ${props => props.theme.fontSize.sm};
     }
   }
 `;

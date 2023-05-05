@@ -38,7 +38,8 @@ export const getModalMessage = ({ action, data }) => {
         return (
           <>
             <ModalText>
-              Do you confirm that you wish to add contact &nbsp;<b>{name}</b>(
+              Do you confirm that you wish to add contact &nbsp;<b>{name}</b>
+              &nbsp;(
               <b>{number}</b>)&nbsp; back to your list ?
             </ModalText>
           </>
@@ -48,7 +49,7 @@ export const getModalMessage = ({ action, data }) => {
           <>
             <ModalText>
               Are you sure you want to delete contact contact &nbsp;
-              <b>{name}</b>(<b>{number}</b>)&nbsp; from recycle bin?
+              <b>{name}</b>&nbsp;(<b>{number}</b>)&nbsp; from recycle bin?
             </ModalText>
             <ModalWarning>
               Please be aware that once this action is taken, the contact cannot

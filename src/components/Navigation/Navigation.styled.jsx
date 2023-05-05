@@ -10,10 +10,10 @@ export const NavigationList = styled.ul`
   display: flex;
   justify-content: center;
 
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standart};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     background-color: ${props => props.theme.colors.white};
-    border-radius: 50px;
+    border-radius: ${props => props.theme.borderRadius.large};
     column-gap: 0;
     padding-left: 10px;
     padding-right: 10px;
@@ -33,7 +33,7 @@ export const NavigationLink = styled(NavLink)`
   position: relative;
   display: flex;
   align-items: center;
-  column-gap: 5px;
+  column-gap: ${props => props.theme.gapSize.extraSmall};
   height: 100%;
   padding: 10px;
   color: ${props => props.theme.colors.black};
@@ -41,7 +41,7 @@ export const NavigationLink = styled(NavLink)`
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 10px;
+    font-size: ${props => props.theme.fontSize.xxs};
     font-weight: 800;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -65,7 +65,7 @@ export const NavigationLink = styled(NavLink)`
     transform: translateY(-50%);
 
     @media screen and (max-width: 767px) {
-      border-radius: 50%;
+      border-radius: ${props => props.theme.borderRadius.extra};
 
       &::before {
         position: absolute;
@@ -90,7 +90,7 @@ export const NavigationLink = styled(NavLink)`
     }
 
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      border-radius: 50px;
+      border-radius: ${props => props.theme.borderRadius.large};
       background-color: ${props => props.theme.colors.hover};
       transform: translateY(0%);
     }

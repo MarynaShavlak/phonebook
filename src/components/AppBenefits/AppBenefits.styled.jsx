@@ -5,7 +5,7 @@ export const BenefitsList = styled.ul`
   flex-direction: column;
   padding-left: 20px;
   padding-right: 20px;
-  gap: 30px;
+  gap: ${props => props.theme.gapSize.extra};
   margin-bottom: 80px;
 
   li:nth-child(2n) {
@@ -21,7 +21,7 @@ export const Item = styled.li`
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 600px;
   }
-  border-radius: 8px;
+  border-radius: ${props => props.theme.borderRadius.standart};
 
   padding: 20px 10px;
   border: 1px solid ${props => props.theme.colors.main};
@@ -34,27 +34,27 @@ export const Item = styled.li`
     align-items: center;
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: ${props => props.theme.borderRadius.extra};
     background-color: ${props => props.theme.colors.error};
     color: ${props => props.theme.colors.white};
     font-weight: 900;
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
   }
 
   h2 {
     margin-bottom: 10px;
     color: ${props => props.theme.colors.error};
-    font-size: 16px;
+    font-size: ${props => props.theme.fontSize.md};
     font-weight: 800;
     text-align: center;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 18px;
+      font-size: ${props => props.theme.fontSize.lg};
     }
   }
   p {
-    font-size: 12px;
+    font-size: ${props => props.theme.fontSize.xs};
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      font-size: 14px;
+      font-size: ${props => props.theme.fontSize.sm};
     }
   }
 
@@ -71,6 +71,8 @@ export const IconWrap = styled.div`
   background-color: ${props => props.theme.colors.main};
   border-bottom-left-radius: 8px;
   border-top-right-radius: 8px;
+  width: 25px;
+  height: 25px;
   svg {
     fill: ${props => props.theme.colors.white};
     width: 15px;
@@ -82,8 +84,7 @@ export const IconWrap = styled.div`
   }
   right: -1px;
   top: 0px;
-  width: 30px;
-  height: 30px;
+
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 45px;
     height: 45px;

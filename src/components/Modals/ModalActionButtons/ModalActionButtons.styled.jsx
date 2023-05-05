@@ -5,10 +5,10 @@ export const ModalButtonsBlock = styled.ul`
   justify-content: center;
   margin-top: 30px;
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
-    font-size: 20px;
+    font-size: ${props => props.theme.fontSize.xl};
     margin-top: 25px;
   }
-  column-gap: 20px;
+  column-gap: ${props => props.theme.gapSize.large};
   li {
     flex: 1;
   }
@@ -22,10 +22,10 @@ export const Button = styled.button`
   background-color: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: 10px;
-  font-size: 12px;
+  border-radius: ${props => props.theme.borderRadius.standart};
+  font-size: ${props => props.theme.fontSize.xs};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize.sm};
   }
   font-weight: 800;
   text-transform: uppercase;
