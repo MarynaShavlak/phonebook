@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/phonebook/static/css/main.451d17fc.css",
-    "main.js": "/phonebook/static/js/main.fbbc31fc.js",
-    "static/js/840.a047805b.chunk.js": "/phonebook/static/js/840.a047805b.chunk.js",
+    "main.js": "/phonebook/static/js/main.4737ca2f.js",
+    "static/js/840.280ea6ff.chunk.js": "/phonebook/static/js/840.280ea6ff.chunk.js",
     "static/js/733.66e41eb3.chunk.js": "/phonebook/static/js/733.66e41eb3.chunk.js",
-    "static/js/91.316840c3.chunk.js": "/phonebook/static/js/91.316840c3.chunk.js",
+    "static/js/91.d369105b.chunk.js": "/phonebook/static/js/91.d369105b.chunk.js",
     "static/js/65.adcb31e0.chunk.js": "/phonebook/static/js/65.adcb31e0.chunk.js",
     "static/js/969.e567fa9b.chunk.js": "/phonebook/static/js/969.e567fa9b.chunk.js",
     "static/js/543.c69dbdaf.chunk.js": "/phonebook/static/js/543.c69dbdaf.chunk.js",
@@ -17,10 +17,10 @@
     "static/media/home.svg": "/phonebook/static/media/home.46348ce6cb7e33d8a4aa802e8fa81772.svg",
     "index.html": "/phonebook/index.html",
     "main.451d17fc.css.map": "/phonebook/static/css/main.451d17fc.css.map",
-    "main.fbbc31fc.js.map": "/phonebook/static/js/main.fbbc31fc.js.map",
-    "840.a047805b.chunk.js.map": "/phonebook/static/js/840.a047805b.chunk.js.map",
+    "main.4737ca2f.js.map": "/phonebook/static/js/main.4737ca2f.js.map",
+    "840.280ea6ff.chunk.js.map": "/phonebook/static/js/840.280ea6ff.chunk.js.map",
     "733.66e41eb3.chunk.js.map": "/phonebook/static/js/733.66e41eb3.chunk.js.map",
-    "91.316840c3.chunk.js.map": "/phonebook/static/js/91.316840c3.chunk.js.map",
+    "91.d369105b.chunk.js.map": "/phonebook/static/js/91.d369105b.chunk.js.map",
     "65.adcb31e0.chunk.js.map": "/phonebook/static/js/65.adcb31e0.chunk.js.map",
     "969.e567fa9b.chunk.js.map": "/phonebook/static/js/969.e567fa9b.chunk.js.map",
     "543.c69dbdaf.chunk.js.map": "/phonebook/static/js/543.c69dbdaf.chunk.js.map",
@@ -32,6 +32,6 @@
   },
   "entrypoints": [
     "static/css/main.451d17fc.css",
-    "static/js/main.fbbc31fc.js"
+    "static/js/main.4737ca2f.js"
   ]
 }
