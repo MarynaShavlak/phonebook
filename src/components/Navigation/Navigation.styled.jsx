@@ -10,7 +10,7 @@ export const NavigationList = styled.ul`
   display: flex;
   justify-content: center;
 
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     background-color: ${props => props.theme.colors.white};
     border-radius: ${props => props.theme.borderRadius.large};

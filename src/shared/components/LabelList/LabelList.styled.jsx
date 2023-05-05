@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: ${props => props.theme.gapSize.standart};
+  gap: ${props => props.theme.gapSize.standard};
 `;
 
 export const LabelButton = styled.button`
@@ -12,7 +12,7 @@ export const LabelButton = styled.button`
   background-color: ${props => props.theme.colors.main};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-weight: 800;
   /* box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1); */
   cursor: pointer;

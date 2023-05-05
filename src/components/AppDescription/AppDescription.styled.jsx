@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DescBlock = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: ${props => props.theme.gapSize.standart};
+  row-gap: ${props => props.theme.gapSize.standard};
   @media screen and (min-width: ${props => props.theme.devices.desktop}) {
     row-gap: ${props => props.theme.gapSize.medium};
   }

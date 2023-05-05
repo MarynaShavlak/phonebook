@@ -7,4 +7,5 @@ export const CONTACT_ACTIONS = {
   ADD_TO_GROUP: 'Add contact to group',
   ADD_TO_FAVORITES: 'Add contact to favorites',
   REMOVE_FROM_FAVORITES: 'Remove contact from favorites',
+  DELETE_ALL: 'Delete',
 };

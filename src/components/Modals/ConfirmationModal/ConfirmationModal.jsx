@@ -19,9 +19,9 @@ ConfirmationModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   data: PropTypes.oneOfType([
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
     }),
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -34,11 +34,12 @@ ConfirmationModal.propTypes = {
         })
       ),
     }),
-  ]).isRequired,
+  ]),
   action: PropTypes.oneOf([
     CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
     CONTACT_ACTIONS.RESTORE,
     CONTACT_ACTIONS.DELETE,
+    CONTACT_ACTIONS.DELETE_ALL,
     GROUP_ACTIONS.DELETE,
     GROUP_ACTIONS.EDIT,
     GROUP_ACTIONS.ADD,

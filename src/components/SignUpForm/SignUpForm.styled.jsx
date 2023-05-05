@@ -7,7 +7,7 @@ export const FormWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto 0;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   box-shadow: 5px 5px 8px 1px rgba(112, 111, 111, 1);
   /* width: 290px; */
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
@@ -102,7 +102,7 @@ export const InfoInput = styled(Field)`
   padding-bottom: 10px;
   border: 2px solid ${props => props.theme.colors.black};
   background-color: transparent;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.lg};
   font-weight: 500;
   z-index: 2;
@@ -152,7 +152,7 @@ export const SignUpButton = styled.button`
 
   color: ${props => props.theme.colors.black};
   border: 2px solid ${props => props.theme.colors.accent};
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.md};
   font-weight: 800;
   text-transform: uppercase;

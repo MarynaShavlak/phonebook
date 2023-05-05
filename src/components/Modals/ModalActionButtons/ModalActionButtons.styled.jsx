@@ -22,7 +22,7 @@ export const Button = styled.button`
   background-color: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.xs};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: ${props => props.theme.fontSize.sm};

@@ -19,7 +19,7 @@ export const theme = Object.freeze({
   },
   borderRadius: {
     small: '5px',
-    standart: '10px',
+    standard: '10px',
     medium: '20px',
     large: '50px',
     extra: '50%',
@@ -38,7 +38,7 @@ export const theme = Object.freeze({
   gapSize: {
     extraSmall: '5px',
     small: '8px',
-    standart: '10px',
+    standard: '10px',
     medium: '15px',
     large: '20px',
     extra: '35px',

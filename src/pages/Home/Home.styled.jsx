@@ -97,7 +97,7 @@ export const StartButton = styled.button`
   background-color: ${props => props.theme.colors.white};
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.md};
   font-weight: 800;
   text-transform: uppercase;

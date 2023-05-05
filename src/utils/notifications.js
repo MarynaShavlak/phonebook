@@ -184,3 +184,10 @@ export function showGroupManageContactsSuccess(groupName, contactsInGroup) {
     : `There are no contacts in the group "${groupName}" now`;
   return showMessage(TOAST_TYPES.SUCCESS, message);
 }
+
+export function showRecyclebinClearInfo() {
+  return showMessage(
+    TOAST_TYPES.SUCCESS,
+    'The contents of the recycle bin have been emptied.'
+  );
+}

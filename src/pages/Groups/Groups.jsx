@@ -47,7 +47,7 @@ const Groups = () => {
                 <ListHeader
                   category={ITEM_CATEGORIES.GROUP}
                   items={groups}
-                  handleAddNew={toggleCreateGroupModal}
+                  handleClick={toggleCreateGroupModal}
                 />
                 <GroupsList>
                   {groups.map(group => (

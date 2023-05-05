@@ -2,7 +2,7 @@ import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
 import { ModalText, ModalWarning } from 'shared/commonStyledComponents';
 
 export const getModalMessage = ({ action, data }) => {
-  const { name, number, contacts } = data;
+  const { name, number, contacts } = data ?? {};
 
   if (contacts) {
     if (action === GROUP_ACTIONS.DELETE) {
@@ -54,6 +54,16 @@ export const getModalMessage = ({ action, data }) => {
             <ModalWarning>
               Please be aware that once this action is taken, the contact cannot
               be restored.
+            </ModalWarning>
+          </>
+        );
+      case CONTACT_ACTIONS.DELETE_ALL:
+        return (
+          <>
+            <ModalText>Are you sure you want to clear recycle bin?</ModalText>
+            <ModalWarning>
+              Please be aware that once this action is taken, the contacts in
+              recycle bin cannot be restored.
             </ModalWarning>
           </>
         );

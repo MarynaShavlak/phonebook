@@ -5,7 +5,7 @@ export const ControlButtons = styled.div`
 `;
 export const ContactEl = styled.div`
   display: flex;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   align-items: center;
   font-size: ${props => props.theme.fontSize.sm};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {

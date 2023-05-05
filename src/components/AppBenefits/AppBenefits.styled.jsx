@@ -21,7 +21,7 @@ export const Item = styled.li`
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     width: 600px;
   }
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
 
   padding: 20px 10px;
   border: 1px solid ${props => props.theme.colors.main};

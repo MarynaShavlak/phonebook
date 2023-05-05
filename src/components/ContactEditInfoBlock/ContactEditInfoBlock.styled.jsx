@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: ${props => props.theme.gapSize.standart};
+  row-gap: ${props => props.theme.gapSize.standard};
   padding: 10px;
   background-color: ${props => props.theme.colors.main};
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.sm};
   font-weight: 600;
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
@@ -14,7 +14,7 @@ export const ContactInfo = styled.div`
   }
   p {
     display: flex;
-    column-gap: ${props => props.theme.gapSize.standart};
+    column-gap: ${props => props.theme.gapSize.standard};
   }
   p span:first-child {
     width: 100px;

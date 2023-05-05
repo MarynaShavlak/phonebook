@@ -4,7 +4,7 @@ export const GroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  row-gap: ${props => props.theme.gapSize.standart};
+  row-gap: ${props => props.theme.gapSize.standard};
 `;
 export const GroupEl = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ export const Content = styled.div`
 export const Element = styled.div`
   display: flex;
   flex-grow: 1;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   align-items: center;
   font-size: ${props => props.theme.fontSize.md};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
@@ -92,10 +92,8 @@ export const ContactEl = styled.div`
   flex-grow: 1;
   column-gap: ${props => props.theme.gapSize.extraSmall};
   align-items: center;
-  font-size: ${props => props.theme.fontSize.sm};
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: ${props => props.theme.fontSize.md};
-  }
+  font-size: ${props => props.theme.fontSize.md};
+
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   &:not(:hover) {
     color: initial;
@@ -122,7 +120,7 @@ export const IconButton = styled.button`
 `;
 export const DropButton = styled.button`
   display: flex;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   align-self: center;
   align-items: center;
   background-color: transparent;

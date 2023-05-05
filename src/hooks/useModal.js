@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useModal = action => {
   const [modalType, setModalType] = useState(null);
-
+  useEffect(() => {
+    if (modalType === action) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  }, [modalType, action]);
   const openModal = () => {
     setModalType(action);
   };

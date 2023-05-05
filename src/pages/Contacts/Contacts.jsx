@@ -56,7 +56,7 @@ const Contacts = () => {
                 <ListHeader
                   category={ITEM_CATEGORIES.CONTACT}
                   items={allContacts}
-                  handleAddNew={() => navigate(`${ROUTES.CREATE}`)}
+                  handleClick={() => navigate(`${ROUTES.CREATE}`)}
                 />
                 <FilterList />
               </>

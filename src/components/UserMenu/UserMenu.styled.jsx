@@ -5,7 +5,7 @@ export const UserMenuWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   div {
     cursor: pointer;
   }
@@ -63,13 +63,13 @@ export const DropdownMenuItem = styled.li`
 
 export const LogoutButton = styled.button`
   display: flex;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   align-items: center;
   width: 100%;
   background-color: transparent;
   color: ${props => props.theme.colors.black};
   border: 5px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.sm};
   font-weight: 800;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),

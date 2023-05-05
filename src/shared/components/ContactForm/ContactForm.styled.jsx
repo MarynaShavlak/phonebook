@@ -37,7 +37,7 @@ export const FormItem = styled.li`
 `;
 export const Name = styled.input`
   ${inputMixin}
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
 
   border: 3px solid ${props => props.theme.colors.main};
   font-weight: 600;
@@ -54,7 +54,7 @@ export const Name = styled.input`
 `;
 export const Phone = styled(PhoneInput)`
   ${inputMixin}
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
 
   border: 3px solid ${props => props.theme.colors.main};
   &.PhoneInput--focus {

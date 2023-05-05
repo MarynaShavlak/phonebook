@@ -28,7 +28,7 @@ export const FilterBlock = styled.div`
     font-weight: 600;
     color: ${props => props.theme.colors.black};
     border: 3px solid ${props => props.theme.colors.main};
-    border-radius: ${props => props.theme.borderRadius.standart};
+    border-radius: ${props => props.theme.borderRadius.standard};
     &:focus {
       outline: none;
       border: 3px solid ${props => props.theme.colors.accent};

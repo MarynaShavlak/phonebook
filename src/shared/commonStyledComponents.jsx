@@ -27,7 +27,7 @@ const commonContentWrapperStyles = `
 
 export const ContentWrapper = styled(Container)`
   ${commonContentWrapperStyles};
-  row-gap: 10px;
+  row-gap: ${props => props.theme.gapSize.standard};
   padding: 0;
   min-width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
@@ -44,7 +44,7 @@ export const ContentWrapper = styled(Container)`
 export const SpecificContentWrapper = styled(Container)`
   ${commonContentWrapperStyles};
   align-items: center;
-  row-gap: 20px;
+  row-gap: ${props => props.theme.gapSize.large};
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
     width: 345px;
   }
@@ -68,7 +68,7 @@ export const Main = styled.main`
 
 export const Button = styled.button`
   display: flex;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standard};
   align-self: center;
   align-items: center;
   padding: 15px;
@@ -76,7 +76,7 @@ export const Button = styled.button`
   color: ${props => props.theme.colors.black};
 
   border: none;
-  border-radius: ${props => props.theme.borderRadius.standart};
+  border-radius: ${props => props.theme.borderRadius.standard};
   font-size: ${props => props.theme.fontSize.xs};
   font-weight: 800;
   text-transform: uppercase;
@@ -109,6 +109,8 @@ export const InfoWrap = styled.div`
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.hover};
   border-top: 1px solid ${props => props.theme.colors.hover};
+  border-top-right-radius: ${props => props.theme.borderRadius.standard};
+  border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
 `;
 
 export const Text = styled.p`
@@ -122,7 +124,7 @@ export const Text = styled.p`
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: ${props => props.theme.gapSize.standard};
 `;
 
 export const ModalText = styled.p`
@@ -162,7 +164,7 @@ export const CloseModalBtn = styled.button`
   top: 0;
   right: 0;
   display: flex;
-  column-gap: 10px;
+  column-gap: ${props => props.theme.gapSize.standard};
   align-self: center;
   align-items: center;
   background-color: transparent;
@@ -186,6 +188,8 @@ export const AddNewBtn = styled.button`
   padding: 10px;
   background-color: ${props => props.theme.colors.hover};
   border: none;
+  border-top-right-radius: ${props => props.theme.borderRadius.standard};
+  border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);

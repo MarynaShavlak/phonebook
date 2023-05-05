@@ -56,7 +56,7 @@ export const DropdownElement = styled.span`
   display: flex;
   width: 100%;
   align-items: center;
-  column-gap: ${props => props.theme.gapSize.standart};
+  column-gap: ${props => props.theme.gapSize.standard};
   padding: 5px;
   color: ${props => props.theme.colors.black};
   font-size: ${props => props.theme.fontSize.xs};

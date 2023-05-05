@@ -18,6 +18,12 @@ body {
   /* background:#f5f5f5; */
 
 }
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
