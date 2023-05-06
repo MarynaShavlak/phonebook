@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -13,6 +13,7 @@ import {
   Notification,
   FilterList,
   ListHeader,
+  MultiSelectBar,
 } from 'shared';
 import {
   selectContacts,
@@ -25,6 +26,11 @@ import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 
 const Contacts = () => {
+  const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false); // new state variable
+
+  const toggleMultiSelect = () => {
+    setIsMultiSelectOpen(!isMultiSelectOpen);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,7 +63,10 @@ const Contacts = () => {
                   category={ITEM_CATEGORIES.CONTACT}
                   items={allContacts}
                   handleClick={() => navigate(`${ROUTES.CREATE}`)}
+                  handleSelectClick={toggleMultiSelect}
+                  active={isMultiSelectOpen}
                 />
+                {isMultiSelectOpen && <MultiSelectBar />}
                 <FilterList />
               </>
             )}

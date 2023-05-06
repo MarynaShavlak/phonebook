@@ -182,20 +182,27 @@ export const TelLink = styled.a`
   color: ${props => props.theme.colors.black};
 `;
 
-export const AddNewBtn = styled.button`
+export const ActionBtn = styled.button`
   display: flex;
   align-items: center;
   padding: 10px;
   background-color: ${props => props.theme.colors.hover};
   border: none;
-  border-top-right-radius: ${props => props.theme.borderRadius.standard};
-  border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
   cursor: pointer;
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    /* background-color: ${props => props.theme.colors.brightAccent}; */
+  &:hover,
+  &.active {
     color: ${props => props.theme.colors.white};
+  }
+`;
+
+export const ActionBtnList = styled.div`
+  display: flex;
+  column-gap: ${props => props.theme.gapSize.standard};
+  ${ActionBtn}:last-child {
+    border-top-right-radius: ${props => props.theme.borderRadius.standard};
+    border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
   }
 `;
 

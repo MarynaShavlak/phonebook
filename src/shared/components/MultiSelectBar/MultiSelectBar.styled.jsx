@@ -1,0 +1,87 @@
+import styled from 'styled-components';
+
+export const ControlBar = styled.div`
+  display: flex;
+`;
+
+export const SelectBtn = styled.button`
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  align-items: center;
+  column-gap: ${props => props.theme.gapSize.standard};
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: ${props => props.theme.colors.black};
+  font-size: ${props => props.theme.fontSize.xs};
+  font-weight: 500;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: ${props => props.theme.fontSize.sm};
+  }
+`;
+export const SelectedInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  /* width: 100%; */
+  align-items: center;
+  column-gap: ${props => props.theme.gapSize.standard};
+  padding: 10px;
+  color: ${props => props.theme.colors.black};
+  font-size: ${props => props.theme.fontSize.xs};
+  font-weight: 500;
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    font-size: ${props => props.theme.fontSize.sm};
+  }
+
+  span {
+    font-size: ${props => props.theme.fontSize.xl};
+    line-height: 1.25;
+  }
+`;
+
+export const ChoseActionBlock = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  column-gap: ${props => props.theme.gapSize.standard};
+  /* justify-content: space-between; */
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: ${props => props.theme.borderRadius.medium};
+  background-color: ${props => props.theme.colors.main};
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    justify-content: space-between;
+  }
+  span {
+    font-size: ${props => props.theme.fontSize.sm};
+    font-weight: 700;
+    flex-grow: 1;
+    text-align: center;
+
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      font-size: ${props => props.theme.fontSize.md};
+    }
+  }
+`;
+
+export const BtnList = styled.ul`
+  display: flex;
+  column-gap: ${props => props.theme.gapSize.medium};
+
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: ${props => props.theme.borderRadius.standard};
+    background-color: ${props => props.theme.colors.white};
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover,
+    &:focus {
+      background-color: ${props => props.theme.colors.black};
+      color: ${props => props.theme.colors.white};
+    }
+  }
+`;
