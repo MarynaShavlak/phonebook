@@ -20,7 +20,7 @@ export const FavoriteButton = ({ checked = false, onChange }) => {
         '&.Mui-checked': {
           color: '#feafe5',
         },
-        marginLeft: '20px',
+        // marginLeft: '20px',
       }}
     />
   );

@@ -56,7 +56,6 @@ export const ListHeader = ({
 ListHeader.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleClick: PropTypes.func.isRequired,
-  // handleSelectClick: PropTypes.func.isRequired,
   handleSelectClick: PropTypes.func,
   category: PropTypes.oneOf(Object.values(ITEM_CATEGORIES)).isRequired,
   active: PropTypes.bool,

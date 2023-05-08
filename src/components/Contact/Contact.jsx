@@ -10,6 +10,7 @@ import {
   FavoriteButton,
   HighlightContactDetails,
   DropdownMenu,
+  SelectCheckbox,
 } from 'components';
 
 import {
@@ -106,6 +107,7 @@ export const Contact = ({ contact }) => {
   return (
     <>
       <ContactEl>
+        <SelectCheckbox checked={isFavorite} onChange={toggleFavorite} />
         <Avatar
           size="30"
           textSizeRatio={2}

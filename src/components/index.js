@@ -12,6 +12,7 @@ export { DeletedContact } from 'components/DeletedContact';
 export { DropdownMenu } from 'components/DropdownMenu';
 export { EditGroupModal } from 'components/EditGroupModal';
 export { FavoriteButton } from 'components/FavoriteButton';
+export { SelectCheckbox } from 'components/SelectCheckbox';
 export { FavoriteContact } from 'components/FavoriteContact';
 export { Group } from 'components/Group';
 export { HighlightContactDetails } from 'components/HighlightContactDetails';
