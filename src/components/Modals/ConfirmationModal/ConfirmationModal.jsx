@@ -34,6 +34,13 @@ ConfirmationModal.propTypes = {
         })
       ),
     }),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        number: PropTypes.string,
+      })
+    ),
   ]),
   action: PropTypes.oneOf([
     CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,

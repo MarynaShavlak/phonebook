@@ -19,13 +19,16 @@ export {
 } from './contact/validation';
 export * as Notifications from './notifications';
 export { checkContactUpdateSpecialCases } from './contact/checkContactUpdate';
+export { checkContactInSelected } from './contact/checkContactInSelected';
 export { getExclusiveContact } from './contact/getExclusiveContact';
 export { findGroupsForContact } from './contact/findGroupsForContact';
 export { getContactById } from './contact/getContactById';
 export { isContactInFavorites } from './contact/isContactInFavorites';
+export { isArrayOfContacts } from './contact/isArrayOfContacts';
 export { findContactGroupsChanges } from './contact/findContactGroupsChanges';
 export { getContactNewData } from './contact/getContactNewData';
 export { renderDropdownElement } from './renderDropdownElement';
+export { getSelectButtonText } from './getSelectButtonText';
 export { checkGroupNameExistence } from './group/checkGroupNameExistence';
 export { validateAndCheckGroupName } from './group/validateAndCheckGroupName';
 export { getContactsByGroupName } from './group/getContactsByGroupName';

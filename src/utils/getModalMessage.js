@@ -1,8 +1,10 @@
-import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
+import { CONTACT_ACTIONS, GROUP_ACTIONS, ITEM_CATEGORIES } from 'constants';
 import { ModalText, ModalWarning } from 'shared/commonStyledComponents';
+import { isArrayOfContacts, getTotalQuantityString } from 'utils';
 
 export const getModalMessage = ({ action, data }) => {
   const { name, number, contacts } = data ?? {};
+  const isSelectedContacts = isArrayOfContacts(data);
 
   if (contacts) {
     if (action === GROUP_ACTIONS.DELETE) {
@@ -19,6 +21,20 @@ export const getModalMessage = ({ action, data }) => {
         </>
       );
     }
+  } else if (isSelectedContacts) {
+    return (
+      <>
+        <ModalText>
+          Are you certain that you wish to move &nbsp;
+          <b>{getTotalQuantityString(data, ITEM_CATEGORIES.CONTACT)}</b>
+          &nbsp;to the recycle bin?
+        </ModalText>
+        <ModalWarning>
+          Please note that it will be possible to restore contacts from the
+          recycle bin.
+        </ModalWarning>
+      </>
+    );
   } else {
     switch (action) {
       case CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN:

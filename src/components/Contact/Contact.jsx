@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -30,6 +30,7 @@ import {
   getCurrentTime,
   findGroupsForContact,
   renderDropdownElement,
+  checkContactInSelected,
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import {
@@ -38,7 +39,12 @@ import {
   showErrorMessage,
 } from 'utils/notifications';
 
-export const Contact = ({ contact }) => {
+export const Contact = ({
+  contact,
+  isMultiSelectOpen,
+  selectedContacts,
+  updateSelectedContacts,
+}) => {
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
   const deletedContacts = useSelector(selectRecycleBinContacts);
@@ -48,8 +54,13 @@ export const Contact = ({ contact }) => {
   const [isFavorite, setIsFavorite] = useState(
     favoriteContacts.some(el => el.id === contact.id)
   );
+  const [isSelected, setIsSelected] = useState(false);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
+
+  useEffect(() => {
+    setIsSelected(checkContactInSelected(selectedContacts, contact));
+  }, [selectedContacts, contact]);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -58,6 +69,10 @@ export const Contact = ({ contact }) => {
         dispatch(removeContactFromFavorites(contact.id)))
       : (dispatch(addContactToFavorites(contact)),
         showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact));
+  };
+  const toggleIsSelected = () => {
+    updateSelectedContacts(contact);
+    setIsFavorite(!setIsSelected);
   };
 
   const deleteContactAndCheckError = async contactId => {
@@ -107,14 +122,19 @@ export const Contact = ({ contact }) => {
   return (
     <>
       <ContactEl>
-        <SelectCheckbox checked={isFavorite} onChange={toggleFavorite} />
-        <Avatar
-          size="30"
-          textSizeRatio={2}
-          name={contact.name}
-          unstyled={false}
-          round="50%"
-        />
+        {isMultiSelectOpen && (
+          <SelectCheckbox checked={isSelected} onChange={toggleIsSelected} />
+        )}
+        {!isMultiSelectOpen && (
+          <Avatar
+            size="30"
+            textSizeRatio={2}
+            name={contact.name}
+            unstyled={false}
+            round="50%"
+          />
+        )}
+
         <HighlightContactDetails
           contact={contact}
           filterByName={filterByName}
@@ -180,4 +200,13 @@ Contact.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }).isRequired,
+  isMultiSelectOpen: PropTypes.bool,
+  selectedContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  updateSelectedContacts: PropTypes.func.isRequired,
 };

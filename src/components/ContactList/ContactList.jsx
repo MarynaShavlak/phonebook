@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Contact, ContactSortButtons } from 'components';
 import { List, ContactItem } from './ContactList.styled';
@@ -8,7 +9,11 @@ import { SORT_OPTIONS, LOCAL_STORAGE_KEYS } from 'constants';
 
 const { SORT_OPTION_KEY, REVERSE_SORT_KEY } = LOCAL_STORAGE_KEYS;
 
-export const ContactList = () => {
+export const ContactList = ({
+  isMultiSelectOpen,
+  selectedContacts,
+  updateSelectedContacts,
+}) => {
   const contacts = useSelector(selectFilteredContacts);
 
   const {
@@ -40,10 +45,27 @@ export const ContactList = () => {
       <List>
         {sortedContacts.map(contact => (
           <ContactItem key={contact.id}>
-            <Contact contact={contact} />
+            <Contact
+              contact={contact}
+              isMultiSelectOpen={isMultiSelectOpen}
+              selectedContacts={selectedContacts}
+              updateSelectedContacts={updateSelectedContacts}
+            />
           </ContactItem>
         ))}
       </List>
     </>
   );
+};
+
+ContactList.propTypes = {
+  isMultiSelectOpen: PropTypes.bool,
+  selectedContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  updateSelectedContacts: PropTypes.func.isRequired,
 };

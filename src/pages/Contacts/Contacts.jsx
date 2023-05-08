@@ -24,6 +24,7 @@ import {
 } from 'redux/contacts';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
+import { checkContactInSelected } from 'utils';
 
 const Contacts = () => {
   const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false); // new state variable
@@ -40,6 +41,8 @@ const Contacts = () => {
   const error = useSelector(selectError);
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
+  const [selectedContacts, setSelectedContacts] = useState([]);
+  console.log('selectedContacts: ', selectedContacts);
 
   useEffect(() => {
     if (!allContacts) {
@@ -50,6 +53,27 @@ const Contacts = () => {
 
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts?.length;
+
+  const handleSelectAllClick = () => {
+    if (!selectedContacts.length) {
+      setSelectedContacts(allContacts);
+    } else {
+      setSelectedContacts([]);
+    }
+  };
+
+  const updateSelectedContacts = contact => {
+    const isInSelected = checkContactInSelected(selectedContacts, contact);
+    if (isInSelected) {
+      const updatedSelectedContacts = selectedContacts.filter(
+        el => el.id !== contact.id
+      );
+      setSelectedContacts(updatedSelectedContacts);
+    } else {
+      const updatedSelectedContacts = [...selectedContacts, contact];
+      setSelectedContacts(updatedSelectedContacts);
+    }
+  };
 
   return (
     <>
@@ -66,7 +90,12 @@ const Contacts = () => {
                   handleSelectClick={toggleMultiSelect}
                   active={isMultiSelectOpen}
                 />
-                {isMultiSelectOpen && <MultiSelectBar />}
+                {isMultiSelectOpen && (
+                  <MultiSelectBar
+                    onSelectAllClick={handleSelectAllClick}
+                    selectedContacts={selectedContacts}
+                  />
+                )}
                 <FilterList />
               </>
             )}
@@ -76,7 +105,12 @@ const Contacts = () => {
               <ErrorMessage />
             ) : filteredContacts?.length ? (
               <>
-                <ContactList state={{ from: location }} />
+                <ContactList
+                  state={{ from: location }}
+                  isMultiSelectOpen={isMultiSelectOpen}
+                  selectedContacts={selectedContacts}
+                  updateSelectedContacts={updateSelectedContacts}
+                />
               </>
             ) : isFiltered ? (
               <Notification

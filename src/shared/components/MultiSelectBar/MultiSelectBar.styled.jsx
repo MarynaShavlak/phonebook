@@ -2,32 +2,43 @@ import styled from 'styled-components';
 
 export const ControlBar = styled.div`
   display: flex;
+  column-gap: ${props => props.theme.gapSize.extraSmall};
 `;
 
 export const SelectBtn = styled.button`
   display: flex;
   flex-direction: column;
-  /* width: 100%; */
+  justify-content: space-evenly;
+  width: 75px;
+  height: 65px;
   align-items: center;
   column-gap: ${props => props.theme.gapSize.standard};
-  padding: 10px;
+  padding: 5px;
   border: none;
   background-color: transparent;
   color: ${props => props.theme.colors.black};
   font-size: ${props => props.theme.fontSize.xs};
   font-weight: 500;
+  transform: scale(1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    width: 80px;
     font-size: ${props => props.theme.fontSize.sm};
+    &:hover {
+      color: ${props => props.theme.colors.hover};
+      transform: scale(1.2);
+    }
   }
 `;
 export const SelectedInfo = styled.div`
   display: flex;
   flex-direction: column;
-
+  justify-content: space-evenly;
   /* width: 100%; */
   align-items: center;
   column-gap: ${props => props.theme.gapSize.standard};
-  padding: 10px;
+  padding: 5px;
   color: ${props => props.theme.colors.black};
   font-size: ${props => props.theme.fontSize.xs};
   font-weight: 500;
@@ -78,10 +89,12 @@ export const BtnList = styled.ul`
     background-color: ${props => props.theme.colors.white};
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
       color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    &:hover,
-    &:focus {
-      background-color: ${props => props.theme.colors.black};
-      color: ${props => props.theme.colors.white};
+
+    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      &:hover {
+        background-color: ${props => props.theme.colors.black};
+        color: ${props => props.theme.colors.white};
+      }
     }
   }
 `;

@@ -5,7 +5,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { SelectWrap } from './SelectedCheckbox.styled';
 
-export const SelectCheckbox = ({ checked = false, onChange }) => {
+export const SelectCheckbox = ({ checked, onChange }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox ' } };
   return (
     <SelectWrap>
@@ -16,7 +16,7 @@ export const SelectCheckbox = ({ checked = false, onChange }) => {
         checkedIcon={<CheckBoxIcon />}
         onChange={onChange}
         sx={{
-          '& .MuiSvgIcon-root': { fontSize: 38 },
+          '& .MuiSvgIcon-root': { fontSize: 30 },
           color: '#feafe5',
 
           '&.Mui-checked': {
