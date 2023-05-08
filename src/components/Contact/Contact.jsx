@@ -12,32 +12,27 @@ import {
   DropdownMenu,
   SelectCheckbox,
 } from 'components';
-
-import {
-  addContactToRecycleBin,
-  selectRecycleBinContacts,
-} from 'redux/recycleBin';
+import { selectRecycleBinContacts } from 'redux/recycleBin';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import {
   selectFavoritesContacts,
   addContactToFavorites,
   removeContactFromFavorites,
 } from 'redux/favorites';
-import { selectGroups, deleteContactFromGroup } from 'redux/groups';
-import { deleteContact } from 'redux/contacts';
+import { selectGroups } from 'redux/groups';
 import { ContactEl } from './Contact.styled';
 import {
-  getCurrentTime,
-  findGroupsForContact,
   renderDropdownElement,
   checkContactInSelected,
+  checkIfInRecycleBin,
+  addContactToRecycleBinWithRemovalTime,
+  deleteContactAndCheckError,
+  removeContactFromFavoritesIfNeeded,
+  isContactInFavorites,
+  removeContactFromGroups,
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
-import {
-  showContactSuccess,
-  showRecyclebinWarn,
-  showErrorMessage,
-} from 'utils/notifications';
+import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
 
 export const Contact = ({
   contact,
@@ -52,7 +47,7 @@ export const Contact = ({
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(
-    favoriteContacts.some(el => el.id === contact.id)
+    isContactInFavorites(contact, favoriteContacts)
   );
   const [isSelected, setIsSelected] = useState(false);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
@@ -70,52 +65,28 @@ export const Contact = ({
       : (dispatch(addContactToFavorites(contact)),
         showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact));
   };
+
   const toggleIsSelected = () => {
     updateSelectedContacts(contact);
     setIsFavorite(!setIsSelected);
   };
 
-  const deleteContactAndCheckError = async contactId => {
-    const deleteResult = await dispatch(deleteContact(contactId));
-    if (deleteResult.error) {
-      showErrorMessage();
-      toggleRemoveModal();
-      return false;
-    }
-    return true;
-  };
-
-  const checkIfInRecycleBin = (contact, deletedContacts) => {
-    return deletedContacts.some(el => el.id === contact.id);
-  };
-
-  const addContactToRecycleBinWithRemovalTime = contact => {
-    const removalTime = getCurrentTime();
-    dispatch(addContactToRecycleBin({ ...contact, removalTime }));
-  };
-
-  const removeContactFromFavoritesIfNeeded = (contact, isFavorite) => {
-    if (isFavorite) {
-      dispatch(removeContactFromFavorites(contact.id));
-    }
-  };
-
-  const removeContactFromGroups = (contact, groups) => {
-    const groupNames = findGroupsForContact(contact, groups);
-    groupNames.forEach(groupName => {
-      dispatch(deleteContactFromGroup({ group: groupName, contact }));
-    });
-  };
-
   const moveContactToRecycleBin = async () => {
-    if (!(await deleteContactAndCheckError(contact.id))) return;
+    if (
+      !(await deleteContactAndCheckError({
+        contactId: contact.id,
+        dispatch,
+        toggleRemoveModal,
+      }))
+    )
+      return;
     if (checkIfInRecycleBin(contact, deletedContacts)) {
       showRecyclebinWarn(contact);
       return;
     }
-    addContactToRecycleBinWithRemovalTime(contact);
-    removeContactFromFavoritesIfNeeded(contact, isFavorite);
-    removeContactFromGroups(contact, groups);
+    addContactToRecycleBinWithRemovalTime(contact, dispatch);
+    removeContactFromFavoritesIfNeeded({ contact, isFavorite, dispatch });
+    removeContactFromGroups({ contact, groups, dispatch });
     showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
   };
 

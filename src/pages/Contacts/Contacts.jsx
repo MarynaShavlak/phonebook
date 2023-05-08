@@ -42,7 +42,6 @@ const Contacts = () => {
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
   const [selectedContacts, setSelectedContacts] = useState([]);
-  console.log('selectedContacts: ', selectedContacts);
 
   useEffect(() => {
     if (!allContacts) {
@@ -58,8 +57,12 @@ const Contacts = () => {
     if (!selectedContacts.length) {
       setSelectedContacts(allContacts);
     } else {
-      setSelectedContacts([]);
+      resetSelectedContacts();
     }
+  };
+
+  const resetSelectedContacts = () => {
+    setSelectedContacts([]);
   };
 
   const updateSelectedContacts = contact => {
@@ -94,6 +97,7 @@ const Contacts = () => {
                   <MultiSelectBar
                     onSelectAllClick={handleSelectAllClick}
                     selectedContacts={selectedContacts}
+                    resetSelectedContacts={resetSelectedContacts}
                   />
                 )}
                 <FilterList />
