@@ -32,6 +32,8 @@ export { deleteContactAndCheckError } from './contact/deleteContactAndCheckError
 export { removeContactFromFavoritesIfNeeded } from './contact/removeContactFromFavoritesIfNeeded';
 export { addContactToRecycleBinWithRemovalTime } from './contact/addContactToRecycleBinWithRemovalTime';
 export { removeContactFromGroups } from './contact/removeContactFromGroups';
+export { addToFavorites } from './contact/addToFavorites';
+export { removeFromFavorites } from './contact/removeFromFavorites';
 export { renderDropdownElement } from './renderDropdownElement';
 export { getSelectButtonText } from './getSelectButtonText';
 export { checkGroupNameExistence } from './group/checkGroupNameExistence';

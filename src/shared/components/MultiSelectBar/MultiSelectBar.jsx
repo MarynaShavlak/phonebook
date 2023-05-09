@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { ConfirmationModal, AddFewContactsToGroupModal } from 'components';
 import {
   SelectBtn,
@@ -18,15 +19,13 @@ import {
   removeContactFromFavoritesIfNeeded,
   isContactInFavorites,
   removeContactFromGroups,
+  addToFavorites,
+  removeFromFavorites,
 } from 'utils';
 import { useModal } from 'hooks';
 import { ICON_NAMES, ICON_SIZES, OPERATION, CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
-import {
-  selectFavoritesContacts,
-  addContactToFavorites,
-  removeContactFromFavorites,
-} from 'redux/favorites';
+import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
 
@@ -43,6 +42,7 @@ export const MultiSelectBar = ({
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
   const [isFavorite, setIsFavorite] = useState(false);
+  const isTablet = useMediaQuery('(min-width:768px)');
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -52,11 +52,9 @@ export const MultiSelectBar = ({
         favoriteContacts
       );
       if (isFavorite && isContactInFavorite) {
-        showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact);
-        dispatch(removeContactFromFavorites(contact.id));
+        removeFromFavorites({ contact, dispatch });
       } else if (!isFavorite && !isContactInFavorite) {
-        dispatch(addContactToFavorites(contact));
-        showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact);
+        addToFavorites({ contact, dispatch });
       }
     }
   };
@@ -89,13 +87,14 @@ export const MultiSelectBar = ({
       resetSelectedContacts();
     }
   };
+
   return (
     <ControlBar>
       <SelectBtn type="button" onClick={onSelectAllClick}>
         {getSelectButtonText(isAnyContactSelected)}
       </SelectBtn>
       <ChoseActionBlock>
-        <span>Choose Action</span>{' '}
+        {isTablet && <span>Choose Action</span>}
         <BtnList>
           <button
             type="button"

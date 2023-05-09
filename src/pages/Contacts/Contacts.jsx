@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -24,14 +24,9 @@ import {
 } from 'redux/contacts';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
-import { checkContactInSelected } from 'utils';
+import { useMultiSelect } from 'hooks';
 
 const Contacts = () => {
-  const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false); // new state variable
-
-  const toggleMultiSelect = () => {
-    setIsMultiSelectOpen(!isMultiSelectOpen);
-  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,7 +36,14 @@ const Contacts = () => {
   const error = useSelector(selectError);
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
-  const [selectedContacts, setSelectedContacts] = useState([]);
+  const {
+    isMultiSelectOpen,
+    toggleMultiSelect,
+    selectedContacts,
+    resetSelectedContacts,
+    handleSelectAllClick,
+    updateSelectedContacts,
+  } = useMultiSelect(allContacts);
 
   useEffect(() => {
     if (!allContacts) {
@@ -52,31 +54,6 @@ const Contacts = () => {
 
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts?.length;
-
-  const handleSelectAllClick = () => {
-    if (!selectedContacts.length) {
-      setSelectedContacts(allContacts);
-    } else {
-      resetSelectedContacts();
-    }
-  };
-
-  const resetSelectedContacts = () => {
-    setSelectedContacts([]);
-  };
-
-  const updateSelectedContacts = contact => {
-    const isInSelected = checkContactInSelected(selectedContacts, contact);
-    if (isInSelected) {
-      const updatedSelectedContacts = selectedContacts.filter(
-        el => el.id !== contact.id
-      );
-      setSelectedContacts(updatedSelectedContacts);
-    } else {
-      const updatedSelectedContacts = [...selectedContacts, contact];
-      setSelectedContacts(updatedSelectedContacts);
-    }
-  };
 
   return (
     <>

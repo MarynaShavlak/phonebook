@@ -14,11 +14,7 @@ import {
 } from 'components';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
-import {
-  selectFavoritesContacts,
-  addContactToFavorites,
-  removeContactFromFavorites,
-} from 'redux/favorites';
+import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { ContactEl } from './Contact.styled';
 import {
@@ -30,6 +26,8 @@ import {
   removeContactFromFavoritesIfNeeded,
   isContactInFavorites,
   removeContactFromGroups,
+  addToFavorites,
+  removeFromFavorites,
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
@@ -47,6 +45,7 @@ export const Contact = ({
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState();
+
   const [isSelected, setIsSelected] = useState(false);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
@@ -58,15 +57,6 @@ export const Contact = ({
   useEffect(() => {
     setIsSelected(checkContactInSelected(selectedContacts, contact));
   }, [selectedContacts, contact]);
-
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    return isFavorite
-      ? (showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact),
-        dispatch(removeContactFromFavorites(contact.id)))
-      : (dispatch(addContactToFavorites(contact)),
-        showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact));
-  };
 
   const toggleIsSelected = () => {
     updateSelectedContacts(contact);
@@ -91,14 +81,18 @@ export const Contact = ({
     removeContactFromGroups({ contact, groups, dispatch });
     showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
   };
-
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    return isFavorite
+      ? removeFromFavorites({ contact, dispatch })
+      : addToFavorites({ contact, dispatch });
+  };
   return (
     <>
       <ContactEl>
-        {isMultiSelectOpen && (
+        {isMultiSelectOpen ? (
           <SelectCheckbox checked={isSelected} onChange={toggleIsSelected} />
-        )}
-        {!isMultiSelectOpen && (
+        ) : (
           <Avatar
             size="30"
             textSizeRatio={2}
@@ -107,7 +101,6 @@ export const Contact = ({
             round="50%"
           />
         )}
-
         <HighlightContactDetails
           contact={contact}
           filterByName={filterByName}

@@ -1,24 +1,63 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { selectFavoritesContacts } from 'redux/favorites/selectors';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { FavoriteContact, AppBar } from 'components';
-import { Section, Notification } from 'shared';
+import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { selectContacts } from 'redux/contacts';
+import { ITEM_CATEGORIES, ROUTES } from 'constants';
+import { useMultiSelect } from 'hooks';
 
 const Favorites = () => {
+  // const allContacts = useSelector(selectContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    isMultiSelectOpen,
+    toggleMultiSelect,
+    selectedContacts,
+    resetSelectedContacts,
+    handleSelectAllClick,
+    updateSelectedContacts,
+  } = useMultiSelect(favoriteContacts);
+
   return (
     <>
       <AppBar />{' '}
       <Main>
         <Section>
           <ContentWrapper>
+            {!!favoriteContacts?.length && (
+              <>
+                <ListHeader
+                  category={ITEM_CATEGORIES.CONTACT}
+                  items={favoriteContacts}
+                  handleClick={() => navigate(`${ROUTES.CREATE}`)}
+                  handleSelectClick={toggleMultiSelect}
+                  active={isMultiSelectOpen}
+                />
+                {isMultiSelectOpen && (
+                  <MultiSelectBar
+                    onSelectAllClick={handleSelectAllClick}
+                    selectedContacts={selectedContacts}
+                    resetSelectedContacts={resetSelectedContacts}
+                  />
+                )}
+              </>
+            )}
             {!!favoriteContacts.length ? (
               <List>
                 {favoriteContacts.map(contact => (
                   <ContactItem key={contact.id}>
-                    <FavoriteContact contact={contact} />
+                    <FavoriteContact
+                      contact={contact}
+                      isMultiSelectOpen={isMultiSelectOpen}
+                      selectedContacts={selectedContacts}
+                      updateSelectedContacts={updateSelectedContacts}
+                    />
                   </ContactItem>
                 ))}
               </List>

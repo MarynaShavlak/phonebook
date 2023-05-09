@@ -58,7 +58,9 @@ export const ChoseActionBlock = styled.div`
   align-items: center;
 
   column-gap: ${props => props.theme.gapSize.standard};
-  /* justify-content: space-between; */
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+  }
   flex-grow: 1;
   padding: 10px;
   border-radius: ${props => props.theme.borderRadius.medium};
