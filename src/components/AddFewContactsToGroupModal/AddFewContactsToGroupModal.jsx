@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +9,8 @@ import {
   addContactToGroup,
   deleteContactFromGroup,
 } from 'redux/groups';
-import { findGroupsForContact, findContactGroupsChanges } from 'utils';
-import { showAddToGroups } from 'utils/notifications';
+import { findGroupsForContact } from 'utils';
+import { showAddFewContactsToGroups } from 'utils/notifications';
 import {
   ModalText,
   ModalContent,
@@ -19,40 +19,51 @@ import {
 } from 'shared/commonStyledComponents';
 import { CONTACT_ACTIONS, ITEM_CATEGORIES, ROUTES } from 'constants';
 import { renderSelectedGroupsText } from './helpers';
+import { getTotalQuantityString } from 'utils';
 
-export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
+export const AddFewContactsToGroupModal = ({
+  isOpen,
+  onClose,
+  selectedContacts,
+  resetSelectedContacts,
+}) => {
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
-  const groupNamesByContact = findGroupsForContact(contact, groups);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [initialSelectedGroups, setInitialSelectedGroups] = useState([]);
-  const [selectedGroups, setSelectedGroups] = useState(groupNamesByContact);
-
-  useEffect(() => {
-    setInitialSelectedGroups(selectedGroups);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [selectedGroups, setSelectedGroups] = useState([]);
+  const contactsQuantity = getTotalQuantityString(
+    selectedContacts,
+    ITEM_CATEGORIES.CONTACT
+  );
 
   const handleGroupSelect = groupName => {
     const isSelected = selectedGroups.includes(groupName);
+    setSelectedGroups(prevSelectedGroups => {
+      if (isSelected) {
+        return prevSelectedGroups.filter(el => el !== groupName);
+      }
+      return [...prevSelectedGroups, groupName];
+    });
 
-    if (isSelected) {
-      setSelectedGroups(selectedGroups.filter(el => el !== groupName));
-      dispatch(deleteContactFromGroup({ group: groupName, contact }));
-    } else {
-      setSelectedGroups([...selectedGroups, groupName]);
-      dispatch(addContactToGroup({ group: groupName, contact }));
+    for (const contact of selectedContacts) {
+      const isAlreadyExistInGroup = findGroupsForContact(
+        contact,
+        groups
+      ).includes(groupName);
+
+      if (isSelected && isAlreadyExistInGroup) {
+        dispatch(deleteContactFromGroup({ group: groupName, contact }));
+      } else if (!isSelected && !isAlreadyExistInGroup) {
+        dispatch(addContactToGroup({ group: groupName, contact }));
+      }
     }
   };
 
   const handleAdddContactToGroupList = () => {
-    const message = findContactGroupsChanges(
-      initialSelectedGroups,
-      selectedGroups
-    );
-    showAddToGroups(message);
+    showAddFewContactsToGroups(contactsQuantity, selectedGroups);
     onClose();
+    resetSelectedContacts();
   };
 
   return (
@@ -76,8 +87,7 @@ export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
         ) : (
           <>
             <ModalText>
-              Choose groups for <b>{contact.name}</b>&nbsp;(
-              <b>{contact.number}</b>):
+              Choose groups for <b>{contactsQuantity}</b>
             </ModalText>
 
             <LabelList
@@ -94,12 +104,15 @@ export const AddContactToGroupModal = ({ contact, isOpen, onClose }) => {
   );
 };
 
-AddContactToGroupModal.propTypes = {
-  contact: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }),
+AddFewContactsToGroupModal.propTypes = {
+  resetSelectedContacts: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  selectedContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ),
 };

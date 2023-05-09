@@ -46,12 +46,14 @@ export const Contact = ({
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
-  const [isFavorite, setIsFavorite] = useState(
-    isContactInFavorites(contact, favoriteContacts)
-  );
+  const [isFavorite, setIsFavorite] = useState();
   const [isSelected, setIsSelected] = useState(false);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
+
+  useEffect(() => {
+    setIsFavorite(isContactInFavorites(contact, favoriteContacts));
+  }, [favoriteContacts, contact]);
 
   useEffect(() => {
     setIsSelected(checkContactInSelected(selectedContacts, contact));
@@ -68,7 +70,7 @@ export const Contact = ({
 
   const toggleIsSelected = () => {
     updateSelectedContacts(contact);
-    setIsFavorite(!setIsSelected);
+    setIsSelected(!isSelected);
   };
 
   const moveContactToRecycleBin = async () => {

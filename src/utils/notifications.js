@@ -139,6 +139,13 @@ export function showAuthError() {
 export function showAddToGroups(message) {
   return showMessage(TOAST_TYPES.INFO, message);
 }
+export function showAddFewContactsToGroups(contactsQuantity, selectedGroups) {
+  const groupNamesString = selectedGroups.join(', ');
+  const groupPart = selectedGroups.length === 1 ? 'group' : 'groups:';
+  const message = `Added ${contactsQuantity} in ${groupPart} "${groupNamesString}" `;
+  return showMessage(TOAST_TYPES.INFO, message);
+}
+
 export function showDeleteFromGroup({ groupName, contact }) {
   const message = `The contact ${contact.name} (${contact.number}) has been deleted from group "${groupName}" `;
   return showMessage(TOAST_TYPES.INFO, message);

@@ -1,4 +1,5 @@
 export { AddContactToGroupModal } from 'components/AddContactToGroupModal';
+export { AddFewContactsToGroupModal } from 'components/AddFewContactsToGroupModal';
 export { AppBar } from 'components/AppBar';
 export { AppBenefits } from 'components/AppBenefits';
 export { AppDescription } from 'components/AppDescription';

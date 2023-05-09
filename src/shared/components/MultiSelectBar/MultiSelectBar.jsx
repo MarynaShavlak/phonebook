@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { ConfirmationModal, AddContactToGroupModal } from 'components';
+import { ConfirmationModal, AddFewContactsToGroupModal } from 'components';
 import {
   SelectBtn,
   SelectedInfo,
@@ -22,7 +22,11 @@ import {
 import { useModal } from 'hooks';
 import { ICON_NAMES, ICON_SIZES, OPERATION, CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
-import { selectFavoritesContacts } from 'redux/favorites';
+import {
+  selectFavoritesContacts,
+  addContactToFavorites,
+  removeContactFromFavorites,
+} from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
 
@@ -38,6 +42,24 @@ export const MultiSelectBar = ({
   const isAnyContactSelected = selectedContacts.length;
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    for (const contact of selectedContacts) {
+      const isContactInFavorite = isContactInFavorites(
+        contact,
+        favoriteContacts
+      );
+      if (isFavorite && isContactInFavorite) {
+        showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact);
+        dispatch(removeContactFromFavorites(contact.id));
+      } else if (!isFavorite && !isContactInFavorite) {
+        dispatch(addContactToFavorites(contact));
+        showContactSuccess(CONTACT_ACTIONS.ADD_TO_FAVORITES, contact);
+      }
+    }
+  };
 
   const moveSelectedContactsToRecycleBin = async () => {
     const promises = selectedContacts.map(contact =>
@@ -77,8 +99,18 @@ export const MultiSelectBar = ({
         <BtnList>
           <button
             type="button"
+            aria-label="Add/remove selected contacts to favorites"
+            onClick={toggleFavorite}
+            disabled={!isAnyContactSelected}
+          >
+            {' '}
+            {renderIcons(ICON_NAMES.FAVORITE, ICON_SIZES.MEDIUM_SMALL)}
+          </button>
+          <button
+            type="button"
             aria-label="Remove selected contacts to recycle bin"
             onClick={toggleRemoveModal}
+            disabled={!isAnyContactSelected}
           >
             {' '}
             {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
@@ -87,6 +119,7 @@ export const MultiSelectBar = ({
             type="button"
             aria-label="Add selected contacts to recycle to group"
             onClick={toggleAddModal}
+            disabled={!isAnyContactSelected}
           >
             {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
           </button>
@@ -105,10 +138,11 @@ export const MultiSelectBar = ({
         />
       )}
       {isAddModalOpen && (
-        <AddContactToGroupModal
+        <AddFewContactsToGroupModal
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
-          // contact={contact}
+          selectedContacts={selectedContacts}
+          resetSelectedContacts={resetSelectedContacts}
         />
       )}
     </ControlBar>
@@ -117,7 +151,7 @@ export const MultiSelectBar = ({
 
 MultiSelectBar.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
-  // resetSelectedContacts: PropTypes.func.isRequired,
+  resetSelectedContacts: PropTypes.func.isRequired,
   selectedContacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

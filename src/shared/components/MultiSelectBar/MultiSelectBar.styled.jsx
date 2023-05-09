@@ -89,11 +89,12 @@ export const BtnList = styled.ul`
     background-color: ${props => props.theme.colors.white};
     transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
       color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-      &:hover {
-        background-color: ${props => props.theme.colors.black};
-        color: ${props => props.theme.colors.white};
+    &:not(:disabled) {
+      @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+        &:hover {
+          background-color: ${props => props.theme.colors.black};
+          color: ${props => props.theme.colors.white};
+        }
       }
     }
   }
