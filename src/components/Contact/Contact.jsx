@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Avatar from 'react-avatar';
-import { useModal } from 'hooks';
+import { useModal, useSelectedContact } from 'hooks';
 import {
   ConfirmationModal,
   AddContactToGroupModal,
   FavoriteButton,
   HighlightContactDetails,
   DropdownMenu,
-  SelectCheckbox,
 } from 'components';
+import { ContactAvatar } from 'shared';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { selectFavoritesContacts } from 'redux/favorites';
@@ -19,7 +18,6 @@ import { selectGroups } from 'redux/groups';
 import { ContactEl } from './Contact.styled';
 import {
   renderDropdownElement,
-  checkContactInSelected,
   checkIfInRecycleBin,
   addContactToRecycleBinWithRemovalTime,
   deleteContactAndCheckError,
@@ -38,6 +36,7 @@ export const Contact = ({
   selectedContacts,
   updateSelectedContacts,
 }) => {
+  const { id, name } = contact;
   const filterByName = useSelector(selectFilterByName);
   const filterByNumber = useSelector(selectFilterByNumber);
   const deletedContacts = useSelector(selectRecycleBinContacts);
@@ -45,28 +44,22 @@ export const Contact = ({
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState();
-
-  const [isSelected, setIsSelected] = useState(false);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
+  const [isSelected, toggleIsSelected] = useSelectedContact(
+    selectedContacts,
+    contact,
+    updateSelectedContacts
+  );
 
   useEffect(() => {
     setIsFavorite(isContactInFavorites(contact, favoriteContacts));
   }, [favoriteContacts, contact]);
 
-  useEffect(() => {
-    setIsSelected(checkContactInSelected(selectedContacts, contact));
-  }, [selectedContacts, contact]);
-
-  const toggleIsSelected = () => {
-    updateSelectedContacts(contact);
-    setIsSelected(!isSelected);
-  };
-
   const moveContactToRecycleBin = async () => {
     if (
       !(await deleteContactAndCheckError({
-        contactId: contact.id,
+        contactId: id,
         dispatch,
         toggleRemoveModal,
       }))
@@ -81,6 +74,7 @@ export const Contact = ({
     removeContactFromGroups({ contact, groups, dispatch });
     showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
   };
+
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
     return isFavorite
@@ -90,17 +84,12 @@ export const Contact = ({
   return (
     <>
       <ContactEl>
-        {isMultiSelectOpen ? (
-          <SelectCheckbox checked={isSelected} onChange={toggleIsSelected} />
-        ) : (
-          <Avatar
-            size="30"
-            textSizeRatio={2}
-            name={contact.name}
-            unstyled={false}
-            round="50%"
-          />
-        )}
+        <ContactAvatar
+          isMultiSelectOpen={isMultiSelectOpen}
+          isSelected={isSelected}
+          toggleIsSelected={toggleIsSelected}
+          name={name}
+        />
         <HighlightContactDetails
           contact={contact}
           filterByName={filterByName}

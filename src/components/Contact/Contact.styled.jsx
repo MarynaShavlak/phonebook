@@ -29,7 +29,7 @@ export const ContactEl = styled.div`
 export const Time = styled.p`
   display: flex;
   column-gap: ${props => props.theme.gapSize.extraSmall};
-  padding-left: 40px;
+  padding-left: 58px;
   align-items: center;
   /* margin-right: 20px; */
   font-size: ${props => props.theme.fontSize.xxs};

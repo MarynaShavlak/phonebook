@@ -75,6 +75,7 @@ const Contacts = () => {
                     onSelectAllClick={handleSelectAllClick}
                     selectedContacts={selectedContacts}
                     resetSelectedContacts={resetSelectedContacts}
+                    page={ROUTES.CONTACTS}
                   />
                 )}
                 <FilterList />

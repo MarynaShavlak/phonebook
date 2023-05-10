@@ -33,6 +33,8 @@ export { removeContactFromFavoritesIfNeeded } from './contact/removeContactFromF
 export { addContactToRecycleBinWithRemovalTime } from './contact/addContactToRecycleBinWithRemovalTime';
 export { removeContactFromGroups } from './contact/removeContactFromGroups';
 export { addToFavorites } from './contact/addToFavorites';
+export { checkAndWarnForDuplicateContact } from './contact/checkAndWarnForDuplicateContact';
+export { restoreDeletedContact } from './contact/restoreDeletedContact';
 export { removeFromFavorites } from './contact/removeFromFavorites';
 export { renderDropdownElement } from './renderDropdownElement';
 export { getSelectButtonText } from './getSelectButtonText';

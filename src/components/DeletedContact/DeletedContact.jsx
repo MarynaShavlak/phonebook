@@ -1,115 +1,68 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Avatar from 'react-avatar';
 import { ConfirmationModal, DropdownMenu } from 'components';
+import { ContactAvatar } from 'shared';
 import { ContactEl, Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
-import { addContact } from 'redux/contacts';
-import { checkForDuplicateContact, renderDropdownElement } from 'utils';
 import {
-  showContactSuccess,
-  showContactExistWarn,
-  showRecyclebinInfo,
-  showErrorMessage,
-} from 'utils/notifications';
-import { useModal } from 'hooks';
+  renderDropdownElement,
+  restoreDeletedContact,
+  checkAndWarnForDuplicateContact,
+} from 'utils';
+import { showRecyclebinInfo } from 'utils/notifications';
+import { useModal, useSelectedContact } from 'hooks';
 import { CONTACT_ACTIONS, OPERATION } from 'constants';
 
-export const DeletedContact = ({ deletedContact, allContacts }) => {
+export const DeletedContact = ({
+  contact,
+  allContacts,
+  isMultiSelectOpen,
+  selectedContacts,
+  updateSelectedContacts,
+}) => {
+  const { id, name, number, removalTime } = contact;
   const dispatch = useDispatch();
   const { isRestoreModalOpen, toggleRestoreModal } = useModal(
     OPERATION.RESTORE
   );
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
+  const [isSelected, toggleIsSelected] = useSelectedContact(
+    selectedContacts,
+    contact,
+    updateSelectedContacts
+  );
 
   const handleDelete = () => {
-    dispatch(removeContactFromRecycleBin(deletedContact.id));
-    showRecyclebinInfo(deletedContact);
+    dispatch(removeContactFromRecycleBin(id));
+    showRecyclebinInfo(contact);
     toggleRestoreModal();
   };
 
-  const checkAndWarnForDuplicateContact = ({ newContact, contacts }) => {
-    const { isDuplicate, isNameExist, isNumberExist } =
-      checkForDuplicateContact({
-        newContact,
-        contacts,
-      });
-    if (isDuplicate) {
-      showContactExistWarn({
-        isNameExist,
-        isNumberExist,
-        contact: newContact,
-      });
-      return true;
-    }
-    return false;
-  };
-
-  const restoreDeletedContact = async deletedContact => {
-    try {
-      const restoreResult = await dispatch(addContact(deletedContact));
-      const deleteResult = await dispatch(
-        removeContactFromRecycleBin(deletedContact.id)
-      );
-      if (restoreResult.error || deleteResult.error) {
-        showErrorMessage();
-      } else {
-        showContactSuccess(CONTACT_ACTIONS.RESTORE, deletedContact);
-      }
-    } catch (error) {
-      showErrorMessage();
-    }
-  };
-
   const handleRestore = async () => {
-    if (
-      checkAndWarnForDuplicateContact({
-        newContact: deletedContact,
-        contacts: allContacts,
-      })
-    ) {
-      toggleRestoreModal();
-      return;
-    }
-
-    await restoreDeletedContact(deletedContact);
+    checkAndWarnForDuplicateContact({
+      newContact: contact,
+      contacts: allContacts,
+    })
+      ? toggleRestoreModal()
+      : await restoreDeletedContact({ contact, dispatch });
   };
 
   return (
     <>
-      {isRestoreModalOpen && (
-        <ConfirmationModal
-          isOpen={isRestoreModalOpen}
-          onClose={toggleRestoreModal}
-          data={deletedContact}
-          onConfirm={handleRestore}
-          action={CONTACT_ACTIONS.RESTORE}
-        />
-      )}
-      {isDeleteModalOpen && (
-        <ConfirmationModal
-          isOpen={isDeleteModalOpen}
-          onClose={toggleDeleteModal}
-          data={deletedContact}
-          onConfirm={handleDelete}
-          action={CONTACT_ACTIONS.DELETE}
-        />
-      )}
       <div>
         <ContactEl>
-          <Avatar
-            size="30"
-            textSizeRatio={2}
-            name={deletedContact.name}
-            unstyled={false}
-            round="50%"
+          <ContactAvatar
+            isMultiSelectOpen={isMultiSelectOpen}
+            isSelected={isSelected}
+            toggleIsSelected={toggleIsSelected}
+            name={name}
           />
-          <p>{deletedContact.name}:</p>
-          <p>{deletedContact.number}</p>
+          <p>{name}:</p>
+          <p>{number}</p>
         </ContactEl>
         <Time>
-          removed at <b>{deletedContact.removalTime}</b>
+          removed at <b>{removalTime}</b>
         </Time>
       </div>
 
@@ -133,12 +86,30 @@ export const DeletedContact = ({ deletedContact, allContacts }) => {
           },
         ]}
       />
+      {isRestoreModalOpen && (
+        <ConfirmationModal
+          isOpen={isRestoreModalOpen}
+          onClose={toggleRestoreModal}
+          data={contact}
+          onConfirm={handleRestore}
+          action={CONTACT_ACTIONS.RESTORE}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onClose={toggleDeleteModal}
+          data={contact}
+          onConfirm={handleDelete}
+          action={CONTACT_ACTIONS.DELETE}
+        />
+      )}
     </>
   );
 };
 
 DeletedContact.propTypes = {
-  deletedContact: PropTypes.shape({
+  contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
@@ -151,4 +122,13 @@ DeletedContact.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isMultiSelectOpen: PropTypes.bool,
+  selectedContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  updateSelectedContacts: PropTypes.func.isRequired,
 };

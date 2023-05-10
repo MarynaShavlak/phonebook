@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { DeletedContact, AppBar, ConfirmationModal } from 'components';
-import { Section, Notification, ListHeader } from 'shared';
+import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import { selectRecycleBinContacts, clearRecycleBin } from 'redux/recycleBin';
 import { selectContacts, fetchContacts } from 'redux/contacts';
-import { ITEM_CATEGORIES, CONTACT_ACTIONS } from 'constants';
+import { ITEM_CATEGORIES, CONTACT_ACTIONS, ROUTES } from 'constants';
 import { showRecyclebinClearInfo } from 'utils/notifications';
+import { useMultiSelect } from 'hooks';
 
 const RecycleBin = () => {
   const deletedContacts = useSelector(selectRecycleBinContacts);
@@ -15,6 +16,14 @@ const RecycleBin = () => {
   const dispatch = useDispatch();
   const [isClearRecyclebinModalOpen, setIsClearRecyclebinModalOpen] =
     useState(false);
+  const {
+    isMultiSelectOpen,
+    toggleMultiSelect,
+    selectedContacts,
+    resetSelectedContacts,
+    handleSelectAllClick,
+    updateSelectedContacts,
+  } = useMultiSelect(deletedContacts);
 
   useEffect(() => {
     if (!allContacts) {
@@ -45,6 +54,16 @@ const RecycleBin = () => {
                     category={ITEM_CATEGORIES.RECYCLEBIN}
                     items={deletedContacts}
                     handleClick={toggleClearRecyclebinModal}
+                    handleSelectClick={toggleMultiSelect}
+                    active={isMultiSelectOpen}
+                  />
+                )}
+                {isMultiSelectOpen && (
+                  <MultiSelectBar
+                    onSelectAllClick={handleSelectAllClick}
+                    selectedContacts={selectedContacts}
+                    resetSelectedContacts={resetSelectedContacts}
+                    page={ROUTES.RECYCLEBIN}
                   />
                 )}
 
@@ -62,8 +81,11 @@ const RecycleBin = () => {
                     {deletedContacts.map(contact => (
                       <ContactItem key={contact.id}>
                         <DeletedContact
-                          deletedContact={contact}
+                          contact={contact}
                           allContacts={allContacts}
+                          isMultiSelectOpen={isMultiSelectOpen}
+                          selectedContacts={selectedContacts}
+                          updateSelectedContacts={updateSelectedContacts}
                         />
                       </ContactItem>
                     ))}

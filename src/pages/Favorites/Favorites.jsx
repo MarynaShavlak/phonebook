@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFavoritesContacts } from 'redux/favorites/selectors';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { FavoriteContact, AppBar } from 'components';
 import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import { selectContacts } from 'redux/contacts';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 import { useMultiSelect } from 'hooks';
 
 const Favorites = () => {
-  // const allContacts = useSelector(selectContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     isMultiSelectOpen,
@@ -44,6 +41,7 @@ const Favorites = () => {
                     onSelectAllClick={handleSelectAllClick}
                     selectedContacts={selectedContacts}
                     resetSelectedContacts={resetSelectedContacts}
+                    page={ROUTES.FAVORITES}
                   />
                 )}
               </>

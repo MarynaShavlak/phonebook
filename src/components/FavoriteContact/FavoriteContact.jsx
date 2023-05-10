@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import Avatar from 'react-avatar';
-import { FavoriteButton, SelectCheckbox } from 'components';
+import { FavoriteButton } from 'components';
+import { ContactAvatar } from 'shared';
 import { ContactEl } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites';
 import { CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess } from 'utils/notifications';
 import { TelLink } from 'shared/commonStyledComponents';
-import { checkContactInSelected } from 'utils';
+import { useSelectedContact } from 'hooks';
 
 export const FavoriteContact = ({
   contact,
@@ -16,39 +16,31 @@ export const FavoriteContact = ({
   selectedContacts,
   updateSelectedContacts,
 }) => {
+  const { name, number } = contact;
   const dispatch = useDispatch();
+
   const removeFromFavorites = () => {
     showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact);
     dispatch(removeContactFromFavorites(contact.id));
   };
-  const [isSelected, setIsSelected] = useState(false);
-
-  const toggleIsSelected = () => {
-    setIsSelected(!isSelected);
-    updateSelectedContacts(contact);
-  };
-
-  useEffect(() => {
-    setIsSelected(checkContactInSelected(selectedContacts, contact));
-  }, [selectedContacts, contact]);
+  const [isSelected, toggleIsSelected] = useSelectedContact(
+    selectedContacts,
+    contact,
+    updateSelectedContacts
+  );
 
   return (
     <>
       <ContactEl>
-        {isMultiSelectOpen ? (
-          <SelectCheckbox checked={isSelected} onChange={toggleIsSelected} />
-        ) : (
-          <Avatar
-            size="30"
-            textSizeRatio={2}
-            name={contact.name}
-            unstyled={false}
-            round="50%"
-          />
-        )}
-        <p>{contact.name}:</p>
-        <TelLink href={`tel: ${contact.number}`}>
-          <p>{contact.number}</p>
+        <ContactAvatar
+          isMultiSelectOpen={isMultiSelectOpen}
+          isSelected={isSelected}
+          toggleIsSelected={toggleIsSelected}
+          name={name}
+        />
+        <p>{name}:</p>
+        <TelLink href={`tel: ${number}`}>
+          <p>{number}</p>
         </TelLink>
       </ContactEl>
 

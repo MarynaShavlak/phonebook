@@ -28,12 +28,15 @@ import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
+import { ROUTES } from 'constants';
 
 export const MultiSelectBar = ({
   onSelectAllClick,
   selectedContacts,
   resetSelectedContacts,
+  page,
 }) => {
+  const isFavoritesPage = page === ROUTES.FAVORITES;
   const dispatch = useDispatch();
   const deletedContacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
@@ -41,7 +44,7 @@ export const MultiSelectBar = ({
   const isAnyContactSelected = selectedContacts.length;
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFavoritesPage);
   const isTablet = useMediaQuery('(min-width:768px)');
 
   const toggleFavorite = () => {
@@ -105,6 +108,15 @@ export const MultiSelectBar = ({
             {' '}
             {renderIcons(ICON_NAMES.FAVORITE, ICON_SIZES.MEDIUM_SMALL)}
           </button>
+
+          <button
+            type="button"
+            aria-label="Add selected contacts to recycle to group"
+            onClick={toggleAddModal}
+            disabled={!isAnyContactSelected}
+          >
+            {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
+          </button>
           <button
             type="button"
             aria-label="Remove selected contacts to recycle bin"
@@ -113,14 +125,6 @@ export const MultiSelectBar = ({
           >
             {' '}
             {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
-          </button>
-          <button
-            type="button"
-            aria-label="Add selected contacts to recycle to group"
-            onClick={toggleAddModal}
-            disabled={!isAnyContactSelected}
-          >
-            {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
           </button>
         </BtnList>
       </ChoseActionBlock>
@@ -158,4 +162,5 @@ MultiSelectBar.propTypes = {
       number: PropTypes.string,
     })
   ).isRequired,
+  page: PropTypes.string.isRequired,
 };

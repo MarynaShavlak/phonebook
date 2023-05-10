@@ -12,3 +12,4 @@ export { ListHeader } from './components/ListHeader';
 export { BackButton } from './components/BackButton';
 export { AuthenticationPrompt } from './components/AuthenticationPrompt';
 export { MultiSelectBar } from './components/MultiSelectBar';
+export { ContactAvatar } from './components/ContactAvatar';
