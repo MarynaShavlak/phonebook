@@ -11,7 +11,6 @@ import {
   BtnList,
 } from './MultiSelectBar.styled';
 import {
-  renderIcons,
   getSelectButtonText,
   checkIfInRecycleBin,
   addContactToRecycleBinWithRemovalTime,
@@ -21,14 +20,18 @@ import {
   removeContactFromGroups,
   addToFavorites,
   removeFromFavorites,
+  checkAndWarnForDuplicateContact,
+  restoreDeletedContact,
 } from 'utils';
 import { useModal } from 'hooks';
-import { ICON_NAMES, ICON_SIZES, OPERATION, CONTACT_ACTIONS } from 'constants';
+import { ICON_NAMES, OPERATION, CONTACT_ACTIONS } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
+import { selectContacts } from 'redux/contacts';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
 import { ROUTES } from 'constants';
+import { ActionBtn } from './ActionBtn/ActionBtn';
 
 export const MultiSelectBar = ({
   onSelectAllClick,
@@ -36,15 +39,20 @@ export const MultiSelectBar = ({
   resetSelectedContacts,
   page,
 }) => {
-  const isFavoritesPage = page === ROUTES.FAVORITES;
+  const isOnFavoritesPage = page === ROUTES.FAVORITES;
+  const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
   const dispatch = useDispatch();
+  const allContacts = useSelector(selectContacts);
   const deletedContacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
   const isAnyContactSelected = selectedContacts.length;
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
-  const [isFavorite, setIsFavorite] = useState(isFavoritesPage);
+  const { isRestoreModalOpen, toggleRestoreModal } = useModal(
+    OPERATION.RESTORE
+  );
+  const [isFavorite, setIsFavorite] = useState(isOnFavoritesPage);
   const isTablet = useMediaQuery('(min-width:768px)');
 
   const toggleFavorite = () => {
@@ -70,9 +78,7 @@ export const MultiSelectBar = ({
         toggleRemoveModal,
       })
     );
-
     const results = await Promise.all(promises);
-
     if (results.every(result => result)) {
       selectedContacts.forEach(contact => {
         if (checkIfInRecycleBin(contact, deletedContacts)) {
@@ -85,11 +91,65 @@ export const MultiSelectBar = ({
         removeContactFromGroups({ contact, groups, dispatch });
         showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
       });
-
       toggleRemoveModal();
       resetSelectedContacts();
     }
   };
+
+  const restoreSelectedContacts = async () => {
+    for (const contact of selectedContacts) {
+      const isContactAlreadyExist = checkAndWarnForDuplicateContact({
+        newContact: contact,
+        contacts: allContacts,
+      });
+      if (isContactAlreadyExist) {
+        continue;
+      }
+      await restoreDeletedContact({ contact, dispatch });
+      toggleRestoreModal();
+      resetSelectedContacts();
+    }
+  };
+
+  const favoriteButton = (
+    <ActionBtn
+      ariaLabel="Add/remove selected contacts to favorites"
+      onClick={toggleFavorite}
+      disabled={!isAnyContactSelected}
+      iconName={ICON_NAMES.FAVORITE}
+    />
+  );
+
+  const addButton = (
+    <ActionBtn
+      ariaLabel="Add selected contacts to groups"
+      onClick={toggleAddModal}
+      disabled={!isAnyContactSelected}
+      iconName={ICON_NAMES.GROUP}
+    />
+  );
+
+  const restoreButton = isOnRecyclebinPage && (
+    <ActionBtn
+      ariaLabel="Restore selected contacts"
+      onClick={toggleRestoreModal}
+      disabled={!isAnyContactSelected}
+      iconName={ICON_NAMES.RESTORE}
+    />
+  );
+
+  const removeButton = (
+    <ActionBtn
+      ariaLabel={
+        isOnRecyclebinPage
+          ? 'Delete selected contacts from recycle bin'
+          : 'Remove selected contacts to recycle bin'
+      }
+      onClick={toggleRemoveModal}
+      disabled={!isAnyContactSelected}
+      iconName={ICON_NAMES.DELETE}
+    />
+  );
 
   return (
     <ControlBar>
@@ -99,33 +159,14 @@ export const MultiSelectBar = ({
       <ChoseActionBlock>
         {isTablet && <span>Choose Action</span>}
         <BtnList>
-          <button
-            type="button"
-            aria-label="Add/remove selected contacts to favorites"
-            onClick={toggleFavorite}
-            disabled={!isAnyContactSelected}
-          >
-            {' '}
-            {renderIcons(ICON_NAMES.FAVORITE, ICON_SIZES.MEDIUM_SMALL)}
-          </button>
-
-          <button
-            type="button"
-            aria-label="Add selected contacts to recycle to group"
-            onClick={toggleAddModal}
-            disabled={!isAnyContactSelected}
-          >
-            {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
-          </button>
-          <button
-            type="button"
-            aria-label="Remove selected contacts to recycle bin"
-            onClick={toggleRemoveModal}
-            disabled={!isAnyContactSelected}
-          >
-            {' '}
-            {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
-          </button>
+          {!isOnRecyclebinPage && (
+            <>
+              {favoriteButton}
+              {addButton}
+            </>
+          )}
+          {restoreButton}
+          {removeButton}
         </BtnList>
       </ChoseActionBlock>
       <SelectedInfo type="button">
@@ -146,6 +187,15 @@ export const MultiSelectBar = ({
           onClose={toggleAddModal}
           selectedContacts={selectedContacts}
           resetSelectedContacts={resetSelectedContacts}
+        />
+      )}
+      {isRestoreModalOpen && (
+        <ConfirmationModal
+          isOpen={isRestoreModalOpen}
+          onClose={toggleRestoreModal}
+          data={selectedContacts}
+          onConfirm={restoreSelectedContacts}
+          action={CONTACT_ACTIONS.RESTORE}
         />
       )}
     </ControlBar>

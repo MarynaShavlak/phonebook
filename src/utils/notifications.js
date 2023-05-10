@@ -57,10 +57,10 @@ export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
     const message = `Oops, a contact  ${name} (${number}) already exists in your phonebook.`;
     return showMessage(TOAST_TYPES.WARNING, message);
   } else if (isNameExist) {
-    const message = `Oops, a contact with name ${name} already exists in your phonebook. Please enter a different name.`;
+    const message = `Oops, a contact with name ${name} already exists in your phonebook`;
     return showMessage(TOAST_TYPES.WARNING, message);
   } else if (isNumberExist) {
-    const message = `Oops, a contact with number ${number} already exists in your phonebook. Please enter a different number.`;
+    const message = `Oops, a contact with number ${number} already exists in your phonebook.`;
     return showMessage(TOAST_TYPES.WARNING, message);
   }
 }

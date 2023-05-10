@@ -21,17 +21,11 @@ export const ContactEl = styled.div`
   }
 `;
 
-// export const Name = styled.p`
-//   font-style: italic;
-// `;
-// export const Number = styled.p``;
-
 export const Time = styled.p`
   display: flex;
   column-gap: ${props => props.theme.gapSize.extraSmall};
-  padding-left: 58px;
+  padding-left: 40px;
   align-items: center;
-  /* margin-right: 20px; */
   font-size: ${props => props.theme.fontSize.xxs};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: ${props => props.theme.fontSize.xs};
