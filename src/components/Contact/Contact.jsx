@@ -33,8 +33,8 @@ import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
 export const Contact = ({
   contact,
   isMultiSelectOpen,
-  selectedContacts,
-  updateSelectedContacts,
+  selectedItems,
+  updateSelectedItems,
 }) => {
   const { id, name } = contact;
   const filterByName = useSelector(selectFilterByName);
@@ -47,9 +47,9 @@ export const Contact = ({
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
   const [isSelected, toggleIsSelected] = useSelectedContact(
-    selectedContacts,
+    selectedItems,
     contact,
-    updateSelectedContacts
+    updateSelectedItems
   );
 
   useEffect(() => {
@@ -156,12 +156,12 @@ Contact.propTypes = {
     number: PropTypes.string.isRequired,
   }).isRequired,
   isMultiSelectOpen: PropTypes.bool,
-  selectedContacts: PropTypes.arrayOf(
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
     })
   ).isRequired,
-  updateSelectedContacts: PropTypes.func.isRequired,
+  updateSelectedItems: PropTypes.func.isRequired,
 };

@@ -11,8 +11,8 @@ const { SORT_OPTION_KEY, REVERSE_SORT_KEY } = LOCAL_STORAGE_KEYS;
 
 export const ContactList = ({
   isMultiSelectOpen,
-  selectedContacts,
-  updateSelectedContacts,
+  selectedItems,
+  updateSelectedItems,
 }) => {
   const contacts = useSelector(selectFilteredContacts);
 
@@ -48,8 +48,8 @@ export const ContactList = ({
             <Contact
               contact={contact}
               isMultiSelectOpen={isMultiSelectOpen}
-              selectedContacts={selectedContacts}
-              updateSelectedContacts={updateSelectedContacts}
+              selectedItems={selectedItems}
+              updateSelectedItems={updateSelectedItems}
             />
           </ContactItem>
         ))}
@@ -60,12 +60,12 @@ export const ContactList = ({
 
 ContactList.propTypes = {
   isMultiSelectOpen: PropTypes.bool,
-  selectedContacts: PropTypes.arrayOf(
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
     })
   ).isRequired,
-  updateSelectedContacts: PropTypes.func.isRequired,
+  updateSelectedItems: PropTypes.func.isRequired,
 };

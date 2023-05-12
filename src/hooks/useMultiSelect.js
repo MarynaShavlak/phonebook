@@ -3,43 +3,43 @@ import { checkContactInSelected } from 'utils';
 
 export const useMultiSelect = allContacts => {
   const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false);
-  const [selectedContacts, setSelectedContacts] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const toggleMultiSelect = () => {
     setIsMultiSelectOpen(!isMultiSelectOpen);
   };
 
-  const resetSelectedContacts = () => {
-    setSelectedContacts([]);
+  const resetSelectedItems = () => {
+    setSelectedItems([]);
   };
 
   const handleSelectAllClick = () => {
-    if (!selectedContacts.length) {
-      setSelectedContacts(allContacts);
+    if (!selectedItems.length) {
+      setSelectedItems(allContacts);
     } else {
-      resetSelectedContacts();
+      resetSelectedItems();
     }
   };
 
-  const updateSelectedContacts = contact => {
-    const isInSelected = checkContactInSelected(selectedContacts, contact);
+  const updateSelectedItems = contact => {
+    const isInSelected = checkContactInSelected(selectedItems, contact);
     if (isInSelected) {
-      const updatedSelectedContacts = selectedContacts.filter(
+      const updatedselectedItems = selectedItems.filter(
         el => el.id !== contact.id
       );
-      setSelectedContacts(updatedSelectedContacts);
+      setSelectedItems(updatedselectedItems);
     } else {
-      const updatedSelectedContacts = [...selectedContacts, contact];
-      setSelectedContacts(updatedSelectedContacts);
+      const updatedselectedItems = [...selectedItems, contact];
+      setSelectedItems(updatedselectedItems);
     }
   };
 
   return {
     isMultiSelectOpen,
     toggleMultiSelect,
-    resetSelectedContacts,
+    resetSelectedItems,
     handleSelectAllClick,
-    selectedContacts,
-    updateSelectedContacts,
+    selectedItems,
+    updateSelectedItems,
   };
 };

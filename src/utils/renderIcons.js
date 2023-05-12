@@ -35,6 +35,7 @@ import { MdGroupAdd } from 'react-icons/md';
 import { ImInfo } from 'react-icons/im';
 import { BsPencilFill } from 'react-icons/bs';
 import { BiSelectMultiple } from 'react-icons/bi';
+import { MdOutlineMerge } from 'react-icons/md';
 import { ICON_NAMES } from 'constants';
 
 const icons = {
@@ -64,6 +65,7 @@ const icons = {
   [ICON_NAMES.LOG_OUT]: <FiLogOut />,
   [ICON_NAMES.LOCK]: <RiLock2Fill className="user-form__icon" />,
   [ICON_NAMES.MAN]: <BsPersonFill />,
+  [ICON_NAMES.MERGE]: <MdOutlineMerge />,
   [ICON_NAMES.MULTI_SELECT]: <BiSelectMultiple />,
   [ICON_NAMES.NUMBER]: <BsTelephoneFill />,
   [ICON_NAMES.PENCIL]: <BsPencilFill />,

@@ -4,4 +4,5 @@ export const OPERATION = {
   RESTORE: 'restore',
   REMOVE: 'remove',
   ADD: 'add',
+  MERGE: 'merge',
 };

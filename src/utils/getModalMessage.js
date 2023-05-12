@@ -4,7 +4,7 @@ import { isArrayOfContacts, getTotalQuantityString } from 'utils';
 
 export const getModalMessage = ({ action, data }) => {
   const { name, number, contacts } = data ?? {};
-  const isSelectedContacts = isArrayOfContacts(data);
+  const isContactsSelected = isArrayOfContacts(data);
 
   if (contacts) {
     if (action === GROUP_ACTIONS.DELETE) {
@@ -21,7 +21,7 @@ export const getModalMessage = ({ action, data }) => {
         </>
       );
     }
-  } else if (isSelectedContacts) {
+  } else if (isContactsSelected) {
     return (
       <>
         <ModalText>

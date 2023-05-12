@@ -36,6 +36,7 @@ export { addToFavorites } from './contact/addToFavorites';
 export { checkAndWarnForDuplicateContact } from './contact/checkAndWarnForDuplicateContact';
 export { restoreDeletedContact } from './contact/restoreDeletedContact';
 export { removeFromFavorites } from './contact/removeFromFavorites';
+export { getUniqueContacts } from './contact/getUniqueContacts';
 export { renderDropdownElement } from './renderDropdownElement';
 export { getSelectButtonText } from './getSelectButtonText';
 export { checkGroupNameExistence } from './group/checkGroupNameExistence';

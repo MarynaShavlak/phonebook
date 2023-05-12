@@ -25,6 +25,7 @@ export const ICON_NAMES = {
   LOG_OUT: 'logOut',
   LOCK: 'lock',
   MAN: 'man',
+  MERGE: 'merge',
   MULTI_SELECT: 'multiSelect',
   NUMBER: 'number',
   PENCIL: 'pencil',

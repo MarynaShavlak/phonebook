@@ -19,10 +19,10 @@ const RecycleBin = () => {
   const {
     isMultiSelectOpen,
     toggleMultiSelect,
-    selectedContacts,
-    resetSelectedContacts,
+    selectedItems,
+    resetSelectedItems,
     handleSelectAllClick,
-    updateSelectedContacts,
+    updateSelectedItems,
   } = useMultiSelect(deletedContacts);
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const RecycleBin = () => {
                 {isMultiSelectOpen && (
                   <MultiSelectBar
                     onSelectAllClick={handleSelectAllClick}
-                    selectedContacts={selectedContacts}
-                    resetSelectedContacts={resetSelectedContacts}
+                    selectedItems={selectedItems}
+                    resetSelectedItems={resetSelectedItems}
                     page={ROUTES.RECYCLEBIN}
                   />
                 )}
@@ -84,8 +84,8 @@ const RecycleBin = () => {
                           contact={contact}
                           allContacts={allContacts}
                           isMultiSelectOpen={isMultiSelectOpen}
-                          selectedContacts={selectedContacts}
-                          updateSelectedContacts={updateSelectedContacts}
+                          selectedItems={selectedItems}
+                          updateSelectedItems={updateSelectedItems}
                         />
                       </ContactItem>
                     ))}

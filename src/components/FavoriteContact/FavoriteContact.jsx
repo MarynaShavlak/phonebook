@@ -13,8 +13,8 @@ import { useSelectedContact } from 'hooks';
 export const FavoriteContact = ({
   contact,
   isMultiSelectOpen,
-  selectedContacts,
-  updateSelectedContacts,
+  selectedItems,
+  updateSelectedItems,
 }) => {
   const { name, number } = contact;
   const dispatch = useDispatch();
@@ -24,9 +24,9 @@ export const FavoriteContact = ({
     dispatch(removeContactFromFavorites(contact.id));
   };
   const [isSelected, toggleIsSelected] = useSelectedContact(
-    selectedContacts,
+    selectedItems,
     contact,
-    updateSelectedContacts
+    updateSelectedItems
   );
 
   return (
@@ -56,12 +56,12 @@ FavoriteContact.propTypes = {
     number: PropTypes.string.isRequired,
   }).isRequired,
   isMultiSelectOpen: PropTypes.bool,
-  selectedContacts: PropTypes.arrayOf(
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
     })
   ).isRequired,
-  updateSelectedContacts: PropTypes.func.isRequired,
+  updateSelectedItems: PropTypes.func.isRequired,
 };

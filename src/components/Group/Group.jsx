@@ -9,7 +9,7 @@ import {
   makeSlug,
   renderDropdownElement,
 } from 'utils';
-import { useModal } from 'hooks';
+import { useModal, useSelectedContact } from 'hooks';
 import {
   GROUP_ACTIONS,
   OPERATION,
@@ -20,7 +20,6 @@ import {
 import { ConfirmationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
   Content,
-  GroupAvatar,
   Element,
   GroupEl,
   GroupWrapper,
@@ -31,12 +30,23 @@ import {
 } from './Group.styled';
 import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
 import { TelLink } from 'shared/commonStyledComponents';
+import { ContactAvatar } from 'shared';
 
-export const Group = ({ group }) => {
+export const Group = ({
+  group,
+  isMultiSelectOpen,
+  selectedItems,
+  updateSelectedItems,
+}) => {
   const [isGroupContentVisible, setIsGroupContentVisible] = useState(false);
   const { isEditModalOpen, toggleEditModal } = useModal(OPERATION.EDIT);
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const dispatch = useDispatch();
+  const [isSelected, toggleIsSelected] = useSelectedContact(
+    selectedItems,
+    group,
+    updateSelectedItems
+  );
 
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
@@ -60,9 +70,11 @@ export const Group = ({ group }) => {
     <>
       <GroupWrapper>
         <GroupEl>
-          <GroupAvatar>
-            {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
-          </GroupAvatar>
+          <ContactAvatar
+            isMultiSelectOpen={isMultiSelectOpen}
+            isSelected={isSelected}
+            toggleIsSelected={toggleIsSelected}
+          />
           <Content onClick={toggleGroupContent}>
             <Element>
               {group.name}&nbsp; ({contactsQuantityInGroup})
@@ -170,4 +182,13 @@ Group.propTypes = {
       })
     ),
   }).isRequired,
+  isMultiSelectOpen: PropTypes.bool,
+  selectedItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  updateSelectedItems: PropTypes.func.isRequired,
 };

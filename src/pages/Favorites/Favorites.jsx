@@ -15,10 +15,10 @@ const Favorites = () => {
   const {
     isMultiSelectOpen,
     toggleMultiSelect,
-    selectedContacts,
-    resetSelectedContacts,
+    selectedItems,
+    resetSelectedItems,
     handleSelectAllClick,
-    updateSelectedContacts,
+    updateSelectedItems,
   } = useMultiSelect(favoriteContacts);
 
   return (
@@ -39,8 +39,8 @@ const Favorites = () => {
                 {isMultiSelectOpen && (
                   <MultiSelectBar
                     onSelectAllClick={handleSelectAllClick}
-                    selectedContacts={selectedContacts}
-                    resetSelectedContacts={resetSelectedContacts}
+                    selectedItems={selectedItems}
+                    resetSelectedItems={resetSelectedItems}
                     page={ROUTES.FAVORITES}
                   />
                 )}
@@ -53,8 +53,8 @@ const Favorites = () => {
                     <FavoriteContact
                       contact={contact}
                       isMultiSelectOpen={isMultiSelectOpen}
-                      selectedContacts={selectedContacts}
-                      updateSelectedContacts={updateSelectedContacts}
+                      selectedItems={selectedItems}
+                      updateSelectedItems={updateSelectedItems}
                     />
                   </ContactItem>
                 ))}

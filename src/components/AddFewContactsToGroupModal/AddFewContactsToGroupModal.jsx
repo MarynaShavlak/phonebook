@@ -24,8 +24,8 @@ import { getTotalQuantityString } from 'utils';
 export const AddFewContactsToGroupModal = ({
   isOpen,
   onClose,
-  selectedContacts,
-  resetSelectedContacts,
+  selectedItems,
+  resetSelectedItems,
 }) => {
   const groupNames = useSelector(selectGroupNames);
   const groups = useSelector(selectGroups);
@@ -33,7 +33,7 @@ export const AddFewContactsToGroupModal = ({
   const navigate = useNavigate();
   const [selectedGroups, setSelectedGroups] = useState([]);
   const contactsQuantity = getTotalQuantityString(
-    selectedContacts,
+    selectedItems,
     ITEM_CATEGORIES.CONTACT
   );
 
@@ -46,7 +46,7 @@ export const AddFewContactsToGroupModal = ({
       return [...prevSelectedGroups, groupName];
     });
 
-    for (const contact of selectedContacts) {
+    for (const contact of selectedItems) {
       const isAlreadyExistInGroup = findGroupsForContact(
         contact,
         groups
@@ -63,7 +63,7 @@ export const AddFewContactsToGroupModal = ({
   const handleAdddContactToGroupList = () => {
     showAddFewContactsToGroups(contactsQuantity, selectedGroups);
     onClose();
-    resetSelectedContacts();
+    resetSelectedItems();
   };
 
   return (
@@ -105,10 +105,10 @@ export const AddFewContactsToGroupModal = ({
 };
 
 AddFewContactsToGroupModal.propTypes = {
-  resetSelectedContacts: PropTypes.func.isRequired,
+  resetSelectedItems: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  selectedContacts: PropTypes.arrayOf(
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,

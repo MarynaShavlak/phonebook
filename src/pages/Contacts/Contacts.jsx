@@ -39,10 +39,10 @@ const Contacts = () => {
   const {
     isMultiSelectOpen,
     toggleMultiSelect,
-    selectedContacts,
-    resetSelectedContacts,
+    selectedItems,
+    resetSelectedItems,
     handleSelectAllClick,
-    updateSelectedContacts,
+    updateSelectedItems,
   } = useMultiSelect(allContacts);
 
   useEffect(() => {
@@ -73,8 +73,8 @@ const Contacts = () => {
                 {isMultiSelectOpen && (
                   <MultiSelectBar
                     onSelectAllClick={handleSelectAllClick}
-                    selectedContacts={selectedContacts}
-                    resetSelectedContacts={resetSelectedContacts}
+                    selectedItems={selectedItems}
+                    resetSelectedItems={resetSelectedItems}
                     page={ROUTES.CONTACTS}
                   />
                 )}
@@ -90,8 +90,8 @@ const Contacts = () => {
                 <ContactList
                   state={{ from: location }}
                   isMultiSelectOpen={isMultiSelectOpen}
-                  selectedContacts={selectedContacts}
-                  updateSelectedContacts={updateSelectedContacts}
+                  selectedItems={selectedItems}
+                  updateSelectedItems={updateSelectedItems}
                 />
               </>
             ) : isFiltered ? (

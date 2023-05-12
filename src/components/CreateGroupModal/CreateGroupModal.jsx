@@ -1,33 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  validateName,
-  validateGroupData,
-  checkGroupNameExistence,
-} from 'utils';
+import { validateGroupData, checkGroupNameExistence } from 'utils';
 import { showGroupSuccess, showErrorMessage } from 'utils/notifications';
 import { addNewGroup, selectGroups } from 'redux/groups';
-import { CustomModal } from 'shared';
-import { Name } from 'shared/components/ContactForm/ContactForm.styled';
-import {
-  ModalHeader,
-  ModalInputWrapper,
-  ModalError,
-} from 'shared/commonStyledComponents';
+import { CustomModal, ModalInput } from 'shared';
+import { ModalHeader } from 'shared/commonStyledComponents';
+import { useGroupName } from 'hooks';
 
 export const CreateGroupModal = ({ isOpen, onClose }) => {
-  const [groupName, setGroupName] = useState('');
-  const [groupNameError, setGroupNameError] = useState(null);
-
-  const handleNameChange = async e => {
-    const { value } = e.target;
-    const errorMessage = await validateName(value);
-    setGroupName(value);
-    setGroupNameError(errorMessage);
-  };
-
+  const [groupName, groupNameError, handleNameChange] = useGroupName('');
   const dispatch = useDispatch();
   const groups = useSelector(selectGroups);
 
@@ -53,15 +36,11 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
     >
       <>
         <ModalHeader>Create new group of contacts</ModalHeader>
-        <ModalInputWrapper>
-          <Name
-            type="text"
-            name="name"
-            value={groupName}
-            onChange={handleNameChange}
-          />
-          {groupNameError && <ModalError>{groupNameError}</ModalError>}
-        </ModalInputWrapper>
+        <ModalInput
+          groupName={groupName}
+          handleNameChange={handleNameChange}
+          groupNameError={groupNameError}
+        />
       </>
     </CustomModal>
   );

@@ -18,8 +18,8 @@ export const DeletedContact = ({
   contact,
   allContacts,
   isMultiSelectOpen,
-  selectedContacts,
-  updateSelectedContacts,
+  selectedItems,
+  updateSelectedItems,
 }) => {
   const { id, name, number, removalTime } = contact;
   const dispatch = useDispatch();
@@ -28,9 +28,9 @@ export const DeletedContact = ({
   );
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const [isSelected, toggleIsSelected] = useSelectedContact(
-    selectedContacts,
+    selectedItems,
     contact,
-    updateSelectedContacts
+    updateSelectedItems
   );
 
   const handleDelete = () => {
@@ -123,12 +123,12 @@ DeletedContact.propTypes = {
     })
   ).isRequired,
   isMultiSelectOpen: PropTypes.bool,
-  selectedContacts: PropTypes.arrayOf(
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
     })
   ).isRequired,
-  updateSelectedContacts: PropTypes.func.isRequired,
+  updateSelectedItems: PropTypes.func.isRequired,
 };

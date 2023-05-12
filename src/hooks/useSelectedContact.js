@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react';
 import { checkContactInSelected } from 'utils';
 
 export const useSelectedContact = (
-  selectedContacts,
+  selectedItems,
   contact,
-  updateSelectedContacts
+  updateSelectedItems
 ) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const toggleIsSelected = () => {
     setIsSelected(!isSelected);
-    updateSelectedContacts(contact);
+    updateSelectedItems(contact);
   };
 
   useEffect(() => {
-    setIsSelected(checkContactInSelected(selectedContacts, contact));
-  }, [selectedContacts, contact]);
+    setIsSelected(checkContactInSelected(selectedItems, contact));
+  }, [selectedItems, contact]);
 
   return [isSelected, toggleIsSelected];
 };

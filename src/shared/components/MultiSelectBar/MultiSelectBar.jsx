@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ConfirmationModal, AddFewContactsToGroupModal } from 'components';
+import {
+  ConfirmationModal,
+  AddFewContactsToGroupModal,
+  MergeGroupsModal,
+} from 'components';
 import {
   SelectBtn,
   SelectedInfo,
@@ -35,20 +39,23 @@ import { ActionBtn } from './ActionBtn/ActionBtn';
 
 export const MultiSelectBar = ({
   onSelectAllClick,
-  selectedContacts,
-  resetSelectedContacts,
+  selectedItems,
+  resetSelectedItems,
   page,
 }) => {
   const isOnFavoritesPage = page === ROUTES.FAVORITES;
   const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
+  const isOnGroupsPage = page === ROUTES.GROUPS;
   const dispatch = useDispatch();
   const allContacts = useSelector(selectContacts);
   const deletedContacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
-  const isAnyContactSelected = selectedContacts.length;
+  const isAnyContactSelected = selectedItems.length;
+  const isAvailbaleToMerge = selectedItems.length >= 2;
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
+  const { isMergeModalOpen, toggleMergeModal } = useModal(OPERATION.MERGE);
   const { isRestoreModalOpen, toggleRestoreModal } = useModal(
     OPERATION.RESTORE
   );
@@ -57,7 +64,7 @@ export const MultiSelectBar = ({
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    for (const contact of selectedContacts) {
+    for (const contact of selectedItems) {
       const isContactInFavorite = isContactInFavorites(
         contact,
         favoriteContacts
@@ -70,8 +77,8 @@ export const MultiSelectBar = ({
     }
   };
 
-  const moveSelectedContactsToRecycleBin = async () => {
-    const promises = selectedContacts.map(contact =>
+  const moveselectedItemsToRecycleBin = async () => {
+    const promises = selectedItems.map(contact =>
       deleteContactAndCheckError({
         contactId: contact.id,
         dispatch,
@@ -80,7 +87,7 @@ export const MultiSelectBar = ({
     );
     const results = await Promise.all(promises);
     if (results.every(result => result)) {
-      selectedContacts.forEach(contact => {
+      selectedItems.forEach(contact => {
         if (checkIfInRecycleBin(contact, deletedContacts)) {
           showRecyclebinWarn(contact);
           return;
@@ -92,12 +99,12 @@ export const MultiSelectBar = ({
         showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
       });
       toggleRemoveModal();
-      resetSelectedContacts();
+      resetSelectedItems();
     }
   };
 
-  const restoreSelectedContacts = async () => {
-    for (const contact of selectedContacts) {
+  const restoreselectedItems = async () => {
+    for (const contact of selectedItems) {
       const isContactAlreadyExist = checkAndWarnForDuplicateContact({
         newContact: contact,
         contacts: allContacts,
@@ -107,7 +114,7 @@ export const MultiSelectBar = ({
       }
       await restoreDeletedContact({ contact, dispatch });
       toggleRestoreModal();
-      resetSelectedContacts();
+      resetSelectedItems();
     }
   };
 
@@ -119,7 +126,6 @@ export const MultiSelectBar = ({
       iconName={ICON_NAMES.FAVORITE}
     />
   );
-
   const addButton = (
     <ActionBtn
       ariaLabel="Add selected contacts to groups"
@@ -128,8 +134,15 @@ export const MultiSelectBar = ({
       iconName={ICON_NAMES.GROUP}
     />
   );
-
-  const restoreButton = isOnRecyclebinPage && (
+  const mergeButton = (
+    <ActionBtn
+      ariaLabel="Merge selected groups"
+      onClick={toggleMergeModal}
+      disabled={!isAvailbaleToMerge}
+      iconName={ICON_NAMES.MERGE}
+    />
+  );
+  const restoreButton = (
     <ActionBtn
       ariaLabel="Restore selected contacts"
       onClick={toggleRestoreModal}
@@ -137,7 +150,6 @@ export const MultiSelectBar = ({
       iconName={ICON_NAMES.RESTORE}
     />
   );
-
   const removeButton = (
     <ActionBtn
       ariaLabel={
@@ -159,13 +171,14 @@ export const MultiSelectBar = ({
       <ChoseActionBlock>
         {isTablet && <span>Choose Action</span>}
         <BtnList>
-          {!isOnRecyclebinPage && (
+          {!isOnRecyclebinPage && !isOnGroupsPage && (
             <>
               {favoriteButton}
               {addButton}
             </>
           )}
-          {restoreButton}
+          {isOnRecyclebinPage && <>{restoreButton}</>}
+          {isOnGroupsPage && <>{mergeButton}</>}
           {removeButton}
         </BtnList>
       </ChoseActionBlock>
@@ -176,25 +189,33 @@ export const MultiSelectBar = ({
         <ConfirmationModal
           isOpen={isRemoveModalOpen}
           onClose={toggleRemoveModal}
-          data={selectedContacts}
-          onConfirm={moveSelectedContactsToRecycleBin}
+          data={selectedItems}
+          onConfirm={moveselectedItemsToRecycleBin}
           action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+        />
+      )}
+      {isMergeModalOpen && (
+        <MergeGroupsModal
+          isOpen={isMergeModalOpen}
+          onClose={toggleMergeModal}
+          selectedGroups={selectedItems}
+          resetSelectedGroups={resetSelectedItems}
         />
       )}
       {isAddModalOpen && (
         <AddFewContactsToGroupModal
           isOpen={isAddModalOpen}
           onClose={toggleAddModal}
-          selectedContacts={selectedContacts}
-          resetSelectedContacts={resetSelectedContacts}
+          selectedItems={selectedItems}
+          resetSelectedItems={resetSelectedItems}
         />
       )}
       {isRestoreModalOpen && (
         <ConfirmationModal
           isOpen={isRestoreModalOpen}
           onClose={toggleRestoreModal}
-          data={selectedContacts}
-          onConfirm={restoreSelectedContacts}
+          data={selectedItems}
+          onConfirm={restoreselectedItems}
           action={CONTACT_ACTIONS.RESTORE}
         />
       )}
@@ -204,13 +225,13 @@ export const MultiSelectBar = ({
 
 MultiSelectBar.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
-  resetSelectedContacts: PropTypes.func.isRequired,
-  selectedContacts: PropTypes.arrayOf(
+  resetSelectedItems: PropTypes.func.isRequired,
+  selectedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
     })
-  ).isRequired,
+  ),
   page: PropTypes.string.isRequired,
 };
