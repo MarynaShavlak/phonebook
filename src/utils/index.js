@@ -32,6 +32,7 @@ export { deleteContactAndCheckError } from './contact/deleteContactAndCheckError
 export { removeContactFromFavoritesIfNeeded } from './contact/removeContactFromFavoritesIfNeeded';
 export { addContactToRecycleBinWithRemovalTime } from './contact/addContactToRecycleBinWithRemovalTime';
 export { removeContactFromGroups } from './contact/removeContactFromGroups';
+export { addContactToGroups } from './contact/addContactToGroups';
 export { addToFavorites } from './contact/addToFavorites';
 export { checkAndWarnForDuplicateContact } from './contact/checkAndWarnForDuplicateContact';
 export { restoreDeletedContact } from './contact/restoreDeletedContact';
@@ -48,3 +49,5 @@ export { createNewGroup } from './group/createNewGroup';
 export { handleSelectedGroups } from './group/handleSelectedGroups';
 export { handleContactsInSelectedGroups } from './group/handleContactsInSelectedGroups';
 export { handleSelectedContacts } from './contact/handleSelectedContacts';
+export { checkFewContactsInFavorites } from './contact/checkFewContactsInFavorites';
+export { findSelectedContactsGroups } from './contact/findSelectedContactsGroups';

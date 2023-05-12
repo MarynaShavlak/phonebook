@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFavoritesContacts } from 'redux/favorites/selectors';
 
-import { CustomModal, LabelList, ModalInput } from 'shared';
+import { CustomModal, LabelList } from 'shared';
 import { selectGroups } from 'redux/groups';
 import { ModalText, ModalContent } from 'shared/commonStyledComponents';
 import { CONTACT_ACTIONS, ITEM_CATEGORIES } from 'constants';
 import {
-  checkGroupNameExistence,
-  validateGroupData,
   handleSelectedContacts,
-  createNewGroup,
-  handleContactsInSelectedGroups,
+  checkFewContactsInFavorites,
+  findSelectedContactsGroups,
+  addToFavorites,
+  addContactToGroups,
 } from 'utils';
+import { addContact, selectContacts } from 'redux/contacts';
 
 export const MergeContactsModal = ({
   isOpen,
@@ -23,9 +23,21 @@ export const MergeContactsModal = ({
   resetSelectedContacts,
 }) => {
   const favoriteContacts = useSelector(selectFavoritesContacts);
+  const groups = useSelector(selectGroups);
+  const allContacts = useSelector(selectContacts);
+
+  const isAnySelectedContactExistedInFavorites = checkFewContactsInFavorites(
+    selectedContacts,
+    favoriteContacts
+  );
+
+  const selectedContactsGroups = findSelectedContactsGroups(
+    selectedContacts,
+    groups
+  );
+
   const chosenGroupNames = selectedContacts.map(item => item.name);
   const chosenGroupNumbers = selectedContacts.map(item => item.number);
-  const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
   const [chosenName, setChosenName] = useState([]);
   const [chosenNumber, setChosenNumber] = useState([]);
@@ -45,41 +57,35 @@ export const MergeContactsModal = ({
     const chosenContactName = chosenName[0];
     const chosenContactNumber = chosenNumber[0];
 
-    // if (!(await validateGroupData(chosenGroupName))) return;
-    // if (!checkGroupNameExistence(chosenGroupName, groups)) {
-    //   const isSuccessfullyCreated = await createNewGroup({
-    //     name: chosenGroupName,
-    //     dispatch,
-    //   });
-    //   if (!isSuccessfullyCreated) return;
-    // }
-    // await handleSelectedContacts({
-    //   selectedContacts,
-    //   dispatch,
-    //   onClose,
-    // });
     const finalContact = {
-      id: nanoid(),
       name: chosenContactName,
       number: chosenContactNumber,
     };
-    console.log('finalContact: ', finalContact);
 
-    const isContactByNameinFavorites = favoriteContacts
-      .map(favorite => favorite.name)
-      .includes(chosenContactName);
+    await handleSelectedContacts({
+      chosenContactName,
+      selectedContacts,
+      groups,
+      dispatch,
+      onClose,
+      isFavorite: isAnySelectedContactExistedInFavorites,
+    });
+    await dispatch(addContact(finalContact));
+    // const mergedContact = allContacts.filter(
+    //   contact => contact.name === chosenContactName
+    // )[0];
 
-    const isContactByNumberinFavorites = favoriteContacts
-      .map(favorite => favorite.number)
-      .includes(chosenContactNumber);
-
-    console.log('isContactByNameinFavorites: ', isContactByNameinFavorites);
-    console.log('isContactByNumberinFavorites: ', isContactByNumberinFavorites);
-    // await handleContactsInSelectedGroups({
-    //   selectedContacts,
-    //   chosenGroupName,
-    //   dispatch,
-    // });
+    if (isAnySelectedContactExistedInFavorites) {
+      addToFavorites({ contact: finalContact, dispatch });
+    }
+    if (!!addContactToGroups.length) {
+      addContactToGroups({
+        contact: finalContact,
+        selectedContacts,
+        groups,
+        dispatch,
+      });
+    }
 
     onClose();
     resetSelectedContacts();

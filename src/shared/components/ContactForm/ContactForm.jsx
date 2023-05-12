@@ -84,6 +84,7 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
         allContacts,
         contact,
       });
+      console.log('updatedContact: ', updatedContact);
       if (!createdContactData) return;
 
       let result;
