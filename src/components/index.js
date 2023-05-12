@@ -23,6 +23,7 @@ export { Loader } from 'components/Loader';
 export { LogInForm } from 'components/LogInForm';
 export { ModalActionButtons } from 'components/Modals/ModalActionButtons';
 export { MergeGroupsModal } from 'components/MergeGroupsModal';
+export { MergeContactsModal } from 'components/MergeContactsModal';
 export { Navigation } from 'components/Navigation';
 export { PrivateRoute } from 'components/PrivateRoute/PrivateRoute.jsx';
 export { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute.jsx';

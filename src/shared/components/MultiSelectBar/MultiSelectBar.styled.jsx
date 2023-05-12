@@ -82,7 +82,18 @@ export const ChoseActionBlock = styled.div`
 
 export const BtnList = styled.ul`
   display: flex;
-  column-gap: ${props => props.theme.gapSize.medium};
+
+  @media screen and (max-width: 374px) {
+    width: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: ${props => props.theme.gapSize.extraSmall};
+  }
+
+  column-gap: ${props => props.theme.gapSize.extraSmall};
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    column-gap: ${props => props.theme.gapSize.medium};
+  }
 
   button {
     padding: 10px;

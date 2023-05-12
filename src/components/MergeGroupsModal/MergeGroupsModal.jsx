@@ -91,11 +91,5 @@ MergeGroupsModal.propTypes = {
   resetSelectedGroups: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  selectedGroups: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
+  selectedGroups: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -61,7 +61,7 @@ export const Contact = ({
       !(await deleteContactAndCheckError({
         contactId: id,
         dispatch,
-        toggleRemoveModal,
+        toggleModal: toggleRemoveModal,
       }))
     )
       return;

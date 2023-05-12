@@ -6,6 +6,7 @@ import {
   ConfirmationModal,
   AddFewContactsToGroupModal,
   MergeGroupsModal,
+  MergeContactsModal,
 } from 'components';
 import {
   SelectBtn,
@@ -77,12 +78,12 @@ export const MultiSelectBar = ({
     }
   };
 
-  const moveselectedItemsToRecycleBin = async () => {
+  const moveSelectedItemsToRecycleBin = async () => {
     const promises = selectedItems.map(contact =>
       deleteContactAndCheckError({
         contactId: contact.id,
         dispatch,
-        toggleRemoveModal,
+        toggleModal: toggleRemoveModal,
       })
     );
     const results = await Promise.all(promises);
@@ -175,6 +176,7 @@ export const MultiSelectBar = ({
             <>
               {favoriteButton}
               {addButton}
+              {mergeButton}
             </>
           )}
           {isOnRecyclebinPage && <>{restoreButton}</>}
@@ -190,16 +192,24 @@ export const MultiSelectBar = ({
           isOpen={isRemoveModalOpen}
           onClose={toggleRemoveModal}
           data={selectedItems}
-          onConfirm={moveselectedItemsToRecycleBin}
+          onConfirm={moveSelectedItemsToRecycleBin}
           action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
         />
       )}
-      {isMergeModalOpen && (
+      {isMergeModalOpen && isOnGroupsPage && (
         <MergeGroupsModal
           isOpen={isMergeModalOpen}
           onClose={toggleMergeModal}
           selectedGroups={selectedItems}
           resetSelectedGroups={resetSelectedItems}
+        />
+      )}
+      {isMergeModalOpen && !isOnGroupsPage && (
+        <MergeContactsModal
+          isOpen={isMergeModalOpen}
+          onClose={toggleMergeModal}
+          selectedContacts={selectedItems}
+          resetSelectedContacts={resetSelectedItems}
         />
       )}
       {isAddModalOpen && (

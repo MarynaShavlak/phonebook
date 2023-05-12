@@ -47,3 +47,4 @@ export { getAvailableToSelectContacts } from './group/getAvailableToSelectContac
 export { createNewGroup } from './group/createNewGroup';
 export { handleSelectedGroups } from './group/handleSelectedGroups';
 export { handleContactsInSelectedGroups } from './group/handleContactsInSelectedGroups';
+export { handleSelectedContacts } from './contact/handleSelectedContacts';

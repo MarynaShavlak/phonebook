@@ -18,6 +18,7 @@ export const SelectCheckbox = ({ checked, onChange }) => {
         sx={{
           '& .MuiSvgIcon-root': { fontSize: 30 },
           color: '#feafe5',
+          padding: '0',
 
           '&.Mui-checked': {
             color: '#feafe5',

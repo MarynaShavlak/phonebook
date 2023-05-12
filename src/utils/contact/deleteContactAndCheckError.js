@@ -4,12 +4,12 @@ import { showErrorMessage } from 'utils/notifications';
 export const deleteContactAndCheckError = async ({
   contactId,
   dispatch,
-  toggleRemoveModal,
+  toggleModal,
 }) => {
   const deleteResult = await dispatch(deleteContact(contactId));
   if (deleteResult.error) {
     showErrorMessage();
-    toggleRemoveModal();
+    toggleModal();
     return false;
   }
   return true;
