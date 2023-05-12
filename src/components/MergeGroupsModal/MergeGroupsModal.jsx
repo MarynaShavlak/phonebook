@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomModal, LabelList, ModalInput } from 'shared';
-import { selectGroups, addContactToGroup } from 'redux/groups';
-import { deleteGroup } from 'redux/groups';
-import { findGroupsForContact } from 'utils';
+import { selectGroups } from 'redux/groups';
 import { ModalText, ModalContent } from 'shared/commonStyledComponents';
 import { CONTACT_ACTIONS, ITEM_CATEGORIES } from 'constants';
-import { getUniqueContacts } from 'utils';
+import {
+  checkGroupNameExistence,
+  validateGroupData,
+  handleSelectedGroups,
+  createNewGroup,
+  handleContactsInSelectedGroups,
+} from 'utils';
 import { useGroupName } from 'hooks';
 
 export const MergeGroupsModal = ({
@@ -17,37 +21,40 @@ export const MergeGroupsModal = ({
   resetSelectedGroups,
 }) => {
   const [groupName, groupNameError, handleNameChange] = useGroupName('');
-  console.log('groupName: ', groupName);
-  const selectedGroupNames = selectedGroups.map(item => item.name);
+  const chosenGroupNames = selectedGroups.map(item => item.name);
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
-  const [selectedGroup, setSelectedGroup] = useState([]);
+  const [chosenGroup, setChosenGroup] = useState([]);
+
+  useEffect(() => {
+    if (!!groupName.length && !!setChosenGroup.length) {
+      setChosenGroup([groupName]);
+    }
+  }, [groupName]);
 
   const handleGroupSelect = groupName => {
-    const isAlreadySelected = selectedGroup.includes(groupName);
+    const isAlreadySelected = chosenGroup.includes(groupName);
     const newChosenGroup = isAlreadySelected ? [] : [groupName];
-    setSelectedGroup(newChosenGroup);
+    setChosenGroup(newChosenGroup);
   };
 
-  const handleAdddContactToGroupList = () => {
-    const selectedGroupName = selectedGroup[0];
-    const uniqueContacts = getUniqueContacts(
-      selectedGroups.flatMap(group => group.contacts)
-    );
-    selectedGroups.forEach(group => {
-      if (group.name !== selectedGroupName) {
-        dispatch(deleteGroup(group));
-      }
+  const handleAdddContactToGroupList = async () => {
+    const chosenGroupName = chosenGroup[0];
+    if (!(await validateGroupData(chosenGroupName))) return;
+    if (!checkGroupNameExistence(chosenGroupName, groups)) {
+      const isSuccessfullyCreated = await createNewGroup({
+        name: chosenGroupName,
+        dispatch,
+      });
+      if (!isSuccessfullyCreated) return;
+    }
+    await handleSelectedGroups({ chosenGroupName, selectedGroups, dispatch });
+    await handleContactsInSelectedGroups({
+      selectedGroups,
+      chosenGroupName,
+      dispatch,
     });
-    uniqueContacts.forEach(contact => {
-      const isAlreadyExistInGroup = findGroupsForContact(
-        contact,
-        groups
-      ).includes(selectedGroupName);
-      if (!isAlreadyExistInGroup) {
-        dispatch(addContactToGroup({ group: selectedGroupName, contact }));
-      }
-    });
+
     onClose();
     resetSelectedGroups();
   };
@@ -62,9 +69,9 @@ export const MergeGroupsModal = ({
       <ModalContent>
         <ModalText>Choose group name you want to merge in:</ModalText>
         <LabelList
-          items={selectedGroupNames}
+          items={chosenGroupNames}
           handleItem={handleGroupSelect}
-          selectedItems={selectedGroup}
+          selectedItems={chosenGroup}
           category={ITEM_CATEGORIES.GROUP}
         />
         <ModalText>

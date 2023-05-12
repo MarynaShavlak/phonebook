@@ -44,3 +44,6 @@ export { validateAndCheckGroupName } from './group/validateAndCheckGroupName';
 export { getContactsByGroupName } from './group/getContactsByGroupName';
 export { getOriginalGroupName } from './group/getOriginalGroupName';
 export { getAvailableToSelectContacts } from './group/getAvailableToSelectContacts';
+export { createNewGroup } from './group/createNewGroup';
+export { handleSelectedGroups } from './group/handleSelectedGroups';
+export { handleContactsInSelectedGroups } from './group/handleContactsInSelectedGroups';

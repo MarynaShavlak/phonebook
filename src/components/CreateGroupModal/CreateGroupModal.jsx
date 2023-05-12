@@ -1,10 +1,13 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { validateGroupData, checkGroupNameExistence } from 'utils';
-import { showGroupSuccess, showErrorMessage } from 'utils/notifications';
-import { addNewGroup, selectGroups } from 'redux/groups';
+import {
+  validateGroupData,
+  checkGroupNameExistence,
+  createNewGroup,
+} from 'utils';
+import { showGroupSuccess, showGroupWarn } from 'utils/notifications';
+import { selectGroups } from 'redux/groups';
 import { CustomModal, ModalInput } from 'shared';
 import { ModalHeader } from 'shared/commonStyledComponents';
 import { useGroupName } from 'hooks';
@@ -15,14 +18,15 @@ export const CreateGroupModal = ({ isOpen, onClose }) => {
   const groups = useSelector(selectGroups);
 
   const handleAddNewGroup = async () => {
-    const isGroupDataValid = await validateGroupData(groupName);
-    if (!isGroupDataValid) return;
-    if (checkGroupNameExistence(groupName, groups)) return;
-    const newGroup = { name: groupName, id: nanoid() };
-    const result = await dispatch(addNewGroup(newGroup));
-    if (result.error) {
-      return showErrorMessage();
+    if (!(await validateGroupData(groupName))) return;
+    if (checkGroupNameExistence(groupName, groups)) {
+      return showGroupWarn(groupName);
     }
+    const isSuccessfullyCreated = await createNewGroup({
+      name: groupName,
+      dispatch,
+    });
+    if (!isSuccessfullyCreated) return;
     showGroupSuccess(groupName);
     onClose();
   };
