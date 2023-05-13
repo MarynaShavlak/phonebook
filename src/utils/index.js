@@ -51,3 +51,6 @@ export { handleContactsInSelectedGroups } from './group/handleContactsInSelected
 export { handleSelectedContacts } from './contact/handleSelectedContacts';
 export { checkFewContactsInFavorites } from './contact/checkFewContactsInFavorites';
 export { findSelectedContactsGroups } from './contact/findSelectedContactsGroups';
+export { createFinalMergedContact } from './contact/createFinalMergedContact';
+export { updateContactInStore } from './contact/updateContactInStore';
+export { addContactToStore } from './contact/addContactToStore';

@@ -38,7 +38,7 @@ export const MergeGroupsModal = ({
     setChosenGroup(newChosenGroup);
   };
 
-  const handleAdddContactToGroupList = async () => {
+  const handleMergeGroups = async () => {
     const chosenGroupName = chosenGroup[0];
     if (!(await validateGroupData(chosenGroupName))) return;
     if (!checkGroupNameExistence(chosenGroupName, groups)) {
@@ -64,7 +64,7 @@ export const MergeGroupsModal = ({
       isOpen={isOpen}
       onClose={onClose}
       action={!groups.length ? '' : CONTACT_ACTIONS.ADD_TO_GROUP}
-      onConfirm={handleAdddContactToGroupList}
+      onConfirm={handleMergeGroups}
     >
       <ModalContent>
         <ModalText>Choose group name you want to merge in:</ModalText>

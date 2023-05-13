@@ -13,12 +13,7 @@ import {
   Name,
   Error,
 } from './ContactForm.styled';
-import {
-  selectContacts,
-  fetchContacts,
-  addContact,
-  updateContact,
-} from 'redux/contacts';
+import { selectContacts, fetchContacts } from 'redux/contacts';
 
 import {
   validateContactData,
@@ -28,6 +23,7 @@ import {
 } from 'utils';
 import { showErrorMessage } from 'utils/notifications';
 import { OPERATION, CONTACT_ACTIONS, ROUTES } from 'constants';
+import { addContact, updateContact } from 'redux/contacts';
 
 export const ContactForm = ({ contact, action, onSubmit }) => {
   const [name, setName] = useState('');
@@ -84,7 +80,6 @@ export const ContactForm = ({ contact, action, onSubmit }) => {
         allContacts,
         contact,
       });
-      console.log('updatedContact: ', updatedContact);
       if (!createdContactData) return;
 
       let result;

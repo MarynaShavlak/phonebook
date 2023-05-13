@@ -5,7 +5,7 @@ import {
 } from 'utils';
 
 export const handleSelectedContacts = async ({
-  chosenContactName,
+  finalName,
   selectedContacts,
   groups,
   dispatch,
@@ -13,7 +13,7 @@ export const handleSelectedContacts = async ({
   isFavorite,
 }) => {
   const contactsToDelete = selectedContacts.filter(
-    contact => contact.name !== chosenContactName
+    contact => contact.name !== finalName
   );
   const contactDeleteOperations = contactsToDelete.map(contact =>
     deleteContactAndCheckError({

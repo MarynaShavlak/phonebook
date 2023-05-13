@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFavoritesContacts } from 'redux/favorites/selectors';
@@ -10,11 +10,12 @@ import { CONTACT_ACTIONS, ITEM_CATEGORIES } from 'constants';
 import {
   handleSelectedContacts,
   checkFewContactsInFavorites,
-  findSelectedContactsGroups,
   addToFavorites,
   addContactToGroups,
+  createFinalMergedContact,
+  updateContactInStore,
 } from 'utils';
-import { addContact, selectContacts } from 'redux/contacts';
+import { showErrorMessage } from 'utils/notifications';
 
 export const MergeContactsModal = ({
   isOpen,
@@ -24,56 +25,38 @@ export const MergeContactsModal = ({
 }) => {
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
-  const allContacts = useSelector(selectContacts);
-
-  const isAnySelectedContactExistedInFavorites = checkFewContactsInFavorites(
-    selectedContacts,
-    favoriteContacts
-  );
-
-  const selectedContactsGroups = findSelectedContactsGroups(
-    selectedContacts,
-    groups
-  );
-
-  const chosenGroupNames = selectedContacts.map(item => item.name);
-  const chosenGroupNumbers = selectedContacts.map(item => item.number);
+  const selectedContactsNames = selectedContacts.map(({ name }) => name);
+  const selectedContactsNumbers = selectedContacts.map(({ number }) => number);
   const dispatch = useDispatch();
-  const [chosenName, setChosenName] = useState([]);
-  const [chosenNumber, setChosenNumber] = useState([]);
+  const [finalName, setFinalName] = useState(null);
+  const [finalNumber, setFinalNumber] = useState(null);
 
   const handleNameSelect = name => {
-    const isAlreadySelected = chosenName.includes(name);
-    const newChosenName = isAlreadySelected ? [] : [name];
-    setChosenName(newChosenName);
+    const updatedFinalName = finalName === name ? null : name;
+    setFinalName(updatedFinalName);
   };
   const handleNumberSelect = number => {
-    const isAlreadySelected = chosenNumber.includes(number);
-    const newChosenNumber = isAlreadySelected ? [] : [number];
-    setChosenNumber(newChosenNumber);
+    const updatedFinalNumber = finalNumber === number ? null : number;
+    setFinalNumber(updatedFinalNumber);
   };
-
-  const handleAdddContactToGroupList = async () => {
-    const chosenContactName = chosenName[0];
-    const chosenContactNumber = chosenNumber[0];
-
-    const finalContact = {
-      name: chosenContactName,
-      number: chosenContactNumber,
-    };
-
+  const updateFinalContact = async finalContact => {
+    await updateContactInStore({
+      updatedContact: finalContact,
+      dispatch,
+    });
+  };
+  const mergeContactsAndUpdateLists = async (
+    finalContact,
+    isAnySelectedContactExistedInFavorites
+  ) => {
     await handleSelectedContacts({
-      chosenContactName,
+      finalName,
       selectedContacts,
       groups,
       dispatch,
       onClose,
       isFavorite: isAnySelectedContactExistedInFavorites,
     });
-    await dispatch(addContact(finalContact));
-    // const mergedContact = allContacts.filter(
-    //   contact => contact.name === chosenContactName
-    // )[0];
 
     if (isAnySelectedContactExistedInFavorites) {
       addToFavorites({ contact: finalContact, dispatch });
@@ -86,9 +69,26 @@ export const MergeContactsModal = ({
         dispatch,
       });
     }
-
-    onClose();
-    resetSelectedContacts();
+  };
+  const mergeContacts = async () => {
+    try {
+      const finalContact = createFinalMergedContact({
+        selectedContacts,
+        finalName,
+        finalNumber,
+      });
+      const isAnySelectedContactExistedInFavorites =
+        checkFewContactsInFavorites(selectedContacts, favoriteContacts);
+      await updateFinalContact(finalContact);
+      await mergeContactsAndUpdateLists(
+        finalContact,
+        isAnySelectedContactExistedInFavorites
+      );
+      onClose();
+      resetSelectedContacts();
+    } catch (error) {
+      showErrorMessage();
+    }
   };
 
   return (
@@ -96,21 +96,21 @@ export const MergeContactsModal = ({
       isOpen={isOpen}
       onClose={onClose}
       action={!groups.length ? '' : CONTACT_ACTIONS.ADD_TO_GROUP}
-      onConfirm={handleAdddContactToGroupList}
+      onConfirm={mergeContacts}
     >
       <ModalContent>
         <ModalText>Choose final contact name:</ModalText>
         <LabelList
-          items={chosenGroupNames}
+          items={selectedContactsNames}
           handleItem={handleNameSelect}
-          selectedItems={chosenName}
+          selectedItems={[finalName]}
           category={ITEM_CATEGORIES.GROUP}
         />
         <ModalText>Choose final contact number:</ModalText>
         <LabelList
-          items={chosenGroupNumbers}
+          items={selectedContactsNumbers}
           handleItem={handleNumberSelect}
-          selectedItems={chosenNumber}
+          selectedItems={[finalNumber]}
           category={ITEM_CATEGORIES.GROUP}
         />
       </ModalContent>
