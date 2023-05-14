@@ -5,8 +5,6 @@ import { FavoriteButton } from 'components';
 import { ContactAvatar } from 'shared';
 import { ContactEl } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites';
-import { CONTACT_ACTIONS } from 'constants';
-import { showContactSuccess } from 'utils/notifications';
 import { TelLink } from 'shared/commonStyledComponents';
 import { useSelectedContact } from 'hooks';
 
@@ -20,7 +18,6 @@ export const FavoriteContact = ({
   const dispatch = useDispatch();
 
   const removeFromFavorites = () => {
-    showContactSuccess(CONTACT_ACTIONS.REMOVE_FROM_FAVORITES, contact);
     dispatch(removeContactFromFavorites(contact.id));
   };
   const [isSelected, toggleIsSelected] = useSelectedContact(

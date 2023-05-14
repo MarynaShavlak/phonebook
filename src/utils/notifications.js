@@ -42,8 +42,8 @@ function getMessage(operation, contact) {
     [CONTACT_ACTIONS.ADD]: `You've just added contact ${contact.name} (${contact.number}) to your contacts list`,
     [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `You've just removed contact ${contact.name} (${contact.number}) from your contacts list to recycle bin`,
     [CONTACT_ACTIONS.RESTORE]: `You've just restored contact ${contact.name} (${contact.number}) in your contacts list`,
-    [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact ${contact.name} (${contact.number}) to your favorites`,
-    [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact ${contact.name} (${contact.number}) from your favorites`,
+    // [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact ${contact.name} (${contact.number}) to your favorites`,
+    // [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact ${contact.name} (${contact.number}) from your favorites`,
   };
   return (
     messages[operation] ||

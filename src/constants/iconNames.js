@@ -36,6 +36,7 @@ export const ICON_NAMES = {
   RESTORE: 'restore',
   SETTINGS: 'settings',
   SUCCESS: 'success',
+  SEARCH: 'search',
   SORT: 'sort',
   UNCHECK: 'unCheck',
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -44,7 +44,11 @@ const Contacts = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(allContacts);
+  const [isSearchMenuOpen, setIsSetSearchMenuOpen] = useState(false);
 
+  const toggleSearchMenu = () => {
+    setIsSetSearchMenuOpen(!isSearchMenuOpen);
+  };
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
@@ -54,7 +58,6 @@ const Contacts = () => {
 
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts?.length;
-
   return (
     <>
       <AppBar />
@@ -68,7 +71,9 @@ const Contacts = () => {
                   items={allContacts}
                   handleClick={() => navigate(`${ROUTES.CREATE}`)}
                   handleSelectClick={toggleMultiSelect}
+                  handleSearchClick={toggleSearchMenu}
                   active={isMultiSelectOpen}
+                  page={ROUTES.CONTACTS}
                 />
                 {isMultiSelectOpen && (
                   <MultiSelectBar

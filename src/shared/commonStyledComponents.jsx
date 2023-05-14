@@ -93,6 +93,7 @@ export const Button = styled.button`
   }
 `;
 export const Info = styled.p`
+  text-align: center;
   font-size: ${props => props.theme.fontSize.md};
   color: ${props => props.theme.colors.black};
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
@@ -105,8 +106,16 @@ export const Info = styled.p`
 `;
 export const InfoWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 767px) {
+    border: 1px solid ${props => props.theme.colors.hover};
+    border-radius: ${props => props.theme.borderRadius.standard};
+  }
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    justify-content: space-between;
+    align-items: center;
+  }
+
   border-bottom: 1px solid ${props => props.theme.colors.hover};
   border-top: 1px solid ${props => props.theme.colors.hover};
   border-top-right-radius: ${props => props.theme.borderRadius.standard};
@@ -199,10 +208,13 @@ export const ActionBtn = styled.button`
 
 export const ActionBtnList = styled.div`
   display: flex;
+
   column-gap: ${props => props.theme.gapSize.standard};
-  ${ActionBtn}:last-child {
-    border-top-right-radius: ${props => props.theme.borderRadius.standard};
-    border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    ${ActionBtn}:last-child {
+      border-top-right-radius: ${props => props.theme.borderRadius.standard};
+      border-bottom-right-radius: ${props => props.theme.borderRadius.standard};
+    }
   }
 `;
 

@@ -12,6 +12,7 @@ import { GiConfirmed } from 'react-icons/gi';
 import { FaRegSadCry } from 'react-icons/fa';
 import { BsFillStarFill } from 'react-icons/bs';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { MdSearch } from 'react-icons/md';
 import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
@@ -74,6 +75,7 @@ const icons = {
   [ICON_NAMES.QUICK_SEARCH]: <MdPersonSearch />,
   [ICON_NAMES.REMOVE]: <RiDeleteBin6Fill />,
   [ICON_NAMES.RESTORE]: <MdSettingsBackupRestore />,
+  [ICON_NAMES.SEARCH]: <MdSearch />,
   [ICON_NAMES.SETTINGS]: <FiSettings />,
   [ICON_NAMES.SORT]: <MdSort />,
   [ICON_NAMES.UNCHECK]: <FaRegCircle className="unCheck__icon" />,
