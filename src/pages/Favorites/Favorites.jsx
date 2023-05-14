@@ -4,10 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { selectFavoritesContacts } from 'redux/favorites/selectors';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { FavoriteContact, AppBar } from 'components';
-import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
+import {
+  Section,
+  Notification,
+  ListHeader,
+  MultiSelectBar,
+  FilterList,
+} from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
-import { useMultiSelect } from 'hooks';
+import { useMultiSelect, useSearchMenu } from 'hooks';
 
 const Favorites = () => {
   const favoriteContacts = useSelector(selectFavoritesContacts);
@@ -20,7 +26,7 @@ const Favorites = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(favoriteContacts, ROUTES.FAVORITES);
-
+  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   return (
     <>
       <AppBar />{' '}
@@ -34,7 +40,10 @@ const Favorites = () => {
                   items={favoriteContacts}
                   handleClick={() => navigate(`${ROUTES.CREATE}`)}
                   handleSelectClick={toggleMultiSelect}
+                  handleSearchClick={toggleSearchMenu}
                   activeMultiSelect={isMultiSelectOpen}
+                  activeSearchMenu={isSearchMenuOpen}
+                  page={ROUTES.FAVORITES}
                 />
                 {isMultiSelectOpen && (
                   <MultiSelectBar
@@ -44,6 +53,7 @@ const Favorites = () => {
                     page={ROUTES.FAVORITES}
                   />
                 )}
+                {isSearchMenuOpen && <FilterList />}
               </>
             )}
             {!!favoriteContacts.length ? (

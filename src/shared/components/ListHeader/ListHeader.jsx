@@ -22,7 +22,8 @@ export const ListHeader = ({
   page,
 }) => {
   const isTablet = useMediaQuery('(min-width:768px)');
-  const isOnContactsPage = page === ROUTES.CONTACTS;
+  const isOnFavoritesPage = page === ROUTES.FAVORITES;
+  const isOnGroupsPage = page === ROUTES.GROUPS;
 
   const iconName =
     category === ITEM_CATEGORIES.CONTACT
@@ -46,7 +47,7 @@ export const ListHeader = ({
         )}
 
         <ActionBtnList>
-          {isOnContactsPage && (
+          {!isOnGroupsPage && (
             <ActionBtn
               type="button"
               aria-label="Open search menu"
@@ -65,17 +66,19 @@ export const ListHeader = ({
           >
             {renderIcons(ICON_NAMES.MULTI_SELECT, ICON_SIZES.MEDIUM)}
           </ActionBtn>
-          <ActionBtn
-            type="button"
-            aria-label={
-              category === ITEM_CATEGORIES.RECYCLEBIN
-                ? 'Clear recycle bin'
-                : `Add new ${category}`
-            }
-            onClick={handleClick}
-          >
-            {renderIcons(iconName, ICON_SIZES.MEDIUM)}
-          </ActionBtn>
+          {!isOnFavoritesPage && (
+            <ActionBtn
+              type="button"
+              aria-label={
+                category === ITEM_CATEGORIES.RECYCLEBIN
+                  ? 'Clear recycle bin'
+                  : `Add new ${category}`
+              }
+              onClick={handleClick}
+            >
+              {renderIcons(iconName, ICON_SIZES.MEDIUM)}
+            </ActionBtn>
+          )}
         </ActionBtnList>
       </InfoWrap>
     </>

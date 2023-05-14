@@ -7,15 +7,12 @@ import {
   ConfirmationModal,
   AddContactToGroupModal,
   FavoriteButton,
-  HighlightContactDetails,
   DropdownMenu,
 } from 'components';
-import { ContactAvatar } from 'shared';
+import { ContactData } from 'shared';
 import { selectRecycleBinContacts } from 'redux/recycleBin';
-import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
-import { ContactEl } from './Contact.styled';
 import {
   renderDropdownElement,
   checkIfInRecycleBin,
@@ -36,9 +33,7 @@ export const Contact = ({
   selectedItems,
   updateSelectedItems,
 }) => {
-  const { id, name } = contact;
-  const filterByName = useSelector(selectFilterByName);
-  const filterByNumber = useSelector(selectFilterByNumber);
+  const { id } = contact;
   const deletedContacts = useSelector(selectRecycleBinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
@@ -83,19 +78,12 @@ export const Contact = ({
   };
   return (
     <>
-      <ContactEl>
-        <ContactAvatar
-          isMultiSelectOpen={isMultiSelectOpen}
-          isSelected={isSelected}
-          toggleIsSelected={toggleIsSelected}
-          name={name}
-        />
-        <HighlightContactDetails
-          contact={contact}
-          filterByName={filterByName}
-          filterByNumber={filterByNumber}
-        />
-      </ContactEl>
+      <ContactData
+        isMultiSelectOpen={isMultiSelectOpen}
+        isSelected={isSelected}
+        toggleIsSelected={toggleIsSelected}
+        contact={contact}
+      />
       <FavoriteButton checked={isFavorite} onChange={toggleFavorite} />
       <DropdownMenu
         elements={[

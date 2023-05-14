@@ -59,6 +59,7 @@ const Groups = () => {
                   handleClick={toggleCreateGroupModal}
                   handleSelectClick={toggleMultiSelect}
                   activeMultiSelect={isMultiSelectOpen}
+                  page={ROUTES.GROUPS}
                 />
                 {isMultiSelectOpen && (
                   <MultiSelectBar

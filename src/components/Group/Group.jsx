@@ -25,11 +25,9 @@ import {
   List,
   DropButton,
   IconButton,
-  ContactEl,
 } from './Group.styled';
 import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
-import { TelLink, ContactData } from 'shared/commonStyledComponents';
-import { ContactAvatar } from 'shared';
+import { ContactAvatar, ContactData } from 'shared';
 
 export const Group = ({
   group,
@@ -94,21 +92,12 @@ export const Group = ({
                 >
                   {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
                 </IconButton>
-                <ContactEl>
-                  <ContactAvatar
-                    isMultiSelectOpen={isMultiSelectOpen}
-                    isSelected={isSelected}
-                    toggleIsSelected={toggleIsSelected}
-                    name={contact.name}
-                  />
-
-                  <ContactData>
-                    <p>{contact.name}</p>
-                    <TelLink href={`tel: ${contact.number}`}>
-                      <p>{contact.number}</p>
-                    </TelLink>
-                  </ContactData>
-                </ContactEl>
+                <ContactData
+                  isMultiSelectOpen={isMultiSelectOpen}
+                  isSelected={isSelected}
+                  toggleIsSelected={toggleIsSelected}
+                  contact={contact}
+                />
               </li>
             ))}
           </List>

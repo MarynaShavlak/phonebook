@@ -14,3 +14,4 @@ export { AuthenticationPrompt } from './components/AuthenticationPrompt';
 export { MultiSelectBar } from './components/MultiSelectBar';
 export { ContactAvatar } from './components/ContactAvatar';
 export { ModalInput } from './components/ModalInput';
+export { ContactData } from './components/ContactData';

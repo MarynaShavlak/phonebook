@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { FavoriteButton } from 'components';
-import { ContactAvatar } from 'shared';
-import { ContactEl } from 'components/Contact/Contact.styled';
+import { ContactData } from 'shared';
 import { removeContactFromFavorites } from 'redux/favorites';
-import { ContactData, TelLink } from 'shared/commonStyledComponents';
 import { useSelectedContact } from 'hooks';
 
 export const FavoriteContact = ({
@@ -14,7 +12,6 @@ export const FavoriteContact = ({
   selectedItems,
   updateSelectedItems,
 }) => {
-  const { name, number } = contact;
   const dispatch = useDispatch();
 
   const removeFromFavorites = () => {
@@ -28,20 +25,12 @@ export const FavoriteContact = ({
 
   return (
     <>
-      <ContactEl>
-        <ContactAvatar
-          isMultiSelectOpen={isMultiSelectOpen}
-          isSelected={isSelected}
-          toggleIsSelected={toggleIsSelected}
-          name={name}
-        />
-        <ContactData>
-          <p>{name}</p>
-          <TelLink href={`tel: ${number}`}>
-            <p>{number}</p>
-          </TelLink>
-        </ContactData>
-      </ContactEl>
+      <ContactData
+        isMultiSelectOpen={isMultiSelectOpen}
+        isSelected={isSelected}
+        toggleIsSelected={toggleIsSelected}
+        contact={contact}
+      />
 
       <FavoriteButton onChange={removeFromFavorites} checked />
     </>
