@@ -17,7 +17,8 @@ export const ListHeader = ({
   handleSelectClick,
   handleSearchClick,
   category,
-  active,
+  activeSearchMenu,
+  activeMultiSelect,
   page,
 }) => {
   const isTablet = useMediaQuery('(min-width:768px)');
@@ -50,7 +51,7 @@ export const ListHeader = ({
               type="button"
               aria-label="Open search menu"
               onClick={handleSearchClick}
-              className={clsx({ active })}
+              className={clsx({ active: activeSearchMenu })}
             >
               {renderIcons(ICON_NAMES.SEARCH, ICON_SIZES.MEDIUM)}
             </ActionBtn>
@@ -60,7 +61,7 @@ export const ListHeader = ({
             type="button"
             aria-label="Open multi-select menu"
             onClick={handleSelectClick}
-            className={clsx({ active })}
+            className={clsx({ active: activeMultiSelect })}
           >
             {renderIcons(ICON_NAMES.MULTI_SELECT, ICON_SIZES.MEDIUM)}
           </ActionBtn>
@@ -87,6 +88,7 @@ ListHeader.propTypes = {
   handleSelectClick: PropTypes.func,
   handleSearchClick: PropTypes.func,
   category: PropTypes.oneOf(Object.values(ITEM_CATEGORIES)).isRequired,
-  active: PropTypes.bool,
+  activeSearchMenu: PropTypes.bool,
+  activeMultiSelect: PropTypes.bool,
   page: PropTypes.string,
 };

@@ -19,7 +19,7 @@ const Favorites = () => {
     resetSelectedItems,
     handleSelectAllClick,
     updateSelectedItems,
-  } = useMultiSelect(favoriteContacts);
+  } = useMultiSelect(favoriteContacts, ROUTES.FAVORITES);
 
   return (
     <>
@@ -34,7 +34,7 @@ const Favorites = () => {
                   items={favoriteContacts}
                   handleClick={() => navigate(`${ROUTES.CREATE}`)}
                   handleSelectClick={toggleMultiSelect}
-                  active={isMultiSelectOpen}
+                  activeMultiSelect={isMultiSelectOpen}
                 />
                 {isMultiSelectOpen && (
                   <MultiSelectBar

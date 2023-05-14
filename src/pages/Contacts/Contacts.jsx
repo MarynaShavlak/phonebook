@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -24,7 +24,7 @@ import {
 } from 'redux/contacts';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
-import { useMultiSelect } from 'hooks';
+import { useMultiSelect, useSearchMenu } from 'hooks';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -43,19 +43,14 @@ const Contacts = () => {
     resetSelectedItems,
     handleSelectAllClick,
     updateSelectedItems,
-  } = useMultiSelect(allContacts);
-  const [isSearchMenuOpen, setIsSetSearchMenuOpen] = useState(false);
-
-  const toggleSearchMenu = () => {
-    setIsSetSearchMenuOpen(!isSearchMenuOpen);
-  };
+  } = useMultiSelect(allContacts, ROUTES.CONTACTS);
+  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts?.length;
   return (
@@ -72,7 +67,8 @@ const Contacts = () => {
                   handleClick={() => navigate(`${ROUTES.CREATE}`)}
                   handleSelectClick={toggleMultiSelect}
                   handleSearchClick={toggleSearchMenu}
-                  active={isMultiSelectOpen}
+                  activeMultiSelect={isMultiSelectOpen}
+                  activeSearchMenu={isSearchMenuOpen}
                   page={ROUTES.CONTACTS}
                 />
                 {isMultiSelectOpen && (
@@ -83,7 +79,7 @@ const Contacts = () => {
                     page={ROUTES.CONTACTS}
                   />
                 )}
-                <FilterList />
+                {isSearchMenuOpen && <FilterList />}
               </>
             )}
             {isLoading ? (

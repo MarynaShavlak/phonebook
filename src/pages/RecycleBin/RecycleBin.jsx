@@ -23,7 +23,7 @@ const RecycleBin = () => {
     resetSelectedItems,
     handleSelectAllClick,
     updateSelectedItems,
-  } = useMultiSelect(deletedContacts);
+  } = useMultiSelect(deletedContacts, ROUTES.RECYCLEBIN);
 
   useEffect(() => {
     if (!allContacts) {
@@ -55,7 +55,7 @@ const RecycleBin = () => {
                     items={deletedContacts}
                     handleClick={toggleClearRecyclebinModal}
                     handleSelectClick={toggleMultiSelect}
-                    active={isMultiSelectOpen}
+                    activeMultiSelect={isMultiSelectOpen}
                   />
                 )}
                 {isMultiSelectOpen && (

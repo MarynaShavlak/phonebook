@@ -5,3 +5,4 @@ export { useSort } from './useSort';
 export { useMultiSelect } from './useMultiSelect';
 export { useSelectedContact } from './useSelectedContact';
 export { useGroupName } from './useGroupName';
+export { useSearchMenu } from './useSearchMenu';

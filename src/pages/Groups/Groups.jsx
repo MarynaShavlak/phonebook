@@ -25,7 +25,7 @@ const Groups = () => {
     resetSelectedItems,
     handleSelectAllClick,
     updateSelectedItems,
-  } = useMultiSelect(groups);
+  } = useMultiSelect(groups, ROUTES.GROUPS);
 
   useEffect(() => {
     if (!allContacts) {
@@ -58,7 +58,7 @@ const Groups = () => {
                   items={groups}
                   handleClick={toggleCreateGroupModal}
                   handleSelectClick={toggleMultiSelect}
-                  active={isMultiSelectOpen}
+                  activeMultiSelect={isMultiSelectOpen}
                 />
                 {isMultiSelectOpen && (
                   <MultiSelectBar
