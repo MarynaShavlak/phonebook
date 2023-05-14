@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Avatar from 'react-avatar';
 import {
   renderIcons,
   Notifications,
@@ -29,7 +28,7 @@ import {
   ContactEl,
 } from './Group.styled';
 import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
-import { TelLink } from 'shared/commonStyledComponents';
+import { TelLink, ContactData } from 'shared/commonStyledComponents';
 import { ContactAvatar } from 'shared';
 
 export const Group = ({
@@ -96,17 +95,19 @@ export const Group = ({
                   {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
                 </IconButton>
                 <ContactEl>
-                  <Avatar
-                    size="25"
-                    textSizeRatio={2}
+                  <ContactAvatar
+                    isMultiSelectOpen={isMultiSelectOpen}
+                    isSelected={isSelected}
+                    toggleIsSelected={toggleIsSelected}
                     name={contact.name}
-                    unstyled={false}
-                    round="50%"
                   />
-                  <p>{contact.name}:</p>
-                  <TelLink href={`tel: ${contact.number}`}>
-                    <p>{contact.number}</p>
-                  </TelLink>
+
+                  <ContactData>
+                    <p>{contact.name}</p>
+                    <TelLink href={`tel: ${contact.number}`}>
+                      <p>{contact.number}</p>
+                    </TelLink>
+                  </ContactData>
                 </ContactEl>
               </li>
             ))}

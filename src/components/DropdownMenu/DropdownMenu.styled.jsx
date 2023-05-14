@@ -38,9 +38,10 @@ export const DropdownToggleBtn = styled.button`
   display: flex;
   align-self: center;
   align-items: center;
-  padding: 5px;
+  padding: 0 5px;
   background-color: transparent;
-  border: 5px solid transparent;
+  border: none;
+  /* border: 5px solid transparent; */
   border-radius: ${props => props.theme.borderRadius.extra};
   cursor: pointer;
   svg {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TelLink } from 'shared/commonStyledComponents';
 
 export const GroupWrapper = styled.div`
   display: flex;
@@ -51,10 +52,8 @@ export const Element = styled.div`
   flex-grow: 1;
   column-gap: ${props => props.theme.gapSize.standard};
   align-items: center;
-  font-size: ${props => props.theme.fontSize.md};
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: ${props => props.theme.fontSize.lg};
-  }
+  font-size: ${props => props.theme.fontSize.lg};
+
   font-weight: 500;
 `;
 
@@ -114,6 +113,9 @@ export const IconButton = styled.button`
   &:hover {
     color: ${props => props.theme.colors.hover};
     ~ ${ContactEl} {
+      color: ${props => props.theme.colors.hover};
+    }
+    ~ ${TelLink} {
       color: ${props => props.theme.colors.hover};
     }
   }

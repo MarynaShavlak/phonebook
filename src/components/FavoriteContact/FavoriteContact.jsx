@@ -5,7 +5,7 @@ import { FavoriteButton } from 'components';
 import { ContactAvatar } from 'shared';
 import { ContactEl } from 'components/Contact/Contact.styled';
 import { removeContactFromFavorites } from 'redux/favorites';
-import { TelLink } from 'shared/commonStyledComponents';
+import { ContactData, TelLink } from 'shared/commonStyledComponents';
 import { useSelectedContact } from 'hooks';
 
 export const FavoriteContact = ({
@@ -35,10 +35,12 @@ export const FavoriteContact = ({
           toggleIsSelected={toggleIsSelected}
           name={name}
         />
-        <p>{name}:</p>
-        <TelLink href={`tel: ${number}`}>
-          <p>{number}</p>
-        </TelLink>
+        <ContactData>
+          <p>{name}</p>
+          <TelLink href={`tel: ${number}`}>
+            <p>{number}</p>
+          </TelLink>
+        </ContactData>
       </ContactEl>
 
       <FavoriteButton onChange={removeFromFavorites} checked />

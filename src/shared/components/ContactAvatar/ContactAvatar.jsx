@@ -12,7 +12,7 @@ export const ContactAvatar = ({
   toggleIsSelected,
   name,
 }) => {
-  const avatarLetter = name.charAt(0);
+  const avatarLetter = name?.charAt(0);
   const avatar = name ? (
     <Avatar
       size="30"
@@ -39,7 +39,7 @@ export const ContactAvatar = ({
 
 ContactAvatar.propTypes = {
   name: PropTypes.string,
-  isMultiSelectOpen: PropTypes.bool.isRequired,
-  isSelected: PropTypes.bool.isRequired,
-  toggleIsSelected: PropTypes.func.isRequired,
+  isMultiSelectOpen: PropTypes.bool,
+  isSelected: PropTypes.bool,
+  toggleIsSelected: PropTypes.func,
 };

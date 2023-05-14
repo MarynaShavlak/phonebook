@@ -1,16 +1,14 @@
 import styled from 'styled-components';
+
 export const ControlButtons = styled.div`
   display: flex;
   column-gap: ${props => props.theme.gapSize.large};
 `;
 export const ContactEl = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: start; */
   column-gap: ${props => props.theme.gapSize.standard};
-  font-size: ${props => props.theme.fontSize.sm};
-  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
-    font-size: ${props => props.theme.fontSize.md};
-  }
+  font-size: ${props => props.theme.fontSize.md};
   flex-grow: 1;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
   color: ${props => props.theme.colors.black};

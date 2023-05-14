@@ -5,7 +5,7 @@ export const List = styled.ul`
   flex-direction: column;
   justify-content: center;
   font-size: ${props => props.theme.fontSize.md};
-  row-gap: ${props => props.theme.gapSize.standard};
+  row-gap: ${props => props.theme.gapSize.large};
   min-width: 290px;
   @media screen and (min-width: ${props => props.theme.devices.mobile}) {
     width: 345px;

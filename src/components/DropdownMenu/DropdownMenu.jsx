@@ -28,7 +28,7 @@ export const DropdownMenu = ({ elements, type }) => {
         <div>
           <div onClick={handleDropdownMenu}>
             <DropdownToggleBtn type="button" ariaLabel="List of operations">
-              {renderIcons(icon, ICON_SIZES.MEDIUM)}
+              {renderIcons(icon, ICON_SIZES.MEDIUM_LARGE)}
             </DropdownToggleBtn>
           </div>
 
