@@ -191,6 +191,17 @@ export const TelLink = styled.a`
   color: ${props => props.theme.colors.black};
 `;
 
+export const ContactData = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* flex-direction: column; */
+  gap: ${props => props.theme.gapSize.small};
+  @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    gap: ${props => props.theme.gapSize.standard};
+  }
+`;
+
 export const ActionBtn = styled.button`
   display: flex;
   align-items: center;
