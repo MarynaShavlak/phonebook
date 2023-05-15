@@ -1,4 +1,7 @@
-export { selectRecycleBinContacts } from './selectors';
+export {
+  selectRecyclebinContacts,
+  selectFilteredRecyclebinContacts,
+} from './selectors';
 export {
   addContactToRecycleBin,
   removeContactFromRecycleBin,

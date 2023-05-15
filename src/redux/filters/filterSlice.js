@@ -6,15 +6,15 @@ const initialState = {
   groups: '',
   recyclebin: '',
 };
-const filterByNameSlice = createSlice({
-  name: 'filterByName',
+const filterSlice = createSlice({
+  name: 'filter',
   initialState,
   reducers: {
-    setFilterByName(state, action) {
+    setFilter(state, action) {
       state[action.payload.name] = action.payload.value;
     },
   },
 });
 
-export const { setFilterByName } = filterByNameSlice.actions;
-export const filterByNameReducer = filterByNameSlice.reducer;
+export const { setFilter } = filterSlice.actions;
+export const filterReducer = filterSlice.reducer;

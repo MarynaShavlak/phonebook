@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -15,10 +15,7 @@ import {
   Filter,
 } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import {
-  selectFilterFavoritesByName,
-  selectFilterFavoritesByNumber,
-} from 'redux/filters/favorites';
+import { selectFilter } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 import { useMultiSelect, useSearchMenu } from 'hooks';
 
@@ -28,10 +25,8 @@ const Favorites = () => {
   const filteredFavoritesContacts = useSelector(
     selectFilteredFavoritesContacts
   );
-  const filterByName = useSelector(selectFilterFavoritesByName);
-  const filterByNumber = useSelector(selectFilterFavoritesByNumber);
-  const isFiltered =
-    (!!filterByName || !!filterByNumber) && !!favoriteContacts?.length;
+  const filter = useSelector(selectFilter(ROUTES.CONTACTS));
+  const isFiltered = !!filter && !!favoriteContacts?.length;
   const navigate = useNavigate();
   const {
     isMultiSelectOpen,
@@ -42,8 +37,7 @@ const Favorites = () => {
     updateSelectedItems,
   } = useMultiSelect(favoriteContacts, ROUTES.FAVORITES);
   const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
-  const favoritesRef = useRef();
-  console.log('favoritesRef: ', favoritesRef);
+
   return (
     <>
       <AppBar />{' '}
@@ -70,12 +64,7 @@ const Favorites = () => {
                     page={ROUTES.FAVORITES}
                   />
                 )}
-                {/* {isSearchMenuOpen && (
-                  <Filter
-                    page={ROUTES.FAVORITES}
-                    favoritesFilterRef={favoritesRef}
-                  />
-                )} */}
+                {isSearchMenuOpen && <Filter page={ROUTES.FAVORITES} />}
               </>
             )}
 
@@ -94,7 +83,7 @@ const Favorites = () => {
               </List>
             ) : isFiltered ? (
               <Notification
-                message={`No contacts found matching your search criteria for names or numbers containing '${filterByName}'`}
+                message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
               />
             ) : (
               <Notification message="There are no contacts in your favorites yet" />

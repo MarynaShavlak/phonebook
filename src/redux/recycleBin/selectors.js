@@ -1,11 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { selectFilterRecyclebinByName } from 'redux/filters/recyclebin/selectors';
-export const selectRecycleBinContacts = state => state.recycleBin.recycleBin;
-export const selectFilteredRecyclebinContacts = createSelector(
-  [selectRecycleBinContacts, selectFilterRecyclebinByName],
+import { ROUTES } from 'constants';
+import { selectFilter } from 'redux/filters';
 
-  (contacts, filterByName) => {
-    const normalizeFilter = filterByName.toLowerCase();
+export const selectRecyclebinContacts = state => state.recycleBin.recycleBin;
+export const selectFilteredRecyclebinContacts = createSelector(
+  [selectRecyclebinContacts, selectFilter(ROUTES.RECYCLEBIN)],
+
+  (contacts, filter) => {
+    const normalizeFilter = filter.toLowerCase();
     if (!contacts) return [];
     const recyclebinContacts = contacts.filter(contact => {
       return (

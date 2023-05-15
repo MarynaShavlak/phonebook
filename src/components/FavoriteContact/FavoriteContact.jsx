@@ -5,7 +5,8 @@ import { FavoriteButton } from 'components';
 import { ContactData } from 'shared';
 import { removeContactFromFavorites } from 'redux/favorites';
 import { useSelectedContact } from 'hooks';
-import { selectFilterFavoritesByName } from 'redux/filters/favorites/selectors';
+import { selectFilter } from 'redux/filters';
+import { ROUTES } from 'constants';
 
 export const FavoriteContact = ({
   contact,
@@ -23,7 +24,7 @@ export const FavoriteContact = ({
     contact,
     updateSelectedItems
   );
-  const filterValue = useSelector(selectFilterFavoritesByName);
+  const filter = useSelector(selectFilter(ROUTES.FAVORITES));
 
   return (
     <>
@@ -32,7 +33,7 @@ export const FavoriteContact = ({
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
         contact={contact}
-        filter={filterValue}
+        filter={filter}
       />
 
       <FavoriteButton onChange={removeFromFavorites} checked />

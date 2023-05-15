@@ -7,18 +7,27 @@ import {
   Notification,
   ListHeader,
   MultiSelectBar,
-  FilterList,
+  Filter,
 } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import { selectRecycleBinContacts, clearRecycleBin } from 'redux/recycleBin';
+import {
+  selectRecyclebinContacts,
+  clearRecycleBin,
+  selectFilteredRecyclebinContacts,
+} from 'redux/recycleBin';
 import { selectContacts, fetchContacts } from 'redux/contacts';
+import { selectFilter } from 'redux/filters';
 import { ITEM_CATEGORIES, CONTACT_ACTIONS, ROUTES } from 'constants';
 import { showRecyclebinClearInfo } from 'utils/notifications';
 import { useMultiSelect, useSearchMenu } from 'hooks';
 
 const RecycleBin = () => {
-  const deletedContacts = useSelector(selectRecycleBinContacts);
+  const deletedContacts = useSelector(selectRecyclebinContacts);
   const allContacts = useSelector(selectContacts);
+  const filteredRecyclebinContacts = useSelector(
+    selectFilteredRecyclebinContacts
+  );
+  const filter = useSelector(selectFilter(ROUTES.RECYCLEBIN));
   const dispatch = useDispatch();
   const [isClearRecyclebinModalOpen, setIsClearRecyclebinModalOpen] =
     useState(false);
@@ -47,6 +56,7 @@ const RecycleBin = () => {
     showRecyclebinClearInfo();
     toggleClearRecyclebinModal();
   };
+  const isFiltered = !!filter && !!allContacts?.length;
   return (
     <>
       <AppBar />
@@ -75,7 +85,7 @@ const RecycleBin = () => {
                     page={ROUTES.RECYCLEBIN}
                   />
                 )}
-                {isSearchMenuOpen && <FilterList page={ROUTES.RECYCLEBIN} />}
+                {isSearchMenuOpen && <Filter page={ROUTES.RECYCLEBIN} />}
                 {isClearRecyclebinModalOpen && (
                   <ConfirmationModal
                     isOpen={isClearRecyclebinModalOpen}
@@ -87,7 +97,7 @@ const RecycleBin = () => {
 
                 {!!deletedContacts.length ? (
                   <List>
-                    {deletedContacts.map(contact => (
+                    {filteredRecyclebinContacts.map(contact => (
                       <ContactItem key={contact.id}>
                         <DeletedContact
                           contact={contact}

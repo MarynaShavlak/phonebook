@@ -1,9 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { selectFilterFavoritesByName } from 'redux/filters/favorites/selectors';
+import { ROUTES } from 'constants';
+import { selectFilter } from 'redux/filters/selectors';
 export const selectFavoritesContacts = state => state.favorites.favorites;
 
 export const selectFilteredFavoritesContacts = createSelector(
-  [selectFavoritesContacts, selectFilterFavoritesByName],
+  [selectFavoritesContacts, selectFilter(ROUTES.FAVORITES)],
 
   (contacts, filterFavoritesByName) => {
     const normalizeFilter = filterFavoritesByName.toLowerCase();

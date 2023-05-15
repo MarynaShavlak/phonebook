@@ -10,7 +10,7 @@ import {
   DropdownMenu,
 } from 'components';
 import { ContactData } from 'shared';
-import { selectRecycleBinContacts } from 'redux/recycleBin';
+import { selectRecyclebinContacts } from 'redux/recycleBin';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import {
@@ -26,7 +26,7 @@ import {
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
-import { selectFilterByName } from 'redux/filters';
+import { selectFilter } from 'redux/filters';
 
 export const Contact = ({
   contact,
@@ -35,7 +35,7 @@ export const Contact = ({
   updateSelectedItems,
 }) => {
   const { id } = contact;
-  const deletedContacts = useSelector(selectRecycleBinContacts);
+  const deletedContacts = useSelector(selectRecyclebinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export const Contact = ({
       : addToFavorites({ contact, dispatch });
   };
 
-  const filterValue = useSelector(selectFilterByName('contacts'));
+  const filter = useSelector(selectFilter(ROUTES.CONTACTS));
 
   return (
     <>
@@ -87,7 +87,7 @@ export const Contact = ({
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
         contact={contact}
-        filter={filterValue}
+        filter={filter}
       />
       <FavoriteButton checked={isFavorite} onChange={toggleFavorite} />
       <DropdownMenu

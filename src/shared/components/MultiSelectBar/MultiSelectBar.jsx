@@ -34,7 +34,7 @@ import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
 import { selectContacts } from 'redux/contacts';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
-import { selectRecycleBinContacts } from 'redux/recycleBin';
+import { selectRecyclebinContacts } from 'redux/recycleBin';
 import { ROUTES } from 'constants';
 import { ActionBtn } from './ActionBtn/ActionBtn';
 
@@ -49,7 +49,7 @@ export const MultiSelectBar = ({
   const isOnGroupsPage = page === ROUTES.GROUPS;
   const dispatch = useDispatch();
   const allContacts = useSelector(selectContacts);
-  const deletedContacts = useSelector(selectRecycleBinContacts);
+  const deletedContacts = useSelector(selectRecyclebinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
   const isAnyContactSelected = selectedItems.length;

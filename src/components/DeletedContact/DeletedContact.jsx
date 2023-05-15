@@ -12,7 +12,8 @@ import {
 } from 'utils';
 import { showRecyclebinInfo } from 'utils/notifications';
 import { useModal, useSelectedContact } from 'hooks';
-import { CONTACT_ACTIONS, OPERATION } from 'constants';
+import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
+import { selectFilter } from 'redux/filters';
 
 export const DeletedContact = ({
   contact,
@@ -47,7 +48,7 @@ export const DeletedContact = ({
       ? toggleRestoreModal()
       : await restoreDeletedContact({ contact, dispatch });
   };
-  // const filterValue = useSelector(selectFilterByName);
+  const filter = useSelector(selectFilter(ROUTES.RECYCLEBIN));
   return (
     <>
       <div>
@@ -56,7 +57,7 @@ export const DeletedContact = ({
           isSelected={isSelected}
           toggleIsSelected={toggleIsSelected}
           contact={contact}
-          // filter={filterValue}
+          filter={filter}
         />
         <Time>
           removed at <b>{removalTime}</b>

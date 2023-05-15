@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -22,11 +22,7 @@ import {
   selectFilteredContacts,
   fetchContacts,
 } from 'redux/contacts';
-// import {
-//   selectFilterByName,
-//   selectFilterByNumber,
-// } from 'redux/filters/contacts';
-import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
+import { selectFilter } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 import { useMultiSelect, useSearchMenu } from 'hooks';
 
@@ -38,8 +34,7 @@ const Contacts = () => {
   const allContacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const filterByName = useSelector(selectFilterByName('contacts'));
-  const filterByNumber = useSelector(selectFilterByNumber('contacts'));
+  const filter = useSelector(selectFilter(ROUTES.CONTACTS));
   const {
     isMultiSelectOpen,
     toggleMultiSelect,
@@ -55,15 +50,7 @@ const Contacts = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-  const isFiltered =
-    (!!filterByName || !!filterByNumber) && !!allContacts?.length;
-
-  useEffect(() => {
-    console.log('Mount');
-    return () => {
-      console.log('Unmount');
-    };
-  }, []);
+  const isFiltered = !!filter && !!allContacts?.length;
 
   return (
     <>
@@ -107,7 +94,7 @@ const Contacts = () => {
               />
             ) : isFiltered ? (
               <Notification
-                message={`No contacts found matching your search criteria for names or numbers containing '${filterByName}'`}
+                message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
               />
             ) : (
               <>
