@@ -5,22 +5,21 @@ import { TelLink, ContactData } from 'shared/commonStyledComponents';
 
 export const HighlightContactDetails = ({
   contact,
-  filterByName,
-  filterByNumber,
+  filter,
   defaultHighlighterClass = 'marked',
 }) => {
   return (
     <ContactData>
       <Highlighter
         highlightClassName={clsx(defaultHighlighterClass)}
-        searchWords={[`${filterByName}`]}
+        searchWords={[`${filter}`]}
         autoEscape={true}
         textToHighlight={`${contact.name}`}
       />
       <TelLink href={`tel: ${contact.number}`}>
         <Highlighter
           highlightClassName={clsx(defaultHighlighterClass)}
-          searchWords={[`${filterByNumber}`]}
+          searchWords={[`${filter}`]}
           autoEscape={true}
           textToHighlight={` ${contact.number}`}
         />
@@ -34,7 +33,6 @@ HighlightContactDetails.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }).isRequired,
-  filterByName: PropTypes.string.isRequired,
-  filterByNumber: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
   defaultHighlighterClass: PropTypes.string,
 };

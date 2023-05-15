@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: '',
+  contacts: '',
+  favorites: '',
+  groups: '',
+  recyclebin: '',
 };
 const filterByNameSlice = createSlice({
-  name: 'filter',
+  name: 'filterByName',
   initialState,
   reducers: {
     setFilterByName(state, action) {
-      state.value = action.payload;
+      state[action.payload.name] = action.payload.value;
     },
   },
 });

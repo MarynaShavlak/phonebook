@@ -3,4 +3,7 @@ export {
   removeContactFromFavorites,
   updateFavoriteContact,
 } from './favoritesSlice.js';
-export { selectFavoritesContacts } from './selectors.js';
+export {
+  selectFavoritesContacts,
+  selectFilteredFavoritesContacts,
+} from './selectors.js';

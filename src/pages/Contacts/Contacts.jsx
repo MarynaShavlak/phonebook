@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -11,7 +11,7 @@ import {
   Section,
   ErrorMessage,
   Notification,
-  FilterList,
+  Filter,
   ListHeader,
   MultiSelectBar,
 } from 'shared';
@@ -22,6 +22,10 @@ import {
   selectFilteredContacts,
   fetchContacts,
 } from 'redux/contacts';
+// import {
+//   selectFilterByName,
+//   selectFilterByNumber,
+// } from 'redux/filters/contacts';
 import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 import { useMultiSelect, useSearchMenu } from 'hooks';
@@ -34,8 +38,8 @@ const Contacts = () => {
   const allContacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const filterByName = useSelector(selectFilterByName);
-  const filterByNumber = useSelector(selectFilterByNumber);
+  const filterByName = useSelector(selectFilterByName('contacts'));
+  const filterByNumber = useSelector(selectFilterByNumber('contacts'));
   const {
     isMultiSelectOpen,
     toggleMultiSelect,
@@ -53,6 +57,14 @@ const Contacts = () => {
   }, [dispatch]);
   const isFiltered =
     (!!filterByName || !!filterByNumber) && !!allContacts?.length;
+
+  useEffect(() => {
+    console.log('Mount');
+    return () => {
+      console.log('Unmount');
+    };
+  }, []);
+
   return (
     <>
       <AppBar />
@@ -79,7 +91,7 @@ const Contacts = () => {
                     page={ROUTES.CONTACTS}
                   />
                 )}
-                {isSearchMenuOpen && <FilterList />}
+                {isSearchMenuOpen && <Filter page={ROUTES.CONTACTS} />}
               </>
             )}
             {isLoading ? (
@@ -87,23 +99,15 @@ const Contacts = () => {
             ) : error && isLoading === false ? (
               <ErrorMessage />
             ) : filteredContacts?.length ? (
-              <>
-                <ContactList
-                  state={{ from: location }}
-                  isMultiSelectOpen={isMultiSelectOpen}
-                  selectedItems={selectedItems}
-                  updateSelectedItems={updateSelectedItems}
-                />
-              </>
+              <ContactList
+                state={{ from: location }}
+                isMultiSelectOpen={isMultiSelectOpen}
+                selectedItems={selectedItems}
+                updateSelectedItems={updateSelectedItems}
+              />
             ) : isFiltered ? (
               <Notification
-                message={
-                  filterByName && filterByNumber
-                    ? `No contacts found matching your search criteria for names containing '${filterByName}' and numbers containing '${filterByNumber}'.`
-                    : filterByName
-                    ? `No contacts found matching your search criteria for names containing "${filterByName}" `
-                    : `No contacts found matching your search criteria for numbers containing  "${filterByNumber}" `
-                }
+                message={`No contacts found matching your search criteria for names or numbers containing '${filterByName}'`}
               />
             ) : (
               <>

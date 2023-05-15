@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { DeletedContact, AppBar, ConfirmationModal } from 'components';
-import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
+import {
+  Section,
+  Notification,
+  ListHeader,
+  MultiSelectBar,
+  FilterList,
+} from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import { selectRecycleBinContacts, clearRecycleBin } from 'redux/recycleBin';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { ITEM_CATEGORIES, CONTACT_ACTIONS, ROUTES } from 'constants';
 import { showRecyclebinClearInfo } from 'utils/notifications';
-import { useMultiSelect } from 'hooks';
+import { useMultiSelect, useSearchMenu } from 'hooks';
 
 const RecycleBin = () => {
   const deletedContacts = useSelector(selectRecycleBinContacts);
@@ -24,7 +30,7 @@ const RecycleBin = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(deletedContacts, ROUTES.RECYCLEBIN);
-
+  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
@@ -55,7 +61,10 @@ const RecycleBin = () => {
                     items={deletedContacts}
                     handleClick={toggleClearRecyclebinModal}
                     handleSelectClick={toggleMultiSelect}
+                    handleSearchClick={toggleSearchMenu}
                     activeMultiSelect={isMultiSelectOpen}
+                    activeSearchMenu={isSearchMenuOpen}
+                    page={ROUTES.RECYCLEBIN}
                   />
                 )}
                 {isMultiSelectOpen && (
@@ -66,7 +75,7 @@ const RecycleBin = () => {
                     page={ROUTES.RECYCLEBIN}
                   />
                 )}
-
+                {isSearchMenuOpen && <FilterList page={ROUTES.RECYCLEBIN} />}
                 {isClearRecyclebinModalOpen && (
                   <ConfirmationModal
                     isOpen={isClearRecyclebinModalOpen}

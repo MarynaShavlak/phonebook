@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { HighlightContactDetails } from 'components';
 import { ContactAvatar } from 'shared';
-import { selectFilterByName, selectFilterByNumber } from 'redux/filters';
 import { ContactEl } from 'components/Contact/Contact.styled';
 
 export const ContactData = ({
@@ -11,11 +9,9 @@ export const ContactData = ({
   isMultiSelectOpen,
   isSelected,
   toggleIsSelected,
+  filter,
 }) => {
   const { name } = contact;
-  const filterByName = useSelector(selectFilterByName);
-  const filterByNumber = useSelector(selectFilterByNumber);
-
   return (
     <ContactEl>
       <ContactAvatar
@@ -24,11 +20,7 @@ export const ContactData = ({
         toggleIsSelected={toggleIsSelected}
         name={name}
       />
-      <HighlightContactDetails
-        contact={contact}
-        filterByName={filterByName}
-        filterByNumber={filterByNumber}
-      />
+      <HighlightContactDetails contact={contact} filter={filter} />
     </ContactEl>
   );
 };
@@ -42,4 +34,5 @@ ContactData.propTypes = {
   isMultiSelectOpen: PropTypes.bool,
   isSelected: PropTypes.bool,
   toggleIsSelected: PropTypes.func.isRequired,
+  filter: PropTypes.string,
 };

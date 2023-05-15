@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ConfirmationModal, DropdownMenu } from 'components';
-import { ContactAvatar } from 'shared';
+import { ContactAvatar, ContactData } from 'shared';
 import { ContactEl, Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import {
@@ -47,20 +47,17 @@ export const DeletedContact = ({
       ? toggleRestoreModal()
       : await restoreDeletedContact({ contact, dispatch });
   };
-
+  // const filterValue = useSelector(selectFilterByName);
   return (
     <>
       <div>
-        <ContactEl>
-          <ContactAvatar
-            isMultiSelectOpen={isMultiSelectOpen}
-            isSelected={isSelected}
-            toggleIsSelected={toggleIsSelected}
-            name={name}
-          />
-          <p>{name}:</p>
-          <p>{number}</p>
-        </ContactEl>
+        <ContactData
+          isMultiSelectOpen={isMultiSelectOpen}
+          isSelected={isSelected}
+          toggleIsSelected={toggleIsSelected}
+          contact={contact}
+          // filter={filterValue}
+        />
         <Time>
           removed at <b>{removalTime}</b>
         </Time>

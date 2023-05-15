@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: '',
+  contacts: '',
+  favorites: '',
+  groups: '',
+  recyclebin: '',
 };
 const filterByNumberSlice = createSlice({
-  name: 'filter',
+  name: 'filterByNumber',
   initialState,
   reducers: {
     setFilterByNumber(state, action) {
-      state.value = action.payload;
+      state[action.payload.name] = action.payload.value;
     },
   },
 });

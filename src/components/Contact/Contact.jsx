@@ -26,6 +26,7 @@ import {
 } from 'utils';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
+import { selectFilterByName } from 'redux/filters';
 
 export const Contact = ({
   contact,
@@ -76,6 +77,9 @@ export const Contact = ({
       ? removeFromFavorites({ contact, dispatch })
       : addToFavorites({ contact, dispatch });
   };
+
+  const filterValue = useSelector(selectFilterByName('contacts'));
+
   return (
     <>
       <ContactData
@@ -83,6 +87,7 @@ export const Contact = ({
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
         contact={contact}
+        filter={filterValue}
       />
       <FavoriteButton checked={isFavorite} onChange={toggleFavorite} />
       <DropdownMenu

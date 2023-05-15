@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectFavoritesContacts } from 'redux/favorites/selectors';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  selectFavoritesContacts,
+  selectFilteredFavoritesContacts,
+} from 'redux/favorites';
 import { List, ContactItem } from 'components/ContactList/ContactList.styled';
 import { FavoriteContact, AppBar } from 'components';
 import {
@@ -9,14 +12,26 @@ import {
   Notification,
   ListHeader,
   MultiSelectBar,
-  FilterList,
+  Filter,
 } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import {
+  selectFilterFavoritesByName,
+  selectFilterFavoritesByNumber,
+} from 'redux/filters/favorites';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
 import { useMultiSelect, useSearchMenu } from 'hooks';
 
 const Favorites = () => {
+  const location = useLocation();
   const favoriteContacts = useSelector(selectFavoritesContacts);
+  const filteredFavoritesContacts = useSelector(
+    selectFilteredFavoritesContacts
+  );
+  const filterByName = useSelector(selectFilterFavoritesByName);
+  const filterByNumber = useSelector(selectFilterFavoritesByNumber);
+  const isFiltered =
+    (!!filterByName || !!filterByNumber) && !!favoriteContacts?.length;
   const navigate = useNavigate();
   const {
     isMultiSelectOpen,
@@ -27,6 +42,8 @@ const Favorites = () => {
     updateSelectedItems,
   } = useMultiSelect(favoriteContacts, ROUTES.FAVORITES);
   const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
+  const favoritesRef = useRef();
+  console.log('favoritesRef: ', favoritesRef);
   return (
     <>
       <AppBar />{' '}
@@ -53,12 +70,18 @@ const Favorites = () => {
                     page={ROUTES.FAVORITES}
                   />
                 )}
-                {isSearchMenuOpen && <FilterList />}
+                {/* {isSearchMenuOpen && (
+                  <Filter
+                    page={ROUTES.FAVORITES}
+                    favoritesFilterRef={favoritesRef}
+                  />
+                )} */}
               </>
             )}
-            {!!favoriteContacts.length ? (
-              <List>
-                {favoriteContacts.map(contact => (
+
+            {filteredFavoritesContacts?.length ? (
+              <List state={{ from: location }}>
+                {filteredFavoritesContacts.map(contact => (
                   <ContactItem key={contact.id}>
                     <FavoriteContact
                       contact={contact}
@@ -69,6 +92,10 @@ const Favorites = () => {
                   </ContactItem>
                 ))}
               </List>
+            ) : isFiltered ? (
+              <Notification
+                message={`No contacts found matching your search criteria for names or numbers containing '${filterByName}'`}
+              />
             ) : (
               <Notification message="There are no contacts in your favorites yet" />
             )}
