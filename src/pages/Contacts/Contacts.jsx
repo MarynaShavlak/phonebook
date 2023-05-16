@@ -27,6 +27,7 @@ const Contacts = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(allContacts, ROUTES.CONTACTS);
+
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
@@ -37,7 +38,6 @@ const Contacts = () => {
   const openCreateNewContactPage = () => {
     navigate(`${ROUTES.CREATE}`);
   };
-
   const renderContact = contact => {
     return (
       <Contact

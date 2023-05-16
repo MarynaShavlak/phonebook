@@ -67,7 +67,6 @@ const RecycleBin = () => {
                   resetSelectedItems={resetSelectedItems}
                   handleSelectAllClick={handleSelectAllClick}
                 />
-
                 <ItemsListSection
                   page={ROUTES.RECYCLEBIN}
                   renderContact={renderContact}

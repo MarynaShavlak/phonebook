@@ -14,10 +14,12 @@ export const ActionsMenu = ({
   selectedItems,
   resetSelectedItems,
   handleSelectAllClick,
+  // isSearchMenuOpen,
+  // toggleSearchMenu,
 }) => {
+  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu(page);
   const dispatch = useDispatch();
   const allContacts = useSelector(selectContacts);
-  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());

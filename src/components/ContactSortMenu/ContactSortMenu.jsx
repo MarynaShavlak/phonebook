@@ -12,7 +12,7 @@ export const ContactSortMenu = () => {
       localStorage.getItem(REVERSE_SORT_KEY) === 'true'
     );
 
-  console.log('sortOption: ', sortOption);
+  // console.log('sortOption: ', sortOption);
   useEffect(() => {
     localStorage.setItem(SORT_OPTION_KEY, sortOption);
     localStorage.setItem(REVERSE_SORT_KEY, reverseSort);
