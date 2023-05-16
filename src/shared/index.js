@@ -15,3 +15,4 @@ export { MultiSelectBar } from './components/MultiSelectBar';
 export { ContactAvatar } from './components/ContactAvatar';
 export { ModalInput } from './components/ModalInput';
 export { ContactData } from './components/ContactData';
+export { ActionsMenu } from './components/ActionsMenu';

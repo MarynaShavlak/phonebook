@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   ContentWrapper,
   Main,
   Button,
 } from 'shared/commonStyledComponents.jsx';
-import { ContactList, Loader, AppBar } from 'components';
 import {
-  Section,
-  ErrorMessage,
-  Notification,
-  Filter,
-  ListHeader,
-  MultiSelectBar,
-} from 'shared';
+  ItemsList,
+  Loader,
+  AppBar,
+  ContactSortMenu,
+  Contact,
+} from 'components';
+import { Section, ErrorMessage, Notification, ActionsMenu } from 'shared';
 import {
   selectContacts,
   selectIsLoading,
@@ -24,12 +23,11 @@ import {
 } from 'redux/contacts';
 import { selectFilter } from 'redux/filters';
 import { ITEM_CATEGORIES, ROUTES } from 'constants';
-import { useMultiSelect, useSearchMenu } from 'hooks';
+import { useMultiSelect } from 'hooks';
 
 const Contacts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const filteredContacts = useSelector(selectFilteredContacts);
   const allContacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
@@ -43,7 +41,6 @@ const Contacts = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(allContacts, ROUTES.CONTACTS);
-  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
@@ -52,46 +49,49 @@ const Contacts = () => {
   }, [dispatch]);
   const isFiltered = !!filter && !!allContacts?.length;
 
+  const renderContact = contact => {
+    return (
+      <Contact
+        contact={contact}
+        isMultiSelectOpen={isMultiSelectOpen}
+        selectedItems={selectedItems}
+        updateSelectedItems={updateSelectedItems}
+      />
+    );
+  };
+
   return (
     <>
       <AppBar />
       <Main>
         <Section>
           <ContentWrapper>
-            {!!allContacts?.length && (
-              <>
-                <ListHeader
-                  category={ITEM_CATEGORIES.CONTACT}
-                  items={allContacts}
-                  handleClick={() => navigate(`${ROUTES.CREATE}`)}
-                  handleSelectClick={toggleMultiSelect}
-                  handleSearchClick={toggleSearchMenu}
-                  activeMultiSelect={isMultiSelectOpen}
-                  activeSearchMenu={isSearchMenuOpen}
-                  page={ROUTES.CONTACTS}
-                />
-                {isMultiSelectOpen && (
-                  <MultiSelectBar
-                    onSelectAllClick={handleSelectAllClick}
-                    selectedItems={selectedItems}
-                    resetSelectedItems={resetSelectedItems}
-                    page={ROUTES.CONTACTS}
-                  />
-                )}
-                {isSearchMenuOpen && <Filter page={ROUTES.CONTACTS} />}
-              </>
-            )}
+            <ActionsMenu
+              category={ITEM_CATEGORIES.CONTACT}
+              page={ROUTES.CONTACTS}
+              items={allContacts}
+              handleMainBtnClick={() => navigate(`${ROUTES.CREATE}`)}
+              isMultiSelectOpen={isMultiSelectOpen}
+              toggleMultiSelect={toggleMultiSelect}
+              selectedItems={selectedItems}
+              resetSelectedItems={resetSelectedItems}
+              handleSelectAllClick={handleSelectAllClick}
+            />
+
             {isLoading ? (
               <Loader />
             ) : error && isLoading === false ? (
               <ErrorMessage />
             ) : filteredContacts?.length ? (
-              <ContactList
-                state={{ from: location }}
-                isMultiSelectOpen={isMultiSelectOpen}
-                selectedItems={selectedItems}
-                updateSelectedItems={updateSelectedItems}
-              />
+              <>
+                <ContactSortMenu />
+                <ItemsList
+                  // state={{ from: location }}
+                  items={filteredContacts}
+                  renderItem={renderContact}
+                  page={ROUTES.CONTACTS}
+                />
+              </>
             ) : isFiltered ? (
               <Notification
                 message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}

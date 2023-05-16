@@ -4,7 +4,7 @@ import { FilterBlock, Info } from './Filter.styled';
 import { Name } from 'shared/components/ContactForm/ContactForm.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import { setFilter } from 'redux/filters/filterSlice';
 import { selectFilter } from 'redux/filters/selectors';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
@@ -15,7 +15,7 @@ import { ROUTES } from 'constants';
 export function Filter({ page }) {
   const isOnContactsPage = page === ROUTES.CONTACTS;
   const isOnFavoritesPage = page === ROUTES.FAVORITES;
-  const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
+  // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
 
   const filter = useSelector(selectFilter(page));
   const filteredContacts = useSelector(selectFilteredContacts);
@@ -25,20 +25,8 @@ export function Filter({ page }) {
   const filteredRecyclebinContacts = useSelector(
     selectFilteredRecyclebinContacts
   );
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-
-  // const nameSearch = isOnContactsPage
-  //   ? filterByName
-  //   : isOnFavoritesPage
-  //   ? filterFavoritesByName
-  //   : filterRecyclebinByName;
-
-  // const numberSearch = isOnContactsPage
-  //   ? filterByNumber
-  //   : isOnFavoritesPage
-  //   ? filterFavoritesByNumber
-  //   : filterRecyclebinByNumber;
 
   const contacts = isOnContactsPage
     ? filteredContacts

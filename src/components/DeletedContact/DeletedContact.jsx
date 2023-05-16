@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ConfirmationModal, DropdownMenu } from 'components';
-import { ContactAvatar, ContactData } from 'shared';
-import { ContactEl, Time } from 'components/Contact/Contact.styled';
+import { ContactData } from 'shared';
+import { Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import {
   renderDropdownElement,
@@ -14,16 +14,17 @@ import { showRecyclebinInfo } from 'utils/notifications';
 import { useModal, useSelectedContact } from 'hooks';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import { selectFilter } from 'redux/filters';
+import { selectContacts } from 'redux/contacts';
 
 export const DeletedContact = ({
   contact,
-  allContacts,
   isMultiSelectOpen,
   selectedItems,
   updateSelectedItems,
 }) => {
-  const { id, name, number, removalTime } = contact;
+  const { id, removalTime } = contact;
   const dispatch = useDispatch();
+  const allContacts = useSelector(selectContacts);
   const { isRestoreModalOpen, toggleRestoreModal } = useModal(
     OPERATION.RESTORE
   );
@@ -113,13 +114,7 @@ DeletedContact.propTypes = {
     number: PropTypes.string.isRequired,
     removalTime: PropTypes.string.isRequired,
   }).isRequired,
-  allContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+
   isMultiSelectOpen: PropTypes.bool,
   selectedItems: PropTypes.arrayOf(
     PropTypes.shape({

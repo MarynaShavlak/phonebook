@@ -56,7 +56,7 @@ const Groups = () => {
                 <ListHeader
                   category={ITEM_CATEGORIES.GROUP}
                   items={groups}
-                  handleClick={toggleCreateGroupModal}
+                  handleMainBtnClick={toggleCreateGroupModal}
                   handleSelectClick={toggleMultiSelect}
                   activeMultiSelect={isMultiSelectOpen}
                   page={ROUTES.GROUPS}

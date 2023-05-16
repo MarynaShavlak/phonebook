@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, ContactItem } from 'components/ContactList/ContactList.styled';
-import { DeletedContact, AppBar, ConfirmationModal } from 'components';
 import {
-  Section,
-  Notification,
-  ListHeader,
-  MultiSelectBar,
-  Filter,
-} from 'shared';
+  DeletedContact,
+  AppBar,
+  ConfirmationModal,
+  ItemsList,
+} from 'components';
+import { Section, Notification, ActionsMenu } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import {
   selectRecyclebinContacts,
@@ -19,11 +17,12 @@ import { selectContacts, fetchContacts } from 'redux/contacts';
 import { selectFilter } from 'redux/filters';
 import { ITEM_CATEGORIES, CONTACT_ACTIONS, ROUTES } from 'constants';
 import { showRecyclebinClearInfo } from 'utils/notifications';
-import { useMultiSelect, useSearchMenu } from 'hooks';
+import { useMultiSelect } from 'hooks';
 
 const RecycleBin = () => {
-  const deletedContacts = useSelector(selectRecyclebinContacts);
   const allContacts = useSelector(selectContacts);
+  const deletedContacts = useSelector(selectRecyclebinContacts);
+
   const filteredRecyclebinContacts = useSelector(
     selectFilteredRecyclebinContacts
   );
@@ -39,7 +38,6 @@ const RecycleBin = () => {
     handleSelectAllClick,
     updateSelectedItems,
   } = useMultiSelect(deletedContacts, ROUTES.RECYCLEBIN);
-  const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu();
   useEffect(() => {
     if (!allContacts) {
       dispatch(fetchContacts());
@@ -56,7 +54,17 @@ const RecycleBin = () => {
     showRecyclebinClearInfo();
     toggleClearRecyclebinModal();
   };
-  const isFiltered = !!filter && !!allContacts?.length;
+  const isFiltered = !!filter && !!deletedContacts?.length;
+  const renderContact = contact => {
+    return (
+      <DeletedContact
+        contact={contact}
+        isMultiSelectOpen={isMultiSelectOpen}
+        selectedItems={selectedItems}
+        updateSelectedItems={updateSelectedItems}
+      />
+    );
+  };
   return (
     <>
       <AppBar />
@@ -65,27 +73,18 @@ const RecycleBin = () => {
           <ContentWrapper>
             {!!allContacts?.length && (
               <>
-                {!!deletedContacts?.length && (
-                  <ListHeader
-                    category={ITEM_CATEGORIES.RECYCLEBIN}
-                    items={deletedContacts}
-                    handleClick={toggleClearRecyclebinModal}
-                    handleSelectClick={toggleMultiSelect}
-                    handleSearchClick={toggleSearchMenu}
-                    activeMultiSelect={isMultiSelectOpen}
-                    activeSearchMenu={isSearchMenuOpen}
-                    page={ROUTES.RECYCLEBIN}
-                  />
-                )}
-                {isMultiSelectOpen && (
-                  <MultiSelectBar
-                    onSelectAllClick={handleSelectAllClick}
-                    selectedItems={selectedItems}
-                    resetSelectedItems={resetSelectedItems}
-                    page={ROUTES.RECYCLEBIN}
-                  />
-                )}
-                {isSearchMenuOpen && <Filter page={ROUTES.RECYCLEBIN} />}
+                <ActionsMenu
+                  category={ITEM_CATEGORIES.RECYCLEBIN}
+                  page={ROUTES.RECYCLEBIN}
+                  items={deletedContacts}
+                  handleMainBtnClick={toggleClearRecyclebinModal}
+                  isMultiSelectOpen={isMultiSelectOpen}
+                  toggleMultiSelect={toggleMultiSelect}
+                  selectedItems={selectedItems}
+                  resetSelectedItems={resetSelectedItems}
+                  handleSelectAllClick={handleSelectAllClick}
+                />
+
                 {isClearRecyclebinModalOpen && (
                   <ConfirmationModal
                     isOpen={isClearRecyclebinModalOpen}
@@ -95,20 +94,16 @@ const RecycleBin = () => {
                   />
                 )}
 
-                {!!deletedContacts.length ? (
-                  <List>
-                    {filteredRecyclebinContacts.map(contact => (
-                      <ContactItem key={contact.id}>
-                        <DeletedContact
-                          contact={contact}
-                          allContacts={allContacts}
-                          isMultiSelectOpen={isMultiSelectOpen}
-                          selectedItems={selectedItems}
-                          updateSelectedItems={updateSelectedItems}
-                        />
-                      </ContactItem>
-                    ))}
-                  </List>
+                {filteredRecyclebinContacts?.length ? (
+                  <ItemsList
+                    items={filteredRecyclebinContacts}
+                    renderItem={renderContact}
+                    page={ROUTES.RECYCLEBIN}
+                  />
+                ) : isFiltered ? (
+                  <Notification
+                    message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
+                  />
                 ) : (
                   <Notification message="There are no contacts in recycle bin now" />
                 )}

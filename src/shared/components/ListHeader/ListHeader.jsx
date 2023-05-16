@@ -13,7 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const ListHeader = ({
   items,
-  handleClick,
+  handleMainBtnClick,
   handleSelectClick,
   handleSearchClick,
   category,
@@ -74,7 +74,7 @@ export const ListHeader = ({
                   ? 'Clear recycle bin'
                   : `Add new ${category}`
               }
-              onClick={handleClick}
+              onClick={handleMainBtnClick}
             >
               {renderIcons(iconName, ICON_SIZES.MEDIUM)}
             </ActionBtn>
@@ -87,7 +87,7 @@ export const ListHeader = ({
 
 ListHeader.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleMainBtnClick: PropTypes.func.isRequired,
   handleSelectClick: PropTypes.func,
   handleSearchClick: PropTypes.func,
   category: PropTypes.oneOf(Object.values(ITEM_CATEGORIES)).isRequired,
