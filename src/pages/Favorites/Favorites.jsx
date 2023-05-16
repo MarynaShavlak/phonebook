@@ -1,24 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  selectFavoritesContacts,
-  selectFilteredFavoritesContacts,
-} from 'redux/favorites';
-import { FavoriteContact, AppBar, ItemsList } from 'components';
-import { Section, Notification, ActionsMenu } from 'shared';
+import { selectFavoritesContacts } from 'redux/favorites';
+import { FavoriteContact, AppBar } from 'components';
+import { Section, ActionsMenu, ItemsListSection } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import { selectFilter } from 'redux/filters';
-import { ITEM_CATEGORIES, ROUTES } from 'constants';
+import { ROUTES } from 'constants';
 import { useMultiSelect } from 'hooks';
 
 const Favorites = () => {
   const favoriteContacts = useSelector(selectFavoritesContacts);
-  const filteredFavoritesContacts = useSelector(
-    selectFilteredFavoritesContacts
-  );
-  const filter = useSelector(selectFilter(ROUTES.FAVORITES));
-  const isFiltered = !!filter && !!favoriteContacts?.length;
   const navigate = useNavigate();
   const {
     isMultiSelectOpen,
@@ -45,7 +36,6 @@ const Favorites = () => {
         <Section>
           <ContentWrapper>
             <ActionsMenu
-              category={ITEM_CATEGORIES.CONTACT}
               page={ROUTES.FAVORITES}
               items={favoriteContacts}
               handleMainBtnClick={() => navigate(`${ROUTES.CREATE}`)}
@@ -55,20 +45,10 @@ const Favorites = () => {
               resetSelectedItems={resetSelectedItems}
               handleSelectAllClick={handleSelectAllClick}
             />
-
-            {filteredFavoritesContacts?.length ? (
-              <ItemsList
-                items={filteredFavoritesContacts}
-                renderItem={renderContact}
-                page={ROUTES.FAVORITES}
-              />
-            ) : isFiltered ? (
-              <Notification
-                message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
-              />
-            ) : (
-              <Notification message="There are no contacts in your favorites now" />
-            )}
+            <ItemsListSection
+              page={ROUTES.FAVORITES}
+              renderContact={renderContact}
+            />
           </ContentWrapper>
         </Section>
       </Main>

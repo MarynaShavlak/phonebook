@@ -1,32 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  DeletedContact,
-  AppBar,
-  ConfirmationModal,
-  ItemsList,
-} from 'components';
-import { Section, Notification, ActionsMenu } from 'shared';
+import { DeletedContact, AppBar, ConfirmationModal } from 'components';
+import { Section, ActionsMenu, ItemsListSection } from 'shared';
 import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import {
-  selectRecyclebinContacts,
-  clearRecycleBin,
-  selectFilteredRecyclebinContacts,
-} from 'redux/recycleBin';
+import { selectRecyclebinContacts, clearRecycleBin } from 'redux/recycleBin';
 import { selectContacts, fetchContacts } from 'redux/contacts';
-import { selectFilter } from 'redux/filters';
-import { ITEM_CATEGORIES, CONTACT_ACTIONS, ROUTES } from 'constants';
+import { CONTACT_ACTIONS, ROUTES } from 'constants';
 import { showRecyclebinClearInfo } from 'utils/notifications';
 import { useMultiSelect } from 'hooks';
 
 const RecycleBin = () => {
   const allContacts = useSelector(selectContacts);
   const deletedContacts = useSelector(selectRecyclebinContacts);
-
-  const filteredRecyclebinContacts = useSelector(
-    selectFilteredRecyclebinContacts
-  );
-  const filter = useSelector(selectFilter(ROUTES.RECYCLEBIN));
   const dispatch = useDispatch();
   const [isClearRecyclebinModalOpen, setIsClearRecyclebinModalOpen] =
     useState(false);
@@ -54,7 +39,6 @@ const RecycleBin = () => {
     showRecyclebinClearInfo();
     toggleClearRecyclebinModal();
   };
-  const isFiltered = !!filter && !!deletedContacts?.length;
   const renderContact = contact => {
     return (
       <DeletedContact
@@ -74,7 +58,6 @@ const RecycleBin = () => {
             {!!allContacts?.length && (
               <>
                 <ActionsMenu
-                  category={ITEM_CATEGORIES.RECYCLEBIN}
                   page={ROUTES.RECYCLEBIN}
                   items={deletedContacts}
                   handleMainBtnClick={toggleClearRecyclebinModal}
@@ -85,6 +68,10 @@ const RecycleBin = () => {
                   handleSelectAllClick={handleSelectAllClick}
                 />
 
+                <ItemsListSection
+                  page={ROUTES.RECYCLEBIN}
+                  renderContact={renderContact}
+                />
                 {isClearRecyclebinModalOpen && (
                   <ConfirmationModal
                     isOpen={isClearRecyclebinModalOpen}
@@ -92,20 +79,6 @@ const RecycleBin = () => {
                     onConfirm={handleClearRecycleBin}
                     action={CONTACT_ACTIONS.DELETE_ALL}
                   />
-                )}
-
-                {filteredRecyclebinContacts?.length ? (
-                  <ItemsList
-                    items={filteredRecyclebinContacts}
-                    renderItem={renderContact}
-                    page={ROUTES.RECYCLEBIN}
-                  />
-                ) : isFiltered ? (
-                  <Notification
-                    message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
-                  />
-                ) : (
-                  <Notification message="There are no contacts in recycle bin now" />
                 )}
               </>
             )}

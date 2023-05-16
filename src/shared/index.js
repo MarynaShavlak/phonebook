@@ -16,3 +16,5 @@ export { ContactAvatar } from './components/ContactAvatar';
 export { ModalInput } from './components/ModalInput';
 export { ContactData } from './components/ContactData';
 export { ActionsMenu } from './components/ActionsMenu';
+export { ItemsListSection } from './components/ItemsListSection';
+export { EmptyStateMessage } from './components/EmptyStateMessage';
