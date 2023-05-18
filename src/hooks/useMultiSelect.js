@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import { checkContactInSelected } from 'utils';
+import { LOCAL_STORAGE_KEYS } from 'constants';
 
 export const useMultiSelect = (allContacts, route) => {
   const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(() => {
     const multiSelectState =
-      JSON.parse(localStorage.getItem('multiSelectState')) || {};
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.MULTI_SELECT_STATE)) ||
+      {};
     return multiSelectState[route] ?? false;
   });
   const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
     const multiSelectState =
-      JSON.parse(localStorage.getItem('multiSelectState')) || {};
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.MULTI_SELECT_STATE)) ||
+      {};
     localStorage.setItem(
-      'multiSelectState',
+      LOCAL_STORAGE_KEYS.MULTI_SELECT_STATE,
       JSON.stringify({ ...multiSelectState, [route]: isMultiSelectOpen })
     );
   }, [isMultiSelectOpen, route]);

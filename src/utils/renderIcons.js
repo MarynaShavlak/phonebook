@@ -17,8 +17,8 @@ import { RiGroupFill } from 'react-icons/ri';
 import { AiFillHome } from 'react-icons/ai';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { FaSortAlphaDownAlt } from 'react-icons/fa';
-import { FaSortNumericDown } from 'react-icons/fa';
-import { FaSortNumericDownAlt } from 'react-icons/fa';
+import { FaSortAmountDown } from 'react-icons/fa';
+import { FaSortAmountDownAlt } from 'react-icons/fa';
 import { FiCheck } from 'react-icons/fi';
 import { FaRegCircle } from 'react-icons/fa';
 import { MdSettingsBackupRestore } from 'react-icons/md';
@@ -50,8 +50,8 @@ const icons = {
   [ICON_NAMES.CONFIRM]: <GiConfirmed />,
   [ICON_NAMES.CONTACT]: <RiContactsBook2Fill />,
   [ICON_NAMES.CREATE]: <IoIosCreate />,
-  [ICON_NAMES.DATE_DOWN]: <FaSortNumericDownAlt />,
-  [ICON_NAMES.DATE_UP]: <FaSortNumericDown />,
+  [ICON_NAMES.DATE_DOWN]: <FaSortAmountDown />,
+  [ICON_NAMES.DATE_UP]: <FaSortAmountDownAlt />,
   [ICON_NAMES.DELETE]: <RiDeleteBin6Fill />,
   [ICON_NAMES.DOTS]: <BsThreeDotsVertical />,
   [ICON_NAMES.DROP_DOWN]: <MdOutlineArrowDropDown />,

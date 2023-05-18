@@ -1,4 +1,9 @@
-export const SORT_OPTIONS = {
-  ALPHABETICALLY: 'ByAlphabet',
-  DATE: 'ByDate',
+export const SORT_TYPES = {
+  ALPHABETICALLY: 'alphabet',
+  DATE: 'date',
+};
+
+export const SORT_ORDER = {
+  ASCENDING: 'asc',
+  DESCENDING: 'desc',
 };

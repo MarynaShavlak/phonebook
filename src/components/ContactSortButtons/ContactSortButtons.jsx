@@ -2,22 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SortButtonList } from './ContactSortButtons.styled';
 import { SortButton } from './components/SortButton';
-import { SORT_OPTIONS, ICON_NAMES } from 'constants';
+import { SORT_TYPES, ICON_NAMES } from 'constants';
 const { ALPHA_UP, ALPHA_DOWN, DATE_UP, DATE_DOWN } = ICON_NAMES;
 
 export const ContactSortButtons = ({
   sortOption,
-  reverseSort,
+  activeAlphaSortOrder,
+  activeDateSortOrder,
   handleSortByAlphabet,
   handleSortByDate,
 }) => {
-  const ALPHABETICALLY_ACTIVE = sortOption === SORT_OPTIONS.ALPHABETICALLY;
-  const DATE_ACTIVE = sortOption === SORT_OPTIONS.DATE;
+  const ALPHABETICALLY_ACTIVE = sortOption === SORT_TYPES.ALPHABETICALLY;
+  const DATE_ACTIVE = sortOption === SORT_TYPES.DATE;
 
   return (
     <SortButtonList>
       <SortButton
-        reverseSort={reverseSort}
+        activeSortOrder={activeAlphaSortOrder}
         onClick={handleSortByAlphabet}
         label="Sort contacts by alphabet"
         active={ALPHABETICALLY_ACTIVE}
@@ -25,7 +26,7 @@ export const ContactSortButtons = ({
         iconDown={ALPHA_DOWN}
       />
       <SortButton
-        reverseSort={reverseSort}
+        activeSortOrder={activeDateSortOrder}
         onClick={handleSortByDate}
         label="Sort contacts by date of create"
         active={DATE_ACTIVE}
@@ -38,7 +39,8 @@ export const ContactSortButtons = ({
 
 ContactSortButtons.propTypes = {
   sortOption: PropTypes.string.isRequired,
-  reverseSort: PropTypes.bool.isRequired,
+  activeDateSortOrder: PropTypes.string,
+  activeAlphaSortOrder: PropTypes.string,
   handleSortByAlphabet: PropTypes.func.isRequired,
   handleSortByDate: PropTypes.func.isRequired,
 };

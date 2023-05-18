@@ -1,4 +1,5 @@
 export const LOCAL_STORAGE_KEYS = {
-  SORT_OPTION_KEY: 'sortOption',
-  REVERSE_SORT_KEY: 'reverseSort',
+  SORT_STATE: 'sortState',
+  MULTI_SELECT_STATE: 'multiSelectState',
+  SEARCH_MENU_STATE: 'searchMenuState',
 };

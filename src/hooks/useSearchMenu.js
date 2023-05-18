@@ -1,32 +1,13 @@
 import { useState, useEffect } from 'react';
+import { LOCAL_STORAGE_KEYS } from 'constants';
 
-// export const useSearchMenu = () => {
-//   const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(
-//     sessionStorage.getItem('isSearchMenuOpen') === 'true'
-//   );
-//   console.log('isSearchMenuOpen: ', isSearchMenuOpen);
-
-//   const toggleSearchMenu = () => {
-//     setIsSearchMenuOpen(!isSearchMenuOpen);
-//   };
-
-//   useEffect(() => {
-//     sessionStorage.setItem('isSearchMenuOpen', isSearchMenuOpen);
-//   }, [isSearchMenuOpen]);
-
-//   return {
-//     isSearchMenuOpen,
-//     toggleSearchMenu,
-//   };
-// };
 export const useSearchMenu = route => {
   const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(() => {
     const isSearchMenuOpenState =
-      JSON.parse(localStorage.getItem('isSearchMenuOpenState')) || {};
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.SEARCH_MENU_STATE)) ||
+      {};
     return isSearchMenuOpenState[route] ?? false;
   });
-
-  console.log('isSearchMenuOpen: ', isSearchMenuOpen);
 
   const toggleSearchMenu = () => {
     setIsSearchMenuOpen(!isSearchMenuOpen);
@@ -34,9 +15,10 @@ export const useSearchMenu = route => {
 
   useEffect(() => {
     const isSearchMenuOpenState =
-      JSON.parse(localStorage.getItem('isSearchMenuOpenState')) || {};
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.SEARCH_MENU_STATE)) ||
+      {};
     localStorage.setItem(
-      'isSearchMenuOpenState',
+      LOCAL_STORAGE_KEYS.SEARCH_MENU_STATE,
       JSON.stringify({
         ...isSearchMenuOpenState,
         [route]: isSearchMenuOpen,

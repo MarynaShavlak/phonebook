@@ -3,7 +3,7 @@ export { GROUP_ACTIONS } from './groupActions';
 export { OPERATION } from './operationTypes';
 export { theme } from './theme';
 export { LOCAL_STORAGE_KEYS } from './localStorageKeys';
-export { SORT_OPTIONS } from './sortOptions';
+export { SORT_TYPES, SORT_ORDER } from './sortOptions';
 export { ICON_NAMES } from './iconNames';
 export { ICON_SIZES } from './iconSizes';
 export { ITEM_CATEGORIES } from './itemCategories';
