@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { List, ContactItem } from './ItemsList.styled';
-import { useSort } from 'hooks';
-import { SORT_TYPES, LOCAL_STORAGE_KEYS } from 'constants';
 import { ROUTES } from 'constants';
-
-const { SORT_OPTION_KEY, REVERSE_SORT_KEY } = LOCAL_STORAGE_KEYS;
+import { LOCAL_STORAGE_KEYS } from 'constants';
+import { useLocalStorageNonString } from 'hooks';
 
 export const ItemsList = ({ items, renderItem, page }) => {
-  // const { sortOption, reverseSort, sortContacts } = useSort(
-  //   localStorage.getItem(SORT_OPTION_KEY) || SORT_TYPES.ALPHABETICALLY,
-  //   localStorage.getItem(REVERSE_SORT_KEY) === 'true'
-  // );
+  const storedOption = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEYS.SORT_STATE)
+  );
 
-  // useEffect(() => {
-  //   localStorage.setItem(SORT_OPTION_KEY, sortOption);
-  //   localStorage.setItem(REVERSE_SORT_KEY, reverseSort);
-  // }, [sortOption, reverseSort]);
+  const [type, setType] = useState(storedOption);
+  console.log('type: ', type);
 
-  // const sortedContacts = sortContacts(items);
   const isOnContactsPage = page === ROUTES.CONTACTS;
   const itemsToDisplay = isOnContactsPage ? items : items;
 

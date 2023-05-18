@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { SORT_TYPES, SORT_ORDER, LOCAL_STORAGE_KEYS } from 'constants';
 
-export const useSort = () => {
-  const [option, setOption] = useState({ alphabet: SORT_ORDER.ASCENDING });
+export const useChangeSortType = sortState => {
+  const [option, setOption] = useState({ sortState });
   const { alphabet, date } = option;
   const key = Object.keys(option)[0];
 
@@ -42,7 +42,7 @@ export const useSort = () => {
 //   Date: (a, b) => b.id.localeCompare(a.id),
 // };
 
-// export const useSort = (initialSortOption, initialReverseSort) => {
+// export const useChangeSortType = (initialSortOption, initialReverseSort) => {
 //   const [sort, setSort] = useState({
 //     option: initialSortOption,
 //     reverse: initialReverseSort,
@@ -78,7 +78,7 @@ export const useSort = () => {
 //   Date: (a, b) => b.id.localeCompare(a.id),
 // };
 
-// export const useSort = (initialSortOption, initialReverseSort) => {
+// export const useChangeSortType = (initialSortOption, initialReverseSort) => {
 //   const [sort, setSort] = useState(
 //     // option: initialSortOption,
 //     // reverse: initialReverseSort,

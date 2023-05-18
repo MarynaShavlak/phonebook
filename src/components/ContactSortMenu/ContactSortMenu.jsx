@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContactSortButtons } from 'components';
-import { useSort } from 'hooks';
+import { useChangeSortType } from 'hooks';
+import { SORT_TYPES, SORT_ORDER, LOCAL_STORAGE_KEYS } from 'constants';
 
 export const ContactSortMenu = () => {
   const {
@@ -9,7 +10,8 @@ export const ContactSortMenu = () => {
     activeDateSortOrder,
     handleSortByAlphabet,
     handleSortByDate,
-  } = useSort();
+  } = useChangeSortType({ alphabet: SORT_ORDER.ASCENDING });
+  console.log('sortOption: ', sortOption);
 
   return (
     <>
