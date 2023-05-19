@@ -6,4 +6,4 @@ export { useMultiSelect } from './useMultiSelect';
 export { useSelectedContact } from './useSelectedContact';
 export { useGroupName } from './useGroupName';
 export { useSearchMenu } from './useSearchMenu';
-export { useLocalStorageNonString } from './useLocalStorageNonString';
+export { useItemsSorting } from './useItemsSorting';

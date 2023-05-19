@@ -18,7 +18,7 @@ export const List = styled.ul`
   }
 `;
 
-export const ContactItem = styled.li`
+export const Item = styled.li`
   position: relative;
   margin: 0;
   display: flex;
