@@ -48,7 +48,7 @@ export const ActionsMenu = ({
               page={page}
             />
           )}
-          {isSearchMenuOpen && <Filter page={page} />}
+          <Filter isSearchMenuOpen={isSearchMenuOpen} page={page} />
         </>
       )}
     </>

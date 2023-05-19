@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FilterBlock, Info } from './Filter.styled';
 import { Name } from 'shared/components/ContactForm/ContactForm.styled';
@@ -12,10 +12,20 @@ import { selectFilteredFavoritesContacts } from 'redux/favorites/selectors';
 import { selectFilteredRecyclebinContacts } from 'redux/recycleBin/selectors';
 import { ROUTES } from 'constants';
 
-export function Filter({ page }) {
+export const Filter = ({ page, isSearchMenuOpen }) => {
   const isOnContactsPage = page === ROUTES.CONTACTS;
   const isOnFavoritesPage = page === ROUTES.FAVORITES;
   // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
+  const updateFilter = value => {
+    dispatch(setFilter({ name: page, value: value }));
+  };
+
+  useEffect(() => {
+    if (!isSearchMenuOpen) {
+      updateFilter('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSearchMenuOpen]);
 
   const filter = useSelector(selectFilter(page));
   const filteredContacts = useSelector(selectFilteredContacts);
@@ -34,43 +44,41 @@ export function Filter({ page }) {
     ? filteredFavoritesContacts
     : filteredRecyclebinContacts;
 
-  const updateFilter = value => {
-    dispatch(setFilter({ name: page, value: value }));
-  };
-
   const onChangeFilter = ({ target: { name, value } }) => {
     // updateQueryString(name, value);
     updateFilter(value);
   };
 
-  // const updateQueryString = (name, value) => {
-  //   const newParams = new URLSearchParams(searchParams.toString());
-  //   newParams.delete(name);
-  //   if (value) newParams.append(name, value.toLowerCase());
-  //   newParams.sort();
-  //   setSearchParams(newParams);
-  // };
-
   return (
-    <FilterBlock>
-      <label>
-        <Name
-          type="text"
-          name="search"
-          placeholder={`Search...`}
-          value={filter}
-          onChange={onChangeFilter}
-        />
-      </label>
-      {filter && (
-        <Info>
-          Contacts found: <span>{contacts.length}</span>
-        </Info>
-      )}
-    </FilterBlock>
+    isSearchMenuOpen && (
+      <FilterBlock>
+        <label>
+          <Name
+            type="text"
+            name="search"
+            placeholder={`Search...`}
+            value={filter}
+            onChange={onChangeFilter}
+          />
+        </label>
+        {filter && (
+          <Info>
+            Contacts found: <span>{contacts.length}</span>
+          </Info>
+        )}
+      </FilterBlock>
+    )
   );
-}
+};
 
 Filter.propTypes = {
   page: PropTypes.string.isRequired,
 };
+
+// const updateQueryString = (name, value) => {
+//   const newParams = new URLSearchParams(searchParams.toString());
+//   newParams.delete(name);
+//   if (value) newParams.append(name, value.toLowerCase());
+//   newParams.sort();
+//   setSearchParams(newParams);
+// };

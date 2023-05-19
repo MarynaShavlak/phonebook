@@ -10,7 +10,6 @@ export const ContactSortMenu = () => {
     handleSortByAlphabet,
     handleSortByDate,
   } = useContext(SortContext);
-  console.log('sortOption: ', sortOption);
 
   return (
     <>
