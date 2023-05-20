@@ -112,33 +112,33 @@ const ManageGroupMember = () => {
 
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            <BackButton
-              pathTo={ROUTES.ROOT + ROUTES.GROUPS}
-              onClick={handleBackButtonClick}
-            />
-            <>
-              {renderExistedContactsText(existedContactsInGroup)}
-              <Text>
-                Choose contacts to add to the group <b>"{originalGroupName}"</b>
-              </Text>
-              <Select
-                options={options}
-                onChange={option => choseContactToAddInGroup(option.value)}
-                styles={customStyles}
-              />
+          <ContentWrapper> */}
+      <BackButton
+        pathTo={ROUTES.ROOT + ROUTES.GROUPS}
+        onClick={handleBackButtonClick}
+      />
+      <>
+        {renderExistedContactsText(existedContactsInGroup)}
+        <Text>
+          Choose contacts to add to the group <b>"{originalGroupName}"</b>
+        </Text>
+        <Select
+          options={options}
+          onChange={option => choseContactToAddInGroup(option.value)}
+          styles={customStyles}
+        />
 
-              {renderContactsToAddInGroupList(
-                contactsToAddInGroup,
-                handleContactSelect
-              )}
-            </>
-          </ContentWrapper>
+        {renderContactsToAddInGroupList(
+          contactsToAddInGroup,
+          handleContactSelect
+        )}
+      </>
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

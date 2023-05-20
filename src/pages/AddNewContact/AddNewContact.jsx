@@ -18,18 +18,15 @@ const AddNewContact = () => {
 
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            <BackButton pathTo={backLinkHref} />
-            <ContactForm
-              action={CONTACT_ACTIONS.ADD}
-              onSubmit={successAddContact}
-            />
-          </ContentWrapper>
+          <ContentWrapper> */}
+      <BackButton pathTo={backLinkHref} />
+      <ContactForm action={CONTACT_ACTIONS.ADD} onSubmit={successAddContact} />
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

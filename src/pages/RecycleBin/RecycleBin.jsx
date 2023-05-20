@@ -51,39 +51,39 @@ const RecycleBin = () => {
   };
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            {!!allContacts?.length && (
-              <>
-                <ActionsMenu
-                  page={ROUTES.RECYCLEBIN}
-                  items={deletedContacts}
-                  handleMainBtnClick={toggleClearRecyclebinModal}
-                  isMultiSelectOpen={isMultiSelectOpen}
-                  toggleMultiSelect={toggleMultiSelect}
-                  selectedItems={selectedItems}
-                  resetSelectedItems={resetSelectedItems}
-                  handleSelectAllClick={handleSelectAllClick}
-                />
-                <ItemsListSection
-                  page={ROUTES.RECYCLEBIN}
-                  renderContact={renderContact}
-                />
-                {isClearRecyclebinModalOpen && (
-                  <ConfirmationModal
-                    isOpen={isClearRecyclebinModalOpen}
-                    onClose={toggleClearRecyclebinModal}
-                    onConfirm={handleClearRecycleBin}
-                    action={CONTACT_ACTIONS.DELETE_ALL}
-                  />
-                )}
-              </>
-            )}
-          </ContentWrapper>
+          <ContentWrapper> */}
+      {!!allContacts?.length && (
+        <>
+          <ActionsMenu
+            page={ROUTES.RECYCLEBIN}
+            items={deletedContacts}
+            handleMainBtnClick={toggleClearRecyclebinModal}
+            isMultiSelectOpen={isMultiSelectOpen}
+            toggleMultiSelect={toggleMultiSelect}
+            selectedItems={selectedItems}
+            resetSelectedItems={resetSelectedItems}
+            handleSelectAllClick={handleSelectAllClick}
+          />
+          <ItemsListSection
+            page={ROUTES.RECYCLEBIN}
+            renderContact={renderContact}
+          />
+          {isClearRecyclebinModalOpen && (
+            <ConfirmationModal
+              isOpen={isClearRecyclebinModalOpen}
+              onClose={toggleClearRecyclebinModal}
+              onConfirm={handleClearRecycleBin}
+              action={CONTACT_ACTIONS.DELETE_ALL}
+            />
+          )}
+        </>
+      )}
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

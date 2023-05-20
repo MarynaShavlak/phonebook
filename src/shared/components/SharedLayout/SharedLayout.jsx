@@ -1,18 +1,24 @@
 import { Suspense } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Loader } from 'components';
-// import { ToastContainer } from 'react-toastify';
+import { Loader, AppBar } from 'components';
+import { Section } from 'shared';
+import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
 import { StyledContainer } from 'shared/commonStyledComponents';
 
 export const SharedLayout = () => {
   return (
     <>
-      <Suspense fallback={<Loader />}>
-        {/* <Suspense fallback={null}> */}
-        {/* <Container> */}
-        <Outlet />
-        {/* </Container> */}
-      </Suspense>
+      <AppBar />
+      <Main>
+        <Section>
+          <ContentWrapper>
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
+          </ContentWrapper>
+        </Section>
+      </Main>
 
       <StyledContainer
         position="bottom-right"

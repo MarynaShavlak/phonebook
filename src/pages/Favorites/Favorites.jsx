@@ -31,27 +31,24 @@ const Favorites = () => {
   };
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            <ActionsMenu
-              page={ROUTES.FAVORITES}
-              items={favoriteContacts}
-              handleMainBtnClick={() => navigate(`${ROUTES.CREATE}`)}
-              isMultiSelectOpen={isMultiSelectOpen}
-              toggleMultiSelect={toggleMultiSelect}
-              selectedItems={selectedItems}
-              resetSelectedItems={resetSelectedItems}
-              handleSelectAllClick={handleSelectAllClick}
-            />
-            <ItemsListSection
-              page={ROUTES.FAVORITES}
-              renderContact={renderContact}
-            />
-          </ContentWrapper>
+          <ContentWrapper> */}
+      <ActionsMenu
+        page={ROUTES.FAVORITES}
+        items={favoriteContacts}
+        handleMainBtnClick={() => navigate(`${ROUTES.CREATE}`)}
+        isMultiSelectOpen={isMultiSelectOpen}
+        toggleMultiSelect={toggleMultiSelect}
+        selectedItems={selectedItems}
+        resetSelectedItems={resetSelectedItems}
+        handleSelectAllClick={handleSelectAllClick}
+      />
+      <ItemsListSection page={ROUTES.FAVORITES} renderContact={renderContact} />
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

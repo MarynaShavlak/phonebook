@@ -51,34 +51,34 @@ const Contacts = () => {
 
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            <ActionsMenu
-              page={ROUTES.CONTACTS}
-              items={allContacts}
-              handleMainBtnClick={openCreateNewContactPage}
-              isMultiSelectOpen={isMultiSelectOpen}
-              toggleMultiSelect={toggleMultiSelect}
-              selectedItems={selectedItems}
-              resetSelectedItems={resetSelectedItems}
-              handleSelectAllClick={handleSelectAllClick}
-            />
+          <ContentWrapper> */}
+      <ActionsMenu
+        page={ROUTES.CONTACTS}
+        items={allContacts}
+        handleMainBtnClick={openCreateNewContactPage}
+        isMultiSelectOpen={isMultiSelectOpen}
+        toggleMultiSelect={toggleMultiSelect}
+        selectedItems={selectedItems}
+        resetSelectedItems={resetSelectedItems}
+        handleSelectAllClick={handleSelectAllClick}
+      />
 
-            {isLoading ? (
-              <Loader />
-            ) : error && isLoading === false ? (
-              <ErrorMessage />
-            ) : (
-              <ItemsListSection
-                page={ROUTES.CONTACTS}
-                renderContact={renderContact}
-              />
-            )}
-          </ContentWrapper>
+      {isLoading ? (
+        <Loader />
+      ) : error && isLoading === false ? (
+        <ErrorMessage />
+      ) : (
+        <ItemsListSection
+          page={ROUTES.CONTACTS}
+          renderContact={renderContact}
+        />
+      )}
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

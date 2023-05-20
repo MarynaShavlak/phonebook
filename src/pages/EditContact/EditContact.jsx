@@ -59,20 +59,20 @@ const EditContact = () => {
 
   return contact ? (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            <BackButton pathTo={backLinkHref} />
-            <ContactEditInfoBlock contact={contact} />
-            <ContactForm
-              action={CONTACT_ACTIONS.EDIT}
-              contact={contact}
-              onSubmit={successEditContact}
-            />
-          </ContentWrapper>
+          <ContentWrapper> */}
+      <BackButton pathTo={backLinkHref} />
+      <ContactEditInfoBlock contact={contact} />
+      <ContactForm
+        action={CONTACT_ACTIONS.EDIT}
+        contact={contact}
+        onSubmit={successEditContact}
+      />
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   ) : (
     <Loader />

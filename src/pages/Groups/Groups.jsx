@@ -40,66 +40,66 @@ const Groups = () => {
 
   return (
     <>
-      <AppBar />
-      <Main>
+      {/* <AppBar /> */}
+      {/* <Main>
         <Section>
-          <ContentWrapper>
-            {!!groups.length ? (
-              <>
-                {' '}
-                {isCreateGroupModalOpen && (
-                  <CreateGroupModal
-                    isOpen={isCreateGroupModalOpen}
-                    onClose={toggleCreateGroupModal}
-                  />
-                )}
-                <ListHeader
-                  category={ITEM_CATEGORIES.GROUP}
-                  items={groups}
-                  handleMainBtnClick={toggleCreateGroupModal}
-                  handleSelectClick={toggleMultiSelect}
-                  activeMultiSelect={isMultiSelectOpen}
-                  page={ROUTES.GROUPS}
+          <ContentWrapper> */}
+      {!!groups.length ? (
+        <>
+          {' '}
+          {isCreateGroupModalOpen && (
+            <CreateGroupModal
+              isOpen={isCreateGroupModalOpen}
+              onClose={toggleCreateGroupModal}
+            />
+          )}
+          <ListHeader
+            category={ITEM_CATEGORIES.GROUP}
+            items={groups}
+            handleMainBtnClick={toggleCreateGroupModal}
+            handleSelectClick={toggleMultiSelect}
+            activeMultiSelect={isMultiSelectOpen}
+            page={ROUTES.GROUPS}
+          />
+          {isMultiSelectOpen && (
+            <MultiSelectBar
+              onSelectAllClick={handleSelectAllClick}
+              selectedItems={selectedItems}
+              resetSelectedItems={resetSelectedItems}
+              page={ROUTES.GROUPS}
+            />
+          )}
+          <GroupsList>
+            {groups.map(group => (
+              <GroupItem key={group.id}>
+                <Group
+                  isMultiSelectOpen={isMultiSelectOpen}
+                  group={group}
+                  updateSelectedItems={updateSelectedItems}
+                  selectedItems={selectedItems}
                 />
-                {isMultiSelectOpen && (
-                  <MultiSelectBar
-                    onSelectAllClick={handleSelectAllClick}
-                    selectedItems={selectedItems}
-                    resetSelectedItems={resetSelectedItems}
-                    page={ROUTES.GROUPS}
-                  />
-                )}
-                <GroupsList>
-                  {groups.map(group => (
-                    <GroupItem key={group.id}>
-                      <Group
-                        isMultiSelectOpen={isMultiSelectOpen}
-                        group={group}
-                        updateSelectedItems={updateSelectedItems}
-                        selectedItems={selectedItems}
-                      />
-                    </GroupItem>
-                  ))}
-                </GroupsList>
-              </>
-            ) : (
-              <>
-                {' '}
-                <Notification message="You have not created any groups yet" />
-                <Button type="button" onClick={toggleCreateGroupModal}>
-                  Create group
-                </Button>
-                {isCreateGroupModalOpen && (
-                  <CreateGroupModal
-                    isOpen={isCreateGroupModalOpen}
-                    onClose={toggleCreateGroupModal}
-                  />
-                )}
-              </>
-            )}
-          </ContentWrapper>
+              </GroupItem>
+            ))}
+          </GroupsList>
+        </>
+      ) : (
+        <>
+          {' '}
+          <Notification message="You have not created any groups yet" />
+          <Button type="button" onClick={toggleCreateGroupModal}>
+            Create group
+          </Button>
+          {isCreateGroupModalOpen && (
+            <CreateGroupModal
+              isOpen={isCreateGroupModalOpen}
+              onClose={toggleCreateGroupModal}
+            />
+          )}
+        </>
+      )}
+      {/* </ContentWrapper>
         </Section>
-      </Main>
+      </Main> */}
     </>
   );
 };

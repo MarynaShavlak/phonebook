@@ -1,5 +1,6 @@
 import React, { lazy, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { ROUTES } from 'constants';
 import { PrivateRoute, RestrictedRoute, Loader } from 'components';
 import { SharedLayout } from 'shared';
@@ -27,25 +28,59 @@ const ManageGroupMember = lazy(() =>
 );
 
 export const App = () => {
+  const location = useLocation();
+  const path = location.pathname;
+  console.log('path: ', path);
+
+  if (path.match(/^\/$/)) {
+    console.log("Path is equal to '/'");
+  }
+
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
 
   const isLoading = useSelector(selectIsLoading);
   const sortContextValue = useChangeSortType();
-
+  const isOnLoginPage = path.includes(ROUTES.LOGIN);
+  const isOnRegisterPage = path.includes(ROUTES.REGISTER);
+  const isOnHomePage = !!path.match(/^\/$/);
   useEffect(() => {
     dispatch(authOperations.userInit());
   }, [dispatch]);
 
   if (isLoading) return <Loader />;
+  const shouldRenderSharedLayout = !(
+    isOnLoginPage ||
+    isOnRegisterPage ||
+    isOnHomePage
+  );
 
+  console.log('shouldRenderSharedLayout: ', shouldRenderSharedLayout);
   return isRefreshing ? (
     <Loader />
   ) : (
     <SortContext.Provider value={sortContextValue}>
       <Routes>
+        <Route index element={<Home />} />
+        <Route
+          path={ROUTES.LOGIN}
+          element={
+            <RestrictedRoute
+              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+              component={<LogIn />}
+            />
+          }
+        />
+        <Route
+          path={ROUTES.REGISTER}
+          element={
+            <RestrictedRoute
+              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+              component={<SignUp />}
+            />
+          }
+        />
         <Route path={ROUTES.ROOT} element={<SharedLayout />}>
-          <Route index element={<Home />} />
           <Route
             path={ROUTES.CONTACTS}
             element={
@@ -97,7 +132,6 @@ export const App = () => {
               />
             }
           />
-
           <Route
             path={ROUTES.RECYCLEBIN}
             element={
@@ -107,25 +141,8 @@ export const App = () => {
               />
             }
           />
-          <Route
-            path={ROUTES.LOGIN}
-            element={
-              <RestrictedRoute
-                redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
-                component={<LogIn />}
-              />
-            }
-          />
-          <Route
-            path={ROUTES.REGISTER}
-            element={
-              <RestrictedRoute
-                redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
-                component={<SignUp />}
-              />
-            }
-          />
-          <Route path="*" element={<Home />} />
+
+          <Route path="*" element={<Navigate to={ROUTES.CONTACTS} />} />
         </Route>
       </Routes>
     </SortContext.Provider>
