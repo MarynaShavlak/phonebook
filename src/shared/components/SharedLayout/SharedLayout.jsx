@@ -13,7 +13,7 @@ export const SharedLayout = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            <Suspense fallback={<Loader />}>
+            <Suspense>
               <Outlet />
             </Suspense>
           </ContentWrapper>

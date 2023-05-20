@@ -1,5 +1,4 @@
-import React, { lazy, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { lazy, useEffect, Suspense } from 'react';
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { ROUTES } from 'constants';
 import { PrivateRoute, RestrictedRoute, Loader } from 'components';
@@ -28,17 +27,9 @@ const ManageGroupMember = lazy(() =>
 );
 
 export const App = () => {
-  const location = useLocation();
-  const path = location.pathname;
-  console.log('path: ', path);
-
-  if (path.match(/^\/$/)) {
-    console.log("Path is equal to '/'");
-  }
-
+  const { pathname: path } = useLocation();
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-
   const isLoading = useSelector(selectIsLoading);
   const sortContextValue = useChangeSortType();
   const isOnLoginPage = path.includes(ROUTES.LOGIN);
@@ -48,103 +39,108 @@ export const App = () => {
     dispatch(authOperations.userInit());
   }, [dispatch]);
 
-  if (isLoading) return <Loader />;
   const shouldRenderSharedLayout = !(
     isOnLoginPage ||
     isOnRegisterPage ||
     isOnHomePage
   );
-
-  console.log('shouldRenderSharedLayout: ', shouldRenderSharedLayout);
-  return isRefreshing ? (
+  //  if (isLoading) return <Loader />;
+  return isRefreshing || isLoading ? (
     <Loader />
   ) : (
-    <SortContext.Provider value={sortContextValue}>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route
-          path={ROUTES.LOGIN}
-          element={
-            <RestrictedRoute
-              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
-              component={<LogIn />}
-            />
-          }
-        />
-        <Route
-          path={ROUTES.REGISTER}
-          element={
-            <RestrictedRoute
-              redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
-              component={<SignUp />}
-            />
-          }
-        />
-        <Route path={ROUTES.ROOT} element={<SharedLayout />}>
+    <Suspense>
+      <SortContext.Provider value={sortContextValue}>
+        <Routes>
+          <Route path={ROUTES.ROOT} element={<Home />} />
           <Route
-            path={ROUTES.CONTACTS}
+            path={ROUTES.LOGIN}
             element={
-              <PrivateRoute redirectTo={ROUTES.ROOT} component={<Contacts />} />
-            }
-          />
-          <Route
-            path={ROUTES.CREATE}
-            element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<AddNewContact />}
+              <RestrictedRoute
+                redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+                component={<LogIn />}
               />
             }
           />
           <Route
-            path={ROUTES.EDIT_CONTACT + '/:contactId'}
+            path={ROUTES.REGISTER}
             element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<EditContact />}
+              <RestrictedRoute
+                redirectTo={ROUTES.ROOT + ROUTES.CONTACTS}
+                component={<SignUp />}
               />
             }
           />
-          <Route
-            path={ROUTES.FAVORITES}
-            element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<Favorites />}
+          {shouldRenderSharedLayout && (
+            <Route path={ROUTES.ROOT} element={<SharedLayout />}>
+              <Route index element={<Home />} />
+              <Route
+                path={ROUTES.CONTACTS}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT}
+                    component={<Contacts />}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path={ROUTES.GROUPS}
-            element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<Groups />}
+              <Route
+                path={ROUTES.CREATE}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<AddNewContact />}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path={ROUTES.MANAGE_GROUP_MEMBERS + '/:groupName'}
-            element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<ManageGroupMember />}
+              <Route
+                path={ROUTES.EDIT_CONTACT + '/:contactId'}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<EditContact />}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path={ROUTES.RECYCLEBIN}
-            element={
-              <PrivateRoute
-                redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
-                component={<RecycleBin />}
+              <Route
+                path={ROUTES.FAVORITES}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<Favorites />}
+                  />
+                }
               />
-            }
-          />
-
-          <Route path="*" element={<Navigate to={ROUTES.CONTACTS} />} />
-        </Route>
-      </Routes>
-    </SortContext.Provider>
+              <Route
+                path={ROUTES.GROUPS}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<Groups />}
+                  />
+                }
+              />
+              <Route
+                path={ROUTES.MANAGE_GROUP_MEMBERS + '/:groupName'}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<ManageGroupMember />}
+                  />
+                }
+              />
+              <Route
+                path={ROUTES.RECYCLEBIN}
+                element={
+                  <PrivateRoute
+                    redirectTo={ROUTES.ROOT + ROUTES.LOGIN}
+                    component={<RecycleBin />}
+                  />
+                }
+              />
+              <Route path="*" element={<Navigate to={ROUTES.CONTACTS} />} />
+            </Route>
+          )}{' '}
+        </Routes>
+      </SortContext.Provider>
+    </Suspense>
   );
 };
