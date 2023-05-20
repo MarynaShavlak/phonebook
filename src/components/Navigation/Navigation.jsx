@@ -1,25 +1,23 @@
+import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {
-  Menu,
-  NavigationList,
-  NavigationLink,
-  PhoneLogo,
-} from './Navigation.styled';
+import { Menu, NavigationList, NavigationLink } from './Navigation.styled';
 import { renderIcons } from 'utils';
 import { useAuth } from 'hooks';
-import Logo from './images/phone-genie-logo.png';
 import { Link } from 'react-router-dom';
 import { ICON_NAMES, ICON_SIZES, ROUTES } from 'constants';
+import { AppLogo } from 'components';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
   const isTablet = useMediaQuery('(min-width:768px)');
+
   return (
     <>
       {isTablet && (
         <Link to={ROUTES.ROOT}>
           {' '}
-          <PhoneLogo src={Logo} alt="logo" />
+          {/* <PhoneLogo src={Logo} alt="logo" /> */}
+          <AppLogo />
         </Link>
       )}
       <Menu>

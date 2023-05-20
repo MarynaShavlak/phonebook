@@ -10,7 +10,7 @@ import {
 import { AppBenefits, AppDescription } from 'components';
 import { Main } from 'shared/commonStyledComponents.jsx';
 import { Section, AuthenticationPrompt } from 'shared';
-import Logo from 'components/Navigation/images/phone-genie-logo.png';
+import Logo from 'components/AppLogo/images/phone-genie-logo.png';
 import HomeImage from './images/home.svg';
 import { ROUTES } from 'constants';
 
