@@ -66,9 +66,7 @@ const Contacts = () => {
         handleSelectAllClick={handleSelectAllClick}
       />
 
-      {isLoading ? (
-        <Loader />
-      ) : error && isLoading === false ? (
+      {error && isLoading === false ? (
         <ErrorMessage />
       ) : (
         <ItemsListSection
