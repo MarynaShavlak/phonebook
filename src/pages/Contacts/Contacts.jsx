@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
-import { Loader, AppBar, Contact } from 'components';
-import { Section, ErrorMessage, ActionsMenu, ItemsListSection } from 'shared';
+import { Loader, Contact } from 'components';
+import { ErrorMessage, ActionsMenu, ItemsListSection } from 'shared';
 import {
   selectContacts,
   selectIsLoading,
@@ -38,6 +37,7 @@ const Contacts = () => {
   const openCreateNewContactPage = () => {
     navigate(`${ROUTES.CREATE}`);
   };
+
   const renderContact = contact => {
     return (
       <Contact
@@ -51,32 +51,28 @@ const Contacts = () => {
 
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
-      <ActionsMenu
-        page={ROUTES.CONTACTS}
-        items={allContacts}
-        handleMainBtnClick={openCreateNewContactPage}
-        isMultiSelectOpen={isMultiSelectOpen}
-        toggleMultiSelect={toggleMultiSelect}
-        selectedItems={selectedItems}
-        resetSelectedItems={resetSelectedItems}
-        handleSelectAllClick={handleSelectAllClick}
-      />
-
-      {error && isLoading === false ? (
+      {isLoading ? (
+        <Loader />
+      ) : error && isLoading === false ? (
         <ErrorMessage />
       ) : (
-        <ItemsListSection
-          page={ROUTES.CONTACTS}
-          renderContact={renderContact}
-        />
+        <>
+          <ActionsMenu
+            page={ROUTES.CONTACTS}
+            items={allContacts}
+            handleMainBtnClick={openCreateNewContactPage}
+            isMultiSelectOpen={isMultiSelectOpen}
+            toggleMultiSelect={toggleMultiSelect}
+            selectedItems={selectedItems}
+            resetSelectedItems={resetSelectedItems}
+            handleSelectAllClick={handleSelectAllClick}
+          />
+          <ItemsListSection
+            page={ROUTES.CONTACTS}
+            renderContact={renderContact}
+          />
+        </>
       )}
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   );
 };

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppBar, CreateGroupModal, Group } from 'components';
-import { Section, Notification, ListHeader, MultiSelectBar } from 'shared';
+import {
+  Section,
+  Notification,
+  ListHeader,
+  MultiSelectBar,
+  ActionsMenu,
+} from 'shared';
 import { GroupsList, GroupItem } from './Groups.styled';
 import {
   ContentWrapper,
@@ -40,33 +46,23 @@ const Groups = () => {
 
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
       {!!groups.length ? (
         <>
           {' '}
+          <ActionsMenu
+            page={ROUTES.GROUPS}
+            items={groups}
+            handleMainBtnClick={toggleCreateGroupModal}
+            isMultiSelectOpen={isMultiSelectOpen}
+            toggleMultiSelect={toggleMultiSelect}
+            selectedItems={selectedItems}
+            resetSelectedItems={resetSelectedItems}
+            handleSelectAllClick={handleSelectAllClick}
+          />
           {isCreateGroupModalOpen && (
             <CreateGroupModal
               isOpen={isCreateGroupModalOpen}
               onClose={toggleCreateGroupModal}
-            />
-          )}
-          <ListHeader
-            category={ITEM_CATEGORIES.GROUP}
-            items={groups}
-            handleMainBtnClick={toggleCreateGroupModal}
-            handleSelectClick={toggleMultiSelect}
-            activeMultiSelect={isMultiSelectOpen}
-            page={ROUTES.GROUPS}
-          />
-          {isMultiSelectOpen && (
-            <MultiSelectBar
-              onSelectAllClick={handleSelectAllClick}
-              selectedItems={selectedItems}
-              resetSelectedItems={resetSelectedItems}
-              page={ROUTES.GROUPS}
             />
           )}
           <GroupsList>
@@ -97,9 +93,6 @@ const Groups = () => {
           )}
         </>
       )}
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   );
 };

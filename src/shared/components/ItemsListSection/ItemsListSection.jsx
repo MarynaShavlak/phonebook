@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ItemsList, ContactSortMenu } from 'components';
 import { Notification, EmptyStateMessage } from 'shared';
-import { selectContacts, selectFilteredContacts } from 'redux/contacts';
+import {
+  selectContacts,
+  selectFilteredContacts,
+  selectIsLoading,
+} from 'redux/contacts';
 import {
   selectRecyclebinContacts,
   selectFilteredRecyclebinContacts,
@@ -69,24 +73,26 @@ export const ItemsListSection = ({ page, renderContact }) => {
 
   return (
     <>
-      {filteredItems?.length ? (
-        <>
-          <ContactSortMenu />
-          <ItemsList
-            items={filteredItems}
-            renderItem={renderContact}
-            page={page}
+      <>
+        {filteredItems?.length ? (
+          <>
+            <ContactSortMenu />
+            <ItemsList
+              items={filteredItems}
+              renderItem={renderContact}
+              page={page}
+            />
+          </>
+        ) : isFiltered ? (
+          <Notification
+            message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
           />
-        </>
-      ) : isFiltered ? (
-        <Notification
-          message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
-        />
-      ) : isOnContactsPage || isOnGroupsPage ? (
-        <EmptyStateMessage onActionBtnClick={openCreateNewContactPage} />
-      ) : (
-        <Notification message={`There are no contacts in ${page} now`} />
-      )}
+        ) : isOnContactsPage || isOnGroupsPage ? (
+          <EmptyStateMessage onActionBtnClick={openCreateNewContactPage} />
+        ) : (
+          <Notification message={`There are no contacts in ${page} now`} />
+        )}
+      </>
     </>
   );
 };

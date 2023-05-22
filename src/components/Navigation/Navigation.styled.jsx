@@ -39,7 +39,8 @@ export const NavigationLink = styled(NavLink)`
   color: ${props => props.theme.colors.black};
 
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
     font-size: ${props => props.theme.fontSize.xxs};
     font-weight: 800;

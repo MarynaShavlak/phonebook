@@ -6,8 +6,9 @@ import { SharedLayout } from 'shared';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from 'hooks';
 import * as authOperations from 'redux/auth/authOperations';
-import { selectIsLoading } from 'redux/auth/selectors';
+import { selectIsUserLoading } from 'redux/auth/selectors';
 import { useChangeSortType } from 'hooks';
+
 import SortContext from 'contexts/sortContext.js';
 const Home = lazy(() => import('../../pages/Home/Home.jsx'));
 const Favorites = lazy(() => import('../../pages/Favorites/Favorites.jsx'));
@@ -30,7 +31,7 @@ export const App = () => {
   const { pathname: path } = useLocation();
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsUserLoading);
   const sortContextValue = useChangeSortType();
   const isOnLoginPage = path.includes(ROUTES.LOGIN);
   const isOnRegisterPage = path.includes(ROUTES.REGISTER);
@@ -44,7 +45,7 @@ export const App = () => {
     isOnRegisterPage ||
     isOnHomePage
   );
-  //  if (isLoading) return <Loader />;
+
   return isRefreshing || isLoading ? (
     <Loader />
   ) : (

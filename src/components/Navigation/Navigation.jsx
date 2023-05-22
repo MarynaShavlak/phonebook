@@ -16,7 +16,6 @@ export const Navigation = () => {
       {isTablet && (
         <Link to={ROUTES.ROOT}>
           {' '}
-          {/* <PhoneLogo src={Logo} alt="logo" /> */}
           <AppLogo />
         </Link>
       )}

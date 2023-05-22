@@ -45,16 +45,14 @@ export const ListHeader = ({
         )}
 
         <ActionBtnList>
-          {!isOnGroupsPage && (
-            <ActionBtn
-              type="button"
-              aria-label="Open search menu"
-              onClick={handleSearchClick}
-              className={clsx({ active: activeSearchMenu })}
-            >
-              {renderIcons(ICON_NAMES.SEARCH, ICON_SIZES.MEDIUM)}
-            </ActionBtn>
-          )}
+          <ActionBtn
+            type="button"
+            aria-label="Open search menu"
+            onClick={handleSearchClick}
+            className={clsx({ active: activeSearchMenu })}
+          >
+            {renderIcons(ICON_NAMES.SEARCH, ICON_SIZES.MEDIUM)}
+          </ActionBtn>
 
           <ActionBtn
             type="button"

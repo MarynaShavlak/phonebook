@@ -13,9 +13,9 @@ export const SharedLayout = () => {
       <Main>
         <Section>
           <ContentWrapper>
-            {/* <Suspense> */}
-            <Outlet />
-            {/* </Suspense> */}
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </ContentWrapper>
         </Section>
       </Main>

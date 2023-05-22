@@ -31,10 +31,6 @@ const Favorites = () => {
   };
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
       <ActionsMenu
         page={ROUTES.FAVORITES}
         items={favoriteContacts}
@@ -46,9 +42,6 @@ const Favorites = () => {
         handleSelectAllClick={handleSelectAllClick}
       />
       <ItemsListSection page={ROUTES.FAVORITES} renderContact={renderContact} />
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   );
 };
