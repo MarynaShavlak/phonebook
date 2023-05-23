@@ -1,19 +1,22 @@
 import React from 'react';
 import { Button } from 'shared/commonStyledComponents.jsx';
 import { Notification } from 'shared';
-// import { ROUTES } from 'constants';
+import { ROUTES } from 'constants';
 
-export const EmptyStateMessage = ({ onActionBtnClick }) => {
+export const EmptyStateMessage = ({ onActionBtnClick, page }) => {
   // const isOnFavoritesPage = page === ROUTES.FAVORITES;
-  // const isOnGroupsPage = page === ROUTES.GROUPS;
+  const isOnGroupsPage = page === ROUTES.GROUPS;
   // const isOnContactsPage = page === ROUTES.CONTACTS;
   // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
+  const message = isOnGroupsPage
+    ? 'You have not created any groups yet'
+    : 'Add your first contact today and discover the amazing possibilities of Phone Genie!';
 
   return (
     <>
-      <Notification message="Add your first contact today and discover the amazing possibilities of Phone Genie!" />
+      <Notification message={message} />
       <Button type="button" onClick={onActionBtnClick}>
-        Add contact
+        {isOnGroupsPage ? 'Create group' : 'Add contact'}
       </Button>
     </>
   );

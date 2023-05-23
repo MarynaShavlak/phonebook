@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FavoriteButton } from 'components';
-import { ContactData } from 'shared';
+import { ElementData } from 'shared';
 import { removeContactFromFavorites } from 'redux/favorites';
 import { useSelectedContact } from 'hooks';
 import { selectFilter } from 'redux/filters';
@@ -28,7 +28,7 @@ export const FavoriteContact = ({
 
   return (
     <>
-      <ContactData
+      <ElementData
         isMultiSelectOpen={isMultiSelectOpen}
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}

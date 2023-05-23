@@ -27,7 +27,7 @@ import {
   IconButton,
 } from './Group.styled';
 import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
-import { ContactAvatar, ContactData } from 'shared';
+import { ContactAvatar, ElementData } from 'shared';
 
 export const Group = ({
   group,
@@ -92,7 +92,7 @@ export const Group = ({
                 >
                   {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
                 </IconButton>
-                <ContactData
+                <ElementData
                   isMultiSelectOpen={isMultiSelectOpen}
                   isSelected={isSelected}
                   toggleIsSelected={toggleIsSelected}

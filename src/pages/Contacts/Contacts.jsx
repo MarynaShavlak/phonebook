@@ -69,7 +69,8 @@ const Contacts = () => {
           />
           <ItemsListSection
             page={ROUTES.CONTACTS}
-            renderContact={renderContact}
+            renderItem={renderContact}
+            onActionBtnClick={openCreateNewContactPage}
           />
         </>
       )}

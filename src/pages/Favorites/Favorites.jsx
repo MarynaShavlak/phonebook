@@ -2,9 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFavoritesContacts } from 'redux/favorites';
-import { FavoriteContact, AppBar } from 'components';
-import { Section, ActionsMenu, ItemsListSection } from 'shared';
-import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { FavoriteContact } from 'components';
+import { ActionsMenu, ItemsListSection } from 'shared';
 import { ROUTES } from 'constants';
 import { useMultiSelect } from 'hooks';
 
@@ -41,7 +40,7 @@ const Favorites = () => {
         resetSelectedItems={resetSelectedItems}
         handleSelectAllClick={handleSelectAllClick}
       />
-      <ItemsListSection page={ROUTES.FAVORITES} renderContact={renderContact} />
+      <ItemsListSection page={ROUTES.FAVORITES} renderItem={renderContact} />
     </>
   );
 };

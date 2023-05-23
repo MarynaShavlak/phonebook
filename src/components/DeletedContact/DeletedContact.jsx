@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ConfirmationModal, DropdownMenu } from 'components';
-import { ContactData } from 'shared';
+import { ElementData } from 'shared';
 import { Time } from 'components/Contact/Contact.styled';
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import {
@@ -53,7 +53,7 @@ export const DeletedContact = ({
   return (
     <>
       <div>
-        <ContactData
+        <ElementData
           isMultiSelectOpen={isMultiSelectOpen}
           isSelected={isSelected}
           toggleIsSelected={toggleIsSelected}

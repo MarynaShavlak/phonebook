@@ -9,7 +9,7 @@ import {
   FavoriteButton,
   DropdownMenu,
 } from 'components';
-import { ContactData } from 'shared';
+import { ElementData } from 'shared';
 import { selectRecyclebinContacts } from 'redux/recycleBin';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
@@ -82,7 +82,7 @@ export const Contact = ({
 
   return (
     <>
-      <ContactData
+      <ElementData
         isMultiSelectOpen={isMultiSelectOpen}
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}

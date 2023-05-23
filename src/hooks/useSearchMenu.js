@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { LOCAL_STORAGE_KEYS } from 'constants';
 
 export const useSearchMenu = route => {
-  console.log('route: ', route);
   const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(() => {
     const isSearchMenuOpenState =
       JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.SEARCH_MENU_STATE)) ||

@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppBar, CreateGroupModal, Group } from 'components';
-import {
-  Section,
-  Notification,
-  ListHeader,
-  MultiSelectBar,
-  ActionsMenu,
-} from 'shared';
-import { GroupsList, GroupItem } from './Groups.styled';
-import {
-  ContentWrapper,
-  Main,
-  Button,
-} from 'shared/commonStyledComponents.jsx';
+import { CreateGroupModal, Group } from 'components';
+import { ActionsMenu, ItemsListSection } from 'shared';
 import { selectGroups } from 'redux/groups';
 import { selectContacts, fetchContacts } from 'redux/contacts';
-import { ITEM_CATEGORIES, ROUTES } from 'constants';
+import { ROUTES } from 'constants';
 import { useMultiSelect } from 'hooks';
 
 const Groups = () => {
@@ -44,54 +32,39 @@ const Groups = () => {
     setIsCreateGroupModalOpen(!isCreateGroupModalOpen);
   };
 
+  const renderGroup = group => {
+    return (
+      <Group
+        isMultiSelectOpen={isMultiSelectOpen}
+        group={group}
+        updateSelectedItems={updateSelectedItems}
+        selectedItems={selectedItems}
+      />
+    );
+  };
+
   return (
     <>
-      {!!groups.length ? (
-        <>
-          {' '}
-          <ActionsMenu
-            page={ROUTES.GROUPS}
-            items={groups}
-            handleMainBtnClick={toggleCreateGroupModal}
-            isMultiSelectOpen={isMultiSelectOpen}
-            toggleMultiSelect={toggleMultiSelect}
-            selectedItems={selectedItems}
-            resetSelectedItems={resetSelectedItems}
-            handleSelectAllClick={handleSelectAllClick}
-          />
-          {isCreateGroupModalOpen && (
-            <CreateGroupModal
-              isOpen={isCreateGroupModalOpen}
-              onClose={toggleCreateGroupModal}
-            />
-          )}
-          <GroupsList>
-            {groups.map(group => (
-              <GroupItem key={group.id}>
-                <Group
-                  isMultiSelectOpen={isMultiSelectOpen}
-                  group={group}
-                  updateSelectedItems={updateSelectedItems}
-                  selectedItems={selectedItems}
-                />
-              </GroupItem>
-            ))}
-          </GroupsList>
-        </>
-      ) : (
-        <>
-          {' '}
-          <Notification message="You have not created any groups yet" />
-          <Button type="button" onClick={toggleCreateGroupModal}>
-            Create group
-          </Button>
-          {isCreateGroupModalOpen && (
-            <CreateGroupModal
-              isOpen={isCreateGroupModalOpen}
-              onClose={toggleCreateGroupModal}
-            />
-          )}
-        </>
+      <ActionsMenu
+        page={ROUTES.GROUPS}
+        items={groups}
+        handleMainBtnClick={toggleCreateGroupModal}
+        isMultiSelectOpen={isMultiSelectOpen}
+        toggleMultiSelect={toggleMultiSelect}
+        selectedItems={selectedItems}
+        resetSelectedItems={resetSelectedItems}
+        handleSelectAllClick={handleSelectAllClick}
+      />
+      <ItemsListSection
+        page={ROUTES.GROUPS}
+        renderItem={renderGroup}
+        onActionBtnClick={toggleCreateGroupModal}
+      />
+      {isCreateGroupModalOpen && (
+        <CreateGroupModal
+          isOpen={isCreateGroupModalOpen}
+          onClose={toggleCreateGroupModal}
+        />
       )}
     </>
   );

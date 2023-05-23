@@ -11,7 +11,7 @@ export const selectFilteredRecyclebinContacts = createSelector(
     if (!contacts) return [];
     const recyclebinContacts = contacts.filter(contact => {
       return (
-        contact.name.includes(normalizeFilter) ||
+        contact.name.toLowerCase().includes(normalizeFilter) ||
         contact.number.includes(normalizeFilter)
       );
     });

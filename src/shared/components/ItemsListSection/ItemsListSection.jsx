@@ -1,13 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { ItemsList, ContactSortMenu } from 'components';
 import { Notification, EmptyStateMessage } from 'shared';
-import {
-  selectContacts,
-  selectFilteredContacts,
-  selectIsLoading,
-} from 'redux/contacts';
+import { selectContacts, selectFilteredContacts } from 'redux/contacts';
 import {
   selectRecyclebinContacts,
   selectFilteredRecyclebinContacts,
@@ -18,15 +13,16 @@ import {
 } from 'redux/favorites';
 
 import { selectFilter } from 'redux/filters';
+import { selectGroups, selectFilteredGroups } from 'redux/groups';
 import { ROUTES } from 'constants';
 
-export const ItemsListSection = ({ page, renderContact }) => {
+export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
+  console.log('page: ', page);
   // const isOnFavoritesPage = page === ROUTES.FAVORITES;
   const isOnGroupsPage = page === ROUTES.GROUPS;
   const isOnContactsPage = page === ROUTES.CONTACTS;
   // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
 
-  const navigate = useNavigate();
   const allContacts = useSelector(selectContacts);
   const filteredContacts = useSelector(selectFilteredContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
@@ -37,6 +33,8 @@ export const ItemsListSection = ({ page, renderContact }) => {
   const filteredRecyclebinContacts = useSelector(
     selectFilteredRecyclebinContacts
   );
+  const groups = useSelector(selectGroups);
+  const filteredGroups = useSelector(selectFilteredGroups);
 
   const getItems = page => {
     switch (page) {
@@ -46,6 +44,8 @@ export const ItemsListSection = ({ page, renderContact }) => {
         return favoriteContacts;
       case ROUTES.RECYCLEBIN:
         return recyclebinContacts;
+      case ROUTES.GROUPS:
+        return groups;
       default:
         return allContacts;
     }
@@ -58,18 +58,21 @@ export const ItemsListSection = ({ page, renderContact }) => {
         return filteredFavoritesContacts;
       case ROUTES.RECYCLEBIN:
         return filteredRecyclebinContacts;
+      case ROUTES.GROUPS:
+        return filteredGroups;
       default:
         return filteredContacts;
     }
   };
   const filter = useSelector(selectFilter(page));
   const items = getItems(page);
+  console.log('items: ', items);
   const filteredItems = getFilteredItems(page);
+  console.log('filteredItems: ', filteredItems);
   const isFiltered = !!filter && !!items?.length;
-
-  const openCreateNewContactPage = () => {
-    navigate(`${ROUTES.CREATE}`);
-  };
+  const noMatchesMessage = isOnGroupsPage
+    ? `No groups found matching your search criteria for names containing '${filter}'`
+    : `No contacts found matching your search criteria for names or numbers containing '${filter}'`;
 
   return (
     <>
@@ -79,16 +82,14 @@ export const ItemsListSection = ({ page, renderContact }) => {
             <ContactSortMenu />
             <ItemsList
               items={filteredItems}
-              renderItem={renderContact}
+              renderItem={renderItem}
               page={page}
             />
           </>
         ) : isFiltered ? (
-          <Notification
-            message={`No contacts found matching your search criteria for names or numbers containing '${filter}'`}
-          />
+          <Notification message={noMatchesMessage} />
         ) : isOnContactsPage || isOnGroupsPage ? (
-          <EmptyStateMessage onActionBtnClick={openCreateNewContactPage} />
+          <EmptyStateMessage onActionBtnClick={onActionBtnClick} page={page} />
         ) : (
           <Notification message={`There are no contacts in ${page} now`} />
         )}

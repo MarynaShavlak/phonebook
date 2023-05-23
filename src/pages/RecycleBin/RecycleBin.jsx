@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DeletedContact, AppBar, ConfirmationModal } from 'components';
-import { Section, ActionsMenu, ItemsListSection } from 'shared';
-import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { DeletedContact, ConfirmationModal } from 'components';
+import { ActionsMenu, ItemsListSection } from 'shared';
 import { selectRecyclebinContacts, clearRecycleBin } from 'redux/recycleBin';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { CONTACT_ACTIONS, ROUTES } from 'constants';
@@ -11,6 +10,7 @@ import { useMultiSelect } from 'hooks';
 
 const RecycleBin = () => {
   const allContacts = useSelector(selectContacts);
+  console.log('allContact: ', allContacts);
   const deletedContacts = useSelector(selectRecyclebinContacts);
   const dispatch = useDispatch();
   const [isClearRecyclebinModalOpen, setIsClearRecyclebinModalOpen] =
@@ -49,41 +49,30 @@ const RecycleBin = () => {
       />
     );
   };
+
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
-      {!!allContacts?.length && (
-        <>
-          <ActionsMenu
-            page={ROUTES.RECYCLEBIN}
-            items={deletedContacts}
-            handleMainBtnClick={toggleClearRecyclebinModal}
-            isMultiSelectOpen={isMultiSelectOpen}
-            toggleMultiSelect={toggleMultiSelect}
-            selectedItems={selectedItems}
-            resetSelectedItems={resetSelectedItems}
-            handleSelectAllClick={handleSelectAllClick}
+      <>
+        <ActionsMenu
+          page={ROUTES.RECYCLEBIN}
+          items={deletedContacts}
+          handleMainBtnClick={toggleClearRecyclebinModal}
+          isMultiSelectOpen={isMultiSelectOpen}
+          toggleMultiSelect={toggleMultiSelect}
+          selectedItems={selectedItems}
+          resetSelectedItems={resetSelectedItems}
+          handleSelectAllClick={handleSelectAllClick}
+        />
+        <ItemsListSection page={ROUTES.RECYCLEBIN} renderItem={renderContact} />
+        {isClearRecyclebinModalOpen && (
+          <ConfirmationModal
+            isOpen={isClearRecyclebinModalOpen}
+            onClose={toggleClearRecyclebinModal}
+            onConfirm={handleClearRecycleBin}
+            action={CONTACT_ACTIONS.DELETE_ALL}
           />
-          <ItemsListSection
-            page={ROUTES.RECYCLEBIN}
-            renderContact={renderContact}
-          />
-          {isClearRecyclebinModalOpen && (
-            <ConfirmationModal
-              isOpen={isClearRecyclebinModalOpen}
-              onClose={toggleClearRecyclebinModal}
-              onConfirm={handleClearRecycleBin}
-              action={CONTACT_ACTIONS.DELETE_ALL}
-            />
-          )}
-        </>
-      )}
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
+        )}
+      </>
     </>
   );
 };
