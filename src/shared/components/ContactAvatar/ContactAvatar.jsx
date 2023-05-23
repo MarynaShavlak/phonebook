@@ -4,13 +4,14 @@ import Avatar from 'react-avatar';
 import { SelectCheckbox } from 'components';
 import { GroupAvatar } from 'components/Group/Group.styled';
 import { renderIcons } from 'utils';
-import { ICON_SIZES, ICON_NAMES } from 'constants';
+import { ICON_SIZES, ICON_NAMES, ROUTES } from 'constants';
 
 export const ContactAvatar = ({
   isMultiSelectOpen,
   isSelected,
   toggleIsSelected,
   name,
+  page,
 }) => {
   const avatarLetter = name?.charAt(0);
   const avatar = name ? (
@@ -22,13 +23,11 @@ export const ContactAvatar = ({
       round="50%"
     />
   ) : (
-    <GroupAvatar>
-      {renderIcons(ICON_NAMES.GROUP, ICON_SIZES.MEDIUM_SMALL)}
-    </GroupAvatar>
+    <GroupAvatar>{renderIcons(ICON_NAMES.GROUP, ICON_SIZES.SMALL)}</GroupAvatar>
   );
   return (
     <>
-      {isMultiSelectOpen ? (
+      {isMultiSelectOpen && page !== ROUTES.GROUPS ? (
         <SelectCheckbox checked={isSelected} onChange={toggleIsSelected} />
       ) : (
         avatar
@@ -39,6 +38,7 @@ export const ContactAvatar = ({
 
 ContactAvatar.propTypes = {
   name: PropTypes.string,
+  page: PropTypes.string,
   isMultiSelectOpen: PropTypes.bool,
   isSelected: PropTypes.bool,
   toggleIsSelected: PropTypes.func,

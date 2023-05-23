@@ -1,22 +1,12 @@
 import styled from 'styled-components';
+import { Element } from 'shared/commonStyledComponents';
 
 export const ControlButtons = styled.div`
   display: flex;
   column-gap: ${props => props.theme.gapSize.large};
 `;
-export const ContactEl = styled.div`
-  display: flex;
-  /* align-items: start; */
-  column-gap: ${props => props.theme.gapSize.standard};
+export const ContactEl = styled(Element)`
   font-size: ${props => props.theme.fontSize.md};
-  flex-grow: 1;
-  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  color: ${props => props.theme.colors.black};
-  .marked {
-    background-color: ${props => props.theme.colors.hover};
-    font-weight: 700;
-    border-radius: ${props => props.theme.borderRadius.small};
-  }
 `;
 
 export const Time = styled.p`

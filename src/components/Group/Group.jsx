@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-  renderIcons,
-  Notifications,
-  makeSlug,
-  renderDropdownElement,
-} from 'utils';
+import { renderIcons, makeSlug, renderDropdownElement } from 'utils';
+import { showGroupInfo } from 'utils/notifications';
 import { useModal, useSelectedContact } from 'hooks';
 import {
   GROUP_ACTIONS,
@@ -16,18 +12,24 @@ import {
   ICON_SIZES,
   ROUTES,
 } from 'constants';
-import { ConfirmationModal, EditGroupModal, DropdownMenu } from 'components';
 import {
-  Content,
-  Element,
+  ConfirmationModal,
+  EditGroupModal,
+  DropdownMenu,
+  ContactsListInGroup,
+} from 'components';
+import {
+  GroupDetails,
   GroupEl,
   GroupWrapper,
-  List,
   DropButton,
-  IconButton,
 } from './Group.styled';
-import { deleteGroup, deleteContactFromGroup } from 'redux/groups';
-import { ContactAvatar, ElementData } from 'shared';
+import { deleteGroup } from 'redux/groups';
+import { ContactAvatar } from 'shared';
+import Highlighter from 'react-highlight-words';
+import { clsx } from 'clsx';
+import { selectFilter } from 'redux/filters';
+import { Element } from 'shared/commonStyledComponents';
 
 export const Group = ({
   group,
@@ -44,10 +46,10 @@ export const Group = ({
     group,
     updateSelectedItems
   );
-
+  const filter = useSelector(selectFilter(ROUTES.GROUPS));
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
-    Notifications.showGroupInfo(group.name);
+    showGroupInfo(group.name);
   };
   const toggleGroupContent = () => {
     if (!contactsQuantityInGroup) {
@@ -55,13 +57,7 @@ export const Group = ({
     }
     setIsGroupContentVisible(!isGroupContentVisible);
   };
-  const onDeleteContact = contact => {
-    const groupName = group.name;
-    dispatch(deleteContactFromGroup({ group: groupName, contact }));
-  };
-
   const contactsQuantityInGroup = group.contacts.length;
-  const contactsInGroup = group.contacts;
 
   return (
     <>
@@ -72,36 +68,25 @@ export const Group = ({
             isSelected={isSelected}
             toggleIsSelected={toggleIsSelected}
           />
-          <Content onClick={toggleGroupContent}>
+          <GroupDetails onClick={toggleGroupContent}>
             <Element>
-              {group.name}&nbsp; ({contactsQuantityInGroup})
+              <Highlighter
+                highlightClassName={clsx('marked')}
+                searchWords={[`${filter}`]}
+                autoEscape={true}
+                textToHighlight={`${group.name}`}
+              />
+              ({contactsQuantityInGroup})
             </Element>
             <DropButton type="button">
               {renderIcons(ICON_NAMES.DROP_DOWN, ICON_SIZES.MEDIUM_SMALL)}
             </DropButton>
-          </Content>
+          </GroupDetails>
         </GroupEl>
-
-        {isGroupContentVisible && (
-          <List>
-            {contactsInGroup.map((contact, index) => (
-              <li key={index}>
-                <IconButton
-                  type="button"
-                  onClick={() => onDeleteContact(contact)}
-                >
-                  {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
-                </IconButton>
-                <ElementData
-                  isMultiSelectOpen={isMultiSelectOpen}
-                  isSelected={isSelected}
-                  toggleIsSelected={toggleIsSelected}
-                  item={contact}
-                />
-              </li>
-            ))}
-          </List>
-        )}
+        <ContactsListInGroup
+          group={group}
+          isGroupContentVisible={isGroupContentVisible}
+        />
       </GroupWrapper>
       <DropdownMenu
         elements={[

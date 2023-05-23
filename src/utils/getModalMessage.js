@@ -1,26 +1,55 @@
-import { CONTACT_ACTIONS, GROUP_ACTIONS, ITEM_CATEGORIES } from 'constants';
+import {
+  CONTACT_ACTIONS,
+  GROUP_ACTIONS,
+  ITEM_CATEGORIES,
+  ROUTES,
+} from 'constants';
 import { ModalText, ModalWarning } from 'shared/commonStyledComponents';
 import { isArrayOfContacts, getTotalQuantityString } from 'utils';
 
 export const getModalMessage = ({ action, data }) => {
+  console.log('action: ', action);
   const { name, number, contacts } = data ?? {};
-  const isContactsSelected = isArrayOfContacts(data);
 
-  if (contacts) {
-    if (action === GROUP_ACTIONS.DELETE) {
-      return (
-        <>
-          <ModalText>
-            Are you absolutely certain that you wish to delete the <b>{name}</b>{' '}
-            group?
-          </ModalText>
-          <ModalWarning>
-            Please be aware that once this action is taken, the group cannot be
-            restored.
-          </ModalWarning>
-        </>
-      );
-    }
+  const isContactsSelected = isArrayOfContacts(data);
+  const isOneGroupSelected = !!(
+    (!isContactsSelected && data.length === 1) ||
+    contacts
+  );
+  const areFewGroupsSelected = !isContactsSelected && data.length > 1;
+  console.log('areFewGroupsSelected: ', areFewGroupsSelected);
+  console.log('isOneGroupSelected: ', isOneGroupSelected);
+
+  const selectedName =
+    !isContactsSelected && data.length === 1 ? data[0].name : name;
+
+  if (isOneGroupSelected) {
+    return (
+      <>
+        <ModalText>
+          Are you absolutely certain that you wish to delete the{' '}
+          <b>{selectedName}</b> group?
+        </ModalText>
+        <ModalWarning>
+          Please be aware that once this action is taken, the group cannot be
+          restored.
+        </ModalWarning>
+      </>
+    );
+  } else if (!isContactsSelected && data.length > 1) {
+    return (
+      <>
+        <ModalText>
+          Are you certain that you wish to delete &nbsp;
+          <b>{getTotalQuantityString(data, ROUTES.GROUPS)}</b>
+          &nbsp;?
+        </ModalText>
+        <ModalWarning>
+          Please be aware that once this action is taken, the groups cannot be
+          restored.
+        </ModalWarning>
+      </>
+    );
   } else if (isContactsSelected) {
     return (
       <>

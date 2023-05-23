@@ -1,0 +1,1 @@
+export { ContactsListInGroup } from './ContactsListInGroup';

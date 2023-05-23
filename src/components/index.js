@@ -31,3 +31,4 @@ export { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute.jsx'
 export { SignUpForm } from 'components/SignUpForm';
 export { UserMenu } from 'components/UserMenu';
 export { ContactSortMenu } from 'components/ContactSortMenu';
+export { ContactsListInGroup } from 'components/ContactsListInGroup';

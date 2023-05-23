@@ -11,6 +11,7 @@ export const ElementData = ({
   toggleIsSelected,
   filter,
   children,
+  page,
 }) => {
   const { name } = item;
   return (
@@ -20,6 +21,7 @@ export const ElementData = ({
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
         name={name}
+        page={page}
       />
       <HighlightContactDetails item={item} filter={filter} />
       {children}
@@ -31,7 +33,8 @@ ElementData.propTypes = {
   item: PropTypes.object.isRequired,
   isMultiSelectOpen: PropTypes.bool,
   isSelected: PropTypes.bool,
-  toggleIsSelected: PropTypes.func.isRequired,
+  toggleIsSelected: PropTypes.func,
   filter: PropTypes.string,
   children: PropTypes.node,
+  page: PropTypes.string,
 };

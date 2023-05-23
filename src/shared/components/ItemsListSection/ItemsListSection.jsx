@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ItemsList, ContactSortMenu } from 'components';
 import { Notification, EmptyStateMessage } from 'shared';
@@ -17,7 +18,6 @@ import { selectGroups, selectFilteredGroups } from 'redux/groups';
 import { ROUTES } from 'constants';
 
 export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
-  console.log('page: ', page);
   // const isOnFavoritesPage = page === ROUTES.FAVORITES;
   const isOnGroupsPage = page === ROUTES.GROUPS;
   const isOnContactsPage = page === ROUTES.CONTACTS;
@@ -66,9 +66,7 @@ export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
   };
   const filter = useSelector(selectFilter(page));
   const items = getItems(page);
-  console.log('items: ', items);
   const filteredItems = getFilteredItems(page);
-  console.log('filteredItems: ', filteredItems);
   const isFiltered = !!filter && !!items?.length;
   const noMatchesMessage = isOnGroupsPage
     ? `No groups found matching your search criteria for names containing '${filter}'`
@@ -96,4 +94,10 @@ export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
       </>
     </>
   );
+};
+
+ItemsListSection.propTypes = {
+  page: PropTypes.string.isRequired,
+  renderItem: PropTypes.func,
+  onActionBtnClick: PropTypes.func,
 };

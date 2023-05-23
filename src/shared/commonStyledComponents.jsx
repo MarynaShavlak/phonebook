@@ -229,6 +229,20 @@ export const ActionBtnList = styled.div`
   }
 `;
 
+export const Element = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  column-gap: ${props => props.theme.gapSize.standard};
+  color: ${props => props.theme.colors.black};
+  .marked {
+    background-color: ${props => props.theme.colors.hover};
+    font-weight: 700;
+    border-radius: ${props => props.theme.borderRadius.small};
+  }
+  /* font-size: ${props => props.theme.fontSize.md}; */
+`;
+
 // export const ImageWrap = styled.div`
 //   position: relative;
 //   align-self: start;

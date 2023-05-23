@@ -29,13 +29,18 @@ import {
   restoreDeletedContact,
 } from 'utils';
 import { useModal } from 'hooks';
-import { ICON_NAMES, OPERATION, CONTACT_ACTIONS } from 'constants';
+import {
+  ICON_NAMES,
+  OPERATION,
+  CONTACT_ACTIONS,
+  ROUTES,
+  GROUP_ACTIONS,
+} from 'constants';
 import { showContactSuccess, showRecyclebinWarn } from 'utils/notifications';
 import { selectContacts } from 'redux/contacts';
 import { selectFavoritesContacts } from 'redux/favorites';
 import { selectGroups } from 'redux/groups';
 import { selectRecyclebinContacts } from 'redux/recycleBin';
-import { ROUTES } from 'constants';
 import { ActionBtn } from './ActionBtn/ActionBtn';
 
 export const MultiSelectBar = ({
@@ -52,8 +57,9 @@ export const MultiSelectBar = ({
   const deletedContacts = useSelector(selectRecyclebinContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);
   const groups = useSelector(selectGroups);
-  const isAnyContactSelected = selectedItems.length;
+  const isAnyItemSelected = selectedItems.length;
   const isAvailbaleToMerge = selectedItems.length >= 2;
+  const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
   const { isMergeModalOpen, toggleMergeModal } = useModal(OPERATION.MERGE);
@@ -123,7 +129,7 @@ export const MultiSelectBar = ({
     <ActionBtn
       ariaLabel="Add/remove selected contacts to favorites"
       onClick={toggleFavorite}
-      disabled={!isAnyContactSelected}
+      disabled={!isAnyItemSelected}
       iconName={ICON_NAMES.FAVORITE}
     />
   );
@@ -131,7 +137,7 @@ export const MultiSelectBar = ({
     <ActionBtn
       ariaLabel="Add selected contacts to groups"
       onClick={toggleAddModal}
-      disabled={!isAnyContactSelected}
+      disabled={!isAnyItemSelected}
       iconName={ICON_NAMES.GROUP}
     />
   );
@@ -147,7 +153,7 @@ export const MultiSelectBar = ({
     <ActionBtn
       ariaLabel="Restore selected contacts"
       onClick={toggleRestoreModal}
-      disabled={!isAnyContactSelected}
+      disabled={!isAnyItemSelected}
       iconName={ICON_NAMES.RESTORE}
     />
   );
@@ -159,7 +165,15 @@ export const MultiSelectBar = ({
           : 'Remove selected contacts to recycle bin'
       }
       onClick={toggleRemoveModal}
-      disabled={!isAnyContactSelected}
+      disabled={!isAnyItemSelected}
+      iconName={ICON_NAMES.DELETE}
+    />
+  );
+  const deleteButton = (
+    <ActionBtn
+      ariaLabel="Delete selected groups"
+      onClick={toggleDeleteModal}
+      disabled={!isAnyItemSelected}
       iconName={ICON_NAMES.DELETE}
     />
   );
@@ -167,7 +181,7 @@ export const MultiSelectBar = ({
   return (
     <ControlBar>
       <SelectBtn type="button" onClick={onSelectAllClick}>
-        {getSelectButtonText(isAnyContactSelected)}
+        {getSelectButtonText(isAnyItemSelected)}
       </SelectBtn>
       <ChoseActionBlock>
         {isTablet && <span>Choose Action</span>}
@@ -181,11 +195,12 @@ export const MultiSelectBar = ({
           )}
           {isOnRecyclebinPage && <>{restoreButton}</>}
           {isOnGroupsPage && <>{mergeButton}</>}
-          {removeButton}
+          {!isOnGroupsPage && removeButton}
+          {isOnGroupsPage && deleteButton}
         </BtnList>
       </ChoseActionBlock>
       <SelectedInfo type="button">
-        <span>{isAnyContactSelected}</span> Selected
+        <span>{isAnyItemSelected}</span> Selected
       </SelectedInfo>
       {isRemoveModalOpen && (
         <ConfirmationModal
@@ -194,6 +209,15 @@ export const MultiSelectBar = ({
           data={selectedItems}
           onConfirm={moveSelectedItemsToRecycleBin}
           action={CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onClose={toggleDeleteModal}
+          data={selectedItems}
+          onConfirm={moveSelectedItemsToRecycleBin}
+          action={GROUP_ACTIONS.DELETE}
         />
       )}
       {isMergeModalOpen && isOnGroupsPage && (

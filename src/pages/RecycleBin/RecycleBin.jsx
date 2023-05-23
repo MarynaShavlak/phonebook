@@ -10,7 +10,6 @@ import { useMultiSelect } from 'hooks';
 
 const RecycleBin = () => {
   const allContacts = useSelector(selectContacts);
-  console.log('allContact: ', allContacts);
   const deletedContacts = useSelector(selectRecyclebinContacts);
   const dispatch = useDispatch();
   const [isClearRecyclebinModalOpen, setIsClearRecyclebinModalOpen] =
