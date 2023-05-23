@@ -32,7 +32,7 @@ export const FavoriteContact = ({
         isMultiSelectOpen={isMultiSelectOpen}
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
-        contact={contact}
+        item={contact}
         filter={filter}
       />
 

@@ -96,7 +96,7 @@ export const Group = ({
                   isMultiSelectOpen={isMultiSelectOpen}
                   isSelected={isSelected}
                   toggleIsSelected={toggleIsSelected}
-                  contact={contact}
+                  item={contact}
                 />
               </li>
             ))}

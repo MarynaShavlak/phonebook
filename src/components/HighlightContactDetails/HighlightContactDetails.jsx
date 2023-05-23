@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { TelLink, ContactData } from 'shared/commonStyledComponents';
 
 export const HighlightContactDetails = ({
-  contact,
+  item,
   filter,
   defaultHighlighterClass = 'marked',
 }) => {
@@ -14,14 +14,14 @@ export const HighlightContactDetails = ({
         highlightClassName={clsx(defaultHighlighterClass)}
         searchWords={[`${filter}`]}
         autoEscape={true}
-        textToHighlight={`${contact.name}`}
+        textToHighlight={`${item.name}`}
       />
-      <TelLink href={`tel: ${contact.number}`}>
+      <TelLink href={`tel: ${item.number}`}>
         <Highlighter
           highlightClassName={clsx(defaultHighlighterClass)}
           searchWords={[`${filter}`]}
           autoEscape={true}
-          textToHighlight={` ${contact.number}`}
+          textToHighlight={` ${item.number}`}
         />
       </TelLink>
     </ContactData>
@@ -29,10 +29,7 @@ export const HighlightContactDetails = ({
 };
 
 HighlightContactDetails.propTypes = {
-  contact: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }).isRequired,
-  filter: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
+  filter: PropTypes.string,
   defaultHighlighterClass: PropTypes.string,
 };

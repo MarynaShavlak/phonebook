@@ -5,14 +5,14 @@ import { ContactAvatar } from 'shared';
 import { ContactEl } from 'components/Contact/Contact.styled';
 
 export const ElementData = ({
-  contact,
+  item,
   isMultiSelectOpen,
   isSelected,
   toggleIsSelected,
   filter,
   children,
 }) => {
-  const { name } = contact;
+  const { name } = item;
   return (
     <ContactEl>
       <ContactAvatar
@@ -21,18 +21,14 @@ export const ElementData = ({
         toggleIsSelected={toggleIsSelected}
         name={name}
       />
-      <HighlightContactDetails contact={contact} filter={filter} />
+      <HighlightContactDetails item={item} filter={filter} />
       {children}
     </ContactEl>
   );
 };
 
 ElementData.propTypes = {
-  contact: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }).isRequired,
+  item: PropTypes.object.isRequired,
   isMultiSelectOpen: PropTypes.bool,
   isSelected: PropTypes.bool,
   toggleIsSelected: PropTypes.func.isRequired,

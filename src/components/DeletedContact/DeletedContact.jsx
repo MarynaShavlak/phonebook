@@ -57,7 +57,7 @@ export const DeletedContact = ({
           isMultiSelectOpen={isMultiSelectOpen}
           isSelected={isSelected}
           toggleIsSelected={toggleIsSelected}
-          contact={contact}
+          item={contact}
           filter={filter}
         />
         <Time>

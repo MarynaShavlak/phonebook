@@ -86,7 +86,7 @@ export const Contact = ({
         isMultiSelectOpen={isMultiSelectOpen}
         isSelected={isSelected}
         toggleIsSelected={toggleIsSelected}
-        contact={contact}
+        item={contact}
         filter={filter}
       />
       <FavoriteButton checked={isFavorite} onChange={toggleFavorite} />
