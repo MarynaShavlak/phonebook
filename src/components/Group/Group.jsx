@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { renderIcons, makeSlug, renderDropdownElement } from 'utils';
+import { renderIcons, renderDropdownElement } from 'utils';
 import { showGroupInfo } from 'utils/notifications';
 import { useModal, useSelectedContact } from 'hooks';
 import {
@@ -47,6 +47,7 @@ export const Group = ({
     updateSelectedItems
   );
   const filter = useSelector(selectFilter(ROUTES.GROUPS));
+
   const onDeleteGroup = () => {
     dispatch(deleteGroup(group));
     showGroupInfo(group.name);
@@ -58,7 +59,7 @@ export const Group = ({
     setIsGroupContentVisible(!isGroupContentVisible);
   };
   const contactsQuantityInGroup = group.contacts.length;
-
+  const nameForUrl = encodeURIComponent(group.name);
   return (
     <>
       <GroupWrapper>
@@ -115,7 +116,7 @@ export const Group = ({
                     ROUTES.ROOT +
                     ROUTES.MANAGE_GROUP_MEMBERS +
                     ROUTES.ROOT +
-                    makeSlug(`${group.name}`)
+                    nameForUrl
                   }`}
                 >
                   {renderDropdownElement(GROUP_ACTIONS.MANAGE, OPERATION.ADD)}

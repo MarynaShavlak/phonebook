@@ -54,3 +54,5 @@ export { findSelectedContactsGroups } from './contact/findSelectedContactsGroups
 export { createFinalMergedContact } from './contact/createFinalMergedContact';
 export { updateContactInStore } from './contact/updateContactInStore';
 export { addContactToStore } from './contact/addContactToStore';
+export { isContact } from './contact/isContact';
+export { getModalData } from './getModalData';

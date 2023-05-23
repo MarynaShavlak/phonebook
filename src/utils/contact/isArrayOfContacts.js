@@ -8,7 +8,8 @@ export const isArrayOfContacts = data => {
         obj !== null &&
         'id' in obj &&
         'name' in obj &&
-        'number' in obj
+        'number' in obj &&
+        ('removalTime' in data || data.removalTime === undefined)
     )
   );
 };

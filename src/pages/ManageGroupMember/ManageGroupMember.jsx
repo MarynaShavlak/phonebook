@@ -2,20 +2,15 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
-import { AppBar } from 'components';
-import { Section, BackButton } from 'shared';
+import { BackButton } from 'shared';
 import {
   selectGroups,
   deleteContactFromGroup,
   addContactToGroup,
 } from 'redux/groups';
 import { selectContacts, fetchContacts } from 'redux/contacts';
-import { ContentWrapper, Text, Main } from 'shared/commonStyledComponents.jsx';
-import {
-  getContactsByGroupName,
-  getOriginalGroupName,
-  getAvailableToSelectContacts,
-} from 'utils';
+import { Text } from 'shared/commonStyledComponents.jsx';
+import { getContactsByGroupName, getAvailableToSelectContacts } from 'utils';
 import { showGroupManageContactsSuccess } from 'utils/notifications';
 import {
   renderExistedContactsText,
@@ -26,6 +21,7 @@ import { ROUTES } from 'constants';
 const ManageGroupMember = () => {
   const dispatch = useDispatch();
   const { groupName } = useParams();
+  const originalGroupName = decodeURIComponent(groupName);
   const allContacts = useSelector(selectContacts);
   const groups = useSelector(selectGroups);
 
@@ -62,19 +58,13 @@ const ManageGroupMember = () => {
     showGroupManageContactsSuccess(originalGroupName, contactsInGroup);
 
   const contactsInGroup = useMemo(
-    () => getContactsByGroupName({ groupName, groups }),
-    [groupName, groups]
+    () => getContactsByGroupName(originalGroupName, groups),
+    [originalGroupName, groups]
   );
 
   const contactsAvailableToSelect = useMemo(
     () => getAvailableToSelectContacts(contactsInGroup, allContacts),
     [contactsInGroup, allContacts]
-  );
-
-  const originalGroupName = useMemo(
-    () => getOriginalGroupName({ groupName, groups }),
-    // eslint-disable-next-line
-    [groupName]
   );
 
   const [contactsToAddInGroup, setContactsToAddInGroup] =
@@ -112,10 +102,6 @@ const ManageGroupMember = () => {
 
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
       <BackButton
         pathTo={ROUTES.ROOT + ROUTES.GROUPS}
         onClick={handleBackButtonClick}
@@ -136,9 +122,6 @@ const ManageGroupMember = () => {
           handleContactSelect
         )}
       </>
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   );
 };

@@ -38,7 +38,7 @@ export const DeletedContact = ({
   const handleDelete = () => {
     dispatch(removeContactFromRecycleBin(id));
     showRecyclebinInfo(contact);
-    toggleRestoreModal();
+    toggleDeleteModal();
   };
 
   const handleRestore = async () => {
