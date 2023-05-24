@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FilterBlock, Info } from './Filter.styled';
 import { Name } from 'shared/components/ContactForm/ContactForm.styled';
@@ -13,9 +13,8 @@ import { selectFilteredGroups } from 'redux/groups';
 import { ROUTES } from 'constants';
 
 export const Filter = ({ page, isSearchMenuOpen }) => {
-  const filter = useSelector(selectFilter(page));
+  const filterFromRedux = useSelector(selectFilter(page));
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [searchValue, setSearchValue] = useState(filter);
   const dispatch = useDispatch();
   const isOnContactsPage = page === ROUTES.CONTACTS;
   const isOnFavoritesPage = page === ROUTES.FAVORITES;
@@ -34,11 +33,12 @@ export const Filter = ({ page, isSearchMenuOpen }) => {
   }, [isSearchMenuOpen]);
 
   useEffect(() => {
-    console.log('mount');
-    const filterValue = searchParams.get('search');
-    console.log('filterValue: ', filterValue);
-    if (filter) {
-      updateQueryString('search', filter);
+    const filterFromUrl = searchParams.get('search');
+    if (filterFromRedux) {
+      updateQueryString('search', filterFromRedux);
+    }
+    if (filterFromUrl && !filterFromRedux) {
+      updateFilter(filterFromUrl);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,12 +82,11 @@ export const Filter = ({ page, isSearchMenuOpen }) => {
             type="text"
             name="search"
             placeholder={`Search...`}
-            // value={filter}
-            value={filter}
+            value={filterFromRedux}
             onChange={onChangeFilter}
           />
         </label>
-        {filter && (
+        {filterFromRedux && (
           <Info>
             {itemsName} found: <span>{items.length}</span>
           </Info>

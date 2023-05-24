@@ -37,11 +37,13 @@ export const NavigationLink = styled(NavLink)`
   height: 100%;
   padding: 10px;
   color: ${props => props.theme.colors.black};
-
+  border-radius: ${props => props.theme.borderRadius.extra};
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+    border-radius: ${props => props.theme.borderRadius.large};
     font-size: ${props => props.theme.fontSize.xxs};
     font-weight: 800;
     padding-top: 8px;
