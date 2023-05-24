@@ -46,6 +46,7 @@ export { getContactsByGroupName } from './group/getContactsByGroupName';
 export { getOriginalGroupName } from './group/getOriginalGroupName';
 export { getAvailableToSelectContacts } from './group/getAvailableToSelectContacts';
 export { createNewGroup } from './group/createNewGroup';
+export { getGroupCreationTime } from './group/getGroupCreationTime';
 export { handleSelectedGroups } from './group/handleSelectedGroups';
 export { handleContactsInSelectedGroups } from './group/handleContactsInSelectedGroups';
 export { handleSelectedContacts } from './contact/handleSelectedContacts';

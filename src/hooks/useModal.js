@@ -9,10 +9,10 @@ export const useModal = action => {
       document.body.classList.remove('modal-open');
     }
   }, [modalType, action]);
+
   const openModal = () => {
     setModalType(action);
   };
-
   const closeModal = () => {
     setModalType(null);
   };

@@ -12,7 +12,18 @@ export const useItemsSorting = items => {
 
   const sortFunctions = {
     alphabet: (a, b) => a.name.localeCompare(b.name),
-    date: (a, b) => b.id.localeCompare(a.id),
+    date: (a, b) => {
+      if (
+        a.hasOwnProperty('creationTime') &&
+        b.hasOwnProperty('creationTime')
+      ) {
+        return b.creationTime.localeCompare(a.creationTime);
+      } else if (a.hasOwnProperty('id') && b.hasOwnProperty('id')) {
+        return b.id.localeCompare(a.id);
+      } else {
+        return 0;
+      }
+    },
   };
 
   const getSortedItems = items => {

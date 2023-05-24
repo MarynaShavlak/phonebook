@@ -1,7 +1,6 @@
 import { removeContactFromRecycleBin } from 'redux/recycleBin';
 import { addContact } from 'redux/contacts';
-import { showContactSuccess, showErrorMessage } from 'utils/notifications';
-import { CONTACT_ACTIONS } from 'constants';
+import { showErrorMessage } from 'utils/notifications';
 
 export const restoreDeletedContact = async ({ contact, dispatch }) => {
   try {
@@ -11,8 +10,6 @@ export const restoreDeletedContact = async ({ contact, dispatch }) => {
     );
     if (restoreResult.error || deleteResult.error) {
       showErrorMessage();
-    } else {
-      showContactSuccess(CONTACT_ACTIONS.RESTORE, contact);
     }
   } catch (error) {
     showErrorMessage();

@@ -10,7 +10,7 @@ import {
   restoreDeletedContact,
   checkAndWarnForDuplicateContact,
 } from 'utils';
-import { showRecyclebinInfo } from 'utils/notifications';
+import { showRecyclebinInfo, showContactSuccess } from 'utils/notifications';
 import { useModal, useSelectedContact } from 'hooks';
 import { CONTACT_ACTIONS, OPERATION, ROUTES } from 'constants';
 import { selectFilter } from 'redux/filters';
@@ -42,12 +42,17 @@ export const DeletedContact = ({
   };
 
   const handleRestore = async () => {
-    checkAndWarnForDuplicateContact({
-      newContact: contact,
-      contacts: allContacts,
-    })
-      ? toggleRestoreModal()
-      : await restoreDeletedContact({ contact, dispatch });
+    if (
+      checkAndWarnForDuplicateContact({
+        newContact: contact,
+        contacts: allContacts,
+      })
+    ) {
+      toggleRestoreModal();
+    } else {
+      await restoreDeletedContact({ contact, dispatch });
+      showContactSuccess(CONTACT_ACTIONS.RESTORE, contact);
+    }
   };
   const filter = useSelector(selectFilter(ROUTES.RECYCLEBIN));
   return (

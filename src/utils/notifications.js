@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { CONTACT_ACTIONS } from 'constants';
+import { CONTACT_ACTIONS, GROUP_ACTIONS } from 'constants';
 import { BiHappy } from 'react-icons/bi';
 import { RiEmotionUnhappyLine } from 'react-icons/ri';
 import { BiInfoCircle } from 'react-icons/bi';
@@ -39,11 +39,27 @@ function showMessage(type, message) {
 
 function getMessage(operation, contact) {
   const messages = {
-    [CONTACT_ACTIONS.ADD]: `You've just added contact ${contact.name} (${contact.number}) to your contacts list`,
-    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `You've just removed contact ${contact.name} (${contact.number}) from your contacts list to recycle bin`,
-    [CONTACT_ACTIONS.RESTORE]: `You've just restored contact ${contact.name} (${contact.number}) in your contacts list`,
-    // [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact ${contact.name} (${contact.number}) to your favorites`,
+    [CONTACT_ACTIONS.ADD]: `Contact ${contact.name} (${contact.number}) added.`,
+    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `Contact ${contact.name} (${contact.number}) removed from contacts and sent to recycle bin.`,
+    [CONTACT_ACTIONS.RESTORE]: `Contact ${contact.name} (${contact.number}) restored`,
+    //[CONTACT_ACTIONS.ADD_TO_FAVORITES]: `You've just added contact ${contact.name} (${contact.number}) to your favorites`,
     // [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `You've just removed contact ${contact.name} (${contact.number}) from your favorites`,
+  };
+  return (
+    messages[operation] ||
+    `Type of field with operation ${operation} is not found`
+  );
+}
+
+function getFewItemsMessage(operation, items) {
+  const itemsQuantity = items.length;
+  const messages = {
+    [CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN]: `${itemsQuantity} contacts removed from contacts and sent to recycle bin.`,
+    [CONTACT_ACTIONS.RESTORE]: `${itemsQuantity} contacts restored`,
+    [CONTACT_ACTIONS.DELETE]: `${itemsQuantity} contacts deleted from recycle bin`,
+    [GROUP_ACTIONS.DELETE]: `${itemsQuantity} groups deleted`,
+    [CONTACT_ACTIONS.ADD_TO_FAVORITES]: `${itemsQuantity} contacts added to favorites`,
+    [CONTACT_ACTIONS.REMOVE_FROM_FAVORITES]: `${itemsQuantity} contacts removed from your favorites`,
   };
   return (
     messages[operation] ||
@@ -54,19 +70,23 @@ function getMessage(operation, contact) {
 export function showContactExistWarn({ isNameExist, isNumberExist, contact }) {
   const { name, number } = contact;
   if (isNameExist && isNumberExist) {
-    const message = `Oops, a contact  ${name} (${number}) already exists in your phonebook.`;
+    const message = `Contact  ${name} (${number}) already exists.`;
     return showMessage(TOAST_TYPES.WARNING, message);
   } else if (isNameExist) {
-    const message = `Oops, a contact with name ${name} already exists in your phonebook`;
+    const message = `Contact with name ${name} already exists.`;
     return showMessage(TOAST_TYPES.WARNING, message);
   } else if (isNumberExist) {
-    const message = `Oops, a contact with number ${number} already exists in your phonebook.`;
+    const message = `Contact with number ${number} already exists.`;
     return showMessage(TOAST_TYPES.WARNING, message);
   }
 }
 
 export function showContactSuccess(operation, contact) {
   const message = getMessage(operation, contact);
+  return showMessage(TOAST_TYPES.SUCCESS, message);
+}
+export function showFewItemsSuccess(operation, items) {
+  const message = getFewItemsMessage(operation, items);
   return showMessage(TOAST_TYPES.SUCCESS, message);
 }
 
@@ -106,12 +126,12 @@ export function showRecyclebinWarn(contact) {
 }
 
 export function showRecyclebinInfo(contact) {
-  const message = `You've just deleted contact ${contact.name} (${contact.number}) from recycle bin`;
+  const message = `Contact ${contact.name} (${contact.number}) deleted from recycle bin`;
   return showMessage(TOAST_TYPES.INFO, message);
 }
 
 export function showGroupSuccess(groupName) {
-  const message = `You've just added group with name "${groupName}" `;
+  const message = `Group with name "${groupName}" added`;
   return showMessage(TOAST_TYPES.SUCCESS, message);
 }
 export function showGroupRenameSuccess({ oldGroupName, newGroupName }) {
@@ -120,7 +140,7 @@ export function showGroupRenameSuccess({ oldGroupName, newGroupName }) {
 }
 
 export function showGroupInfo(groupName) {
-  const message = `You've just deleted group with name "${groupName}" `;
+  const message = `Group with name "${groupName}" deleted `;
   return showMessage(TOAST_TYPES.INFO, message);
 }
 
@@ -147,7 +167,7 @@ export function showAddFewContactsToGroups(contactsQuantity, selectedGroups) {
 }
 
 export function showDeleteFromGroup({ groupName, contact }) {
-  const message = `The contact ${contact.name} (${contact.number}) has been deleted from group "${groupName}" `;
+  const message = `Contact ${contact.name} (${contact.number}) deleted from group "${groupName}" `;
   return showMessage(TOAST_TYPES.INFO, message);
 }
 

@@ -34,6 +34,7 @@ const groupsSlice = createSlice({
       state.groups.push({
         name: action.payload.name,
         id: action.payload.id,
+        creationTime: action.payload.creationTime,
         contacts: [],
       });
     },

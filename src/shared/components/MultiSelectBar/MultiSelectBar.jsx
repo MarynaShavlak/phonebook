@@ -42,6 +42,7 @@ import {
   showRecyclebinWarn,
   showGroupInfo,
   showRecyclebinInfo,
+  showFewItemsSuccess,
 } from 'utils/notifications';
 import { selectContacts } from 'redux/contacts';
 import { selectFavoritesContacts } from 'redux/favorites';
@@ -69,6 +70,7 @@ export const MultiSelectBar = ({
   const groups = useSelector(selectGroups);
   const isAnyItemSelected = selectedItems.length;
   const isAvailbaleToMerge = selectedItems.length >= 2;
+
   const { isDeleteModalOpen, toggleDeleteModal } = useModal(OPERATION.DELETE);
   const { isRemoveModalOpen, toggleRemoveModal } = useModal(OPERATION.REMOVE);
   const { isAddModalOpen, toggleAddModal } = useModal(OPERATION.ADD);
@@ -113,12 +115,25 @@ export const MultiSelectBar = ({
         const isFavorite = isContactInFavorites(contact, favoriteContacts);
         removeContactFromFavoritesIfNeeded({ contact, isFavorite, dispatch });
         removeContactFromGroups({ contact, groups, dispatch });
-        showContactSuccess(CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN, contact);
       });
+
+      if (isAnyItemSelected === 1) {
+        showContactSuccess(
+          CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
+          selectedItems[0]
+        );
+      } else {
+        showFewItemsSuccess(
+          CONTACT_ACTIONS.REMOVE_TO_RECYCLE_BIN,
+          selectedItems
+        );
+      }
+
       toggleRemoveModal();
       resetSelectedItems();
     }
   };
+
   const {
     isOneGroupSelected,
     areFewGroupsSelected,
@@ -130,15 +145,24 @@ export const MultiSelectBar = ({
     if (isOneGroupSelected || areFewGroupsSelected) {
       selectedItems.forEach(item => {
         dispatch(deleteGroup(item));
-        showGroupInfo(item.name);
       });
+      if (isAnyItemSelected === 1) {
+        showGroupInfo(selectedItems[0].name);
+      } else {
+        showFewItemsSuccess(GROUP_ACTIONS.DELETE, selectedItems);
+      }
     }
 
     if (isContactsArray || isSingleContact) {
       selectedItems.forEach(item => {
         dispatch(removeContactFromRecycleBin(item.id));
-        showRecyclebinInfo(item);
       });
+
+      if (isAnyItemSelected === 1) {
+        showRecyclebinInfo(selectedItems[0]);
+      } else {
+        showFewItemsSuccess(CONTACT_ACTIONS.DELETE, selectedItems);
+      }
     }
 
     toggleDeleteModal();
@@ -155,9 +179,16 @@ export const MultiSelectBar = ({
         continue;
       }
       await restoreDeletedContact({ contact, dispatch });
-      toggleRestoreModal();
-      resetSelectedItems();
     }
+
+    if (isAnyItemSelected === 1) {
+      showContactSuccess(CONTACT_ACTIONS.RESTORE, selectedItems[0]);
+    } else {
+      showFewItemsSuccess(CONTACT_ACTIONS.RESTORE, selectedItems);
+    }
+
+    toggleRestoreModal();
+    resetSelectedItems();
   };
 
   const favoriteButton = (

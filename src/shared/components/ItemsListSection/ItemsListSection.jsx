@@ -65,6 +65,7 @@ export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
     }
   };
   const filter = useSelector(selectFilter(page));
+  console.log('filter in listSection: ', filter);
   const items = getItems(page);
   const filteredItems = getFilteredItems(page);
   const isFiltered = !!filter && !!items?.length;
