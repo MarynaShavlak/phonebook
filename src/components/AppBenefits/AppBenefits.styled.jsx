@@ -47,7 +47,9 @@ export const Item = styled.li`
     font-size: ${props => props.theme.fontSize.md};
     font-weight: 800;
     text-align: center;
+    width: 220px;
     @media screen and (min-width: ${props => props.theme.devices.tablet}) {
+      width: 100%;
       font-size: ${props => props.theme.fontSize.lg};
     }
   }

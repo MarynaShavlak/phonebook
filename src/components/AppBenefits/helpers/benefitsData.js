@@ -3,7 +3,7 @@ import { ICON_NAMES } from 'constants';
 export const benefitsData = [
   {
     id: 1,
-    icon: 'pencil',
+    icon: ICON_NAMES.PENCIL,
     title: 'Create and edit contacts effortlessly',
     description:
       'Phone Genie provides the functionality to create and modify contacts, facilitating the maintenance of an up-to-date directory of your contacts.',
@@ -11,9 +11,9 @@ export const benefitsData = [
   {
     id: 2,
     icon: ICON_NAMES.ALPHA_DOWN,
-    title: 'Efficiently sort contacts',
+    title: 'Efficiently sort contacts and groups',
     description:
-      'Phone Genie efficiently manages contacts with a versatile sorting feature, allowing convenient alphabetical or date-based sorting.',
+      'Phone Genie efficiently manages contacts and groups with a versatile sorting feature, allowing convenient alphabetical or date-based sorting.',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const benefitsData = [
     icon: ICON_NAMES.QUICK_SEARCH,
     title: 'Quick search',
     description:
-      'Phone Genie offers a proficient feature that enables users to perform a comprehensive search for their contacts with utmost ease and efficiency.',
+      'Phone Genie offers a proficient feature that enables users to perform a comprehensive search for their contacts and groups with utmost ease and efficiency.',
   },
   {
     id: 5,
@@ -42,5 +42,19 @@ export const benefitsData = [
     title: 'Contact groups',
     description:
       'Phone Genie provides users with the ability to group their contacts for optimal organization and management of contact information.',
+  },
+  {
+    id: 7,
+    icon: ICON_NAMES.MERGE,
+    title: 'Merge Contacts and Groups',
+    description:
+      'Phone Genie simplifies contact management by combining multiple contacts or groups into a single entry, decluttering and streamlining your contacts book.',
+  },
+  {
+    id: 7,
+    icon: ICON_NAMES.MULTI_SELECT,
+    title: 'Streamline Contact Management with Batch Actions',
+    description:
+      'Phone Genie simplifies contact and group management, revolutionizing large contact lists with multiple actions.',
   },
 ];
