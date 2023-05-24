@@ -57,9 +57,7 @@ export const NavigationLink = styled(NavLink)`
       width: 25px;
       height: 25px;
     }
-    transform: scale(1);
-    transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1),
-      transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.active {
@@ -105,10 +103,11 @@ export const NavigationLink = styled(NavLink)`
 
   :hover:not(.active),
   :focus-visible:not(.active) {
-    color: ${props => props.theme.colors.hover};
+    color: ${props => props.theme.colors.white};
+    border-radius: ${props => props.theme.borderRadius.large};
+    background-color: ${props => props.theme.colors.hover};
     svg {
-      fill: ${props => props.theme.colors.hover};
-      transform: scale(1.5);
+      fill: ${props => props.theme.colors.white};
     }
   }
 `;
