@@ -14,8 +14,6 @@ export const ActionsMenu = ({
   selectedItems,
   resetSelectedItems,
   handleSelectAllClick,
-  // isSearchMenuOpen,
-  // toggleSearchMenu,
 }) => {
   const { isSearchMenuOpen, toggleSearchMenu } = useSearchMenu(page);
   const dispatch = useDispatch();

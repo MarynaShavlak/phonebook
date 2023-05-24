@@ -18,11 +18,8 @@ import { selectGroups, selectFilteredGroups } from 'redux/groups';
 import { ROUTES } from 'constants';
 
 export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
-  // const isOnFavoritesPage = page === ROUTES.FAVORITES;
   const isOnGroupsPage = page === ROUTES.GROUPS;
   const isOnContactsPage = page === ROUTES.CONTACTS;
-  // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
-
   const allContacts = useSelector(selectContacts);
   const filteredContacts = useSelector(selectFilteredContacts);
   const favoriteContacts = useSelector(selectFavoritesContacts);

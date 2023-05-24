@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { EditRules, ContactInfo } from './ContactEditInfoBlock.styled';
 import { renderIcons } from 'utils';
 import { ICON_NAMES, ICON_SIZES } from 'constants';
@@ -31,4 +32,12 @@ export const ContactEditInfoBlock = ({ contact }) => {
       </EditRules>
     </>
   );
+};
+
+ContactEditInfoBlock.propTypes = {
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
 };

@@ -1,13 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'shared/commonStyledComponents.jsx';
 import { Notification } from 'shared';
 import { ROUTES } from 'constants';
 
 export const EmptyStateMessage = ({ onActionBtnClick, page }) => {
-  // const isOnFavoritesPage = page === ROUTES.FAVORITES;
   const isOnGroupsPage = page === ROUTES.GROUPS;
-  // const isOnContactsPage = page === ROUTES.CONTACTS;
-  // const isOnRecyclebinPage = page === ROUTES.RECYCLEBIN;
   const message = isOnGroupsPage
     ? 'You have not created any groups yet'
     : 'Add your first contact today and discover the amazing possibilities of Phone Genie!';
@@ -20,4 +18,9 @@ export const EmptyStateMessage = ({ onActionBtnClick, page }) => {
       </Button>
     </>
   );
+};
+
+EmptyStateMessage.propTypes = {
+  page: PropTypes.string.isRequired,
+  onActionBtnClick: PropTypes.func.isRequired,
 };

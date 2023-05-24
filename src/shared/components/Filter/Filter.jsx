@@ -98,4 +98,5 @@ export const Filter = ({ page, isSearchMenuOpen }) => {
 
 Filter.propTypes = {
   page: PropTypes.string.isRequired,
+  isSearchMenuOpen: PropTypes.bool.isRequired,
 };

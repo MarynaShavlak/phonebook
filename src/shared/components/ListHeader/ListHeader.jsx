@@ -22,7 +22,6 @@ export const ListHeader = ({
 }) => {
   const isTablet = useMediaQuery('(min-width:768px)');
   const isOnFavoritesPage = page === ROUTES.FAVORITES;
-  const isOnGroupsPage = page === ROUTES.GROUPS;
 
   const iconName =
     page === ROUTES.CONTACTS
