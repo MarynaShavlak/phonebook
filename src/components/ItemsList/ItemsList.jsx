@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import {
   deleteContactFromGroup,
   updateContactsOrderInGroup,
@@ -14,25 +14,24 @@ export const ItemsList = ({ items, renderItem, page }) => {
   const sortedItems = useItemsSorting(items);
   const dispatch = useDispatch();
   const onDragEnd = result => {
-    console.log('result: ', result);
     const { source, destination } = result;
-    console.log('destination: ', destination);
-    console.log('source: ', source);
+    const sourceGroup = items.find(group => group.id === source?.droppableId);
+    const destinationGroup = items.find(
+      group => group.id === destination?.droppableId
+    );
+    const isItemDraggedInsideOneList = sourceGroup === destinationGroup;
 
-    if (!destination || destination.index === source.index) {
+    if (
+      !destination ||
+      (isItemDraggedInsideOneList && destination?.index === source?.index)
+    ) {
       return;
     }
 
-    const sourceGroup = items.find(group => group.id === source.droppableId);
-    const destinationGroup = items.find(
-      group => group.id === destination.droppableId
-    );
-
-    if (sourceGroup === destinationGroup) {
+    if (isItemDraggedInsideOneList) {
       const updatedContacts = Array.from(sourceGroup.contacts);
       const [removedContact] = updatedContacts.splice(source.index, 1);
       updatedContacts.splice(destination.index, 0, removedContact);
-      console.log('updatedContacts: ', updatedContacts);
 
       dispatch(
         updateContactsOrderInGroup({
@@ -41,22 +40,16 @@ export const ItemsList = ({ items, renderItem, page }) => {
         })
       );
     } else {
+      const newIndexPos = destination.index;
       const contact = sourceGroup.contacts[source.index];
-      console.log('contact: ', contact);
-
-      // Perform the necessary actions to move the contact between items
-      // For example, you can dispatch Redux actions to update the state
-      // or call API endpoints to persist the changes
-      // ...
-
-      // Delete the contact from the source group
       dispatch(deleteContactFromGroup({ group: sourceGroup.name, contact }));
+      const contactsInDestinationGroup = [...destinationGroup.contacts];
+      contactsInDestinationGroup.splice(newIndexPos, 0, contact);
 
-      // Add the contact to the destination group
       dispatch(
         updateContactsOrderInGroup({
           groupName: destinationGroup.name,
-          contacts: [...destinationGroup.contacts, contact],
+          contacts: contactsInDestinationGroup,
         })
       );
     }
@@ -69,16 +62,11 @@ export const ItemsList = ({ items, renderItem, page }) => {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <Item key={item.id}>{renderItem(item, index)}</Item>
-                {/* <ContactsListInGroup
-                contacts={group.contacts}
-                onDeleteContact={contact => onDeleteContact(group, contact)}
-              /> */}
+
                 {provided.placeholder}
               </div>
             )}
           </Droppable>
-
-          // <Item key={item.id}>{renderItem(item, index)}</Item>
         ))}
       </List>
     </DragDropContext>
