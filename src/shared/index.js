@@ -17,3 +17,4 @@ export { ElementData } from './components/ElementData';
 export { ActionsMenu } from './components/ActionsMenu';
 export { ItemsListSection } from './components/ItemsListSection';
 export { EmptyStateMessage } from './components/EmptyStateMessage';
+export { DraggableItemsList } from './components/DraggableItemsList';
