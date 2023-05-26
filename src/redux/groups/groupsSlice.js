@@ -72,6 +72,14 @@ const groupsSlice = createSlice({
       });
       state.groups = newGroups;
     },
+
+    updateContactsOrderInGroup: (state, action) => {
+      const { groupName, contacts } = action.payload;
+      const groupIndex = state.groups.findIndex(
+        group => group.name === groupName
+      );
+      state.groups[groupIndex].contacts = contacts;
+    },
   },
 });
 
@@ -83,6 +91,7 @@ export const {
   renameGroup,
   clearGroups,
   updateContactInGroups,
+  updateContactsOrderInGroup,
 } = groupsSlice.actions;
 
 export const groupsReducer = persistReducer(persistConfig, groupsSlice.reducer);

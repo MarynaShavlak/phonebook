@@ -1,8 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { AppBar } from 'components';
-import { Section, ContactForm, BackButton } from 'shared';
-import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { ContactForm, BackButton } from 'shared';
 import { showContactSuccess } from 'utils/notifications';
 import { CONTACT_ACTIONS } from 'constants';
 import { ROUTES } from 'constants';
@@ -18,15 +16,8 @@ const AddNewContact = () => {
 
   return (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
       <BackButton pathTo={backLinkHref} />
       <ContactForm action={CONTACT_ACTIONS.ADD} onSubmit={successAddContact} />
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import { Loader, AppBar, ContactEditInfoBlock } from 'components';
-import { Section, ContactForm, BackButton } from 'shared';
-import { ContentWrapper, Main } from 'shared/commonStyledComponents.jsx';
+import { Loader, ContactEditInfoBlock } from 'components';
+import { ContactForm, BackButton } from 'shared';
 import { selectContacts, fetchContacts } from 'redux/contacts';
 import { showEditContactSuccess } from 'utils/notifications';
 import { getContactById } from 'utils';
@@ -59,10 +58,6 @@ const EditContact = () => {
 
   return contact ? (
     <>
-      {/* <AppBar /> */}
-      {/* <Main>
-        <Section>
-          <ContentWrapper> */}
       <BackButton pathTo={backLinkHref} />
       <ContactEditInfoBlock contact={contact} />
       <ContactForm
@@ -70,9 +65,6 @@ const EditContact = () => {
         contact={contact}
         onSubmit={successEditContact}
       />
-      {/* </ContentWrapper>
-        </Section>
-      </Main> */}
     </>
   ) : (
     <Loader />

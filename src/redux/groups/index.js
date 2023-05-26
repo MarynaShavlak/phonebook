@@ -10,4 +10,5 @@ export {
   deleteGroup,
   renameGroup,
   updateContactInGroups,
+  updateContactsOrderInGroup,
 } from './groupsSlice';
