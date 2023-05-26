@@ -12,6 +12,7 @@ import {
 import { ElementData } from 'shared';
 
 export const ContactsListInGroup = ({ group, isGroupContentVisible }) => {
+  // console.log('group.id: ', group.id);
   const dispatch = useDispatch();
   const contactsInGroup = group.contacts;
   console.log('contactsInGroup: ', contactsInGroup);
@@ -20,72 +21,151 @@ export const ContactsListInGroup = ({ group, isGroupContentVisible }) => {
     dispatch(deleteContactFromGroup({ group: groupName, contact }));
   };
 
+  // const onDragEnd = result => {
+  //   console.log('result: ', result);
+  //   const { source, destination } = result;
+
+  //   // Check if the destination is valid (not null and different from source)
+  //   if (!destination || destination.index === source.index) {
+  //     return;
+  //   }
+
+  //   // Create a new array to hold the reordered contacts
+  //   const updatedContacts = Array.from(contactsInGroup);
+
+  //   // Remove the contact from the source index
+  //   const [removedContact] = updatedContacts.splice(source.index, 1);
+  //   console.log('removedContact: ', removedContact);
+
+  //   // Insert the removed contact at the destination index
+  //   updatedContacts.splice(destination.index, 0, removedContact);
+  //   console.log('updatedContacts: ', updatedContacts);
+  //   const groupName = group.name;
+  //   // Update the state or dispatch an action to update the contacts
+  //   // For example, you can use the useDispatch hook:
+  //   dispatch(
+  //     updateContactsOrderInGroup({
+  //       groupName: groupName,
+  //       contacts: updatedContacts,
+  //     })
+  //   );
+  // };
+
   const onDragEnd = result => {
     const { source, destination } = result;
+    console.log('result: ', result);
+    console.log('destination: ', destination);
+    console.log('source: ', source);
 
-    // Check if the destination is valid (not null and different from source)
-    if (!destination || destination.index === source.index) {
+    // Check if the destination is valid (not null)
+    if (!destination) {
       return;
     }
 
-    // Create a new array to hold the reordered contacts
-    const updatedContacts = Array.from(contactsInGroup);
+    // Check if the contact is being moved within the same group
+    if (source.droppableId === destination.droppableId) {
+      const updatedContacts = Array.from(contactsInGroup);
+      const [removedContact] = updatedContacts.splice(source.index, 1);
+      updatedContacts.splice(destination.index, 0, removedContact);
 
-    // Remove the contact from the source index
-    const [removedContact] = updatedContacts.splice(source.index, 1);
+      const groupName = group.name;
+      dispatch(
+        updateContactsOrderInGroup({
+          groupName: groupName,
+          contacts: updatedContacts,
+        })
+      );
+    } else {
+      // Contact is being moved between different groups
+      const sourceGroup = source.droppableId;
+      console.log('sourceGroup: ', sourceGroup);
+      const destinationGroup = destination.droppableId;
+      console.log('destinationGroup: ', destinationGroup);
+      const contact = contactsInGroup[source.index];
+      console.log('contact: ', contact);
 
-    // Insert the removed contact at the destination index
-    updatedContacts.splice(destination.index, 0, removedContact);
-    console.log('updatedContacts: ', updatedContacts);
-    const groupName = group.name;
-    // Update the state or dispatch an action to update the contacts
-    // For example, you can use the useDispatch hook:
-    dispatch(
-      updateContactsOrderInGroup({
-        groupName: groupName,
-        contacts: updatedContacts,
-      })
-    );
+      // dispatch(
+      //   moveContactBetweenGroups({
+      //     sourceGroup: sourceGroup,
+      //     destinationGroup: destinationGroup,
+      //     contact: contact,
+      //   })
+      // );
+    }
   };
 
+  // return (
+  //   <DragDropContext onDragEnd={onDragEnd}>
+  //     {isGroupContentVisible && (
+  //       <Droppable droppableId={group.id}>
+  //         {provided => (
+  //           <List {...provided.droppableProps} ref={provided.innerRef}>
+  //             {contactsInGroup.map((contact, index) => (
+  //               <Draggable
+  //                 key={index}
+  //                 draggableId={`${group.id}-${index}`}
+  //                 // draggableId={index.toString()}
+  //                 index={index}
+  //               >
+  //                 {provided => (
+  //                   <li
+  //                     ref={provided.innerRef}
+  //                     {...provided.draggableProps}
+  //                     {...provided.dragHandleProps}
+  //                   >
+  //                     <IconButton
+  //                       type="button"
+  //                       onClick={() => onDeleteContact(contact)}
+  //                     >
+  //                       {renderIcons(
+  //                         ICON_NAMES.DELETE,
+  //                         ICON_SIZES.MEDIUM_SMALL
+  //                       )}
+  //                     </IconButton>
+  //                     <ElementData item={contact} page={ROUTES.GROUPS} />
+  //                   </li>
+  //                 )}
+  //               </Draggable>
+  //             ))}
+  //             {provided.placeholder}
+  //           </List>
+  //         )}
+  //       </Droppable>
+  //     )}
+  //   </DragDropContext>
+  // );
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <>
       {isGroupContentVisible && (
-        <Droppable droppableId="contactsList">
-          {provided => (
-            <List {...provided.droppableProps} ref={provided.innerRef}>
-              {contactsInGroup.map((contact, index) => (
-                <Draggable
-                  key={index}
-                  draggableId={index.toString()}
-                  index={index}
+        <List>
+          {contactsInGroup.map((contact, index) => (
+            <Draggable
+              key={index}
+              draggableId={`${group.id}-${index}`}
+              // draggableId={index.toString()}
+              index={index}
+            >
+              {provided => (
+                <li
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
                 >
-                  {provided => (
-                    <li
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
-                      <IconButton
-                        type="button"
-                        onClick={() => onDeleteContact(contact)}
-                      >
-                        {renderIcons(
-                          ICON_NAMES.DELETE,
-                          ICON_SIZES.MEDIUM_SMALL
-                        )}
-                      </IconButton>
-                      <ElementData item={contact} page={ROUTES.GROUPS} />
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </List>
-          )}
-        </Droppable>
+                  <IconButton
+                    type="button"
+                    onClick={() => onDeleteContact(contact)}
+                  >
+                    {renderIcons(ICON_NAMES.DELETE, ICON_SIZES.MEDIUM_SMALL)}
+                  </IconButton>
+                  <ElementData item={contact} page={ROUTES.GROUPS} />
+                </li>
+              )}
+            </Draggable>
+          ))}
+        </List>
       )}
-    </DragDropContext>
+    </>
   );
 };
 

@@ -55,11 +55,13 @@ const Groups = () => {
         resetSelectedItems={resetSelectedItems}
         handleSelectAllClick={handleSelectAllClick}
       />
+
       <ItemsListSection
         page={ROUTES.GROUPS}
         renderItem={renderGroup}
         onActionBtnClick={toggleCreateGroupModal}
       />
+
       {isCreateGroupModalOpen && (
         <CreateGroupModal
           isOpen={isCreateGroupModalOpen}

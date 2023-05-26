@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import { ItemsList, ContactSortMenu } from 'components';
 import { Notification, EmptyStateMessage } from 'shared';
@@ -70,7 +71,7 @@ export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
     : `No contacts found matching your search criteria for names or numbers containing '${filter}'`;
 
   return (
-    <>
+    <DragDropContext>
       <>
         {filteredItems?.length ? (
           <>
@@ -89,7 +90,7 @@ export const ItemsListSection = ({ page, renderItem, onActionBtnClick }) => {
           <Notification message={`There are no contacts in ${page} now`} />
         )}
       </>
-    </>
+    </DragDropContext>
   );
 };
 
