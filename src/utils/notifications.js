@@ -159,6 +159,11 @@ export function showAuthError() {
 export function showAddToGroups(message) {
   return showMessage(TOAST_TYPES.INFO, message);
 }
+export function showDragToGroup(contact, group) {
+  const { name, number } = contact;
+  const message = `Contact  ${name} (${number}) already exists in group ${group}.`;
+  return showMessage(TOAST_TYPES.INFO, message);
+}
 export function showAddFewContactsToGroups(contactsQuantity, selectedGroups) {
   const groupNamesString = selectedGroups.join(', ');
   const groupPart = selectedGroups.length === 1 ? 'group' : 'groups:';

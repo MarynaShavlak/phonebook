@@ -6,6 +6,8 @@ import {
   deleteContactFromGroup,
   updateContactsOrderInGroup,
 } from 'redux/groups';
+import { findGroupsForContact } from 'utils';
+import { showDragToGroup } from 'utils/notifications';
 
 import { List, Item } from './ItemsList.styled';
 import { useItemsSorting } from 'hooks';
@@ -40,8 +42,16 @@ export const ItemsList = ({ items, renderItem, page }) => {
         })
       );
     } else {
-      const newIndexPos = destination.index;
       const contact = sourceGroup.contacts[source.index];
+      const groupsForContacts = findGroupsForContact(contact, items);
+      const isAlreadyExistInGroup = groupsForContacts.includes(
+        destinationGroup.name
+      );
+
+      if (isAlreadyExistInGroup) {
+        return showDragToGroup(contact, destinationGroup.name);
+      }
+      const newIndexPos = destination.index;
       dispatch(deleteContactFromGroup({ group: sourceGroup.name, contact }));
       const contactsInDestinationGroup = [...destinationGroup.contacts];
       contactsInDestinationGroup.splice(newIndexPos, 0, contact);
