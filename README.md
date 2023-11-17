@@ -34,19 +34,19 @@ user experience:
   and devices. By utilizing CSS media queries and flexible layouts, it provides
   an optimal user experience across various platforms, enhancing accessibility,
   satisfaction, and engagement.
- - Frontend Technologies: 
-  - React: The foundation of the frontend, enabling the creation of dynamic and interactive user interfaces.
-  - React Router DOM: Facilitating seamless navigation within the application.
-  - Redux Toolkit and React Redux: Managing the state of the application efficiently, ensuring a smooth and predictable user experience.
-  - Axios: Handling HTTP requests to interact with the backend API.
-  - Formik and Yup: Streamlining form management and validation.
-  - Redux Persist: Ensuring persistent state across user sessions.
-  - Styled Components, Classnames, Clsx: Enabling the styling of components for a visually appealing design.
-  - Slugify, Nanoid: Supporting URL and unique identifier generation.
-  - React Icons, React Select, React Modal: Enhancing the UI with iconography, selectable components, and modal dialogs.
-  - React Loader Spinner, React Avatar, React Highlight Words: Improving user experience with loading indicators, avatar displays, and highlighted text.
-  - React Toastify: Providing user-friendly notifications.
-  - Randomcolor: Generating random colors for visual elements.
-  - Downshift, React-beautiful-dnd: Implementing dropdowns and drag-and-drop functionality.
-  - Modern Normalize: Ensuring consistent rendering across different browsers.
-  - Material UI: Incorporating Material Design components for a cohesive and polished look.
+ -**Frontend Technologies**: 
+      - React: The foundation of the frontend, enabling the creation of dynamic and interactive user interfaces.
+      - React Router DOM: Facilitating seamless navigation within the application.
+      - Redux Toolkit and React Redux: Managing the state of the application efficiently, ensuring a smooth and predictable user experience.
+      - Axios: Handling HTTP requests to interact with the backend API.
+      - Formik and Yup: Streamlining form management and validation.
+      - Redux Persist: Ensuring persistent state across user sessions.
+      - Styled Components, Classnames, Clsx: Enabling the styling of components for a visually appealing design.
+      - Slugify, Nanoid: Supporting URL and unique identifier generation.
+      - React Icons, React Select, React Modal: Enhancing the UI with iconography, selectable components, and modal dialogs.
+      - React Loader Spinner, React Avatar, React Highlight Words: Improving user experience with loading indicators, avatar displays, and highlighted text.
+      - React Toastify: Providing user-friendly notifications.
+      - Randomcolor: Generating random colors for visual elements.
+      - Downshift, React-beautiful-dnd: Implementing dropdowns and drag-and-drop functionality.
+      - Modern Normalize: Ensuring consistent rendering across different browsers.
+      - Material UI: Incorporating Material Design components for a cohesive and polished look.
