@@ -50,3 +50,59 @@ user experience:
       - Downshift, React-beautiful-dnd: Implementing dropdowns and drag-and-drop functionality.
       - Modern Normalize: Ensuring consistent rendering across different browsers.
       - Material UI: Incorporating Material Design components for a cohesive and polished look.
+
+## :movie_camera: Visual Showcase
+
+
+
+### Prerequisites
+Before you begin, make sure you have:
+
+- Node.js and npm installed on your machine.
+
+
+
+## Getting Started
+
+Follow these steps to run the project on your local machine:
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/MarynaShavlak/phonebook.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd phonebook
+    ```
+
+3. Install project dependencies:
+
+    ```bash
+    npm install
+    ```
+
+## Available Scripts
+
+In the project directory, you can run the following scripts:
+
+- **Start the Development Server:**
+
+    ```bash
+    npm start
+    ```
+
+    This command runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+- **Build the Project for Production:**
+
+    ```bash
+    npm run build
+    ```
+
+    Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+
+
