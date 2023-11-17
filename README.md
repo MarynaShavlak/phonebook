@@ -34,7 +34,7 @@ user experience:
   and devices. By utilizing CSS media queries and flexible layouts, it provides
   an optimal user experience across various platforms, enhancing accessibility,
   satisfaction, and engagement.
- -**Frontend Technologies**: 
+ - **Frontend Technologies**: 
       - React: The foundation of the frontend, enabling the creation of dynamic and interactive user interfaces.
       - React Router DOM: Facilitating seamless navigation within the application.
       - Redux Toolkit and React Redux: Managing the state of the application efficiently, ensuring a smooth and predictable user experience.
