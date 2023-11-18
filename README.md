@@ -196,6 +196,9 @@ phonebook/
    - 🔄 Effortless drag-and-drop enables smooth contact movement between groups.
    - ✅ Smart duplicate check ensures data integrity when transferring contacts.
 
+ ###  📞 Click-to-Call Feature:
+ Users can now click on the phone number of a contact to initiate a call directly from the application, providing a seamless and efficient communication experience.
+
  ### 📣 User Notifications:
 - ✨ Instant success notifications for completed actions.
 - 🚨 Immediate error alerts for quick issue resolution.
@@ -206,3 +209,15 @@ Personalized avatars show the first letters of users' names when logged in, addi
 
 ### 🏠 Feature Overview:
 Users find a comprehensive overview of all app features, facilitating easy navigation and understanding of each feature's benefits.
+
+
+## :hourglass:Future Plans: Roadmap
+1. 📇 **Enhanced Contact Information**:
+Expansion of Fields: Introduce additional contact information fields to provide richer context and a more comprehensive profile.
+2. 📸  **Photo Personalization**:
+Profile and Contacts Photos: Enable users to add photos to both profiles and contacts, enhancing personalization and visual recognition.
+3. 🌒 **Dark Theme Option**:
+Low-Light Interface: Implement a dark theme option for the interface, ensuring a comfortable and visually friendly experience in low-light environments.
+4. 🎉 **Birthday Reminders**:
+Important Dates: Set up birthday reminders to keep users informed and celebrate important dates with timely notifications.
+Stay tuned for these exciting updates as we continue to enhance your experience! 🌟
