@@ -197,3 +197,8 @@ phonebook/
    - 👁️ One-click toggle for instant visibility control of contacts within a group.
    - 🔄 Effortless drag-and-drop enables smooth contact movement between groups.
    - ✅ Smart duplicate check ensures data integrity when transferring contacts.
+
+ ### 📣 User Notifications:
+- ✨ Instant success notifications for completed actions.
+- 🚨 Immediate error alerts for quick issue resolution.
+- 🌐 Real-time updates ensure a seamless user experience.
