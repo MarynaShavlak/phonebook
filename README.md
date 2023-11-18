@@ -228,11 +228,28 @@ Users find a comprehensive overview of all app features, facilitating easy navig
     <td><img src='/src/project-screens/2.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
   <tr>
-    <td>Log In Process</td>
-     <td></td>
+    <td>Edit Contact</td>
+     <td>Select few contacts</td>
   </tr>
   <tr>
-    <td><img src='/src/project-screens/3.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/edit-contact.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/select-and-drop-down.png' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
+  <tr>
+    <td>Delete Contact Confirmation Modal</td>
+     <td>Search Contacts</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/delete-contact.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/search-contacts.png' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
+  <tr>
+    <td>Create Group</td>
+     <td>Add Few Contacts in Groups</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/create-group.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/add-few-contacts-in-groups.png' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
  </table>
 
