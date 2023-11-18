@@ -220,4 +220,24 @@ Profile and Contacts Photos: Enable users to add photos to both profiles and con
 Low-Light Interface: Implement a dark theme option for the interface, ensuring a comfortable and visually friendly experience in low-light environments.
 4. 🎉 **Birthday Reminders**:
 Important Dates: Set up birthday reminders to keep users informed and celebrate important dates with timely notifications.
+
 Stay tuned for these exciting updates as we continue to enhance your experience! 🌟
+
+
+## :handshake: Acknowledgments
+
+A special note of appreciation goes out to:
+
+- [React Router DOM](https://reactrouter.com/): I express my appreciation for the seamless navigation capabilities provided by React Router DOM, elevating the overall user experience
+- [Redux Toolkit and React Redux](https://redux.js.org/): My sincere thanks for the efficient state management offered by Redux Toolkit and React Redux, ensuring a smooth and predictable user interface.
+- [Axios](https://axios-http.com/):  I extend my thanks for the seamless handling of HTTP requests, facilitating smooth interactions with the backend API.
+- [Formik](https://formik.org/) and [Yup](https://github.com/jquense/yup): TMy gratitude for the streamlined form management and validation provided by Formik and Yup, simplifying intricate processes.
+- [Redux Persist](https://github.com/rt2zz/redux-persist): My appreciation for the contribution of Redux Persist in ensuring persistent state across user sessions, thereby enhancing the continuity of the user journey.
+- [Styled Components](https://styled-components.com/), [Classnames](https://github.com/JedWatson/classnames), [Clsx](https://github.com/lukeed/clsx): I acknowledge the instrumental role played by these styling tools in enabling the creation of visually appealing and stylish components.
+- [Slugify](https://github.com/simov/slugify), [Nanoid](https://github.com/ai/nanoid): My thanks for the support in URL and unique identifier generation, contributing to the robustness of the project.
+- [React Icons](https://react-icons.github.io/react-icons/), [React Select](https://react-select.com/), [React Modal](https://github.com/reactjs/react-modal):  I express my gratitude for the enhancement of the user interface through the incorporation of iconography, selectable components, and modal dialogs.
+- [React Loader Spinner](https://github.com/mhnpd/react-loader-spinner), [React Avatar](https://www.npmjs.com/package/react-avatar), [React Highlight Words](https://www.npmjs.com/package/react-highlight-words): My thanks for the improvement of the user experience through loading indicators, avatar displays, and highlighted text.
+- [React Toastify](https://github.com/fkhadra/react-toastify): I am thankful for the provision of user-friendly notifications, contributing to effective project communication.
+- [Randomcolor](https://github.com/davidmerfield/randomColor): My appreciation for the contribution to visual appeal by generating random colors for various visual elements.
+- [Downshift](https://downshift-js.com/), [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd): My thanks for the implementation of dropdowns and drag-and-drop functionality, enriching user interactions.
+- [Material UI](https://material-ui.com/): I extend my gratitude for the incorporation of Material Design components, which significantly contribute to a cohesive and polished visual aesthetic.
