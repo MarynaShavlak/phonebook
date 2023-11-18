@@ -105,4 +105,47 @@ In the project directory, you can run the following scripts:
     Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
 
 
+## :file_folder: Project Structure
+
+Here's an overview of the directory structure of the Phone Genie phonebook web aplication project:
+├── src/
+│   ├── components/
+│   │   ├── ... (other component files)
+│   ├── constants/
+│   │   ├── ... (other constant files)
+│   ├── contexts/
+│   │   ├── ... (other context files)
+│   ├── hooks/
+│   │   ├── ... (other hook files)
+│   ├── pages/
+│   │   ├── ... (other page files)
+│   ├── redux/
+│   │   ├── ... (other Redux-related files)
+│   ├── services/
+│   │   ├── ... (other service files)
+│   ├── shared/
+│   │   ├── ... (other shared files)
+│   ├── utils/
+│   │   ├── ... (other utility files)
+│   ├── index.css
+│   ├── index.js
+├── public/
+│   ├── 404.html
+│   ├── favicon.ico
+│   ├── index.html
+├── ...
+
+
+## ⚙️ Features
+
+### Registration, Login, and Logout Features:
+- Registration:
+   - Users can create a new account by providing necessary information such as username, email, and password.
+   - Input validation ensures data accuracy and security.
+   - Password confirmation.
+- Login:
+   - Registered users can log in using their credentials (email and password).
+   - Session management ensures secure and seamless navigation within the application.
+- Logout:
+   - Users can log out to end their current session securely.
 
