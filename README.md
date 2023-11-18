@@ -140,7 +140,7 @@ phonebook/
 
 ## ⚙️ Features
 
-### Registration, Login, and Logout Features:
+### 🔑 Registration, Login, and Logout Features:
 - **Registration**:
    - Users can create a new account by providing necessary information such as username, email, and password.
    - Input validation ensures data accuracy and security.
@@ -151,8 +151,42 @@ phonebook/
 - **Logout**:
    - Users can log out to end their current session securely.
 
-### Phone Number Input with Country Code and Flag for International Contacts:
+### 🌐 Phone Number Input with Country Code and Flag for International Contacts:
 - **Phone Number Input**:
    - Users can input phone numbers with an option to include the country code.
    - Validation ensures that the entered phone numbers are in the correct format.
    - Flags associated with country codes provide a visual cue for international contacts, enhancing user experience.
+
+### 👥 Contact Management Features:
+- **Create, Edit, and Delete Contacts**:
+   - Users can add new contacts by providing essential information (name, phone number).
+   - Existing contacts can be edited to update information.
+   - Contacts can be moved to recycle bin, and a confirmation step is included to prevent accidental deletions.
+- **Search and Sort Contacts**:
+   - Seamlessly locate contacts by name or number with the intuitive search bar.
+   - Arrange contacts effortlessly with sorting options by name or date added, in both ascending and descending order.
+- **Add Contacts to Favorites and Custom Groups**:
+   - Users can mark certain contacts as favorites for quick access.
+   - Users have the capability to effortlessly add or remove contacts from one or multiple custom groups.
+- **Recycle Bin Feature for Deleted Contacts**:
+   - Deleted contacts are temporarily stored in a recycle bin rather than being permanently erased.
+   - Users have the option to restore contacts from the recycle bin, ensuring careful consideration, including checks for duplicates in the contact book.
+- **Merge Contacts**:
+   - Seamlessly merge selected contacts by choosing the preferred name and number from the list of selected contacts.to maintain a clean and organized contact list.
+   - Empowers users to retain the most relevant information from each contact during the merging process.
+- **Streamline Contact Management with Batch Actions**:
+   - Enjoy efficient contact management with the ability to select all contacts in a single click or choose specific ones.
+
+
+
+### ![Group Icon](https://img.icons8.com/ios/452/groups.png) Groups Management Features:
+- Create, Edit, and Delete Groups:
+   - Create: Users can make custom groups, ensuring uniqueness in group names.
+   - Edit: Modify existing groups, with checks to avoid duplicate names.
+   - Delete: Permanently remove unnecessary groups, excluding associated contacts.
+- Manage Contacts within Groups:
+   - Contacts can be assigned to specific groups for better organization.
+- Merge Groups:
+   - Efficient Merging: Users can merge groups for a simplified structure.
+   - Custom Names: Choose a new group name during merging.
+   - Contact Integrity: Ensure uniqueness when merging groups with the same contacts.
