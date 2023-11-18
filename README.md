@@ -157,7 +157,7 @@ phonebook/
    - 🔍 Validation ensures that the entered phone numbers are in the correct format.
    - 🌐 Flags associated with country codes provide a visual cue for international contacts, enhancing user experience.
 
-### 👥 Contact Management Features:
+###  👤 Contact Management Features:
 - **Create, Edit, and Delete Contacts**:
    - ➕ Users can add new contacts by providing essential information (name, phone number).
    - 🖊️ Existing contacts can be edited to update information.
@@ -179,13 +179,13 @@ phonebook/
 - 🗑️ **Permanent Deletion**: Permanently erase contacts for a clean slate.
 - 🕒 **Timestamps**: View removal dates and times for informed decision-making.
 
-### ![Group Icon](https://img.icons8.com/ios/452/groups.png) Groups Management Features:
+### 👥 Groups Management Features:
 - **Create, Edit, and Delete Groups**:
    - ✨ Create: Users can make custom groups, ensuring uniqueness in group names.
    - 🖊️ Edit: Modify existing groups, with checks to avoid duplicate names.
    - 🗑️ Delete: Permanently remove unnecessary groups, excluding associated contacts.
-- **Manage Contacts within Groups**:
-   - 👥 Contacts can be assigned to specific groups for better organization.
+- **Manage Contacts sithin Groups**:
+   -  Contacts can be assigned to specific groups for better organization.
 - **Merge Groups**:
    - 🔄 Efficient Merging: Users can merge groups for a simplified structure.
    - 📝 Custom Names: Choose a new group name during merging.
