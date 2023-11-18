@@ -5,14 +5,9 @@
 
    "Phone Genie" prioritizes user convenience, offering a comprehensive suite of tools for effortless contact and group management. Elevate your experience with its intuitive interface and powerful features.
 
-   ![](https://img.shields.io/badge/Code-JavaScript-informational?style=flat&logo=JavaScript&color=F7DF1E)![](https://img.shields.io/badge/Code-HTML5-informational?style=flat&logo=HTML5&color=E34F26)
-   ![](https://img.shields.io/badge/Style-CSS3-informational?style=flat&logo=CSS3&color=1572B6)
-   ![](https://img.shields.io/badge/Tools-NPM-informational?style=flat&logo=NPM&color=CB3837)
-   ![](https://img.shields.io/badge/Tools-Git-informational?style=flat&logo=Git&color=F05032)![](https://img.shields.io/badge/Tools-GitHub-informational?style=flat&logo=GitHub&color=181717)
-
 ## 🔍 Introduction
 
-
+Welcome to "Phone Genie," a cutting-edge React application transforming contact management. Fueled by a robust Swagger backend API, it offers a seamless and secure user experience. Prioritizing user convenience, the app provides intuitive features for effortless contact and group management, including secure registration, batch actions, and a click-to-call function. With streamlined features and real-time updates, "Phone Genie" redefines contact management for a future of seamless user experiences.
 
 ## :rocket: Get Started
 
@@ -50,9 +45,6 @@ user experience:
       - Downshift, React-beautiful-dnd: Implementing dropdowns and drag-and-drop functionality.
       - Modern Normalize: Ensuring consistent rendering across different browsers.
       - Material UI: Incorporating Material Design components for a cohesive and polished look.
-
-## :movie_camera: Visual Showcase
-
 
 
 ### Prerequisites
@@ -275,6 +267,14 @@ Users find a comprehensive overview of all app features, facilitating easy navig
     <td><img src='/src/project-screens/restore-contacts.png' width=400 alt="скріншот  cторінки сайту" ></td>
     <td><img src='/src/project-screens/favorites.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
+  <tr>
+    <td>Mobile Design</td>
+     <td>Tablet Design</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/mobile.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/tablet.png' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
  </table>
 
 
@@ -312,3 +312,9 @@ A special note of appreciation goes out to:
 - [Randomcolor](https://github.com/davidmerfield/randomColor): My appreciation for the contribution to visual appeal by generating random colors for various visual elements.
 - [Downshift](https://downshift-js.com/), [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd): My thanks for the implementation of dropdowns and drag-and-drop functionality, enriching user interactions.
 - [Material UI](https://material-ui.com/): I extend my gratitude for the incorporation of Material Design components, which significantly contribute to a cohesive and polished visual aesthetic.
+
+
+## Conclusion:
+"Phone Genie" is a state-of-the-art React application redefining contact management. With a meticulously designed interface and a robust Swagger backend API, it ensures a seamless and secure user experience. From secure registration to intuitive international number input, batch actions, and recycle bin management, "Phone Genie" prioritizes user convenience.
+
+Key features include click-to-call functionality, dynamic user avatars, and a custom loader for enhanced communication and user engagement. The application's focus on streamlined contact and group management, with features like merging and drag-and-drop functionality, sets it apart. User notifications and real-time updates contribute to a smooth user experience. With an informative features overview, "Phone Genie" combines functionality with an intuitive interface, redefining contact management for an elevated user experience.
