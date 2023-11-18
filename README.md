@@ -221,13 +221,19 @@ Users find a comprehensive overview of all app features, facilitating easy navig
 <table>
   <tr>
     <td>Start Page: Features Overview</td>
-     <td>Registaration Process</td>
+     <td>Registration Process</td>
   </tr>
   <tr>
     <td><img src='/src/project-screens/1.gif' width=400 alt="скріншот  cторінки сайту" ></td>
     <td><img src='/src/project-screens/2.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
-    
+  <tr>
+    <td>Log In Process</td>
+     <td></td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/3.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
  </table>
 
 
