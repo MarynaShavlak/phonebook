@@ -253,10 +253,11 @@ Users find a comprehensive overview of all app features, facilitating easy navig
   </tr>
   <tr>
     <td>Manage contacts in group, edit and delete group</td>
-     <td></td>
+     <td>Drag contacts between groups</td>
   </tr>
   <tr>
     <td><img src='/src/project-screens/edit-delete-group.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/drag-contacts.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
  </table>
 
