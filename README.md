@@ -143,36 +143,35 @@ phonebook/
 ### 🔑 Registration, Login, and Logout Features:
 - **Registration**:
    - 📝 Users can create a new account by providing necessary information such as username, email, and password.
-   - 🔐 Input validation ensures data accuracy and security.
-   - 🔒 Password confirmation.
+   - 🔐 Input validation ensures data accuracy and security, including password confirmation.
 - **Login**:
    - 🔑 Registered users can log in using their credentials (email and password).
-   - 🔄 Session management ensures secure and seamless navigation within the application.
+   - 🔄 Session management ensures secure and seamless navigation.
 - **Logout**:
-   - 🚪 Users can log out to end their current session securely.
+   - 🚪  Users can securely end their current session.
 
 ### 🌐 Phone Number Input with Country Code and Flag for International Contacts:
 - **Phone Number Input**:
-   - 📱 Users can input phone numbers with an option to include the country code.
-   - 🔍 Validation ensures that the entered phone numbers are in the correct format.
+   - 📱 Users can input phone numbers with an optional country code.
+   - 🔍 Validation ensures correct phone number formats.
    - 🌐 Flags associated with country codes provide a visual cue for international contacts, enhancing user experience.
 
 ###  👤 Contact Management Features:
 - **Create, Edit, and Delete Contacts**:
-   - ➕ Users can add new contacts by providing essential information (name, phone number).
+   - ➕ Add new contacts with essential information (name, phone number).
    - 🖊️ Existing contacts can be edited to update information.
    - 🗑️ Contacts can be moved to recycle bin, and a confirmation step is included to prevent accidental deletions.
 - **Search and Sort Contacts**:
    - 🔍 Effortlessly find contacts by name or number using the intuitive search bar, available across the entire phonebook, in the favorites list, and even within the recycle bin for comprehensive accessibility.
-   - 🔄 Streamline contact organization with sorting options based on name or date added. Arrange contacts effortlessly in both ascending and descending orders, ensuring a seamless experience throughout the entire phonebook, favorites list, and recycle bin.
+   - 🔄 Organize contacts easily by sorting them based on name or date added. Arrange them in both ascending and descending orders for a seamless experience in your phonebook, favorites list, and recycle bin.
 - **Add Contacts to Favorites and Custom Groups**:
-   - ⭐ Users can mark certain contacts as favorites for quick access.
-   - 👥 Users have the capability to effortlessly add or remove contacts from one or multiple custom groups.
+   - ⭐ Mark contacts as favorites for quick access.
+   - 👥 Effortlessly manage contacts in custom groups.
 - **Merge Contacts**:
-   - 🔄 Seamlessly merge selected contacts by choosing the preferred name and number from the list of selected contacts.to maintain a clean and organized contact list.
-   - 📝 Empowers users to retain the most relevant information from each contact during the merging process.
+   - 🔄 Seamlessly merge selected contacts by choosing preferred name and number.
+   - 📝 Retain the most relevant information from each contact during the merging process.
 - **Streamline Contact Management with Batch Actions**:
-   - 📦Enjoy efficient contact management with the ability to select all contacts in a single click or choose specific ones.
+   - 📦 Efficiently manage contacts with one-click selection.
 
 ### 🗑️ Recycle Bin Management: Restore and Delete Contacts: 
 - ↩️ **Selective Restore**: Easily recover one, multiple, or all contacts from the recycle bin, ensuring no duplicates.
@@ -181,18 +180,17 @@ phonebook/
 
 ### 👥 Groups Management Features:
 - **Create, Edit, and Delete Groups**:
-   - ✨ Create: Users can make custom groups, ensuring uniqueness in group names.
-   - 🖊️ Edit: Modify existing groups, with checks to avoid duplicate names.
-   - 🗑️ Delete: Permanently remove unnecessary groups, excluding associated contacts.
+   - ✨ Create custom groups with unique names.
+   - 🖊️ Edit existing groups, avoiding duplicate names.
+   - 🗑️ Permanently remove unnecessary groups without deleting associated contacts.
 - **Manage Contacts sithin Groups**:
    -  Contacts can be assigned to specific groups for better organization.
 - **Merge Groups**:
-   - 🔄 Efficient Merging: Users can merge groups for a simplified structure.
-   - 📝 Custom Names: Choose a new group name during merging.
-   - 🔄  Contact Integrity: Ensure uniqueness when merging groups with the same contacts.
+   - 🔄 Efficiently merge groups with a new custom name.
+   - 📝 Ensure uniqueness when merging groups with the same contacts.
 - **Search and Sort Groups**:
-   - 🔍 Effortlessly find groups by name using the intuitive search bar, ensuring swift navigation.
-   - 🔄 Streamline group organization with sorting options based on name or date added, available in both ascending and descending order for seamless arrangement.
+   - 🔍 Effortlessly find groups by name using the intuitive search bar.
+   - 🔄  Streamline group organization with sorting options based on name or date added.
 - **Show/Hide Contacts in Group and Drag-and-Drop Functionality**:
    - 👁️ One-click toggle for instant visibility control of contacts within a group.
    - 🔄 Effortless drag-and-drop enables smooth contact movement between groups.
@@ -202,3 +200,9 @@ phonebook/
 - ✨ Instant success notifications for completed actions.
 - 🚨 Immediate error alerts for quick issue resolution.
 - 🌐 Real-time updates ensure a seamless user experience.
+
+###  🌐 Dynamic User Avatars:
+Personalized avatars show the first letters of users' names when logged in, adding a touch of individuality.
+
+### 🏠 Feature Overview:
+Users find a comprehensive overview of all app features, facilitating easy navigation and understanding of each feature's benefits.
