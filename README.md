@@ -259,6 +259,22 @@ Users find a comprehensive overview of all app features, facilitating easy navig
     <td><img src='/src/project-screens/edit-delete-group.gif' width=400 alt="скріншот  cторінки сайту" ></td>
     <td><img src='/src/project-screens/drag-contacts.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
+  <tr>
+    <td>Merge Groups/td>
+     <td>Recycle Bin</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/merge-groups.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/recycle-bin.png' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
+  <tr>
+    <td>Restore Contacts/td>
+     <td>Add/ remove contacts from Favorites</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/restore-contacts.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/favorites.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
  </table>
 
 
