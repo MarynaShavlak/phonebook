@@ -108,6 +108,8 @@ In the project directory, you can run the following scripts:
 ## :file_folder: Project Structure
 
 Here's an overview of the directory structure of the Phone Genie phonebook web aplication project:
+```
+phonebook/
 ├── src/
 │   ├── components/
 │   │   ├── ... (other component files)
@@ -134,18 +136,23 @@ Here's an overview of the directory structure of the Phone Genie phonebook web a
 │   ├── favicon.ico
 │   ├── index.html
 ├── ...
-
+```
 
 ## ⚙️ Features
 
 ### Registration, Login, and Logout Features:
-- Registration:
+- **Registration**:
    - Users can create a new account by providing necessary information such as username, email, and password.
    - Input validation ensures data accuracy and security.
    - Password confirmation.
-- Login:
+- **Login**:
    - Registered users can log in using their credentials (email and password).
    - Session management ensures secure and seamless navigation within the application.
-- Logout:
+- **Logout**:
    - Users can log out to end their current session securely.
 
+### Phone Number Input with Country Code and Flag for International Contacts:
+- **Phone Number Input**:
+   - Users can input phone numbers with an option to include the country code.
+   - Validation ensures that the entered phone numbers are in the correct format.
+   - Flags associated with country codes provide a visual cue for international contacts, enhancing user experience.
