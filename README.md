@@ -12,7 +12,7 @@
 
 ## 🔍 Introduction
 
-## 🔗 Links
+
 
 ## :rocket: Get Started
 
@@ -129,6 +129,7 @@ phonebook/
 │   │   ├── ... (other shared files)
 │   ├── utils/
 │   │   ├── ... (other utility files)
+│   ├── project-screens/
 │   ├── index.css
 │   ├── index.js
 ├── public/
@@ -162,7 +163,8 @@ phonebook/
    - 🖊️ Existing contacts can be edited to update information.
    - 🗑️ Contacts can be moved to recycle bin, and a confirmation step is included to prevent accidental deletions.
 - **Search and Sort Contacts**:
-   - 🔍 Effortlessly find contacts by name or number using the intuitive search bar, available across the entire phonebook, in the favorites list, and even within the recycle bin for comprehensive accessibility.
+   - 🔍 Seamlessly locate contacts by name or number through the intuitive search bar, spanning the entire phonebook, favorites list, and recycle bin for comprehensive accessibility.
+   - 🔤  Intelligent Matching: Easily find contacts with the smart search feature, highlighting matching parts for precise alignment with search criteria.
    - 🔄 Organize contacts easily by sorting them based on name or date added. Arrange them in both ascending and descending orders for a seamless experience in your phonebook, favorites list, and recycle bin.
 - **Add Contacts to Favorites and Custom Groups**:
    - ⭐ Mark contacts as favorites for quick access.
@@ -207,8 +209,30 @@ phonebook/
 ###  🌐 Dynamic User Avatars:
 Personalized avatars show the first letters of users' names when logged in, adding a touch of individuality.
 
-### 🏠 Feature Overview:
+###  ⏳ Custom Loader:
+ Users will experience a custom loader integrated into the app, providing visual feedback during data processing or content loading. The loader enhances the user experience by indicating that an operation is in progress, ensuring transparency and engagement while waiting for tasks to complete.
+
+### 🏠 Features Overview:
 Users find a comprehensive overview of all app features, facilitating easy navigation and understanding of each feature's benefits.
+
+
+## 🖼️ Screenshots
+
+<table>
+  <tr>
+    <td>Start Page: Features Overview</td>
+     <td>Registaration Process</td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/1.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/2.gif' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
+    
+ </table>
+
+
+
+
 
 
 ## :hourglass:Future Plans: Roadmap
