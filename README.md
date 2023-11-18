@@ -240,7 +240,7 @@ Users find a comprehensive overview of all app features, facilitating easy navig
      <td>Search Contacts</td>
   </tr>
   <tr>
-    <td><img src='/src/project-screens/delete-contact.png' width=400 alt="скріншот  cторінки сайту" ></td>
+    <td><img src='/src/project-screens/delete-modal.png' width=400 alt="скріншот  cторінки сайту" ></td>
     <td><img src='/src/project-screens/search-contacts.png' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
   <tr>
@@ -250,6 +250,13 @@ Users find a comprehensive overview of all app features, facilitating easy navig
   <tr>
     <td><img src='/src/project-screens/create-group.png' width=400 alt="скріншот  cторінки сайту" ></td>
     <td><img src='/src/project-screens/add-few-contacts-in-groups.png' width=400 alt="скріншот  cторінки сайту" ></td>
+  </tr>
+  <tr>
+    <td>Manage contacts in group, edit and delete group</td>
+     <td></td>
+  </tr>
+  <tr>
+    <td><img src='/src/project-screens/edit-delete-group.gif' width=400 alt="скріншот  cторінки сайту" ></td>
   </tr>
  </table>
 
