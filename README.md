@@ -12,7 +12,7 @@ Welcome to "Phone Genie," a cutting-edge React application transforming contact 
 ## :rocket: Get Started
 
 To get started with Phone Genie,
-[visit our website](https://marynashavlak.github.io/phonebook/).
+[visit  website](https://marynashavlak.github.io/phonebook/).
 
 ## :computer: Technologies
 
