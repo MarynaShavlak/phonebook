@@ -1,8 +1,8 @@
 # 🧞‍♂️📱 LET PHONE GENIE GRANT YOUR EVERY CONNECTION WISH!
 
 Feel free to test it with test account or create a new one:
-email: testshavlak@mail.com
-password: testshavlak2024
+- **email:** testshavlak@mail.com
+- **password:** testshavlak2024
 
 ## :fire: Project Overview
    "Phone Genie" is a comprehensive phonebook application meticulously crafted to redefine user interaction with contact management. This individual project is driven by a robust Swagger backend API for a seamless user experience. Effortlessly manage contacts, including secure registration, easy input of international numbers, and intuitive organization features. Enjoy swift search, batch actions, and a recycle bin for added safety. 
